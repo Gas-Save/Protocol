@@ -19,7 +19,11 @@
  */
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-const mnemonic = "30a99c971c718d9c002e42516dfc679c0ff0cb8fd702e0d8380bb29bbe637ba0"
+var mnemonic = ""
+$.getJSON("test.json", function(json) {
+    mnemonic = json['mnemonic'];
+});
+
 
 module.exports = {
   networks: {
