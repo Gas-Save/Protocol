@@ -46,12 +46,17 @@ module.exports = {
       skipDryRun: true
     },
   },
-
   // Set default mocha options here, use special reporters etc.
-  mocha: {
-    // timeout: 100000
+  mocha: { // https://github.com/cgewecke/eth-gas-reporter
+    reporter: 'eth-gas-reporter',
+    reporterOptions : {
+      currency: 'USD',
+      gasPrice: 1,
+      onlyCalledMethods: true,
+      showTimeSpent: true,
+      excludeContracts: ['Migrations']
+    }
   },
-
   // Configure your compilers
   compilers: {
     solc: {
