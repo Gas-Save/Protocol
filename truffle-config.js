@@ -19,10 +19,9 @@
  */
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-var mnemonic = ""
-$.getJSON("test.json", function(json) {
-    mnemonic = json['mnemonic'];
-});
+var json = require('./keys.json'); 
+var mnemonic = json['mnemonic'];
+
 
 
 module.exports = {
