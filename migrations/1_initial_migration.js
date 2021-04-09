@@ -1,5 +1,5 @@
-var SafuSpeak = artifacts.require ("./SafuSpeak.sol");
+var bep20 = artifacts.require ("./BEP20Token.sol");
 
 module.exports = function (deployer) {
-  deployer.deploy(SafuSpeak);
+  deployer.deploy(bep20);
 };
