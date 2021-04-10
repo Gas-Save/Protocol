@@ -58,8 +58,16 @@ module.exports = {
     }
   },
   // Configure your compilers
-  compilers: {
+ compilers: {
     solc: {
+      version: "^0.6.0",
+      parser: "solcjs",
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 200, 
+        },
+      },
     }
   }
 }
