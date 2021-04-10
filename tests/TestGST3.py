@@ -1,4 +1,5 @@
 from web3 import Web3
+from web3.middleware import geth_poa_middleware
 import pandas as pd
 import os
 import json
@@ -7,9 +8,7 @@ from tqdm import tqdm
 import time
 import unittest
 
-
-
-private_key = 'ae95801c266ec32b92134de8c19efed96a6f0a84f4085631178612bbe3653410'
+private_key = json.load(open("../keys.json"))['mnemonic']
 web3_clients = []
 
 def init_web3():
@@ -21,6 +20,7 @@ def init_web3():
                    "https://data-seed-prebsc-2-s3.binance.org:8545/",]
     for infura_url in infura_urls:
         w3 = Web3(Web3.HTTPProvider(infura_url))
+        w3.middleware_onion.inject(geth_poa_middleware, layer=0)
         web3_clients.append(w3)
 
 

@@ -22,14 +22,12 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 var json = require('./keys.json'); 
 var mnemonic = json['mnemonic'];
 
-
-
 module.exports = {
   networks: {
     development: {
-      host: "127.0.0.1",     // Localhost (default: none)
-      port: 8545,            // Standard BSC port (default: none)
-      network_id: "*",       // Any network (default: none)
+      host: "localhost",
+      port: 7545,
+      network_id: "5777"
     },
     testnet: {
       provider: () => new HDWalletProvider(mnemonic, `https://data-seed-prebsc-2-s3.binance.org:8545/`),
