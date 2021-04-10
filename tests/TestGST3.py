@@ -5,6 +5,9 @@ import json
 import numpy as np
 from tqdm import tqdm
 import time
+import unittest
+
+
 
 private_key = 'ae95801c266ec32b92134de8c19efed96a6f0a84f4085631178612bbe3653410'
 web3_clients = []
@@ -19,12 +22,19 @@ def init_web3():
     for infura_url in infura_urls:
         w3 = Web3(Web3.HTTPProvider(infura_url))
         web3_clients.append(w3)
-#%%
+
+
 init_web3()
 w3 = np.random.choice(web3_clients)
-SG3_abi = "../build/contracts/SG3Token.json"
-SG3_abi = json.load(open(SG3_abi))['abi']
+SG3_abi = json.load(open("../build/contracts/SG3Token.json"))['abi']
 SG3_address = "0x34ed889fE1ede904C5a18063C9ec89922a1F638b"
 SG3_contract = w3.eth.contract(address=SG3_address, abi=SG3_abi)
-#%%
 
+class TestSG3_Contract(unittest.TestCase):
+
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+
+if __name__ == '__main__':
+    unittest.main()
