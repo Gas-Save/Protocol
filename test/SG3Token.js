@@ -28,8 +28,7 @@ contract("SG3 Token Test", async accounts => {
         assert.equal(balance.toNumber(), 1);
         const gasUsed = receipt.receipt.gasUsed;
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
-    }); */
-
+    }); 
     it('Should mint', async function () {
         var instance = await SG3Token.new();
         await instance.mint(100, {from:accounts[0]});
@@ -42,23 +41,32 @@ contract("SG3 Token Test", async accounts => {
         var instance = await SG3Token.new();
         expectRevert(instance.free(100, {from: accounts[3]}), 'ERC20: burn amount exceeds balance');
     });
-/*
-    it('Should burnGasAndFreeFrom', async function () {
+
+    it('Should burn gas and free from', async function () {
         var instance = await SG3Token.new();
         var helper = await SG3_helper.new();
 
-        await instance.SG3Token.mint(100);
-        await instance.SG3Token.approve(helper.address, 50, {from: accounts[0]});
-        await helper.burnGasAndFreeFrom(instance.address, 5000000, 50, {from:accounts[0]});
-        expect((await instance.totalSupply()).toString()).to.be.equal('50');
+        await instance.mint(100);
+        await instance.approve(helper.address, 50, {from: accounts[0]});
+        await helper.burnGasAndFreeFrom(instance.address, 5000000, 50, {from: accounts[0]});
+        var total_supply =  await instance.totalSupply.call()
+        total_supply = total_supply.toNumber()
+        assert.equal(total_supply, 51);
     });
+*/
 
-    it('Should burnGasAndFree', async function () {
-        await this.SG3Token.transfer(this.SG3_helper.address, 75);
-        await this.SG3_helper.burnGasAndFree(this.SG3Token.address, 5000000, 75);
-        expect((await this.SG3Token.totalSupply()).toString()).to.be.equal('175');
+    it('Should burn Gas And Free', async function () {
+        var instance = await SG3Token.new();
+        var helper = await SG3_helper.new();
+
+        await instance.mint(100);
+        await instance.transfer(helper.address, 75, {from: accounts[0]});
+        await helper.burnGasAndFree(instance.address, 5000000, 75, {from: accounts[0]});
+        var total_supply =  await instance.totalSupply.call()
+        total_supply = total_supply.toNumber()
+        assert.equal(total_supply, 26);        
     });
-
+/*
     it('Should burnGasAndFreeUpTo', async function () {
         await this.SG3Token.mint(75);
         await this.SG3Token.transfer(this.SG3_helper.address, 75);

@@ -90,7 +90,7 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
         uint256 valueAfterFee =  value.sub(SGBurnFee, "SG: burn amount does not cover fee");
         if (value > 0) {
             _burn(msg.sender, valueAfterFee);
-            _destroyChildren(value);
+            _destroyChildren(valueAfterFee);
             _transfer(msg.sender, feeAddress, SGBurnFee);
         }
         return value;
