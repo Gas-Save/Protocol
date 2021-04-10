@@ -45,7 +45,7 @@ module.exports = {
     },
   },
   // Set default mocha options here, use special reporters etc.
-  mocha: { // https://github.com/cgewecke/eth-gas-reporter
+  mocha: { /* https://github.com/cgewecke/eth-gas-reporter
     reporter: 'eth-gas-reporter',
     reporterOptions : {
       currency: 'USD',
@@ -53,7 +53,7 @@ module.exports = {
       onlyCalledMethods: true,
       showTimeSpent: true,
       excludeContracts: ['Migrations']
-    }
+    }*/
   },
   // Configure your compilers
  compilers: {
