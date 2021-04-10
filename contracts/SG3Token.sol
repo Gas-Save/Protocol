@@ -1,10 +1,10 @@
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/math/Math.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import 'ERC20WithoutTotalSupply.sol'
+import "./Math.sol";
+import "./SafeMath.sol";
+import "./IERC20.sol";
+import "./Ownable.sol";
+import './ERC20WithoutTotalSupply.sol';
 
 contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
     using SafeMath for uint256;
@@ -18,14 +18,14 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
     uint256 public totalBurned;
 
     //Introduce a fee that is taken on mint/burn
-    uint8 public SGMintFee = 1;
-    uint8 public SGBurnFee = 1;
+    uint256 public SGMintFee = 1;
+    uint256 public SGBurnFee = 1;
 
     //Add address for where fees will be added to. Eventually this can be a contract that GasSwap Holders can redeem siphoned gas from.
-    public address feeAddress;
+    address public feeAddress;
 
     // Set the fee address as the deployer for now. Eventually this will migrate to GasSwap Bank Contract
-    constructor(bytes32 _name) public {
+    constructor() {
         feeAddress = msg.sender;
     }
 
@@ -70,31 +70,19 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
         totalMinted = offset;
     }
 
-    function computeAddress2(uint256 salt) public pure returns (address child) {
-        assembly {
-            let data := mload(0x40)
-            mstore(data, 0xff0000000000004946c0e9F43F4Dee607b0eF1fA1c0000000000000000000000)
-            mstore(add(data, 21), salt)
-            mstore(add(data, 53), 0x3c1644c68e5d6cb380c36d1bf847fdbc0c7ac28030025a2fc5e63cce23c16348)
-            child := and(keccak256(data, 85), 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF)
-        }
+    function computeAddress2(uint256 salt) public view returns (address) {
+        bytes32 _data = keccak256(
+            abi.encodePacked(bytes1(0xff), address(this), salt, bytes32(0x3c1644c68e5d6cb380c36d1bf847fdbc0c7ac28030025a2fc5e63cce23c16348))
+        );
+        return address(uint160(bytes20(_data)));
     }
 
     function _destroyChildren(uint256 value) internal {
-        assembly {
-            let i := sload(totalBurned_slot)
-            let end := add(i, value)
-            sstore(totalBurned_slot, end)
-
-            let data := mload(0x40)
-            mstore(data, 0xff0000000000004946c0e9F43F4Dee607b0eF1fA1c0000000000000000000000)
-            mstore(add(data, 53), 0x3c1644c68e5d6cb380c36d1bf847fdbc0c7ac28030025a2fc5e63cce23c16348)
-            let ptr := add(data, 21)
-            for { } lt(i, end) { i := add(i, 1) } {
-                mstore(ptr, i)
-                pop(call(gas(), keccak256(data, 85), 0, 0, 0, 0, 0))
-            }
+        uint256 _totalBurned = totalBurned;
+        for (uint256 i = 0; i < value; i++) {
+            computeAddress2(_totalBurned + i).call("");
         }
+        totalBurned = _totalBurned + value;
     }
 
     function free(uint256 value) public returns (uint256)  {
@@ -102,7 +90,7 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
         if (value > 0) {
             _burn(msg.sender, valueAfterFee);
             _destroyChildren(value);
-            _transfer(feeAddress, SGBurnFee);
+            _transfer(msg.sender, feeAddress, SGBurnFee);
         }
         return value;
     }
@@ -116,7 +104,7 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
         if (value > 0) {
             _burnFrom(from, valueAfterFee);
             _destroyChildren(valueAfterFee);
-            _transferFrom(from, feeAddress, SGBurnFee);
+            transferFrom(from, feeAddress, SGBurnFee);
         }
         return value;
     }
