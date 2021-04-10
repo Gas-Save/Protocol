@@ -194,7 +194,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.8.0;\r\n\r\nimport \"./Math.sol\";\r\nimport \"./SafeMath.sol\";\r\nimport \"./IERC20.sol\";\r\n\r\nabstract contract ERC20WithoutTotalSupply is IERC20 {\r\n    using SafeMath for uint256;\r\n\r\n    mapping(address => uint256) private _balances;\r\n    mapping(address => mapping(address => uint256)) private _allowances;\r\n\r\n    function balanceOf(address account) public view override returns (uint256) {\r\n        return _balances[account];\r\n    }\r\n\r\n    function allowance(address owner, address spender) public view override returns (uint256) {\r\n        return _allowances[owner][spender];\r\n    }\r\n\r\n    function transfer(address recipient, uint256 amount) public override returns (bool) {\r\n        _transfer(msg.sender, recipient, amount);\r\n        return true;\r\n    }\r\n\r\n    function approve(address spender, uint256 amount) public override returns (bool) {\r\n        _approve(msg.sender, spender, amount);\r\n        return true;\r\n    }\r\n\r\n    function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool) {\r\n        _transfer(sender, recipient, amount);\r\n        uint256 allowed = _allowances[sender][msg.sender];\r\n        if ((allowed >> 255) == 0) {\r\n            _approve(sender, msg.sender, allowed.sub(amount, \"ERC20: transfer amount exceeds allowance\"));\r\n        }\r\n        return true;\r\n    }\r\n\r\n    function _transfer(address sender, address recipient, uint256 amount) internal {\r\n        _balances[sender] = _balances[sender].sub(amount, \"ERC20: transfer amount exceeds balance\");\r\n        _balances[recipient] = _balances[recipient].add(amount);\r\n        emit Transfer(sender, recipient, amount);\r\n    }\r\n\r\n    function _approve(address owner, address spender, uint256 amount) internal {\r\n        _allowances[owner][spender] = amount;\r\n        emit Approval(owner, spender, amount);\r\n    }\r\n\r\n    function _mint(address account, uint256 amount) internal {\r\n        _balances[account] = _balances[account].add(amount);\r\n        emit Transfer(address(0), account, amount);\r\n    }\r\n\r\n    function _burn(address account, uint256 amount) internal {\r\n        _balances[account] = _balances[account].sub(amount, \"ERC20: burn amount exceeds balance\");\r\n        emit Transfer(account, address(0), amount);\r\n    }\r\n\r\n    function _burnFrom(address account, uint256 amount) internal {\r\n        _burn(account, amount);\r\n        uint256 allowed = _allowances[account][msg.sender];\r\n        if ((allowed >> 255) == 0) {\r\n            _approve(account, msg.sender, allowed.sub(amount, \"ERC20: burn amount exceeds allowance\"));\r\n        }\r\n    }\r\n}",
-  "sourcePath": "C:\\Users\\khera\\Documents\\GitHub\\GasSwapTokens\\contracts\\ERC20WithoutTotalSupply.sol",
+  "sourcePath": "C:/Users/khera/Documents/GitHub/GasSwapTokens/contracts/ERC20WithoutTotalSupply.sol",
   "ast": {
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/ERC20WithoutTotalSupply.sol",
     "exportedSymbols": {
@@ -205,10 +205,10 @@
         401
       ],
       "Math": [
-        474
+        546
       ],
       "SafeMath": [
-        1229
+        968
       ]
     },
     "id": 324,
@@ -232,7 +232,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 324,
-        "sourceUnit": 475,
+        "sourceUnit": 547,
         "src": "27:20:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -244,7 +244,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 324,
-        "sourceUnit": 1230,
+        "sourceUnit": 969,
         "src": "49:24:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -297,7 +297,7 @@
               "id": 30,
               "name": "SafeMath",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1229,
+              "referencedDeclaration": 968,
               "src": "166:8:1"
             },
             "nodeType": "UsingForDirective",
@@ -1673,7 +1673,7 @@
                                 "lValueRequested": false,
                                 "memberName": "sub",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 1178,
+                                "referencedDeclaration": 917,
                                 "src": "1234:11:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2050,7 +2050,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1178,
+                        "referencedDeclaration": 917,
                         "src": "1457:21:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2194,7 +2194,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1093,
+                        "referencedDeclaration": 832,
                         "src": "1562:24:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2835,7 +2835,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1093,
+                        "referencedDeclaration": 832,
                         "src": "1936:22:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -3221,7 +3221,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1178,
+                        "referencedDeclaration": 917,
                         "src": "2124:22:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -3864,7 +3864,7 @@
                                 "lValueRequested": false,
                                 "memberName": "sub",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 1178,
+                                "referencedDeclaration": 917,
                                 "src": "2499:11:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -4035,10 +4035,10 @@
         401
       ],
       "Math": [
-        474
+        546
       ],
       "SafeMath": [
-        1229
+        968
       ]
     },
     "id": 324,
@@ -4062,7 +4062,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 324,
-        "sourceUnit": 475,
+        "sourceUnit": 547,
         "src": "27:20:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -4074,7 +4074,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 324,
-        "sourceUnit": 1230,
+        "sourceUnit": 969,
         "src": "49:24:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -4127,7 +4127,7 @@
               "id": 30,
               "name": "SafeMath",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1229,
+              "referencedDeclaration": 968,
               "src": "166:8:1"
             },
             "nodeType": "UsingForDirective",
@@ -5503,7 +5503,7 @@
                                 "lValueRequested": false,
                                 "memberName": "sub",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 1178,
+                                "referencedDeclaration": 917,
                                 "src": "1234:11:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -5880,7 +5880,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1178,
+                        "referencedDeclaration": 917,
                         "src": "1457:21:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -6024,7 +6024,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1093,
+                        "referencedDeclaration": 832,
                         "src": "1562:24:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -6665,7 +6665,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1093,
+                        "referencedDeclaration": 832,
                         "src": "1936:22:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -7051,7 +7051,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1178,
+                        "referencedDeclaration": 917,
                         "src": "2124:22:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -7694,7 +7694,7 @@
                                 "lValueRequested": false,
                                 "memberName": "sub",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 1178,
+                                "referencedDeclaration": 917,
                                 "src": "2499:11:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -7861,7 +7861,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-10T08:44:59.480Z",
+  "updatedAt": "2021-04-10T08:58:49.441Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

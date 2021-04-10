@@ -3,10 +3,11 @@ pragma solidity ^0.8.0;
 import "./Math.sol";
 import "./SafeMath.sol";
 import "./IERC20.sol";
+import "./ISGToken.sol";
 import "./Ownable.sol";
 import './ERC20WithoutTotalSupply.sol';
 
-contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
+contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     using SafeMath for uint256;
 
     //SG3 is based on CHI token. Difference is inbuilt fee on minting.
@@ -33,7 +34,7 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
         return totalMinted - totalBurned;
     }
 
-    function mint(uint256 value) public {
+    function mint(uint256 value) public override {
         uint256 offset = totalMinted;
         assembly {
             mstore(0, 0x746d4946c0e9F43F4Dee607b0eF1fA1c3318585733ff6000526015600bf30000)
@@ -70,7 +71,7 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
         totalMinted = offset;
     }
 
-    function computeAddress2(uint256 salt) public view returns (address) {
+    function computeAddress2(uint256 salt) public override view returns (address) {
         bytes32 _data = keccak256(
             abi.encodePacked(bytes1(0xff), address(this), salt, bytes32(0x3c1644c68e5d6cb380c36d1bf847fdbc0c7ac28030025a2fc5e63cce23c16348))
         );
@@ -85,7 +86,7 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
         totalBurned = _totalBurned + value;
     }
 
-    function free(uint256 value) public returns (uint256)  {
+    function free(uint256 value) public override returns (uint256)  {
         uint256 valueAfterFee =  value.sub(SGBurnFee, "SG: burn amount does not cover fee");
         if (value > 0) {
             _burn(msg.sender, valueAfterFee);
@@ -95,11 +96,11 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
         return value;
     }
 
-    function freeUpTo(uint256 value) public returns (uint256) {
+    function freeUpTo(uint256 value) public override returns (uint256) {
         return free(Math.min(value, balanceOf(msg.sender)));
     }
 
-    function freeFrom(address from, uint256 value) public returns (uint256) {
+    function freeFrom(address from, uint256 value) public override returns (uint256) {
         uint256 valueAfterFee = value.sub(SGBurnFee, "SG: burn amount does not cover fee");
         if (value > 0) {
             _burnFrom(from, valueAfterFee);
@@ -109,22 +110,22 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
         return value;
     }
 
-    function freeFromUpTo(address from, uint256 value) public returns (uint256) {
+    function freeFromUpTo(address from, uint256 value) public override returns (uint256) {
         return freeFrom(from, Math.min(Math.min(value, balanceOf(from)), allowance(from, msg.sender)));
     }
 
     //Add function for Gas Swap that proposers can use to adjust burn fee.
-    function updateBurnFee(uint256 newBurnFee) public onlyOwner {
+    function updateBurnFee(uint256 newBurnFee) public override onlyOwner {
         SGBurnFee = newBurnFee;
     }
 
     //Add function for Gas Swap that proposers can use to adjust mint fee.
-    function updateMintFee(uint256 newMintFee) public onlyOwner {
+    function updateMintFee(uint256 newMintFee) public override onlyOwner {
         SGMintFee = newMintFee;
     }
 
     //Add function that will allow eventual transfer to Gas Swap after initial setup phase
-    function updateFeeAddress(address newFeeAddress) public onlyOwner {
+    function updateFeeAddress(address newFeeAddress) public override onlyOwner {
         feeAddress = newFeeAddress;
     }
     
