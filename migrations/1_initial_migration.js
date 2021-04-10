@@ -1,4 +1,4 @@
-var bep20 = artifacts.require ("./BEP20Token.sol");
+var SG3Token  = artifacts.require ("./SG3Token.sol");
 
 module.exports = function (deployer) {
   deployer.deploy(bep20);

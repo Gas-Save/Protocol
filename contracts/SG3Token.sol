@@ -139,5 +139,5 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable{
     function updateFeeAddress(address newFeeAddress) public onlyOwner {
         feeAddress = newFeeAddress;
     }
-
+    
 }
