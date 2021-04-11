@@ -37,7 +37,7 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     function mint(uint256 value) public override {
         uint256 offset = totalMinted;
         assembly {
-            //replace 0's in 746d00000000000000000000000000003318585733ff6000526015600bf30000 with computed address
+            //replace 0's in 4946c0e9F43F4Dee607b0eF1fA1c in address with one found with profanity.
             mstore(0, 0x746d4946c0e9F43F4Dee607b0eF1fA1c3318585733ff6000526015600bf30000)
 
             for {let i := div(value, 32)} i {i := sub(i, 1)} {
