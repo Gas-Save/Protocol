@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@openzeppelin/test-helpers": "^0.5.10",
-    "@truffle/hdwallet-provider": "^1.2.6"
+    "@truffle/hdwallet-provider": "^1.2.6",
+    "rlp": "^2.2.6"
   }
 }

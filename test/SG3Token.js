@@ -4,7 +4,37 @@ const SG3_helper  = artifacts.require ("./test_helpers/SG3_helper.sol");
 
 contract("SG3 Token Test", async accounts => {
     
+    it("should be able to init contract", async () => {
+
+
+        const rlp = require('rlp');
+        const keccak = require('keccak');
+        
+        var nonce = 0x00; //The nonce must be a hex literal!
+        var sender = accounts[9]; //Requires a hex string as input!
+        
+        var input_arr = [ sender, nonce ];
+        var rlp_encoded = rlp.encode(input_arr);
+        
+        var contract_address_long = keccak('keccak256').update(rlp_encoded).digest('hex');
+        
+        var contract_address = contract_address_long.substring(24); //Trim the first 24 characters.
+        console.log("contract_address: " + contract_address);
+        
+        const account_one = accounts[0];
+        var instance = await SG3Token.new();
+        const amountMint = 100;
+
+        var receipt = await instance.mint(amountMint, {from: accounts[1]})
+        const balance = await instance.balanceOf.call(accounts[1]);
+        assert.equal(balance.toNumber(), 99);
+
+        console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    });
+
+
     it("should be able to mint tokens", async () => {
+        
         const account_one = accounts[0];
         var instance = await SG3Token.new();
         const amountMint = 100;
