@@ -72,7 +72,7 @@ contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
         totalMinted = offset;
     }
 
-    function computeAddress2(uint256 salt) public override view returns (address) {
+    function computeAddress2(uint256 salt) public view returns (address) {
         bytes32 _data = keccak256(
             abi.encodePacked(bytes1(0xff), address(this), salt, bytes32(0x3c1644c68e5d6cb380c36d1bf847fdbc0c7ac28030025a2fc5e63cce23c16348))
         );

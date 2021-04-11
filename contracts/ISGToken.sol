@@ -13,15 +13,9 @@ interface ISGToken {
     function mint(uint256 value) external;
 
     /**
-     * @dev Returns address of child contract to destroy.
-     */
-    function computeAddress2(uint256 salt) external view returns (address);
-
-    /**
      * @dev return number of tokens freed up.
      */
     function free(uint256 value) external returns (uint256);
-
 
     /**
      * @dev return number of tokens freed up.
