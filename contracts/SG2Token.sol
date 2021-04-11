@@ -7,12 +7,12 @@ import "./ISGToken.sol";
 import "./Ownable.sol";
 import './ERC20WithoutTotalSupply.sol';
 
-contract SG3Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
+contract SG2Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     using SafeMath for uint256;
 
-    //SG3 is based on CHI token. Difference is inbuilt fee on minting.
-    string constant public name = "Stored Gas v3 by GasSwap.finance";
-    string constant public symbol = "SG3";
+    //SG2 is based on CHI token. Difference is inbuilt fee on minting.
+    string constant public name = "Stored Gas v2 by GasSwap.finance";
+    string constant public symbol = "SG2";
     uint8 constant public decimals = 0;
 
     uint256 public totalMinted;

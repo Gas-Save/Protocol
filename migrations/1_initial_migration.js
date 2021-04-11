@@ -1,5 +1,5 @@
-var SG3Token  = artifacts.require ("./SG3Token.sol");
+var SG2Token  = artifacts.require ("./SG2Token.sol");
 
 module.exports = function (deployer) {
-  deployer.deploy(SG3Token);
+  deployer.deploy(SG2Token);
 };
