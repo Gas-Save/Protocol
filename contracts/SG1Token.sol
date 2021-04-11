@@ -13,7 +13,7 @@ contract SG1Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     //SG1 uses a burn mechanic loosely based off of GST1. While using a common interface that the other SG tokens use. Also uses formal Erc20.
     string constant public name = "Stored Gas v1 by GasSwap.finance";
     string constant public symbol = "SG1";
-    uint8 constant public decimals = 2;
+    uint8 constant public decimals = 0;
 
     uint256 public totalMinted;
     uint256 public totalBurned;
