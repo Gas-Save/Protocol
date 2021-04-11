@@ -1,6 +1,6 @@
 const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
 const SG3Token  = artifacts.require ("./SG3Token.sol");
-const SG3_helper  = artifacts.require ("./test_helpers/SG3_helper.sol");
+const SG_Helper  = artifacts.require ("./test_helpers/SG_Helper.sol");
 
 contract("SG3 Token Test", async accounts => {
     
@@ -76,7 +76,7 @@ contract("SG3 Token Test", async accounts => {
 
     it('burn gas to find baseline cost', async function () {
         var instance = await SG3Token.new();
-        var helper = await SG3_helper.new();
+        var helper = await SG_Helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 50, {from: accounts[0]});
@@ -92,7 +92,7 @@ contract("SG3 Token Test", async accounts => {
 
     it('Should burn gas and free from', async function () {
         var instance = await SG3Token.new();
-        var helper = await SG3_helper.new();
+        var helper = await SG_Helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 50, {from: accounts[0]});
@@ -107,7 +107,7 @@ contract("SG3 Token Test", async accounts => {
 
     it('Should burn Gas And Free', async function () {
         var instance = await SG3Token.new();
-        var helper = await SG3_helper.new();
+        var helper = await SG_Helper.new();
 
         await instance.mint(100);
         await instance.transfer(helper.address, 75, {from: accounts[0]});
@@ -122,7 +122,7 @@ contract("SG3 Token Test", async accounts => {
 
     it('Should burn Gas And Free Up To', async function () {
         var instance = await SG3Token.new();
-        var helper = await SG3_helper.new();
+        var helper = await SG_Helper.new();
 
         await instance.mint(100);
         await instance.transfer(helper.address, 75, {from: accounts[0]});
@@ -137,7 +137,7 @@ contract("SG3 Token Test", async accounts => {
 
     it('Should burn Gas And Free From Up To', async function () {
         var instance = await SG3Token.new();
-        var helper = await SG3_helper.new();
+        var helper = await SG_Helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 75, {from: accounts[0]});

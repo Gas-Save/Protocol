@@ -2,7 +2,7 @@ pragma solidity ^0.8.0;
 
 import "../ISGToken.sol";
 
-contract SG3_helper {
+contract SG_helper {
 
     function dummy() public {
         assembly{

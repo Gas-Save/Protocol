@@ -10,7 +10,7 @@ import './ERC20WithoutTotalSupply.sol';
 contract SG1Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     using SafeMath for uint256;
 
-    //SG3 is based on CHI token. Difference is inbuilt fee on minting.
+    //SG1 uses a burn mechanic loosely based off of GST1. While using a common interface that the other SG tokens use. Also uses formal Erc20.
     string constant public name = "Stored Gas v1 by GasSwap.finance";
     string constant public symbol = "SG1";
     uint8 constant public decimals = 2;
