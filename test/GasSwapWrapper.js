@@ -4,7 +4,7 @@ const SG1Token  = artifacts.require ("./SG1Token.sol");
 const GS_Wrapper  = artifacts.require ("./GasSwapWrapper.sol");
 const SG_Helper  = artifacts.require ("./test_helpers/SG_Helper.sol");
 
-contract("SG2 Token Test", async accounts => {
+contract("Wrapper Test", async accounts => {
 
     it('burn gas to find baseline cost', async function () {
         var helper = await SG_Helper.new();
