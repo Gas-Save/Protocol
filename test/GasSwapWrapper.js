@@ -21,7 +21,7 @@ contract("SG2 Token Test", async accounts => {
 
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGas(5000000).encodeABI();
-
+        
         var receipt = await wrapper.proxyCaller(burner_callData, helper.address);
         
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
@@ -34,10 +34,12 @@ contract("SG2 Token Test", async accounts => {
         var wrapper = await GS_Wrapper.new();
 
         await instance.mint(100);
+        await instance.approve(wrapper.address, 75, {from: accounts[0]})
+        
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGas(5000000).encodeABI();
 
-        var receipt = await wrapper.gasSwapCaller(burner_callData, helper.address, instance.address, 80);
+        var receipt = await wrapper.gasSwapCaller(burner_callData, helper.address, instance.address, 75);
         
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
         assert.equal(true, true);

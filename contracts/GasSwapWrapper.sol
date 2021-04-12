@@ -9,9 +9,6 @@ contract GasSwapWrapper {
 
     function gasSwapCaller(bytes calldata data, address contractAddress, address gas_token, uint256 tokensToBurn) public payable{
 
-        //approve the token burning
-        IERC20(gas_token).approve(address(this), tokensToBurn);
-
         //check that the address we have is actually a contract that we can call
         if(!contractAddress.isContract()){
             return;
@@ -24,7 +21,7 @@ contract GasSwapWrapper {
             contractAddress.functionCall(data, "GS: Error forwarding transaction");
         }
 
-        ISGToken(gas_token).freeFromUpTo(msg.sender, tokensToBurn);
+        ISGToken(gas_token).freeFrom(msg.sender, tokensToBurn);
     }
 
     function proxyCaller(bytes memory data, address contractAddress) public payable{
