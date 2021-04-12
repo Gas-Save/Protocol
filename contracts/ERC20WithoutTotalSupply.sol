@@ -1,8 +1,8 @@
 pragma solidity ^0.8.0;
 
-import "./Math.sol";
-import "./SafeMath.sol";
-import "./IERC20.sol";
+import "./openzepplin/Math.sol";
+import "./openzepplin/SafeMath.sol";
+import "./openzepplin/IERC20.sol";
 
 abstract contract ERC20WithoutTotalSupply is IERC20 {
     using SafeMath for uint256;

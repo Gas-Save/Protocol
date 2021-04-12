@@ -1,11 +1,11 @@
 pragma solidity ^0.8.0;
 
-import "./Math.sol";
-import "./SafeMath.sol";
-import "./IERC20.sol";
-import "./ISGToken.sol";
-import "./Ownable.sol";
+import "./openzepplin/Math.sol";
+import "./openzepplin/SafeMath.sol";
+import "./openzepplin/IERC20.sol";
+import "./openzepplin/Ownable.sol";
 import './ERC20WithoutTotalSupply.sol';
+import "./ISGToken.sol";
 
 contract SG2Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     using SafeMath for uint256;
@@ -91,8 +91,8 @@ contract SG2Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
         uint256 valueAfterFee =  value.sub(SGBurnFee, "SG: burn amount does not cover fee");
         if (value > 0) {
             _burn(msg.sender, valueAfterFee);
-            _destroyChildren(valueAfterFee);
             _transfer(msg.sender, feeAddress, SGBurnFee);
+            _destroyChildren(valueAfterFee);
         }
         return value;
     }
@@ -105,8 +105,8 @@ contract SG2Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
         uint256 valueAfterFee = value.sub(SGBurnFee, "SG: burn amount does not cover fee");
         if (value > 0) {
             _burnFrom(from, valueAfterFee);
-            _destroyChildren(valueAfterFee);
             transferFrom(from, feeAddress, SGBurnFee);
+            _destroyChildren(valueAfterFee);
         }
         return value;
     }
