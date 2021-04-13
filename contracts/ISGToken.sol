@@ -31,11 +31,6 @@ interface ISGToken {
      * @dev return number of tokens freed up.
      */
     function freeFromUpTo(address from, uint256 value) external returns (uint256);
-
-    /**
-     * @dev updates number of burned tokens siphoned to Gas Swap holders.
-     */
-    function updateBurnFee(uint256 newBurnFee) external; 
  
     /**
      * @dev updates number of minted tokens siphoned to Gas Swap holders.

@@ -20,7 +20,6 @@ contract SG2Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
 
     //Introduce a fee that is taken on mint/burn
     uint256 public SGMintFee = 1;
-    uint256 public SGBurnFee = 1;
 
     //Add address for where fees will be added to. Eventually this can be a contract that GasSwap Holders can redeem siphoned gas from.
     address public feeAddress;
@@ -88,11 +87,9 @@ contract SG2Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     }
 
     function free(uint256 value) public override returns (uint256)  {
-        uint256 valueAfterFee =  value.sub(SGBurnFee, "SG: burn amount does not cover fee");
         if (value > 0) {
-            _burn(msg.sender, valueAfterFee);
-            _transfer(msg.sender, feeAddress, SGBurnFee);
-            _destroyChildren(valueAfterFee);
+            _burn(msg.sender, value);
+            _destroyChildren(value);
         }
         return value;
     }
@@ -102,22 +99,15 @@ contract SG2Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     }
 
     function freeFrom(address from, uint256 value) public override returns (uint256) {
-        uint256 valueAfterFee = value.sub(SGBurnFee, "SG: burn amount does not cover fee");
         if (value > 0) {
-            _burnFrom(from, valueAfterFee);
-            transferFrom(from, feeAddress, SGBurnFee);
-            _destroyChildren(valueAfterFee);
+            _burnFrom(from, value);
+            _destroyChildren(value);
         }
         return value;
     }
 
     function freeFromUpTo(address from, uint256 value) public override returns (uint256) {
         return freeFrom(from, Math.min(Math.min(value, balanceOf(from)), allowance(from, msg.sender)));
-    }
-
-    //Add function for Gas Swap that proposers can use to adjust burn fee.
-    function updateBurnFee(uint256 newBurnFee) public override onlyOwner {
-        SGBurnFee = newBurnFee;
     }
 
     //Add function for Gas Swap that proposers can use to adjust mint fee.

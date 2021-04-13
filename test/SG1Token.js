@@ -85,7 +85,7 @@ contract("SG1 Token Test", async accounts => {
 
         var total_supply =  await instance.totalSupply.call()
         total_supply = total_supply.toNumber()
-        assert.equal(total_supply, 51);
+        assert.equal(total_supply, 50);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
@@ -100,7 +100,7 @@ contract("SG1 Token Test", async accounts => {
 
         var total_supply =  await instance.totalSupply.call()
         total_supply = total_supply.toNumber()
-        assert.equal(total_supply, 26);        
+        assert.equal(total_supply, 25);        
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
@@ -115,7 +115,7 @@ contract("SG1 Token Test", async accounts => {
 
         var total_supply =  await instance.totalSupply.call()
         total_supply = total_supply.toNumber()
-        assert.equal(total_supply, 26);   
+        assert.equal(total_supply, 25);   
         
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
@@ -130,7 +130,7 @@ contract("SG1 Token Test", async accounts => {
         
         var total_supply =  await instance.totalSupply.call()
         total_supply = total_supply.toNumber()
-        assert.equal(total_supply, 31); 
+        assert.equal(total_supply, 30); 
         
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
