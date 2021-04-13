@@ -19,6 +19,14 @@ contract SG_helper {
         }
     }
 
+    function burnGasAndAcceptPayment(uint256 burn) public payable{
+        // call self.dummy() to burn a bunch of gas
+        assembly {
+            mstore(0x0, 0x32e43a1100000000000000000000000000000000000000000000000000000000)
+            let ret := call(burn, address(), 0, 0x0, 0x04, 0x0, 0)
+        }
+    }
+
     function burnGasAndFree(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
         require(ISGToken(gas_token).free(free) > 0, "burnGasAndFree");

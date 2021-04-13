@@ -2,21 +2,14 @@ pragma solidity ^0.8.0;
 
 import "./openzepplin/Address.sol";
 import "./openzepplin/IERC20.sol";
+import "./openzepplin/Ownable.sol";
 import "./ISGToken.sol";
 
-contract GasSwapWrapper {
+contract GasSwapWrapper is Ownable {
     using Address for address;
 
-    function gasSwapCaller(bytes calldata data, address contractAddress, address gas_token, uint256 tokensToBurn) public payable{
-
-        proxyCaller(data, contractAddress);
-
-        ISGToken(gas_token).freeFrom(msg.sender, tokensToBurn);
-    }
-
-    function proxyCaller(bytes memory data, address contractAddress) public payable{
-
-        //check that the address we have is actually a contract that we can call
+    // To avoid abuse, only the transaction sender can use approved values for gas saving.
+    function gasSwapCall(bytes calldata data, address contractAddress, address gas_token, uint256 tokensToBurn) public payable onlyOwner{
         if(!contractAddress.isContract()){
             return;
         }
@@ -27,8 +20,6 @@ contract GasSwapWrapper {
         else{
             contractAddress.functionCall(data, "GS: Error forwarding transaction");
         }
+        ISGToken(gas_token).freeFromUpTo(msg.sender, tokensToBurn);
     }
-    
-    event Interaction(address indexed owner, bytes data);
-    
 }
