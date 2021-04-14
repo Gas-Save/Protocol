@@ -8,12 +8,12 @@ import './ERC20WithoutTotalSupply.sol';
 import "./INonSGToken.sol";
 import "./ISGToken.sol";
 
-contract wrappedChiToken is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
+contract wrappedGST1Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
     using SafeMath for uint256;
 
     //This is an erc-20 compliant wrapper for CHI. We use this to mint wChi from Chi, and pay during the process.
-    string constant public name = "Wrapped Chi by GasSwap.finance";
-    string constant public symbol = "wChi";
+    string constant public name = "Wrapped GST1 by GasSwap.finance";
+    string constant public symbol = "wGST1";
     uint8 constant public decimals = 0;
     
     uint256 public totalMinted;
