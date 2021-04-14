@@ -1,12 +1,9 @@
-pragma solidity ^0.4.10;
+pragma solidity ^0.8.0;
 
-import "rlp.sol";
-
-contract GasToken2 is Rlp {
+contract GasToken2 {
     //////////////////////////////////////////////////////////////////////////
     // Generic ERC20
     //////////////////////////////////////////////////////////////////////////
-
     // owner -> amount
     mapping(address => uint256) s_balances;
     // owner -> spender -> max amount
@@ -17,7 +14,7 @@ contract GasToken2 is Rlp {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     // Spec: Get the account balance of another account with address `owner`
-    function balanceOf(address owner) public constant returns (uint256 balance) {
+    function balanceOf(address owner) public returns (uint256 balance) {
         return s_balances[owner];
     }
 
@@ -67,7 +64,7 @@ contract GasToken2 is Rlp {
     // What if the allowance is higher than the balance of the `owner`?
     // Callers should be careful to use min(allowance, balanceOf) to make sure
     // that the allowance is actually present in the account!
-    function allowance(address owner, address spender) public constant returns (uint256 remaining) {
+    function allowance(address owner, address spender) public returns (uint256 remaining) {
         return s_allowances[owner][spender];
     }
 
@@ -95,7 +92,7 @@ contract GasToken2 is Rlp {
     // totalSupply gives  the number of tokens currently in existence
     // Each token corresponds to one child contract that can be SELFDESTRUCTed
     // for a gas refund.
-    function totalSupply() public constant returns (uint256 supply) {
+    function totalSupply() public returns (uint256 supply) {
         return s_head - s_tail;
     }
 
@@ -138,26 +135,48 @@ contract GasToken2 is Rlp {
     // function.
     function mint(uint256 value) public {
         for (uint256 i = 0; i < value; i++) {
-            require(makeChild() != 0);
+            makeChild();
         }
         s_head += value;
         s_balances[msg.sender] += value;
     }
 
     // Destroys `value` child contracts and updates s_tail.
+    //
+    // This function is affected by an issue in solc: https://github.com/ethereum/solidity/issues/2999
+    // The `mk_contract_address(this, i).call();` doesn't forward all available gas, but only GAS - 25710.
+    // As a result, when this line is executed with e.g. 30000 gas, the callee will have less than 5000 gas
+    // available and its SELFDESTRUCT operation will fail leading to no gas refund occurring.
+    // The remaining ~29000 gas left after the call is enough to update s_tail and the caller's balance.
+    // Hence tokens will have been destroyed without a commensurate gas refund.
+    // Fortunately, there is a simple workaround:
+    // Whenever you call free, freeUpTo, freeFrom, or freeUpToFrom, ensure that you pass at least
+    // 25710 + `value` * (1148 + 5722 + 150) gas. (It won't all be used)
     function destroyChildren(uint256 value) internal {
         uint256 tail = s_tail;
         // tail points to slot behind the last contract in the queue
         for (uint256 i = tail + 1; i <= tail + value; i++) {
-            require(mk_contract_address(this, i).call.gas(msg.gas)());
+            computeAddress2(s_tail + i).call("");
         }
 
         s_tail = tail + value;
     }
 
+    function computeAddress2(uint256 salt) public pure returns (address child) {
+        assembly {
+            let data := mload(0x40)
+            mstore(data, 0xff0000000000004946c0e9F43F4Dee607b0eF1fA1c0000000000000000000000)
+            mstore(add(data, 21), salt)
+            mstore(add(data, 53), 0x3c1644c68e5d6cb380c36d1bf847fdbc0c7ac28030025a2fc5e63cce23c16348)
+            child := and(keccak256(data, 85), 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF)
+        }
+    }
+
     // Frees `value` sub-tokens (e.g. cents, pennies, ...) belonging to the
     // caller of this function by destroying `value` child contracts, which
     // will trigger a partial gas refund.
+    // You should ensure that you pass at least 25710 + `value` * (1148 + 5722 + 150) gas
+    // when calling this function. For details, see the comment above `destroyChildren`.
     function free(uint256 value) public returns (bool success) {
         uint256 from_balance = s_balances[msg.sender];
         if (value > from_balance) {
@@ -173,6 +192,8 @@ contract GasToken2 is Rlp {
 
     // Frees up to `value` sub-tokens. Returns how many tokens were freed.
     // Otherwise, identical to free.
+    // You should ensure that you pass at least 25710 + `value` * (1148 + 5722 + 150) gas
+    // when calling this function. For details, see the comment above `destroyChildren`.
     function freeUpTo(uint256 value) public returns (uint256 freed) {
         uint256 from_balance = s_balances[msg.sender];
         if (value > from_balance) {
@@ -188,6 +209,8 @@ contract GasToken2 is Rlp {
 
     // Frees `value` sub-tokens owned by address `from`. Requires that `msg.sender`
     // has been approved by `from`.
+    // You should ensure that you pass at least 25710 + `value` * (1148 + 5722 + 150) gas
+    // when calling this function. For details, see the comment above `destroyChildren`.
     function freeFrom(address from, uint256 value) public returns (bool success) {
         address spender = msg.sender;
         uint256 from_balance = s_balances[from];
@@ -195,7 +218,7 @@ contract GasToken2 is Rlp {
             return false;
         }
 
-        mapping(address => uint256) from_allowances = s_allowances[from];
+        mapping(address => uint256) storage from_allowances = s_allowances[from];
         uint256 spender_allowance = from_allowances[spender];
         if (value > spender_allowance) {
             return false;
@@ -211,6 +234,8 @@ contract GasToken2 is Rlp {
 
     // Frees up to `value` sub-tokens owned by address `from`. Returns how many tokens were freed.
     // Otherwise, identical to `freeFrom`.
+    // You should ensure that you pass at least 25710 + `value` * (1148 + 5722 + 150) gas
+    // when calling this function. For details, see the comment above `destroyChildren`.
     function freeFromUpTo(address from, uint256 value) public returns (uint256 freed) {
         address spender = msg.sender;
         uint256 from_balance = s_balances[from];
@@ -218,7 +243,7 @@ contract GasToken2 is Rlp {
             value = from_balance;
         }
 
-        mapping(address => uint256) from_allowances = s_allowances[from];
+        mapping(address => uint256) storage from_allowances = s_allowances[from];
         uint256 spender_allowance = from_allowances[spender];
         if (value > spender_allowance) {
             value = spender_allowance;

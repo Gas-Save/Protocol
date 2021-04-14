@@ -1,73 +1,6 @@
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/math/Math.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-
-
-abstract contract ERC20WithoutTotalSupply is IERC20 {
-    using SafeMath for uint256;
-
-    mapping(address => uint256) private _balances;
-    mapping(address => mapping(address => uint256)) private _allowances;
-
-    function balanceOf(address account) public view override returns (uint256) {
-        return _balances[account];
-    }
-
-    function allowance(address owner, address spender) public view override returns (uint256) {
-        return _allowances[owner][spender];
-    }
-
-    function transfer(address recipient, uint256 amount) public override returns (bool) {
-        _transfer(msg.sender, recipient, amount);
-        return true;
-    }
-
-    function approve(address spender, uint256 amount) public override returns (bool) {
-        _approve(msg.sender, spender, amount);
-        return true;
-    }
-
-    function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool) {
-        _transfer(sender, recipient, amount);
-        uint256 allowed = _allowances[sender][msg.sender];
-        if ((allowed >> 255) == 0) {
-            _approve(sender, msg.sender, allowed.sub(amount, "ERC20: transfer amount exceeds allowance"));
-        }
-        return true;
-    }
-
-    function _transfer(address sender, address recipient, uint256 amount) internal {
-        _balances[sender] = _balances[sender].sub(amount, "ERC20: transfer amount exceeds balance");
-        _balances[recipient] = _balances[recipient].add(amount);
-        emit Transfer(sender, recipient, amount);
-    }
-
-    function _approve(address owner, address spender, uint256 amount) internal {
-        _allowances[owner][spender] = amount;
-        emit Approval(owner, spender, amount);
-    }
-
-    function _mint(address account, uint256 amount) internal {
-        _balances[account] = _balances[account].add(amount);
-        emit Transfer(address(0), account, amount);
-    }
-
-    function _burn(address account, uint256 amount) internal {
-        _balances[account] = _balances[account].sub(amount, "ERC20: burn amount exceeds balance");
-        emit Transfer(account, address(0), amount);
-    }
-
-    function _burnFrom(address account, uint256 amount) internal {
-        _burn(account, amount);
-        uint256 allowed = _allowances[account][msg.sender];
-        if ((allowed >> 255) == 0) {
-            _approve(account, msg.sender, allowed.sub(amount, "ERC20: burn amount exceeds allowance"));
-        }
-    }
-}
-
+import "../../ERC20WithoutTotalSupply.sol";
 
 contract ChiToken is IERC20, ERC20WithoutTotalSupply {
     string constant public name = "Chi Token by 1inch";
@@ -128,9 +61,9 @@ contract ChiToken is IERC20, ERC20WithoutTotalSupply {
 
     function _destroyChildren(uint256 value) internal {
         assembly {
-            let i := sload(totalBurned_slot)
+            let i := sload(totalBurned.slot)
             let end := add(i, value)
-            sstore(totalBurned_slot, end)
+            sstore(totalBurned.slot, end)
 
             let data := mload(0x40)
             mstore(data, 0xff0000000000004946c0e9F43F4Dee607b0eF1fA1c0000000000000000000000)
