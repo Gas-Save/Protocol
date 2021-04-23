@@ -9,7 +9,7 @@ import "./IGSVEProtocolToken.sol";
 import "./IGSVEToken.sol";
 
 
-contract GSVEProtocol is Ownable {
+contract GSVECore is Ownable {
     using SafeMath for uint256;
     
     //address of our protocol utility token
@@ -171,6 +171,11 @@ contract GSVEProtocol is Ownable {
         emit Claimed(devClaimRewardAddress, claimGasTokenAddress, tokensGiven);
 
         devTokenClaims[claimGasTokenAddress] = 0;
+    }
+
+    function addGasToken(address gasToken, uint256 mintType, uint256 isClaimable) public onlyOwner{
+        mintingType[gasToken] = mintType;
+        claimable[gasToken] = isClaimable;
     }
 
     event Claimed(address indexed _from, address indexed _token, uint _value);
