@@ -35,15 +35,10 @@ contract GSVECore is Ownable {
     mapping(address => uint256) private userStakeTimes;
     mapping(address => uint256) private userTotalRewards;
 
-    //dev claim reserves
-    mapping(address => uint256) private devTokenClaims;
-
-    //address of where the devs portion of the fee pool is going
-    address private devClaimRewardAddress;
+    mapping(address => mapping(address => uint256)) private userClaimTimes;
 
     constructor(address _tokenAddress) {
         GSVEToken = _tokenAddress;
-        devClaimRewardAddress = msg.sender;
     }
 
     //Staking Functions - TODO Testing and Verification
@@ -137,40 +132,32 @@ contract GSVECore is Ownable {
         }
     }
 
-    //Allow a tier 2 staker to burn tokens and claim from the pool of a specific token. Claimed at a rate of 0.1 GSVE per token claimed.
+    //Allow a tier 2 staker to burn tokens and claim from the pool of a specific token. 
+    //Claimed at a rate of 0.1 GSVE per token claimed.
     function claimToken(address claimGasTokenAddress, uint256 tokensClaimed) public {
 
         uint256 isClaimable = claimable[claimGasTokenAddress];
         require(isClaimable == 0, "GSVE: Token not claimable");
         require(userStakes[msg.sender] >= tierTwoThreshold , "GSVE: User has not staked enough to claim from the pool");
+        
+        if(userClaimTimes[msg.sender][claimGasTokenAddress] != 0){
+            require(block.timestamp.sub(userClaimTimes[msg.sender][claimGasTokenAddress]) > 60 * 60 * 12, "GSVE: User cannot claim the same gas token twice in 12 hours");
+        }
 
         uint256 tokensGiven = tokensClaimed;
 
-        //user can withdraw up to 10 tokens from the pool. taking into account the dev allocation of fee reserves.
-        uint256 tokensAvailableToClaim = IERC20(GSVEToken).balanceOf(address(this)).sub(devTokenClaims[claimGasTokenAddress]);
+        //user can withdraw up to 10 tokens from the pool
+        uint256 tokensAvailableToClaim = IERC20(GSVEToken).balanceOf(address(this));
         tokensGiven = Math.min(Math.min(10, tokensAvailableToClaim), tokensGiven);
 
         if(tokensGiven == 0){
             return;
         }
 
-        //whenever a user claims tokens from the protocol, the dev is given 1 of that gas token that they can claim. This is reserved for them.
-        devTokenClaims[claimGasTokenAddress] = devTokenClaims[claimGasTokenAddress] + 1;
-
         IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, tokensGiven * 1 * 10 ** 17);
         IERC20(claimGasTokenAddress).transfer(msg.sender, tokensGiven);
+        userClaimTimes[msg.sender][claimGasTokenAddress] = block.timestamp;
         emit Claimed(msg.sender, claimGasTokenAddress, tokensGiven);
-    }
-
-    function payDevReward(address claimGasTokenAddress) public {
-        uint256 isClaimable = claimable[claimGasTokenAddress];
-        require(isClaimable == 0, "GSVE: Attempted to claim a non Gas token");
-
-        uint256 tokensGiven = devTokenClaims[claimGasTokenAddress];
-        IERC20(claimGasTokenAddress).transfer(devClaimRewardAddress, tokensGiven);
-        emit Claimed(devClaimRewardAddress, claimGasTokenAddress, tokensGiven);
-
-        devTokenClaims[claimGasTokenAddress] = 0;
     }
 
     function addGasToken(address gasToken, uint256 mintType, uint256 isClaimable) public onlyOwner{
