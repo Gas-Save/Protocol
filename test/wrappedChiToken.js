@@ -1,12 +1,12 @@
 const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
-const SG_Helper  = artifacts.require ("./test_helpers/SG_Helper.sol");
+const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 const wrappedChiToken  = artifacts.require ("./wrappedChiToken.sol");
-const ChiToken  = artifacts.require ("./existing_gas_tokens/ChiToken.sol");
+const GasToken  = artifacts.require ("./existing_gas_tokens/ChiToken.sol");
 
 contract("Wrapped ChiToken Token Test", async accounts => {
  
     it("should be able to mint & wrap from contracts", async () => {
-        var chiTokenInstance = await ChiToken.new();
+        var chiTokenInstance = await GasToken.new();
         var instance = await wrappedChiToken.new(chiTokenInstance.address);    
 
         const amountMint = 100;
@@ -68,7 +68,7 @@ contract("Wrapped ChiToken Token Test", async accounts => {
 
     it('burn gas to find baseline cost', async function () {
         var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 50, {from: accounts[0]});
@@ -84,7 +84,7 @@ contract("Wrapped ChiToken Token Test", async accounts => {
 
     it('Should burn gas and free from', async function () {
         var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 50, {from: accounts[0]});
@@ -99,7 +99,7 @@ contract("Wrapped ChiToken Token Test", async accounts => {
 
     it('Should burn Gas And Free', async function () {
         var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.transfer(helper.address, 75, {from: accounts[0]});
@@ -114,7 +114,7 @@ contract("Wrapped ChiToken Token Test", async accounts => {
 
     it('Should burn Gas And Free Up To', async function () {
         var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.transfer(helper.address, 75, {from: accounts[0]});
@@ -129,7 +129,7 @@ contract("Wrapped ChiToken Token Test", async accounts => {
 
     it('Should burn Gas And Free From Up To', async function () {
         var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 75, {from: accounts[0]});

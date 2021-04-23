@@ -6,9 +6,9 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import './ERC20WithoutTotalSupply.sol';
 import "./INonSGToken.sol";
-import "./ISGToken.sol";
+import "./IGSVEToken.sol";
 
-contract wrappedGST1Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
+contract wrappedGST1Token is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
     using SafeMath for uint256;
 
     //This is an erc-20 compliant wrapper for CHI. We use this to mint wChi from Chi, and pay during the process.

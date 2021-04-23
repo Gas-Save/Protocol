@@ -1,5 +1,5 @@
-var SG2Token  = artifacts.require ("./SG2Token.sol");
+var rFuel  = artifacts.require ("./RocketFuel.sol");
 
 module.exports = function (deployer) {
-  deployer.deploy(SG2Token);
+  deployer.deploy(rFuel);
 };

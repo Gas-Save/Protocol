@@ -5,14 +5,14 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import './ERC20WithoutTotalSupply.sol';
-import "./ISGToken.sol";
+import "./IGSVEToken.sol";
 
-contract SG2Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
+contract RocketFuel is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
     using SafeMath for uint256;
 
     //SG2 is based on CHI token. Difference is inbuilt fee on minting.
-    string constant public name = "Stored Gas v2 by GasSwap.finance";
-    string constant public symbol = "SG2";
+    string constant public name = "Rocket Fuel by GasSwap.finance";
+    string constant public symbol = "rFuel";
     uint8 constant public decimals = 0;
 
     uint256 public totalMinted;

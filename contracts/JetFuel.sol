@@ -5,14 +5,14 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import './ERC20WithoutTotalSupply.sol';
-import "./ISGToken.sol";
+import "./IGSVEToken.sol";
 
-contract SG1Token is IERC20, ERC20WithoutTotalSupply, Ownable, ISGToken{
+contract JetFuel is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
     using SafeMath for uint256;
 
     //SG1 uses a burn mechanic loosely based off of GST1. While using a common interface that the other SG tokens use. Also uses formal Erc20.
-    string constant public name = "Stored Gas v1 by GasSwap.finance";
-    string constant public symbol = "SG1";
+    string constant public name = "Jet Fuel by GasSwap.finance";
+    string constant public symbol = "jFUEL";
     uint8 constant public decimals = 0;
 
     uint256 public totalMinted;

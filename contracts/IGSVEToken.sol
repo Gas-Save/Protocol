@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 /**
  * @dev Interface of the Stored Gas Token Type
  */
-interface ISGToken {
+interface IGSVEToken {
 
     /**
      * @dev mints new tokens.

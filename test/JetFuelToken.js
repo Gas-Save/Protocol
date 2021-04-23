@@ -1,28 +1,13 @@
 const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
-const SG2Token  = artifacts.require ("./SG2Token.sol");
-const SG_Helper  = artifacts.require ("./test_helpers/SG_Helper.sol");
+const GasToken  = artifacts.require ("./JetFuel.sol");
+const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 
-contract("SG2 Token Test", async accounts => {
+contract("JetFuel Token Test", async accounts => {
     
     it("should be able to init contract", async () => {
 
-
-        const rlp = require('rlp');
-        const keccak = require('keccak');
-        
-        var nonce = 0x00; //The nonce must be a hex literal!
-        var sender = accounts[9]; //Requires a hex string as input!
-        
-        var input_arr = [ sender, nonce ];
-        var rlp_encoded = rlp.encode(input_arr);
-        
-        var contract_address_long = keccak('keccak256').update(rlp_encoded).digest('hex');
-        
-        var contract_address = contract_address_long.substring(24); //Trim the first 24 characters.
-        console.log("contract_address: " + contract_address);
-        
         const account_one = accounts[0];
-        var instance = await SG2Token.new();
+        var instance = await GasToken.new();
         const amountMint = 100;
 
         var receipt = await instance.mint(amountMint, {from: accounts[1]})
@@ -36,7 +21,7 @@ contract("SG2 Token Test", async accounts => {
     it("should be able to mint tokens", async () => {
         
         const account_one = accounts[0];
-        var instance = await SG2Token.new();
+        var instance = await GasToken.new();
         const amountMint = 100;
 
         var receipt = await instance.mint(amountMint, {from: accounts[1]})
@@ -48,7 +33,7 @@ contract("SG2 Token Test", async accounts => {
 
     it("should be able to get fee of tokens", async () => {
         const account_one = accounts[0];
-        var instance = await SG2Token.new();
+        var instance = await GasToken.new();
         const amountMint = 100;
 
         var receipt = await instance.mint(amountMint, {from: accounts[1]})
@@ -59,7 +44,7 @@ contract("SG2 Token Test", async accounts => {
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     }); 
     it('Should mint', async function () {
-        var instance = await SG2Token.new();
+        var instance = await GasToken.new();
         var receipt = await instance.mint(100, {from:accounts[0]});
 
         var total_supply =  await instance.totalSupply.call()
@@ -70,13 +55,13 @@ contract("SG2 Token Test", async accounts => {
     });
 
     it('Should fail to free up', async function () {
-        var instance = await SG2Token.new();
+        var instance = await GasToken.new();
         expectRevert(instance.free(100, {from: accounts[3]}), 'ERC20: burn amount exceeds balance');
     });
 
     it('burn gas to find baseline cost', async function () {
-        var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var instance = await GasToken.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 50, {from: accounts[0]});
@@ -91,8 +76,8 @@ contract("SG2 Token Test", async accounts => {
 
 
     it('Should burn gas and free from', async function () {
-        var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var instance = await GasToken.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 50, {from: accounts[0]});
@@ -100,14 +85,14 @@ contract("SG2 Token Test", async accounts => {
 
         var total_supply =  await instance.totalSupply.call()
         total_supply = total_supply.toNumber()
-        assert.equal(total_supply, 50;
+        assert.equal(total_supply, 50);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
 
     it('Should burn Gas And Free', async function () {
-        var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var instance = await GasToken.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.transfer(helper.address, 75, {from: accounts[0]});
@@ -121,8 +106,8 @@ contract("SG2 Token Test", async accounts => {
     });
 
     it('Should burn Gas And Free Up To', async function () {
-        var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var instance = await GasToken.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.transfer(helper.address, 75, {from: accounts[0]});
@@ -136,8 +121,8 @@ contract("SG2 Token Test", async accounts => {
     });
 
     it('Should burn Gas And Free From Up To', async function () {
-        var instance = await SG2Token.new();
-        var helper = await SG_Helper.new();
+        var instance = await GasToken.new();
+        var helper = await GSVE_helper.new();
 
         await instance.mint(100);
         await instance.approve(helper.address, 75, {from: accounts[0]});

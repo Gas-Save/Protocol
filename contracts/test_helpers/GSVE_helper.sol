@@ -1,8 +1,8 @@
 pragma solidity ^0.8.0;
 
-import "../ISGToken.sol";
+import "../IGSVEToken.sol";
 
-contract SG_helper {
+contract GSVE_helper {
 
     function dummy() public {
         assembly{
@@ -29,21 +29,21 @@ contract SG_helper {
 
     function burnGasAndFree(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
-        require(ISGToken(gas_token).free(free) > 0, "burnGasAndFree");
+        require(IGSVEToken(gas_token).free(free) > 0, "burnGasAndFree");
     }
 
     function burnGasAndFreeUpTo(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
-        require(free == ISGToken(gas_token).freeUpTo(free), "burnGasAndFreeUpTo");
+        require(free == IGSVEToken(gas_token).freeUpTo(free), "burnGasAndFreeUpTo");
     }
 
     function burnGasAndFreeFrom(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
-        require(ISGToken(gas_token).freeFrom(tx.origin, free) > 0, "burnGasAndFreeFrom");
+        require(IGSVEToken(gas_token).freeFrom(tx.origin, free) > 0, "burnGasAndFreeFrom");
     }
 
     function burnGasAndFreeFromUpTo(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
-        require(free == ISGToken(gas_token).freeFromUpTo(tx.origin, free), "burnGasAndFreeFromUpTo");
+        require(free == IGSVEToken(gas_token).freeFromUpTo(tx.origin, free), "burnGasAndFreeFromUpTo");
     }
 }

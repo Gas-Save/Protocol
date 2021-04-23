@@ -1,13 +1,13 @@
 const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
-const SG1Token  = artifacts.require ("./SG1Token.sol");
+const SG1Token  = artifacts.require ("./JetFuel.sol");
 const GS_Wrapper  = artifacts.require ("./GasSwapWrapper.sol");
-const SG_Helper  = artifacts.require ("./test_helpers/SG_Helper.sol");
+const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 
 contract("Wrapper Test", async accounts => {
 /*
     it('burn gas to find baseline cost', async function () {
-        var helper = await SG_Helper.new();
+        var helper = await GSVE_helper.new();
         var receipt = await helper.burnGas(147000, {from: accounts[0]});
         assert.equal(true, true);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
@@ -15,7 +15,7 @@ contract("Wrapper Test", async accounts => {
 
     it('Should be able to call function by proxy and burn SG1', async function () {
         var instance = await SG1Token.new();
-        var helper = await SG_Helper.new();
+        var helper = await GSVE_helper.new();
         var wrapper = await GS_Wrapper.new();
 
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
@@ -32,7 +32,7 @@ contract("Wrapper Test", async accounts => {
 */
     it('Should be able to call function by proxy, and this should successfully forward a payment, and then burn SG1', async function () {
         var instance = await SG1Token.new();
-        var helper = await SG_Helper.new();
+        var helper = await GSVE_helper.new();
         var wrapper = await GS_Wrapper.new();
         let wrapper_receipt = await web3.eth.getTransactionReceipt(wrapper.transactionHash)
 

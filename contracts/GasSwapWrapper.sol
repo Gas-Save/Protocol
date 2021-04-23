@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./ISGToken.sol";
+import "./IGSVEToken.sol";
 
 contract GasSwapWrapper is Ownable {
     using Address for address;
@@ -22,6 +22,6 @@ contract GasSwapWrapper is Ownable {
         else{
             contractAddress.functionCall(data, "GS: Error forwarding transaction");
         }
-        ISGToken(gas_token).freeFromUpTo(msg.sender, tokensToBurn);
+        IGSVEToken(gas_token).freeFromUpTo(msg.sender, tokensToBurn);
     }
 }
