@@ -46,6 +46,19 @@ contract wrappedGST2Token is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToke
         totalMinted = totalMinted + value;
     }
 
+    function discountedMint(uint256 value, uint256 discountedFee) public override onlyOwner {
+        IERC20(wrappedTokenAddress).transferFrom(msg.sender, address(this), value);
+        uint256 valueAfterFee =  value.sub(discountedFee, "SG: Minted Value must be larger than base fee");
+        _mint(msg.sender, valueAfterFee);
+
+        if(discountedFee>0){
+            _mint(feeAddress, discountedFee);
+        }
+        
+        totalMinted = totalMinted + value;
+    }
+
+
     function unwrap(uint256 value) public {
         _burn(msg.sender, value);
         IERC20(wrappedTokenAddress).transferFrom(address(this), msg.sender, value);

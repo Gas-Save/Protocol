@@ -38,12 +38,8 @@ contract JetFuel is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
         return totalMinted - totalBurned;
     }
 
-    function mint(uint256 value) public override {
+    function _storeGas(uint256 value) internal{
         uint256 storage_location_array = STORAGE_LOCATION_ARRAY;  // can't use constants inside assembly
-
-        if (value == 0) {
-            return;
-        }
 
         // Read supply
         uint256 supply;
@@ -66,13 +62,32 @@ contract JetFuel is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
         assembly {
             sstore(storage_location_array, add(supply, value))
         }
+    }
 
+    function mint(uint256 value) public override {
+        if (value == 0) {
+            return;
+        }
         uint256 valueAfterFee =  value.sub(SGMintFee, "SG: Minted Value must be larger than base fee");
+        _storeGas(value);
         _mint(msg.sender, valueAfterFee);
         _mint(feeAddress, SGMintFee);
         totalMinted = totalMinted + value;
     }
 
+    function discountedMint(uint256 value, uint256 discountedFee) public override onlyOwner {
+        if (value == 0) {
+            return;
+        }
+        uint256 valueAfterFee =  value.sub(discountedFee, "SG: Minted Value must be larger than discounted fee");
+        _storeGas(value);
+        _mint(msg.sender, valueAfterFee);
+        if(discountedFee > 0){
+            _mint(feeAddress, discountedFee);
+        }
+        totalMinted = totalMinted + value;
+    }
+    
     function _burnStorage(uint256 value) internal {
         uint256 storage_location_array = STORAGE_LOCATION_ARRAY;  // can't use constants inside assembly
         // Read supply
