@@ -18,8 +18,8 @@ contract("GSVE Token Test", async accounts => {
 
     it("name and symbol should be correct", async () => {
 
-      const name = await instance.token.call();
-      const symbol = await instance.token.call();
+      const name = await token.name.call();
+      const symbol = await token.symbol.call();
       assert.equal(name.toString(), "Gas Save Utility Token by Gas Save");
       assert.equal(symbol.toString(), "GSVE");
   });
