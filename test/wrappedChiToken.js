@@ -1,6 +1,6 @@
 const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
 const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
-const wrappedChiToken  = artifacts.require ("./wrappedChiToken.sol");
+const wrappedToken  = artifacts.require ("./wrappedNonGsveToken.sol");
 const GasToken  = artifacts.require ("./existing_gas_tokens/ChiToken.sol");
 
 var instance;
@@ -10,9 +10,17 @@ contract("Wrapped ChiToken Token Test", async accounts => {
  
     it("should be able to mint & wrap from contracts", async () => {
         chiTokenInstance = await GasToken.new();
-        instance = await wrappedChiToken.new(chiTokenInstance.address);    
+        instance = await wrappedToken.new(chiTokenInstance.address, "Wrapped Chi by Gas Save", "wChi");    
     });
 
+    it("name and symbol should be correct", async () => {
+
+        const name = await instance.name.call();
+        const symbol = await instance.symbol.call();
+        assert.equal(name.toString(), "Wrapped Chi by Gas Save");
+        assert.equal(symbol.toString(), "wChi");
+    });
+/*
     it("should be able to mint & wrap from contracts", async () => {
         const amountMint = 100;
 
@@ -28,6 +36,8 @@ contract("Wrapped ChiToken Token Test", async accounts => {
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
+
+*/
 
 /*
     it("should be able to mint tokens", async () => {

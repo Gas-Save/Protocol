@@ -5,15 +5,15 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import './ERC20WithoutTotalSupply.sol';
-import "./INonSGToken.sol";
+import "./INonGSVEToken.sol";
 import "./IGSVEToken.sol";
 
-contract wrappedChiToken is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
+contract wrappedNonGsveToken is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
     using SafeMath for uint256;
 
     //This is an erc-20 compliant wrapper for CHI. We use this to mint wChi from Chi, and pay during the process.
-    string constant public name = "Wrapped Chi by GasSwap.finance";
-    string constant public symbol = "wChi";
+    string public name;
+    string public symbol;
     uint8 constant public decimals = 0;
     
     uint256 public totalMinted;
@@ -28,9 +28,12 @@ contract wrappedChiToken is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken
     address public wrappedTokenAddress;
 
     // Set the fee address as the deployer for now. Eventually this will migrate to GasSwap Bank Contract
-    constructor(address _tokenAddress) {
+    constructor(address _tokenAddress, string memory _name, string memory _symbol) {
         feeAddress = msg.sender;
         wrappedTokenAddress = _tokenAddress;
+        name = _name;
+        symbol = _symbol;
+
     }
 
     function totalSupply() public view override returns(uint256) {
@@ -46,10 +49,10 @@ contract wrappedChiToken is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken
         totalMinted = totalMinted + value;
     }
 
-    function discountedMint(uint256 value, uint256 discountedFee) public override onlyOwner {
+    function discountedMint(uint256 value, uint256 discountedFee, address recipient) public override onlyOwner {
         IERC20(wrappedTokenAddress).transferFrom(msg.sender, address(this), value);
         uint256 valueAfterFee =  value.sub(discountedFee, "SG: Minted Value must be larger than base fee");
-        _mint(msg.sender, valueAfterFee);
+        _mint(recipient, valueAfterFee);
 
         if(discountedFee>0){
             _mint(feeAddress, discountedFee);
@@ -59,15 +62,17 @@ contract wrappedChiToken is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken
     }
 
     function unwrap(uint256 value) public {
-        _burn(msg.sender, value);
-        IERC20(wrappedTokenAddress).transferFrom(address(this), msg.sender, value);
-        totalMinted = totalMinted + value;
+        if(value > 0){
+            _burnFrom(msg.sender, value);
+            IERC20(wrappedTokenAddress).transferFrom(address(this), msg.sender, value);
+            totalMinted = totalMinted + value;
+        }
     }
 
     function free(uint256 value) public override returns (uint256)  {
         if (value > 0) {
             _burn(msg.sender, value);
-            INonSGToken(wrappedTokenAddress).free(value);
+            INonGSVEToken(wrappedTokenAddress).free(value);
             totalBurned = totalBurned + value;
         }
         return value;
@@ -80,7 +85,7 @@ contract wrappedChiToken is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken
     function freeFrom(address from, uint256 value) public override returns (uint256) {
         if (value > 0) {
             _burnFrom(from, value);
-            INonSGToken(wrappedTokenAddress).freeFrom(from, value);
+            INonGSVEToken(wrappedTokenAddress).freeFrom(from, value);
             totalBurned = totalBurned + value;
         }
         return value;

@@ -75,13 +75,13 @@ contract JetFuel is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
         totalMinted = totalMinted + value;
     }
 
-    function discountedMint(uint256 value, uint256 discountedFee) public override onlyOwner {
+    function discountedMint(uint256 value, uint256 discountedFee, address recipient) public override onlyOwner {
         if (value == 0) {
             return;
         }
         uint256 valueAfterFee =  value.sub(discountedFee, "SG: Minted Value must be larger than discounted fee");
         _storeGas(value);
-        _mint(msg.sender, valueAfterFee);
+        _mint(recipient, valueAfterFee);
         if(discountedFee > 0){
             _mint(feeAddress, discountedFee);
         }
