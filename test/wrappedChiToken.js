@@ -3,12 +3,17 @@ const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 const wrappedChiToken  = artifacts.require ("./wrappedChiToken.sol");
 const GasToken  = artifacts.require ("./existing_gas_tokens/ChiToken.sol");
 
+var instance;
+var chiTokenInstance;
+
 contract("Wrapped ChiToken Token Test", async accounts => {
  
     it("should be able to mint & wrap from contracts", async () => {
-        var chiTokenInstance = await GasToken.new();
-        var instance = await wrappedChiToken.new(chiTokenInstance.address);    
+        chiTokenInstance = await GasToken.new();
+        instance = await wrappedChiToken.new(chiTokenInstance.address);    
+    });
 
+    it("should be able to mint & wrap from contracts", async () => {
         const amountMint = 100;
 
         await chiTokenInstance.mint(amountMint);
