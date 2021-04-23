@@ -22,7 +22,7 @@ contract GasToken2 {
         if (value <= s_balances[from]) {
             s_balances[from] -= value;
             s_balances[to] += value;
-            Transfer(from, to, value);
+            emit Transfer(from, to, value);
             return true;
         } else {
             return false;
@@ -55,7 +55,7 @@ contract GasToken2 {
             return false;
         }
         s_allowances[owner][spender] = value;
-        Approval(owner, spender, value);
+        emit Approval(owner, spender, value);
         return true;
     }
 
