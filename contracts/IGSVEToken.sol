@@ -15,7 +15,7 @@ interface IGSVEToken {
     /**
     * @dev mints new tokens at a fee discount.
     */
-    function discountedMint(uint256 value, uint256 fee) external;
+    function discountedMint(uint256 value, uint256 fee, address recipient) external;
 
     /**
      * @dev return number of tokens freed up.
