@@ -146,9 +146,9 @@ contract GSVECore is Ownable {
 
         uint256 tokensGiven = tokensClaimed;
 
-        //user can withdraw up to 10 tokens from the pool
+        //user can withdraw up to 5 tokens from the pool
         uint256 tokensAvailableToClaim = IERC20(GSVEToken).balanceOf(address(this));
-        tokensGiven = Math.min(Math.min(10, tokensAvailableToClaim), tokensGiven);
+        tokensGiven = Math.min(Math.min(5, tokensAvailableToClaim), tokensGiven);
 
         if(tokensGiven == 0){
             return;
