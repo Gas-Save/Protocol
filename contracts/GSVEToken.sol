@@ -14,7 +14,7 @@ contract GSVEToken is ERC20{
         _burn(msg.sender, amount);
     }
 
-    function _burnFrom(address account, uint256 amount) internal {
+    function burnFrom(address account, uint256 amount) external {
         _burn(account, amount);
         uint256 allowed = allowance(account, msg.sender);
         if ((allowed >> 255) == 0) {
