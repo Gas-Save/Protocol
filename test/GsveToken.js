@@ -15,4 +15,12 @@ contract("GSVE Token Test", async accounts => {
       assert.equal(totalSupply.toString(), TOTAL_SUPPLY);
       assert.equal(balanceAdmin.toString(), TOTAL_SUPPLY);
     });
+
+    it("name and symbol should be correct", async () => {
+
+      const name = await instance.token.call();
+      const symbol = await instance.token.call();
+      assert.equal(name.toString(), "Gas Save Utility Token by Gas Save");
+      assert.equal(symbol.toString(), "GSVE");
+  });
 });
