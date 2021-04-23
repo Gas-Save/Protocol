@@ -3,12 +3,17 @@ const SG_Helper  = artifacts.require ("./test_helpers/SG_Helper.sol");
 const wrappedChiToken  = artifacts.require ("./wrappedChiToken.sol");
 const ChiToken  = artifacts.require ("./existing_gas_tokens/ChiToken.sol");
 
+var instance;
+var chiTokenInstance;
+
 contract("Wrapped ChiToken Token Test", async accounts => {
  
-    it("should be able to mint & wrap from contracts", async () => {
-        var chiTokenInstance = await ChiToken.new();
-        var instance = await wrappedChiToken.new(chiTokenInstance.address);    
+    it("should deploy", async () => {
+        chiTokenInstance = await ChiToken.new();
+        instance = await wrappedChiToken.new(chiTokenInstance.address);    
+      });
 
+    it("should be able to mint & wrap from contracts", async () => {
         const amountMint = 100;
 
         await chiTokenInstance.mint(amountMint);
