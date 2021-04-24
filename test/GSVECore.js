@@ -81,7 +81,7 @@ contract("GSVE Token Test", async accounts => {
       var receipt = await protocol.discountedMinting(gasToken.address, 100);
 
       const gasTokenBalance = await gasToken.balanceOf.call(accounts[0]);
-      assert.equal(gasTokenBalance.toNumber(), 99);
+      assert.equal(gasTokenBalance.toNumber(), 199);
 
       const feeHolderGasTokenBalance = await gasToken.balanceOf.call(protocol.address);
       assert.equal(feeHolderGasTokenBalance.toNumber(), 1);
