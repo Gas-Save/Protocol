@@ -2,10 +2,10 @@ const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
 const GSVEToken  = artifacts.require ("./GSVEToken.sol");
 
 contract("GSVE Token Test", async accounts => {
-    let token;
+    var token;
     const TOTAL_SUPPLY = web3.utils.toWei('100000000');
 
-    before(async () => {
+    it('should deploy token', async () => {
       token = await GSVEToken.new();
     });
   
