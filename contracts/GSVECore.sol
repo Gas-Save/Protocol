@@ -19,8 +19,8 @@ contract GSVECore is Ownable {
     uint256 private totalSupportedGasTokens = 0;
 
     //mapping(uint256 => address) private supportedGasTokens;
-    mapping(address => uint256) private mintingType;
-    mapping(address => uint256) private claimable;
+    mapping(address => uint256) private _mintingType;
+    mapping(address => uint256) private _claimable;
 
     //fee schedule when using the 
     uint256 private discountedMint = 1;
@@ -109,7 +109,7 @@ contract GSVECore is Ownable {
 
     //remove fees when the user burns 0.25 GSVE
     function burnDiscountedMinting(address mintTokenAddress, uint256 tokensToMint) public {
-        uint256 mintType = mintingType[mintTokenAddress];
+        uint256 mintType = _mintingType[mintTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
         IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, 25 * 10**16);
         IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 0, msg.sender);
@@ -117,7 +117,7 @@ contract GSVECore is Ownable {
 
     //discounted minting for tier one stakers
     function discountedMinting(address mintTokenAddress, uint256 tokensToMint) public{
-        uint256 mintType = mintingType[mintTokenAddress];
+        uint256 mintType = _mintingType[mintTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
         require(userStakes[msg.sender] >= tierOneThreshold , "GSVE: User has not staked enough to discount");
 
@@ -136,7 +136,7 @@ contract GSVECore is Ownable {
     //Claimed at a rate of 0.1 GSVE per token claimed.
     function claimToken(address claimGasTokenAddress, uint256 tokensClaimed) public {
 
-        uint256 isClaimable = claimable[claimGasTokenAddress];
+        uint256 isClaimable = _claimable[claimGasTokenAddress];
         require(isClaimable == 0, "GSVE: Token not claimable");
         require(userStakes[msg.sender] >= tierTwoThreshold , "GSVE: User has not staked enough to claim from the pool");
         
@@ -161,8 +161,16 @@ contract GSVECore is Ownable {
     }
 
     function addGasToken(address gasToken, uint256 mintType, uint256 isClaimable) public onlyOwner{
-        mintingType[gasToken] = mintType;
-        claimable[gasToken] = isClaimable;
+        _mintingType[gasToken] = mintType;
+        _claimable[gasToken] = isClaimable;
+    }
+
+    function claimable(address gasToken) public view returns (uint256){
+        return _claimable[gasToken];
+    }
+
+    function mintingType(address gasToken) public view returns (uint256){
+        return _mintingType[gasToken];
     }
 
     event Claimed(address indexed _from, address indexed _token, uint _value);
