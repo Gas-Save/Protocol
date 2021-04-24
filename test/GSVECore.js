@@ -87,5 +87,11 @@ contract("GSVE Token Test", async accounts => {
       assert.equal(feeHolderGasTokenBalance.toNumber(), 1);
     });
 
+    it('should fail to mint at discount rate as not a tier 1 stake', async () => {
+      expectRevert(protocol.discountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
+    });
+
+    
+
 
 });
