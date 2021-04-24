@@ -68,12 +68,24 @@ contract("GSVE Token Test", async accounts => {
 
     it('should be able to stake gsve', async () => {
       await token.approve(protocol.address, web3.utils.toWei("25000"));
-      var receipt = await protocol.stake();
+      var receipt = await protocol.stake(web3.utils.toWei('25000'));
 
       const balanceSent = web3.utils.toWei('25000');
       const balanceAddress = await token.balanceOf(protocol.address);
-
       assert.equal(balanceAddress, balanceSent);
+
     });
+
+    it('should be able to mint at a reduced fee due to already having a tier 1 stake', async () => {
+
+      var receipt = await protocol.discountedMinting(gasToken.address, 100);
+
+      const gasTokenBalance = await gasToken.balanceOf.call(accounts[0]);
+      assert.equal(gasTokenBalance.toNumber(), 99);
+
+      const feeHolderGasTokenBalance = await gasToken.balanceOf.call(protocol.address);
+      assert.equal(feeHolderGasTokenBalance.toNumber(), 1);
+    });
+
 
 });
