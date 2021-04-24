@@ -41,7 +41,7 @@ contract("GSVE Token Test", async accounts => {
     });
   
     it('should be able to burn gsve to save on protocol minting fee', async () => {
-      await token.approve(protocol.address, web3.utils.toWei("10"));
+      await token.approve(protocol.address, web3.utils.toWei("0.25"));
       var receipt = await protocol.burnDiscountedMinting(gasToken.address, 100);
 
       const gasTokenBalance = await gasToken.balanceOf.call(accounts[0]);
@@ -55,6 +55,15 @@ contract("GSVE Token Test", async accounts => {
       const balanceAdmin = await token.balanceOf(accounts[0]);
       assert.equal(totalSupplyGSVE.toString(), New_SUPPLY);
       assert.equal(balanceAdmin.toString(), New_SUPPLY);
+    });
+
+    it('should fail to discount minting as no tokens to burn', async () => {
+      expectRevert(protocol.burnDiscountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
+    });
+
+    it('should fail to discount minting as no tokens to burn  but approval given', async () => {
+      await token.approve(protocol.address, web3.utils.toWei("0.25"), {from: accounts[1]});
+      expectRevert(protocol.burnDiscountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
     });
 
 });
