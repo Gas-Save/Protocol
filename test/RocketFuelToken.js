@@ -27,7 +27,7 @@ contract("RocketFuel Token Test", async accounts => {
 
         var receipt = await instance.mint(amountMint, {from: accounts[1]})
         const balance = await instance.balanceOf.call(accounts[1]);
-        assert.equal(balance.toNumber(), 99);
+        assert.equal(balance.toNumber(), 98);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
@@ -41,7 +41,7 @@ contract("RocketFuel Token Test", async accounts => {
 
         var receipt = await instance.mint(amountMint, {from: accounts[1]})
         const balance = await instance.balanceOf.call(accounts[1]);
-        assert.equal(balance.toNumber(), 99);
+        assert.equal(balance.toNumber(), 98);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
@@ -54,7 +54,7 @@ contract("RocketFuel Token Test", async accounts => {
         var receipt = await instance.mint(amountMint, {from: accounts[1]})
 
         const balance = await instance.balanceOf.call(accounts[0]);
-        assert.equal(balance.toNumber(), 1);
+        assert.equal(balance.toNumber(), 2);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     }); 

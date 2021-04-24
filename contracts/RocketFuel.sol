@@ -19,7 +19,7 @@ contract RocketFuel is IERC20, ERC20WithoutTotalSupply, Ownable, IGSVEToken{
     uint256 public totalBurned;
 
     //Introduce a fee that is taken on mint/burn
-    uint256 public SGMintFee = 1;
+    uint256 public SGMintFee = 2;
 
     //Add address for where fees will be added to. Eventually this can be a contract that GasSwap Holders can redeem siphoned gas from.
     address public feeAddress;
