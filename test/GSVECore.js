@@ -61,9 +61,19 @@ contract("GSVE Token Test", async accounts => {
       expectRevert(protocol.burnDiscountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
     });
 
-    it('should fail to discount minting as no tokens to burn  but approval given', async () => {
+    it('should fail to discount minting as no tokens to burn but approval given', async () => {
       await token.approve(protocol.address, web3.utils.toWei("0.25"), {from: accounts[1]});
       expectRevert(protocol.burnDiscountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
+    });
+
+    it('should be able to stake gsve', async () => {
+      await token.approve(protocol.address, web3.utils.toWei("25000"));
+      var receipt = await protocol.stake();
+
+      const balanceSent = web3.utils.toWei('25000');
+      const balanceAddress = await token.balanceOf(protocol.address);
+
+      assert.equal(balanceAddress, balanceSent);
     });
 
 });
