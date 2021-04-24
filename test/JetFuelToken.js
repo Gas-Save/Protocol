@@ -11,7 +11,7 @@ contract("JetFuel Token Test", async accounts => {
         const amountMint = 100;
 
         var receipt = await instance.mint(amountMint, {from: accounts[1]})
-        const balance = await instance.balanceOf.call(accounts[1]);
+        const balance = await instance.balanceOf(accounts[1]);
         assert.equal(balance.toNumber(), 99);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
@@ -25,7 +25,7 @@ contract("JetFuel Token Test", async accounts => {
         const amountMint = 100;
 
         var receipt = await instance.mint(amountMint, {from: accounts[1]})
-        const balance = await instance.balanceOf.call(accounts[1]);
+        const balance = await instance.balanceOf(accounts[1]);
         assert.equal(balance.toNumber(), 99);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
