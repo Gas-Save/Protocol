@@ -6,7 +6,7 @@ const GasToken  = artifacts.require ("./JetFuel.sol");
 const GS_Wrapper  = artifacts.require ("./GasSwapWrapper.sol");
 const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 
-contract("GSVE Token Test", async accounts => {
+contract("GSVE Core Test", async accounts => {
     var token;
     var gasToken;
     var protocol;
@@ -91,7 +91,22 @@ contract("GSVE Token Test", async accounts => {
       expectRevert(protocol.discountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
     });
 
-    
+    it('should be able to mint tokens and be rewarded with gsve tokens', async () => {
+      var receipt = await protocol.rewardedMinting(gasToken.address, 100, {from: accounts[3]});
 
+      const gasTokenBalance = await gasToken.balanceOf.call(accounts[3]);
+      assert.equal(gasTokenBalance.toNumber(), 98);
+
+      const gasTokenProtocolBalance = await gasToken.balanceOf.call(protocol.balanceAddress);
+      assert.equal(gasTokenProtocolBalance.toNumber(), 3);
+
+      const gsveReward = web3.utils.toWei('0.25');
+      const gsveBalance = await token.balanceOf(accounts[3]);
+      assert.equal(gsveReward, gsveBalance);
+    });
+
+    it('should fail to be rewarded for attempting to mint a non-accepted address', async () => {
+      expectRevert(protocol.rewardedMinting(token.address, 100, {from: accounts[3]}), "GSVE: Unsupported Token");
+    });
 
 });
