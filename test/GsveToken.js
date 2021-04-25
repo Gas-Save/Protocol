@@ -38,6 +38,10 @@ contract("GSVE Token Test", async accounts => {
     expectRevert(token.burn(web3.utils.toWei("1"), {from:accounts[1]}), 'ERC20: burn amount exceeds balance');
   });
 
+  it("should not be able to burn tokens when not approved", async () => {
+    expectRevert(token.burnFrom(accounts[0], web3.utils.toWei("1"), {from: accounts[1]}), 'ERC20: burn amount exceeds allowance.');
+  });
+
   it("should be able to burn tokens for another account if approved", async () => {
     await token.approve(accounts[1], web3.utils.toWei("1"))
     await token.burnFrom(accounts[0], web3.utils.toWei("1"), {from:accounts[1]});
@@ -48,7 +52,5 @@ contract("GSVE Token Test", async accounts => {
     assert.equal(balanceAdmin.toString(), New_SUPPLY);
   });
 
-  it("should not be able to burn tokens when not approved", async () => {
-    expectRevert(token.burnFrom(accounts[0], web3.utils.toWei("1"), {from: accounts[1]}), 'ERC20: burn amount exceeds allowance.');
-  });
+
 });
