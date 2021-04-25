@@ -43,6 +43,8 @@ contract GSVECore is Ownable {
 
     //Staking Functions - TODO Testing and Verification
     function stake(uint256 value) public {
+        require(calculateStakeReward(msg.sender) == 0, "GSVE: User has stake rewards they must claim before updating stake.");
+
         if (value == 0){
             return;
         }
@@ -54,6 +56,7 @@ contract GSVECore is Ownable {
     }
     
     function unstakeAmount(uint256 value) public {
+        require(calculateStakeReward(msg.sender) == 0, "GSVE: User has stake rewards they must claim before updating stake.");
         uint256 stakeSize = userStakes[msg.sender];
         if (stakeSize == 0){
             return;
@@ -71,6 +74,7 @@ contract GSVECore is Ownable {
     }
 
     function unstake() public {
+        require(calculateStakeReward(msg.sender) == 0, "GSVE: User has stake rewards they must claim before updating stake.");
         uint256 stakeSize = userStakes[msg.sender];
         if (stakeSize == 0){
             return;
@@ -83,13 +87,14 @@ contract GSVECore is Ownable {
         emit Unstaked(msg.sender, stakeSize);
     }
 
+    //calculate the users current unclaimed rewards. This is 1/2000th the users stake every 12 hours.
     function calculateStakeReward(address rewardedAddress) public view returns(uint256){
         if(userStakeTimes[rewardedAddress] == 0){
             return 0;
         }
 
         uint256 timeDifference = block.timestamp.sub(userStakeTimes[rewardedAddress]);
-        uint256 rewardPeriod = timeDifference.div((60*60*6));
+        uint256 rewardPeriod = timeDifference.div((60*60*12));
         uint256 rewardPerPeriod = userStakes[rewardedAddress].div(2000);
         uint256 reward = rewardPeriod.mul(rewardPerPeriod);
 
@@ -130,6 +135,23 @@ contract GSVECore is Ownable {
         else{
             return;
         }
+    }
+
+    //Reward a user 0.25 GSVE tokens for minting 
+    function rewardedMinting(address mintTokenAddress, uint256 tokensToMint) public{
+        uint256 mintType = _mintingType[mintTokenAddress];
+        require(mintType != 0, "GSVE: Unsupported Token");
+        if(mintType == 1){
+            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 2, msg.sender);
+        }
+        else if (mintType == 2){
+            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 3, msg.sender);
+        }
+        else{
+            return;
+        }
+
+        IERC20(GSVEToken).transfer(msg.sender, 10 * 10**16);
     }
 
     //Allow a tier 2 staker to burn tokens and claim from the pool of a specific token. 
