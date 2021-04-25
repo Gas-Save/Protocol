@@ -133,7 +133,7 @@ contract GSVECore is Ownable {
         }
     }
 
-    //Reward a user 0.25 GSVE tokens for minting 
+    //Reward a user 0.1 GSVE tokens for minting 
     function rewardedMinting(address mintTokenAddress, uint256 tokensToMint) public{
         uint256 mintType = _mintingType[mintTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
