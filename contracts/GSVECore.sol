@@ -22,10 +22,6 @@ contract GSVECore is Ownable {
     mapping(address => uint256) private _mintingType;
     mapping(address => uint256) private _claimable;
 
-    //fee schedule when using the 
-    uint256 private discountedMint = 1;
-    uint256 private discountedWrap = 2;
-
     //fee stake threshholds;
     uint256 private tierOneThreshold = 25000 * (10**18);
     uint256 private tierTwoThreshold = 100000 * (10**18);
@@ -127,10 +123,10 @@ contract GSVECore is Ownable {
         require(userStakes[msg.sender] >= tierOneThreshold , "GSVE: User has not staked enough to discount");
 
         if(mintType == 1){
-            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, discountedMint, msg.sender);
+            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 1, msg.sender);
         }
         else if (mintType == 2){
-            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, discountedWrap, msg.sender);
+            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 2, msg.sender);
         }
         else{
             return;
