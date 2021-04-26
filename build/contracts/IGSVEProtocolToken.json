@@ -1,0 +1,471 @@
+{
+  "contractName": "IGSVEProtocolToken",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "burn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "burnFrom",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"burnFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface of the Stored Gas Token Type\",\"kind\":\"dev\",\"methods\":{\"burn(uint256)\":{\"details\":\"burns tokens from user.\"},\"burnFrom(address,uint256)\":{\"details\":\"burns tokens on behalf of user.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVEProtocolToken.sol\":\"IGSVEProtocolToken\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVEProtocolToken.sol\":{\"keccak256\":\"0x97affdf763e5acdd0c13065f7c3937c444ad53b96a7e1b0032cdb6ef403174e2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://16dc760e2a51b73d564e78bbf214a3c81cf8db348fbeb7a798de961868d2d2a5\",\"dweb:/ipfs/QmfSoasJ9A7pGK65RCQnJn2qbMQKaUSrEv3ZrETeTreckb\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.8.0;\r\n\r\n/**\r\n * @dev Interface of the Stored Gas Token Type\r\n */\r\ninterface IGSVEProtocolToken {\r\n    /**\r\n     * @dev burns tokens from user.\r\n     */\r\n    function burn(uint256 amount) external ;\r\n\r\n    /**\r\n    * @dev burns tokens on behalf of user.\r\n    */\r\n    function burnFrom(address account, uint256 amount) external;\r\n\r\n}",
+  "sourcePath": "C:\\Users\\khera\\Documents\\GitHub\\GasSwapTokens\\contracts\\IGSVEProtocolToken.sol",
+  "ast": {
+    "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVEProtocolToken.sol",
+    "exportedSymbols": {
+      "IGSVEProtocolToken": [
+        1234
+      ]
+    },
+    "id": 1235,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1218,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:4"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 1219,
+          "nodeType": "StructuredDocumentation",
+          "src": "62:56:4",
+          "text": " @dev Interface of the Stored Gas Token Type"
+        },
+        "fullyImplemented": false,
+        "id": 1234,
+        "linearizedBaseContracts": [
+          1234
+        ],
+        "name": "IGSVEProtocolToken",
+        "nameLocation": "130:18:4",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "documentation": {
+              "id": 1220,
+              "nodeType": "StructuredDocumentation",
+              "src": "156:49:4",
+              "text": " @dev burns tokens from user."
+            },
+            "functionSelector": "42966c68",
+            "id": 1225,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "burn",
+            "nameLocation": "220:4:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1223,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1222,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "233:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1225,
+                  "src": "225:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1221,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "225:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "224:16:4"
+            },
+            "returnParameters": {
+              "id": 1224,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "250:0:4"
+            },
+            "scope": 1234,
+            "src": "211:40:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1226,
+              "nodeType": "StructuredDocumentation",
+              "src": "259:55:4",
+              "text": " @dev burns tokens on behalf of user."
+            },
+            "functionSelector": "79cc6790",
+            "id": 1233,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "burnFrom",
+            "nameLocation": "329:8:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1231,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1228,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "346:7:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1233,
+                  "src": "338:15:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1227,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "338:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1230,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "363:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1233,
+                  "src": "355:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1229,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "355:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "337:33:4"
+            },
+            "returnParameters": {
+              "id": 1232,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "379:0:4"
+            },
+            "scope": 1234,
+            "src": "320:60:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1235,
+        "src": "120:265:4",
+        "usedErrors": []
+      }
+    ],
+    "src": "35:350:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVEProtocolToken.sol",
+    "exportedSymbols": {
+      "IGSVEProtocolToken": [
+        1234
+      ]
+    },
+    "id": 1235,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1218,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:4"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 1219,
+          "nodeType": "StructuredDocumentation",
+          "src": "62:56:4",
+          "text": " @dev Interface of the Stored Gas Token Type"
+        },
+        "fullyImplemented": false,
+        "id": 1234,
+        "linearizedBaseContracts": [
+          1234
+        ],
+        "name": "IGSVEProtocolToken",
+        "nameLocation": "130:18:4",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "documentation": {
+              "id": 1220,
+              "nodeType": "StructuredDocumentation",
+              "src": "156:49:4",
+              "text": " @dev burns tokens from user."
+            },
+            "functionSelector": "42966c68",
+            "id": 1225,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "burn",
+            "nameLocation": "220:4:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1223,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1222,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "233:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1225,
+                  "src": "225:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1221,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "225:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "224:16:4"
+            },
+            "returnParameters": {
+              "id": 1224,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "250:0:4"
+            },
+            "scope": 1234,
+            "src": "211:40:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1226,
+              "nodeType": "StructuredDocumentation",
+              "src": "259:55:4",
+              "text": " @dev burns tokens on behalf of user."
+            },
+            "functionSelector": "79cc6790",
+            "id": 1233,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "burnFrom",
+            "nameLocation": "329:8:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1231,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1228,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "346:7:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1233,
+                  "src": "338:15:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1227,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "338:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1230,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "363:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1233,
+                  "src": "355:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1229,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "355:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "337:33:4"
+            },
+            "returnParameters": {
+              "id": 1232,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "379:0:4"
+            },
+            "scope": 1234,
+            "src": "320:60:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1235,
+        "src": "120:265:4",
+        "usedErrors": []
+      }
+    ],
+    "src": "35:350:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-04-25T16:51:59.206Z",
+  "devdoc": {
+    "details": "Interface of the Stored Gas Token Type",
+    "kind": "dev",
+    "methods": {
+      "burn(uint256)": {
+        "details": "burns tokens from user."
+      },
+      "burnFrom(address,uint256)": {
+        "details": "burns tokens on behalf of user."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
