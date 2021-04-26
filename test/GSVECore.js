@@ -14,13 +14,13 @@ contract("GSVE Core Test", async accounts => {
 
     it('should be able to deploy protocol contracts', async () => {
       token = await GSVEToken.new();
-      console.log("GSVE Address -" + token.address);
+      console.log("GSVE Address " + token.address);
       
       gasToken = await GasToken.new();
-      console.log("JetFuel Address -" + gasToken.address);
+      console.log("JetFuel Address " + gasToken.address);
 
       protocol = await GSVEProtocol.new(token.address);
-      console.log("Core Address -" + protocol.address);
+      console.log("Core Address " + protocol.address);
     });
 
     it("should be able to update the fee address of the gas token to the protocol", async () => {
@@ -77,8 +77,12 @@ contract("GSVE Core Test", async accounts => {
 
       const balanceSent = web3.utils.toWei('25000');
       const balanceAddress = await token.balanceOf(protocol.address);
-      assert.equal(balanceAddress, balanceSent);
+      const totalStaked = await protocol.totalStaked();
+      const userStakeSize = await protocol.userStakeSize(accounts[0]);
 
+      assert.equal(balanceAddress, balanceSent);
+      assert.equal(totalStaked, balanceSent);
+      assert.equal(userStakeSize, balanceSent);
     });
 
     it('should be able to mint at a reduced fee due to already having a tier 1 stake', async () => {
@@ -92,6 +96,16 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(feeHolderGasTokenBalance.toNumber(), 1);
     });
 
+    it('should fail to be rewarded if the contract has no rewards to give.', async () => {
+      expectRevert(protocol.rewardedMinting(gasToken.address, 100, {from: accounts[3]}), "GSVE: contract has ran out of rewards to give.");
+    });
+
+    it('contract should be given some tokens to distribute', async () => {
+      await token.transfer(protocol.address, web3.utils.toWei("10000000"));
+      const totalRewards = await protocol.totalRewards();
+      assert.equal(totalRewards.toString(), web3.utils.toWei("10000000"));
+    });
+
     it('should fail to mint at discount rate as not a tier 1 stake', async () => {
       expectRevert(protocol.discountedMinting(gasToken.address, 100, {from: accounts[1]}), 'GSVE: User has not staked enough to discount.');
     });
@@ -99,7 +113,9 @@ contract("GSVE Core Test", async accounts => {
     it('should fail to be rewarded for attempting to mint a non-accepted address', async () => {
       expectRevert(protocol.rewardedMinting(token.address, 100, {from: accounts[3]}), "GSVE: Unsupported Token");
     });
-    
+
+
+
     it('should be able to mint tokens and be rewarded with gsve tokens', async () => {
       var receipt = await protocol.rewardedMinting(gasToken.address, 100, {from: accounts[3]});
 
@@ -113,6 +129,10 @@ contract("GSVE Core Test", async accounts => {
       const gsveBalance = await token.balanceOf(accounts[3]);
       assert.equal(gsveReward.toString(), gsveBalance.toString());
     });
+
+    
+
+
 
 
 });

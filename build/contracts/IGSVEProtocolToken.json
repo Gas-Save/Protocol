@@ -47,15 +47,15 @@
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVEProtocolToken.sol",
     "exportedSymbols": {
       "IGSVEProtocolToken": [
-        1234
+        1305
       ]
     },
-    "id": 1235,
+    "id": 1306,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1218,
+        "id": 1289,
         "literals": [
           "solidity",
           "^",
@@ -71,15 +71,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 1219,
+          "id": 1290,
           "nodeType": "StructuredDocumentation",
           "src": "62:56:4",
           "text": " @dev Interface of the Stored Gas Token Type"
         },
         "fullyImplemented": false,
-        "id": 1234,
+        "id": 1305,
         "linearizedBaseContracts": [
-          1234
+          1305
         ],
         "name": "IGSVEProtocolToken",
         "nameLocation": "130:18:4",
@@ -87,13 +87,13 @@
         "nodes": [
           {
             "documentation": {
-              "id": 1220,
+              "id": 1291,
               "nodeType": "StructuredDocumentation",
               "src": "156:49:4",
               "text": " @dev burns tokens from user."
             },
             "functionSelector": "42966c68",
-            "id": 1225,
+            "id": 1296,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -101,17 +101,17 @@
             "nameLocation": "220:4:4",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1223,
+              "id": 1294,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1222,
+                  "id": 1293,
                   "mutability": "mutable",
                   "name": "amount",
                   "nameLocation": "233:6:4",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1225,
+                  "scope": 1296,
                   "src": "225:14:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -120,7 +120,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1221,
+                    "id": 1292,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "225:7:4",
@@ -135,12 +135,12 @@
               "src": "224:16:4"
             },
             "returnParameters": {
-              "id": 1224,
+              "id": 1295,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "250:0:4"
             },
-            "scope": 1234,
+            "scope": 1305,
             "src": "211:40:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -148,13 +148,13 @@
           },
           {
             "documentation": {
-              "id": 1226,
+              "id": 1297,
               "nodeType": "StructuredDocumentation",
               "src": "259:55:4",
               "text": " @dev burns tokens on behalf of user."
             },
             "functionSelector": "79cc6790",
-            "id": 1233,
+            "id": 1304,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -162,17 +162,17 @@
             "nameLocation": "329:8:4",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1231,
+              "id": 1302,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1228,
+                  "id": 1299,
                   "mutability": "mutable",
                   "name": "account",
                   "nameLocation": "346:7:4",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1233,
+                  "scope": 1304,
                   "src": "338:15:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -181,7 +181,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1227,
+                    "id": 1298,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "338:7:4",
@@ -195,12 +195,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1230,
+                  "id": 1301,
                   "mutability": "mutable",
                   "name": "amount",
                   "nameLocation": "363:6:4",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1233,
+                  "scope": 1304,
                   "src": "355:14:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -209,7 +209,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1229,
+                    "id": 1300,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "355:7:4",
@@ -224,19 +224,19 @@
               "src": "337:33:4"
             },
             "returnParameters": {
-              "id": 1232,
+              "id": 1303,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "379:0:4"
             },
-            "scope": 1234,
+            "scope": 1305,
             "src": "320:60:4",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1235,
+        "scope": 1306,
         "src": "120:265:4",
         "usedErrors": []
       }
@@ -247,15 +247,15 @@
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVEProtocolToken.sol",
     "exportedSymbols": {
       "IGSVEProtocolToken": [
-        1234
+        1305
       ]
     },
-    "id": 1235,
+    "id": 1306,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1218,
+        "id": 1289,
         "literals": [
           "solidity",
           "^",
@@ -271,15 +271,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 1219,
+          "id": 1290,
           "nodeType": "StructuredDocumentation",
           "src": "62:56:4",
           "text": " @dev Interface of the Stored Gas Token Type"
         },
         "fullyImplemented": false,
-        "id": 1234,
+        "id": 1305,
         "linearizedBaseContracts": [
-          1234
+          1305
         ],
         "name": "IGSVEProtocolToken",
         "nameLocation": "130:18:4",
@@ -287,13 +287,13 @@
         "nodes": [
           {
             "documentation": {
-              "id": 1220,
+              "id": 1291,
               "nodeType": "StructuredDocumentation",
               "src": "156:49:4",
               "text": " @dev burns tokens from user."
             },
             "functionSelector": "42966c68",
-            "id": 1225,
+            "id": 1296,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -301,17 +301,17 @@
             "nameLocation": "220:4:4",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1223,
+              "id": 1294,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1222,
+                  "id": 1293,
                   "mutability": "mutable",
                   "name": "amount",
                   "nameLocation": "233:6:4",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1225,
+                  "scope": 1296,
                   "src": "225:14:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -320,7 +320,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1221,
+                    "id": 1292,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "225:7:4",
@@ -335,12 +335,12 @@
               "src": "224:16:4"
             },
             "returnParameters": {
-              "id": 1224,
+              "id": 1295,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "250:0:4"
             },
-            "scope": 1234,
+            "scope": 1305,
             "src": "211:40:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -348,13 +348,13 @@
           },
           {
             "documentation": {
-              "id": 1226,
+              "id": 1297,
               "nodeType": "StructuredDocumentation",
               "src": "259:55:4",
               "text": " @dev burns tokens on behalf of user."
             },
             "functionSelector": "79cc6790",
-            "id": 1233,
+            "id": 1304,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -362,17 +362,17 @@
             "nameLocation": "329:8:4",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1231,
+              "id": 1302,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1228,
+                  "id": 1299,
                   "mutability": "mutable",
                   "name": "account",
                   "nameLocation": "346:7:4",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1233,
+                  "scope": 1304,
                   "src": "338:15:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -381,7 +381,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1227,
+                    "id": 1298,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "338:7:4",
@@ -395,12 +395,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1230,
+                  "id": 1301,
                   "mutability": "mutable",
                   "name": "amount",
                   "nameLocation": "363:6:4",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1233,
+                  "scope": 1304,
                   "src": "355:14:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -409,7 +409,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1229,
+                    "id": 1300,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "355:7:4",
@@ -424,19 +424,19 @@
               "src": "337:33:4"
             },
             "returnParameters": {
-              "id": 1232,
+              "id": 1303,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "379:0:4"
             },
-            "scope": 1234,
+            "scope": 1305,
             "src": "320:60:4",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1235,
+        "scope": 1306,
         "src": "120:265:4",
         "usedErrors": []
       }
@@ -449,7 +449,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-25T16:51:59.206Z",
+  "updatedAt": "2021-04-26T18:29:24.915Z",
   "devdoc": {
     "details": "Interface of the Stored Gas Token Type",
     "kind": "dev",

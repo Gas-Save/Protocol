@@ -3251,17 +3251,17 @@
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/test_helpers/GSVE_helper.sol",
     "exportedSymbols": {
       "GSVE_helper": [
-        3541
+        3612
       ],
       "IGSVEToken": [
-        1302
+        1373
       ]
     },
-    "id": 3542,
+    "id": 3613,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3412,
+        "id": 3483,
         "literals": [
           "solidity",
           "^",
@@ -3274,11 +3274,11 @@
       {
         "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVEToken.sol",
         "file": "../IGSVEToken.sol",
-        "id": 3413,
+        "id": 3484,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 3542,
-        "sourceUnit": 1303,
+        "scope": 3613,
+        "sourceUnit": 1374,
         "src": "27:27:13",
         "symbolAliases": [],
         "unitAlias": ""
@@ -3289,9 +3289,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 3541,
+        "id": 3612,
         "linearizedBaseContracts": [
-          3541
+          3612
         ],
         "name": "GSVE_helper",
         "nameLocation": "67:11:13",
@@ -3299,7 +3299,7 @@
         "nodes": [
           {
             "body": {
-              "id": 3417,
+              "id": 3488,
               "nodeType": "Block",
               "src": "112:61:13",
               "statements": [
@@ -3326,14 +3326,14 @@
                   },
                   "evmVersion": "istanbul",
                   "externalReferences": [],
-                  "id": 3416,
+                  "id": 3487,
                   "nodeType": "InlineAssembly",
                   "src": "123:43:13"
                 }
               ]
             },
             "functionSelector": "32e43a11",
-            "id": 3418,
+            "id": 3489,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -3341,18 +3341,18 @@
             "nameLocation": "97:5:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3414,
+              "id": 3485,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "102:2:13"
             },
             "returnParameters": {
-              "id": 3415,
+              "id": 3486,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "112:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "88:85:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -3360,7 +3360,7 @@
           },
           {
             "body": {
-              "id": 3424,
+              "id": 3495,
               "nodeType": "Block",
               "src": "282:253:13",
               "statements": [
@@ -3476,21 +3476,21 @@
                   "evmVersion": "istanbul",
                   "externalReferences": [
                     {
-                      "declaration": 3420,
+                      "declaration": 3491,
                       "isOffset": false,
                       "isSlot": false,
                       "src": "479:4:13",
                       "valueSize": 1
                     }
                   ],
-                  "id": 3423,
+                  "id": 3494,
                   "nodeType": "InlineAssembly",
                   "src": "346:182:13"
                 }
               ]
             },
             "functionSelector": "4ad5d16f",
-            "id": 3425,
+            "id": 3496,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -3498,17 +3498,17 @@
             "nameLocation": "253:7:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3421,
+              "id": 3492,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3420,
+                  "id": 3491,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "269:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3425,
+                  "scope": 3496,
                   "src": "261:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3517,7 +3517,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3419,
+                    "id": 3490,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "261:7:13",
@@ -3532,12 +3532,12 @@
               "src": "260:14:13"
             },
             "returnParameters": {
-              "id": 3422,
+              "id": 3493,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "282:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "244:291:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -3545,7 +3545,7 @@
           },
           {
             "body": {
-              "id": 3431,
+              "id": 3502,
               "nodeType": "Block",
               "src": "604:253:13",
               "statements": [
@@ -3661,21 +3661,21 @@
                   "evmVersion": "istanbul",
                   "externalReferences": [
                     {
-                      "declaration": 3427,
+                      "declaration": 3498,
                       "isOffset": false,
                       "isSlot": false,
                       "src": "801:4:13",
                       "valueSize": 1
                     }
                   ],
-                  "id": 3430,
+                  "id": 3501,
                   "nodeType": "InlineAssembly",
                   "src": "668:182:13"
                 }
               ]
             },
             "functionSelector": "6318d58c",
-            "id": 3432,
+            "id": 3503,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -3683,17 +3683,17 @@
             "nameLocation": "552:23:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3428,
+              "id": 3499,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3427,
+                  "id": 3498,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "584:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3432,
+                  "scope": 3503,
                   "src": "576:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3702,7 +3702,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3426,
+                    "id": 3497,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "576:7:13",
@@ -3717,12 +3717,12 @@
               "src": "575:14:13"
             },
             "returnParameters": {
-              "id": 3429,
+              "id": 3500,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "604:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "543:314:13",
             "stateMutability": "payable",
             "virtual": false,
@@ -3730,7 +3730,7 @@
           },
           {
             "body": {
-              "id": 3457,
+              "id": 3528,
               "nodeType": "Block",
               "src": "943:106:13",
               "statements": [
@@ -3738,11 +3738,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 3442,
+                        "id": 3513,
                         "name": "burn",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3436,
+                        "referencedDeclaration": 3507,
                         "src": "962:4:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -3757,18 +3757,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 3441,
+                      "id": 3512,
                       "name": "burnGas",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3425,
+                      "referencedDeclaration": 3496,
                       "src": "954:7:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 3443,
+                    "id": 3514,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3783,7 +3783,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3444,
+                  "id": 3515,
                   "nodeType": "ExpressionStatement",
                   "src": "954:13:13"
                 },
@@ -3795,7 +3795,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 3453,
+                        "id": 3524,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3803,11 +3803,11 @@
                         "leftExpression": {
                           "arguments": [
                             {
-                              "id": 3450,
+                              "id": 3521,
                               "name": "free",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3438,
+                              "referencedDeclaration": 3509,
                               "src": "1013:4:13",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -3825,11 +3825,11 @@
                             "expression": {
                               "arguments": [
                                 {
-                                  "id": 3447,
+                                  "id": 3518,
                                   "name": "gas_token",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3434,
+                                  "referencedDeclaration": 3505,
                                   "src": "997:9:13",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_address",
@@ -3844,18 +3844,18 @@
                                     "typeString": "address"
                                   }
                                 ],
-                                "id": 3446,
+                                "id": 3517,
                                 "name": "IGSVEToken",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1302,
+                                "referencedDeclaration": 1373,
                                 "src": "986:10:13",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1302_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1373_$",
                                   "typeString": "type(contract IGSVEToken)"
                                 }
                               },
-                              "id": 3448,
+                              "id": 3519,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -3866,25 +3866,25 @@
                               "src": "986:21:13",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IGSVEToken_$1302",
+                                "typeIdentifier": "t_contract$_IGSVEToken_$1373",
                                 "typeString": "contract IGSVEToken"
                               }
                             },
-                            "id": 3449,
+                            "id": 3520,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "free",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1261,
+                            "referencedDeclaration": 1332,
                             "src": "986:26:13",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$_t_uint256_$",
                               "typeString": "function (uint256) external returns (uint256)"
                             }
                           },
-                          "id": 3451,
+                          "id": 3522,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3903,7 +3903,7 @@
                         "operator": ">",
                         "rightExpression": {
                           "hexValue": "30",
-                          "id": 3452,
+                          "id": 3523,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -3925,7 +3925,7 @@
                       },
                       {
                         "hexValue": "6275726e476173416e6446726565",
-                        "id": 3454,
+                        "id": 3525,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3951,7 +3951,7 @@
                           "typeString": "literal_string \"burnGasAndFree\""
                         }
                       ],
-                      "id": 3445,
+                      "id": 3516,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -3965,7 +3965,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3455,
+                    "id": 3526,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3980,14 +3980,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3456,
+                  "id": 3527,
                   "nodeType": "ExpressionStatement",
                   "src": "978:63:13"
                 }
               ]
             },
             "functionSelector": "01e569a9",
-            "id": 3458,
+            "id": 3529,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -3995,17 +3995,17 @@
             "nameLocation": "874:14:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3439,
+              "id": 3510,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3434,
+                  "id": 3505,
                   "mutability": "mutable",
                   "name": "gas_token",
                   "nameLocation": "897:9:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3458,
+                  "scope": 3529,
                   "src": "889:17:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4014,7 +4014,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3433,
+                    "id": 3504,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "889:7:13",
@@ -4028,12 +4028,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3436,
+                  "id": 3507,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "916:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3458,
+                  "scope": 3529,
                   "src": "908:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4042,7 +4042,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3435,
+                    "id": 3506,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "908:7:13",
@@ -4055,12 +4055,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3438,
+                  "id": 3509,
                   "mutability": "mutable",
                   "name": "free",
                   "nameLocation": "930:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3458,
+                  "scope": 3529,
                   "src": "922:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4069,7 +4069,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3437,
+                    "id": 3508,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "922:7:13",
@@ -4084,12 +4084,12 @@
               "src": "888:47:13"
             },
             "returnParameters": {
-              "id": 3440,
+              "id": 3511,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "943:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "865:184:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -4097,7 +4097,7 @@
           },
           {
             "body": {
-              "id": 3483,
+              "id": 3554,
               "nodeType": "Block",
               "src": "1139:118:13",
               "statements": [
@@ -4105,11 +4105,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 3468,
+                        "id": 3539,
                         "name": "burn",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3462,
+                        "referencedDeclaration": 3533,
                         "src": "1158:4:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -4124,18 +4124,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 3467,
+                      "id": 3538,
                       "name": "burnGas",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3425,
+                      "referencedDeclaration": 3496,
                       "src": "1150:7:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 3469,
+                    "id": 3540,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4150,7 +4150,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3470,
+                  "id": 3541,
                   "nodeType": "ExpressionStatement",
                   "src": "1150:13:13"
                 },
@@ -4162,17 +4162,17 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 3479,
+                        "id": 3550,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
-                          "id": 3472,
+                          "id": 3543,
                           "name": "free",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3464,
+                          "referencedDeclaration": 3535,
                           "src": "1182:4:13",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -4184,11 +4184,11 @@
                         "rightExpression": {
                           "arguments": [
                             {
-                              "id": 3477,
+                              "id": 3548,
                               "name": "free",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3464,
+                              "referencedDeclaration": 3535,
                               "src": "1221:4:13",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -4206,11 +4206,11 @@
                             "expression": {
                               "arguments": [
                                 {
-                                  "id": 3474,
+                                  "id": 3545,
                                   "name": "gas_token",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3460,
+                                  "referencedDeclaration": 3531,
                                   "src": "1201:9:13",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_address",
@@ -4225,18 +4225,18 @@
                                     "typeString": "address"
                                   }
                                 ],
-                                "id": 3473,
+                                "id": 3544,
                                 "name": "IGSVEToken",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1302,
+                                "referencedDeclaration": 1373,
                                 "src": "1190:10:13",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1302_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1373_$",
                                   "typeString": "type(contract IGSVEToken)"
                                 }
                               },
-                              "id": 3475,
+                              "id": 3546,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -4247,25 +4247,25 @@
                               "src": "1190:21:13",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IGSVEToken_$1302",
+                                "typeIdentifier": "t_contract$_IGSVEToken_$1373",
                                 "typeString": "contract IGSVEToken"
                               }
                             },
-                            "id": 3476,
+                            "id": 3547,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "freeUpTo",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1269,
+                            "referencedDeclaration": 1340,
                             "src": "1190:30:13",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$_t_uint256_$",
                               "typeString": "function (uint256) external returns (uint256)"
                             }
                           },
-                          "id": 3478,
+                          "id": 3549,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -4288,7 +4288,7 @@
                       },
                       {
                         "hexValue": "6275726e476173416e64467265655570546f",
-                        "id": 3480,
+                        "id": 3551,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -4314,7 +4314,7 @@
                           "typeString": "literal_string \"burnGasAndFreeUpTo\""
                         }
                       ],
-                      "id": 3471,
+                      "id": 3542,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -4328,7 +4328,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3481,
+                    "id": 3552,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4343,14 +4343,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3482,
+                  "id": 3553,
                   "nodeType": "ExpressionStatement",
                   "src": "1174:75:13"
                 }
               ]
             },
             "functionSelector": "16edf3e3",
-            "id": 3484,
+            "id": 3555,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -4358,17 +4358,17 @@
             "nameLocation": "1066:18:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3465,
+              "id": 3536,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3460,
+                  "id": 3531,
                   "mutability": "mutable",
                   "name": "gas_token",
                   "nameLocation": "1093:9:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3484,
+                  "scope": 3555,
                   "src": "1085:17:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4377,7 +4377,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3459,
+                    "id": 3530,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1085:7:13",
@@ -4391,12 +4391,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3462,
+                  "id": 3533,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "1112:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3484,
+                  "scope": 3555,
                   "src": "1104:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4405,7 +4405,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3461,
+                    "id": 3532,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1104:7:13",
@@ -4418,12 +4418,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3464,
+                  "id": 3535,
                   "mutability": "mutable",
                   "name": "free",
                   "nameLocation": "1126:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3484,
+                  "scope": 3555,
                   "src": "1118:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4432,7 +4432,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3463,
+                    "id": 3534,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1118:7:13",
@@ -4447,12 +4447,12 @@
               "src": "1084:47:13"
             },
             "returnParameters": {
-              "id": 3466,
+              "id": 3537,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1139:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "1057:200:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -4460,7 +4460,7 @@
           },
           {
             "body": {
-              "id": 3511,
+              "id": 3582,
               "nodeType": "Block",
               "src": "1347:125:13",
               "statements": [
@@ -4468,11 +4468,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 3494,
+                        "id": 3565,
                         "name": "burn",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3488,
+                        "referencedDeclaration": 3559,
                         "src": "1366:4:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -4487,18 +4487,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 3493,
+                      "id": 3564,
                       "name": "burnGas",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3425,
+                      "referencedDeclaration": 3496,
                       "src": "1358:7:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 3495,
+                    "id": 3566,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4513,7 +4513,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3496,
+                  "id": 3567,
                   "nodeType": "ExpressionStatement",
                   "src": "1358:13:13"
                 },
@@ -4525,7 +4525,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 3507,
+                        "id": 3578,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -4534,7 +4534,7 @@
                           "arguments": [
                             {
                               "expression": {
-                                "id": 3502,
+                                "id": 3573,
                                 "name": "tx",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
@@ -4545,7 +4545,7 @@
                                   "typeString": "tx"
                                 }
                               },
-                              "id": 3503,
+                              "id": 3574,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -4559,11 +4559,11 @@
                               }
                             },
                             {
-                              "id": 3504,
+                              "id": 3575,
                               "name": "free",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3490,
+                              "referencedDeclaration": 3561,
                               "src": "1432:4:13",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -4585,11 +4585,11 @@
                             "expression": {
                               "arguments": [
                                 {
-                                  "id": 3499,
+                                  "id": 3570,
                                   "name": "gas_token",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3486,
+                                  "referencedDeclaration": 3557,
                                   "src": "1401:9:13",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_address",
@@ -4604,18 +4604,18 @@
                                     "typeString": "address"
                                   }
                                 ],
-                                "id": 3498,
+                                "id": 3569,
                                 "name": "IGSVEToken",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1302,
+                                "referencedDeclaration": 1373,
                                 "src": "1390:10:13",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1302_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1373_$",
                                   "typeString": "type(contract IGSVEToken)"
                                 }
                               },
-                              "id": 3500,
+                              "id": 3571,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -4626,25 +4626,25 @@
                               "src": "1390:21:13",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IGSVEToken_$1302",
+                                "typeIdentifier": "t_contract$_IGSVEToken_$1373",
                                 "typeString": "contract IGSVEToken"
                               }
                             },
-                            "id": 3501,
+                            "id": 3572,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "freeFrom",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1279,
+                            "referencedDeclaration": 1350,
                             "src": "1390:30:13",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_uint256_$",
                               "typeString": "function (address,uint256) external returns (uint256)"
                             }
                           },
-                          "id": 3505,
+                          "id": 3576,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -4663,7 +4663,7 @@
                         "operator": ">",
                         "rightExpression": {
                           "hexValue": "30",
-                          "id": 3506,
+                          "id": 3577,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -4685,7 +4685,7 @@
                       },
                       {
                         "hexValue": "6275726e476173416e644672656546726f6d",
-                        "id": 3508,
+                        "id": 3579,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -4711,7 +4711,7 @@
                           "typeString": "literal_string \"burnGasAndFreeFrom\""
                         }
                       ],
-                      "id": 3497,
+                      "id": 3568,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -4725,7 +4725,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3509,
+                    "id": 3580,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4740,14 +4740,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3510,
+                  "id": 3581,
                   "nodeType": "ExpressionStatement",
                   "src": "1382:82:13"
                 }
               ]
             },
             "functionSelector": "f3389f62",
-            "id": 3512,
+            "id": 3583,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -4755,17 +4755,17 @@
             "nameLocation": "1274:18:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3491,
+              "id": 3562,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3486,
+                  "id": 3557,
                   "mutability": "mutable",
                   "name": "gas_token",
                   "nameLocation": "1301:9:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3512,
+                  "scope": 3583,
                   "src": "1293:17:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4774,7 +4774,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3485,
+                    "id": 3556,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1293:7:13",
@@ -4788,12 +4788,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3488,
+                  "id": 3559,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "1320:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3512,
+                  "scope": 3583,
                   "src": "1312:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4802,7 +4802,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3487,
+                    "id": 3558,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1312:7:13",
@@ -4815,12 +4815,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3490,
+                  "id": 3561,
                   "mutability": "mutable",
                   "name": "free",
                   "nameLocation": "1334:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3512,
+                  "scope": 3583,
                   "src": "1326:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4829,7 +4829,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3489,
+                    "id": 3560,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1326:7:13",
@@ -4844,12 +4844,12 @@
               "src": "1292:47:13"
             },
             "returnParameters": {
-              "id": 3492,
+              "id": 3563,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1347:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "1265:207:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -4857,7 +4857,7 @@
           },
           {
             "body": {
-              "id": 3539,
+              "id": 3610,
               "nodeType": "Block",
               "src": "1566:137:13",
               "statements": [
@@ -4865,11 +4865,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 3522,
+                        "id": 3593,
                         "name": "burn",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3516,
+                        "referencedDeclaration": 3587,
                         "src": "1585:4:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -4884,18 +4884,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 3521,
+                      "id": 3592,
                       "name": "burnGas",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3425,
+                      "referencedDeclaration": 3496,
                       "src": "1577:7:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 3523,
+                    "id": 3594,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4910,7 +4910,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3524,
+                  "id": 3595,
                   "nodeType": "ExpressionStatement",
                   "src": "1577:13:13"
                 },
@@ -4922,17 +4922,17 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 3535,
+                        "id": 3606,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
-                          "id": 3526,
+                          "id": 3597,
                           "name": "free",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3518,
+                          "referencedDeclaration": 3589,
                           "src": "1609:4:13",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -4945,7 +4945,7 @@
                           "arguments": [
                             {
                               "expression": {
-                                "id": 3531,
+                                "id": 3602,
                                 "name": "tx",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
@@ -4956,7 +4956,7 @@
                                   "typeString": "tx"
                                 }
                               },
-                              "id": 3532,
+                              "id": 3603,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -4970,11 +4970,11 @@
                               }
                             },
                             {
-                              "id": 3533,
+                              "id": 3604,
                               "name": "free",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3518,
+                              "referencedDeclaration": 3589,
                               "src": "1663:4:13",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -4996,11 +4996,11 @@
                             "expression": {
                               "arguments": [
                                 {
-                                  "id": 3528,
+                                  "id": 3599,
                                   "name": "gas_token",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3514,
+                                  "referencedDeclaration": 3585,
                                   "src": "1628:9:13",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_address",
@@ -5015,18 +5015,18 @@
                                     "typeString": "address"
                                   }
                                 ],
-                                "id": 3527,
+                                "id": 3598,
                                 "name": "IGSVEToken",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1302,
+                                "referencedDeclaration": 1373,
                                 "src": "1617:10:13",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1302_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1373_$",
                                   "typeString": "type(contract IGSVEToken)"
                                 }
                               },
-                              "id": 3529,
+                              "id": 3600,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -5037,25 +5037,25 @@
                               "src": "1617:21:13",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IGSVEToken_$1302",
+                                "typeIdentifier": "t_contract$_IGSVEToken_$1373",
                                 "typeString": "contract IGSVEToken"
                               }
                             },
-                            "id": 3530,
+                            "id": 3601,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "freeFromUpTo",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1289,
+                            "referencedDeclaration": 1360,
                             "src": "1617:34:13",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_uint256_$",
                               "typeString": "function (address,uint256) external returns (uint256)"
                             }
                           },
-                          "id": 3534,
+                          "id": 3605,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -5078,7 +5078,7 @@
                       },
                       {
                         "hexValue": "6275726e476173416e644672656546726f6d5570546f",
-                        "id": 3536,
+                        "id": 3607,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -5104,7 +5104,7 @@
                           "typeString": "literal_string \"burnGasAndFreeFromUpTo\""
                         }
                       ],
-                      "id": 3525,
+                      "id": 3596,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -5118,7 +5118,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3537,
+                    "id": 3608,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -5133,14 +5133,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3538,
+                  "id": 3609,
                   "nodeType": "ExpressionStatement",
                   "src": "1601:94:13"
                 }
               ]
             },
             "functionSelector": "a2063679",
-            "id": 3540,
+            "id": 3611,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -5148,17 +5148,17 @@
             "nameLocation": "1489:22:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3519,
+              "id": 3590,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3514,
+                  "id": 3585,
                   "mutability": "mutable",
                   "name": "gas_token",
                   "nameLocation": "1520:9:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3540,
+                  "scope": 3611,
                   "src": "1512:17:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5167,7 +5167,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3513,
+                    "id": 3584,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1512:7:13",
@@ -5181,12 +5181,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3516,
+                  "id": 3587,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "1539:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3540,
+                  "scope": 3611,
                   "src": "1531:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5195,7 +5195,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3515,
+                    "id": 3586,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1531:7:13",
@@ -5208,12 +5208,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3518,
+                  "id": 3589,
                   "mutability": "mutable",
                   "name": "free",
                   "nameLocation": "1553:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3540,
+                  "scope": 3611,
                   "src": "1545:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5222,7 +5222,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3517,
+                    "id": 3588,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1545:7:13",
@@ -5237,19 +5237,19 @@
               "src": "1511:47:13"
             },
             "returnParameters": {
-              "id": 3520,
+              "id": 3591,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1566:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "1480:223:13",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 3542,
+        "scope": 3613,
         "src": "58:1648:13",
         "usedErrors": []
       }
@@ -5260,17 +5260,17 @@
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/test_helpers/GSVE_helper.sol",
     "exportedSymbols": {
       "GSVE_helper": [
-        3541
+        3612
       ],
       "IGSVEToken": [
-        1302
+        1373
       ]
     },
-    "id": 3542,
+    "id": 3613,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3412,
+        "id": 3483,
         "literals": [
           "solidity",
           "^",
@@ -5283,11 +5283,11 @@
       {
         "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVEToken.sol",
         "file": "../IGSVEToken.sol",
-        "id": 3413,
+        "id": 3484,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 3542,
-        "sourceUnit": 1303,
+        "scope": 3613,
+        "sourceUnit": 1374,
         "src": "27:27:13",
         "symbolAliases": [],
         "unitAlias": ""
@@ -5298,9 +5298,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 3541,
+        "id": 3612,
         "linearizedBaseContracts": [
-          3541
+          3612
         ],
         "name": "GSVE_helper",
         "nameLocation": "67:11:13",
@@ -5308,7 +5308,7 @@
         "nodes": [
           {
             "body": {
-              "id": 3417,
+              "id": 3488,
               "nodeType": "Block",
               "src": "112:61:13",
               "statements": [
@@ -5335,14 +5335,14 @@
                   },
                   "evmVersion": "istanbul",
                   "externalReferences": [],
-                  "id": 3416,
+                  "id": 3487,
                   "nodeType": "InlineAssembly",
                   "src": "123:43:13"
                 }
               ]
             },
             "functionSelector": "32e43a11",
-            "id": 3418,
+            "id": 3489,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -5350,18 +5350,18 @@
             "nameLocation": "97:5:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3414,
+              "id": 3485,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "102:2:13"
             },
             "returnParameters": {
-              "id": 3415,
+              "id": 3486,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "112:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "88:85:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -5369,7 +5369,7 @@
           },
           {
             "body": {
-              "id": 3424,
+              "id": 3495,
               "nodeType": "Block",
               "src": "282:253:13",
               "statements": [
@@ -5485,21 +5485,21 @@
                   "evmVersion": "istanbul",
                   "externalReferences": [
                     {
-                      "declaration": 3420,
+                      "declaration": 3491,
                       "isOffset": false,
                       "isSlot": false,
                       "src": "479:4:13",
                       "valueSize": 1
                     }
                   ],
-                  "id": 3423,
+                  "id": 3494,
                   "nodeType": "InlineAssembly",
                   "src": "346:182:13"
                 }
               ]
             },
             "functionSelector": "4ad5d16f",
-            "id": 3425,
+            "id": 3496,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -5507,17 +5507,17 @@
             "nameLocation": "253:7:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3421,
+              "id": 3492,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3420,
+                  "id": 3491,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "269:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3425,
+                  "scope": 3496,
                   "src": "261:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5526,7 +5526,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3419,
+                    "id": 3490,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "261:7:13",
@@ -5541,12 +5541,12 @@
               "src": "260:14:13"
             },
             "returnParameters": {
-              "id": 3422,
+              "id": 3493,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "282:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "244:291:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -5554,7 +5554,7 @@
           },
           {
             "body": {
-              "id": 3431,
+              "id": 3502,
               "nodeType": "Block",
               "src": "604:253:13",
               "statements": [
@@ -5670,21 +5670,21 @@
                   "evmVersion": "istanbul",
                   "externalReferences": [
                     {
-                      "declaration": 3427,
+                      "declaration": 3498,
                       "isOffset": false,
                       "isSlot": false,
                       "src": "801:4:13",
                       "valueSize": 1
                     }
                   ],
-                  "id": 3430,
+                  "id": 3501,
                   "nodeType": "InlineAssembly",
                   "src": "668:182:13"
                 }
               ]
             },
             "functionSelector": "6318d58c",
-            "id": 3432,
+            "id": 3503,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -5692,17 +5692,17 @@
             "nameLocation": "552:23:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3428,
+              "id": 3499,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3427,
+                  "id": 3498,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "584:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3432,
+                  "scope": 3503,
                   "src": "576:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -5711,7 +5711,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3426,
+                    "id": 3497,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "576:7:13",
@@ -5726,12 +5726,12 @@
               "src": "575:14:13"
             },
             "returnParameters": {
-              "id": 3429,
+              "id": 3500,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "604:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "543:314:13",
             "stateMutability": "payable",
             "virtual": false,
@@ -5739,7 +5739,7 @@
           },
           {
             "body": {
-              "id": 3457,
+              "id": 3528,
               "nodeType": "Block",
               "src": "943:106:13",
               "statements": [
@@ -5747,11 +5747,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 3442,
+                        "id": 3513,
                         "name": "burn",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3436,
+                        "referencedDeclaration": 3507,
                         "src": "962:4:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -5766,18 +5766,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 3441,
+                      "id": 3512,
                       "name": "burnGas",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3425,
+                      "referencedDeclaration": 3496,
                       "src": "954:7:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 3443,
+                    "id": 3514,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -5792,7 +5792,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3444,
+                  "id": 3515,
                   "nodeType": "ExpressionStatement",
                   "src": "954:13:13"
                 },
@@ -5804,7 +5804,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 3453,
+                        "id": 3524,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -5812,11 +5812,11 @@
                         "leftExpression": {
                           "arguments": [
                             {
-                              "id": 3450,
+                              "id": 3521,
                               "name": "free",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3438,
+                              "referencedDeclaration": 3509,
                               "src": "1013:4:13",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -5834,11 +5834,11 @@
                             "expression": {
                               "arguments": [
                                 {
-                                  "id": 3447,
+                                  "id": 3518,
                                   "name": "gas_token",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3434,
+                                  "referencedDeclaration": 3505,
                                   "src": "997:9:13",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_address",
@@ -5853,18 +5853,18 @@
                                     "typeString": "address"
                                   }
                                 ],
-                                "id": 3446,
+                                "id": 3517,
                                 "name": "IGSVEToken",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1302,
+                                "referencedDeclaration": 1373,
                                 "src": "986:10:13",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1302_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1373_$",
                                   "typeString": "type(contract IGSVEToken)"
                                 }
                               },
-                              "id": 3448,
+                              "id": 3519,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -5875,25 +5875,25 @@
                               "src": "986:21:13",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IGSVEToken_$1302",
+                                "typeIdentifier": "t_contract$_IGSVEToken_$1373",
                                 "typeString": "contract IGSVEToken"
                               }
                             },
-                            "id": 3449,
+                            "id": 3520,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "free",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1261,
+                            "referencedDeclaration": 1332,
                             "src": "986:26:13",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$_t_uint256_$",
                               "typeString": "function (uint256) external returns (uint256)"
                             }
                           },
-                          "id": 3451,
+                          "id": 3522,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -5912,7 +5912,7 @@
                         "operator": ">",
                         "rightExpression": {
                           "hexValue": "30",
-                          "id": 3452,
+                          "id": 3523,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -5934,7 +5934,7 @@
                       },
                       {
                         "hexValue": "6275726e476173416e6446726565",
-                        "id": 3454,
+                        "id": 3525,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -5960,7 +5960,7 @@
                           "typeString": "literal_string \"burnGasAndFree\""
                         }
                       ],
-                      "id": 3445,
+                      "id": 3516,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -5974,7 +5974,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3455,
+                    "id": 3526,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -5989,14 +5989,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3456,
+                  "id": 3527,
                   "nodeType": "ExpressionStatement",
                   "src": "978:63:13"
                 }
               ]
             },
             "functionSelector": "01e569a9",
-            "id": 3458,
+            "id": 3529,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -6004,17 +6004,17 @@
             "nameLocation": "874:14:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3439,
+              "id": 3510,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3434,
+                  "id": 3505,
                   "mutability": "mutable",
                   "name": "gas_token",
                   "nameLocation": "897:9:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3458,
+                  "scope": 3529,
                   "src": "889:17:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6023,7 +6023,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3433,
+                    "id": 3504,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "889:7:13",
@@ -6037,12 +6037,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3436,
+                  "id": 3507,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "916:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3458,
+                  "scope": 3529,
                   "src": "908:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6051,7 +6051,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3435,
+                    "id": 3506,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "908:7:13",
@@ -6064,12 +6064,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3438,
+                  "id": 3509,
                   "mutability": "mutable",
                   "name": "free",
                   "nameLocation": "930:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3458,
+                  "scope": 3529,
                   "src": "922:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6078,7 +6078,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3437,
+                    "id": 3508,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "922:7:13",
@@ -6093,12 +6093,12 @@
               "src": "888:47:13"
             },
             "returnParameters": {
-              "id": 3440,
+              "id": 3511,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "943:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "865:184:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -6106,7 +6106,7 @@
           },
           {
             "body": {
-              "id": 3483,
+              "id": 3554,
               "nodeType": "Block",
               "src": "1139:118:13",
               "statements": [
@@ -6114,11 +6114,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 3468,
+                        "id": 3539,
                         "name": "burn",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3462,
+                        "referencedDeclaration": 3533,
                         "src": "1158:4:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -6133,18 +6133,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 3467,
+                      "id": 3538,
                       "name": "burnGas",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3425,
+                      "referencedDeclaration": 3496,
                       "src": "1150:7:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 3469,
+                    "id": 3540,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6159,7 +6159,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3470,
+                  "id": 3541,
                   "nodeType": "ExpressionStatement",
                   "src": "1150:13:13"
                 },
@@ -6171,17 +6171,17 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 3479,
+                        "id": 3550,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
-                          "id": 3472,
+                          "id": 3543,
                           "name": "free",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3464,
+                          "referencedDeclaration": 3535,
                           "src": "1182:4:13",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -6193,11 +6193,11 @@
                         "rightExpression": {
                           "arguments": [
                             {
-                              "id": 3477,
+                              "id": 3548,
                               "name": "free",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3464,
+                              "referencedDeclaration": 3535,
                               "src": "1221:4:13",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -6215,11 +6215,11 @@
                             "expression": {
                               "arguments": [
                                 {
-                                  "id": 3474,
+                                  "id": 3545,
                                   "name": "gas_token",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3460,
+                                  "referencedDeclaration": 3531,
                                   "src": "1201:9:13",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_address",
@@ -6234,18 +6234,18 @@
                                     "typeString": "address"
                                   }
                                 ],
-                                "id": 3473,
+                                "id": 3544,
                                 "name": "IGSVEToken",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1302,
+                                "referencedDeclaration": 1373,
                                 "src": "1190:10:13",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1302_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1373_$",
                                   "typeString": "type(contract IGSVEToken)"
                                 }
                               },
-                              "id": 3475,
+                              "id": 3546,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -6256,25 +6256,25 @@
                               "src": "1190:21:13",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IGSVEToken_$1302",
+                                "typeIdentifier": "t_contract$_IGSVEToken_$1373",
                                 "typeString": "contract IGSVEToken"
                               }
                             },
-                            "id": 3476,
+                            "id": 3547,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "freeUpTo",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1269,
+                            "referencedDeclaration": 1340,
                             "src": "1190:30:13",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$_t_uint256_$",
                               "typeString": "function (uint256) external returns (uint256)"
                             }
                           },
-                          "id": 3478,
+                          "id": 3549,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -6297,7 +6297,7 @@
                       },
                       {
                         "hexValue": "6275726e476173416e64467265655570546f",
-                        "id": 3480,
+                        "id": 3551,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -6323,7 +6323,7 @@
                           "typeString": "literal_string \"burnGasAndFreeUpTo\""
                         }
                       ],
-                      "id": 3471,
+                      "id": 3542,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -6337,7 +6337,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3481,
+                    "id": 3552,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6352,14 +6352,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3482,
+                  "id": 3553,
                   "nodeType": "ExpressionStatement",
                   "src": "1174:75:13"
                 }
               ]
             },
             "functionSelector": "16edf3e3",
-            "id": 3484,
+            "id": 3555,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -6367,17 +6367,17 @@
             "nameLocation": "1066:18:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3465,
+              "id": 3536,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3460,
+                  "id": 3531,
                   "mutability": "mutable",
                   "name": "gas_token",
                   "nameLocation": "1093:9:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3484,
+                  "scope": 3555,
                   "src": "1085:17:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6386,7 +6386,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3459,
+                    "id": 3530,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1085:7:13",
@@ -6400,12 +6400,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3462,
+                  "id": 3533,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "1112:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3484,
+                  "scope": 3555,
                   "src": "1104:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6414,7 +6414,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3461,
+                    "id": 3532,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1104:7:13",
@@ -6427,12 +6427,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3464,
+                  "id": 3535,
                   "mutability": "mutable",
                   "name": "free",
                   "nameLocation": "1126:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3484,
+                  "scope": 3555,
                   "src": "1118:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6441,7 +6441,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3463,
+                    "id": 3534,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1118:7:13",
@@ -6456,12 +6456,12 @@
               "src": "1084:47:13"
             },
             "returnParameters": {
-              "id": 3466,
+              "id": 3537,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1139:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "1057:200:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -6469,7 +6469,7 @@
           },
           {
             "body": {
-              "id": 3511,
+              "id": 3582,
               "nodeType": "Block",
               "src": "1347:125:13",
               "statements": [
@@ -6477,11 +6477,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 3494,
+                        "id": 3565,
                         "name": "burn",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3488,
+                        "referencedDeclaration": 3559,
                         "src": "1366:4:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -6496,18 +6496,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 3493,
+                      "id": 3564,
                       "name": "burnGas",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3425,
+                      "referencedDeclaration": 3496,
                       "src": "1358:7:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 3495,
+                    "id": 3566,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6522,7 +6522,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3496,
+                  "id": 3567,
                   "nodeType": "ExpressionStatement",
                   "src": "1358:13:13"
                 },
@@ -6534,7 +6534,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 3507,
+                        "id": 3578,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -6543,7 +6543,7 @@
                           "arguments": [
                             {
                               "expression": {
-                                "id": 3502,
+                                "id": 3573,
                                 "name": "tx",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
@@ -6554,7 +6554,7 @@
                                   "typeString": "tx"
                                 }
                               },
-                              "id": 3503,
+                              "id": 3574,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -6568,11 +6568,11 @@
                               }
                             },
                             {
-                              "id": 3504,
+                              "id": 3575,
                               "name": "free",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3490,
+                              "referencedDeclaration": 3561,
                               "src": "1432:4:13",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -6594,11 +6594,11 @@
                             "expression": {
                               "arguments": [
                                 {
-                                  "id": 3499,
+                                  "id": 3570,
                                   "name": "gas_token",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3486,
+                                  "referencedDeclaration": 3557,
                                   "src": "1401:9:13",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_address",
@@ -6613,18 +6613,18 @@
                                     "typeString": "address"
                                   }
                                 ],
-                                "id": 3498,
+                                "id": 3569,
                                 "name": "IGSVEToken",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1302,
+                                "referencedDeclaration": 1373,
                                 "src": "1390:10:13",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1302_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1373_$",
                                   "typeString": "type(contract IGSVEToken)"
                                 }
                               },
-                              "id": 3500,
+                              "id": 3571,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -6635,25 +6635,25 @@
                               "src": "1390:21:13",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IGSVEToken_$1302",
+                                "typeIdentifier": "t_contract$_IGSVEToken_$1373",
                                 "typeString": "contract IGSVEToken"
                               }
                             },
-                            "id": 3501,
+                            "id": 3572,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "freeFrom",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1279,
+                            "referencedDeclaration": 1350,
                             "src": "1390:30:13",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_uint256_$",
                               "typeString": "function (address,uint256) external returns (uint256)"
                             }
                           },
-                          "id": 3505,
+                          "id": 3576,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -6672,7 +6672,7 @@
                         "operator": ">",
                         "rightExpression": {
                           "hexValue": "30",
-                          "id": 3506,
+                          "id": 3577,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -6694,7 +6694,7 @@
                       },
                       {
                         "hexValue": "6275726e476173416e644672656546726f6d",
-                        "id": 3508,
+                        "id": 3579,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -6720,7 +6720,7 @@
                           "typeString": "literal_string \"burnGasAndFreeFrom\""
                         }
                       ],
-                      "id": 3497,
+                      "id": 3568,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -6734,7 +6734,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3509,
+                    "id": 3580,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6749,14 +6749,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3510,
+                  "id": 3581,
                   "nodeType": "ExpressionStatement",
                   "src": "1382:82:13"
                 }
               ]
             },
             "functionSelector": "f3389f62",
-            "id": 3512,
+            "id": 3583,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -6764,17 +6764,17 @@
             "nameLocation": "1274:18:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3491,
+              "id": 3562,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3486,
+                  "id": 3557,
                   "mutability": "mutable",
                   "name": "gas_token",
                   "nameLocation": "1301:9:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3512,
+                  "scope": 3583,
                   "src": "1293:17:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6783,7 +6783,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3485,
+                    "id": 3556,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1293:7:13",
@@ -6797,12 +6797,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3488,
+                  "id": 3559,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "1320:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3512,
+                  "scope": 3583,
                   "src": "1312:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6811,7 +6811,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3487,
+                    "id": 3558,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1312:7:13",
@@ -6824,12 +6824,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3490,
+                  "id": 3561,
                   "mutability": "mutable",
                   "name": "free",
                   "nameLocation": "1334:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3512,
+                  "scope": 3583,
                   "src": "1326:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -6838,7 +6838,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3489,
+                    "id": 3560,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1326:7:13",
@@ -6853,12 +6853,12 @@
               "src": "1292:47:13"
             },
             "returnParameters": {
-              "id": 3492,
+              "id": 3563,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1347:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "1265:207:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -6866,7 +6866,7 @@
           },
           {
             "body": {
-              "id": 3539,
+              "id": 3610,
               "nodeType": "Block",
               "src": "1566:137:13",
               "statements": [
@@ -6874,11 +6874,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 3522,
+                        "id": 3593,
                         "name": "burn",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3516,
+                        "referencedDeclaration": 3587,
                         "src": "1585:4:13",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -6893,18 +6893,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 3521,
+                      "id": 3592,
                       "name": "burnGas",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3425,
+                      "referencedDeclaration": 3496,
                       "src": "1577:7:13",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 3523,
+                    "id": 3594,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -6919,7 +6919,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3524,
+                  "id": 3595,
                   "nodeType": "ExpressionStatement",
                   "src": "1577:13:13"
                 },
@@ -6931,17 +6931,17 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 3535,
+                        "id": 3606,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
-                          "id": 3526,
+                          "id": 3597,
                           "name": "free",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3518,
+                          "referencedDeclaration": 3589,
                           "src": "1609:4:13",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -6954,7 +6954,7 @@
                           "arguments": [
                             {
                               "expression": {
-                                "id": 3531,
+                                "id": 3602,
                                 "name": "tx",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
@@ -6965,7 +6965,7 @@
                                   "typeString": "tx"
                                 }
                               },
-                              "id": 3532,
+                              "id": 3603,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -6979,11 +6979,11 @@
                               }
                             },
                             {
-                              "id": 3533,
+                              "id": 3604,
                               "name": "free",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3518,
+                              "referencedDeclaration": 3589,
                               "src": "1663:4:13",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -7005,11 +7005,11 @@
                             "expression": {
                               "arguments": [
                                 {
-                                  "id": 3528,
+                                  "id": 3599,
                                   "name": "gas_token",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3514,
+                                  "referencedDeclaration": 3585,
                                   "src": "1628:9:13",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_address",
@@ -7024,18 +7024,18 @@
                                     "typeString": "address"
                                   }
                                 ],
-                                "id": 3527,
+                                "id": 3598,
                                 "name": "IGSVEToken",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1302,
+                                "referencedDeclaration": 1373,
                                 "src": "1617:10:13",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1302_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IGSVEToken_$1373_$",
                                   "typeString": "type(contract IGSVEToken)"
                                 }
                               },
-                              "id": 3529,
+                              "id": 3600,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -7046,25 +7046,25 @@
                               "src": "1617:21:13",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IGSVEToken_$1302",
+                                "typeIdentifier": "t_contract$_IGSVEToken_$1373",
                                 "typeString": "contract IGSVEToken"
                               }
                             },
-                            "id": 3530,
+                            "id": 3601,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "freeFromUpTo",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1289,
+                            "referencedDeclaration": 1360,
                             "src": "1617:34:13",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_uint256_$",
                               "typeString": "function (address,uint256) external returns (uint256)"
                             }
                           },
-                          "id": 3534,
+                          "id": 3605,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -7087,7 +7087,7 @@
                       },
                       {
                         "hexValue": "6275726e476173416e644672656546726f6d5570546f",
-                        "id": 3536,
+                        "id": 3607,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -7113,7 +7113,7 @@
                           "typeString": "literal_string \"burnGasAndFreeFromUpTo\""
                         }
                       ],
-                      "id": 3525,
+                      "id": 3596,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -7127,7 +7127,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3537,
+                    "id": 3608,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -7142,14 +7142,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3538,
+                  "id": 3609,
                   "nodeType": "ExpressionStatement",
                   "src": "1601:94:13"
                 }
               ]
             },
             "functionSelector": "a2063679",
-            "id": 3540,
+            "id": 3611,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -7157,17 +7157,17 @@
             "nameLocation": "1489:22:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3519,
+              "id": 3590,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3514,
+                  "id": 3585,
                   "mutability": "mutable",
                   "name": "gas_token",
                   "nameLocation": "1520:9:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3540,
+                  "scope": 3611,
                   "src": "1512:17:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -7176,7 +7176,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3513,
+                    "id": 3584,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1512:7:13",
@@ -7190,12 +7190,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3516,
+                  "id": 3587,
                   "mutability": "mutable",
                   "name": "burn",
                   "nameLocation": "1539:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3540,
+                  "scope": 3611,
                   "src": "1531:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -7204,7 +7204,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3515,
+                    "id": 3586,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1531:7:13",
@@ -7217,12 +7217,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3518,
+                  "id": 3589,
                   "mutability": "mutable",
                   "name": "free",
                   "nameLocation": "1553:4:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3540,
+                  "scope": 3611,
                   "src": "1545:12:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -7231,7 +7231,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3517,
+                    "id": 3588,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1545:7:13",
@@ -7246,19 +7246,19 @@
               "src": "1511:47:13"
             },
             "returnParameters": {
-              "id": 3520,
+              "id": 3591,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1566:0:13"
             },
-            "scope": 3541,
+            "scope": 3612,
             "src": "1480:223:13",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 3542,
+        "scope": 3613,
         "src": "58:1648:13",
         "usedErrors": []
       }
@@ -7271,7 +7271,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-25T16:51:59.312Z",
+  "updatedAt": "2021-04-26T18:29:25.033Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -26,6 +26,8 @@ contract GSVECore is Ownable {
     uint256 private tierOneThreshold = 25000 * (10**18);
     uint256 private tierTwoThreshold = 100000 * (10**18);
 
+    uint256 private _totalStaked = 0;
+
     //staking  
     mapping(address => uint256) private userStakes;
     mapping(address => uint256) private userStakeTimes;
@@ -47,12 +49,11 @@ contract GSVECore is Ownable {
         require(IERC20(GSVEToken).transferFrom(msg.sender, address(this), value));
         userStakes[msg.sender] = userStakes[msg.sender].add(value);
         userStakeTimes[msg.sender] = block.timestamp;
-
+        _totalStaked = _totalStaked.add(value);
         emit Staked(msg.sender, value);
     }
-    
+
     function unstakeAmount(uint256 value) public {
-        require(calculateStakeReward(msg.sender) == 0, "GSVE: User has stake rewards they must claim before updating stake.");
         uint256 stakeSize = userStakes[msg.sender];
         if (stakeSize == 0){
             return;
@@ -65,20 +66,19 @@ contract GSVECore is Ownable {
             userStakeTimes[msg.sender] = block.timestamp;
         }
 
+        _totalStaked = _totalStaked.sub(value);
         require(IERC20(GSVEToken).transfer(msg.sender, stakeWithdrawn));
         emit Unstaked(msg.sender, stakeWithdrawn);
     }
 
     function unstake() public {
-        require(calculateStakeReward(msg.sender) == 0, "GSVE: User has stake rewards they must claim before updating stake.");
         uint256 stakeSize = userStakes[msg.sender];
         if (stakeSize == 0){
             return;
         }
-
         userStakes[msg.sender] = 0;
         userStakeTimes[msg.sender] = 0;
-
+        _totalStaked = _totalStaked.sub(stakeSize);
         require(IERC20(GSVEToken).transfer(msg.sender, stakeSize));
         emit Unstaked(msg.sender, stakeSize);
     }
@@ -98,10 +98,13 @@ contract GSVECore is Ownable {
     }
 
     function collectReward() public {
+        require(totalRewards() > 0, "GSVE: contract has ran out of rewards to give");
+
         uint256 reward = calculateStakeReward(msg.sender);
         if(reward == 0){
             return;
         }
+        
         userStakeTimes[msg.sender] = block.timestamp;
         userTotalRewards[msg.sender] = userTotalRewards[msg.sender] + reward;
         require(IERC20(GSVEToken).transfer(msg.sender, reward), "GSVE: token transfer failed");
@@ -137,6 +140,7 @@ contract GSVECore is Ownable {
     function rewardedMinting(address mintTokenAddress, uint256 tokensToMint) public{
         uint256 mintType = _mintingType[mintTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
+        require(totalRewards() > 0, "GSVE: contract has ran out of rewards to give");
         if(mintType == 1){
             IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 2, msg.sender);
         }
@@ -190,6 +194,23 @@ contract GSVECore is Ownable {
     function mintingType(address gasToken) public view returns (uint256){
         return _mintingType[gasToken];
     }
+
+    function totalStaked() public view returns (uint256){
+        return _totalStaked;
+    }
+
+    function userStakeSize(address user)  public view returns (uint256){
+        return userStakes[user]; 
+    }
+
+    function totalRewards()  public view returns (uint256){
+        return IERC20(GSVEToken).balanceOf(address(this)).sub(_totalStaked); 
+    }
+
+    function totalRewardUser(address user)  public view returns (uint256){
+        return userTotalRewards[user]; 
+    }
+
 
     event Claimed(address indexed _from, address indexed _token, uint _value);
 
