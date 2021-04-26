@@ -14,8 +14,13 @@ contract("GSVE Core Test", async accounts => {
 
     it('should be able to deploy protocol contracts', async () => {
       token = await GSVEToken.new();
+      console.log("GSVE Address -" + token.address);
+      
       gasToken = await GasToken.new();
+      console.log("JetFuel Address -" + gasToken.address);
+
       protocol = await GSVEProtocol.new(token.address);
+      console.log("Core Address -" + protocol.address);
     });
 
     it("should be able to update the fee address of the gas token to the protocol", async () => {
