@@ -449,7 +449,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-26T18:29:24.915Z",
+  "updatedAt": "2021-04-27T15:26:36.270Z",
   "devdoc": {
     "details": "Interface of the Stored Gas Token Type",
     "kind": "dev",
