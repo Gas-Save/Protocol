@@ -130,5 +130,12 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(gsveReward.toString(), gsveBalance.toString());
     });
 
-
+    /*
+    web3.currentProvider.send({
+     jsonrpc: "2.0",
+     method: "evm_increaseTime",
+     params: [600],
+     id: 123
+     })
+     */
 });
