@@ -159,11 +159,14 @@ contract GSVECore is Ownable {
     function claimToken(address claimGasTokenAddress, uint256 tokensClaimed) public {
 
         uint256 isClaimable = _claimable[claimGasTokenAddress];
-        require(isClaimable == 0, "GSVE: Token not claimable");
+        require(isClaimable == 1, "GSVE: Token not claimable");
         require(userStakes[msg.sender] >= tierTwoThreshold , "GSVE: User has not staked enough to claim from the pool");
         
         if(userClaimTimes[msg.sender][claimGasTokenAddress] != 0){
             require(block.timestamp.sub(userClaimTimes[msg.sender][claimGasTokenAddress]) > 60 * 60 * 12, "GSVE: User cannot claim the same gas token twice in 12 hours");
+        }
+        else{
+            require(block.timestamp.sub(userStakeTimes[msg.sender]) > 60 * 60 * 12, "GSVE: User cannot claim within 12 hours of staking");
         }
 
         uint256 tokensGiven = tokensClaimed;

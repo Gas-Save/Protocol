@@ -130,9 +130,5 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(gsveReward.toString(), gsveBalance.toString());
     });
 
-    
-
-
-
 
 });
