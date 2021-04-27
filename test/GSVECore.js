@@ -5,6 +5,7 @@ const GSVEProtocol = artifacts.require ("./GSVECore.sol");
 const GasToken  = artifacts.require ("./JetFuel.sol");
 const GS_Wrapper  = artifacts.require ("./GasSwapWrapper.sol");
 const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
+const timeMachine = require('ganache-time-traveler');
 
 contract("GSVE Core Test", async accounts => {
     var token;
@@ -128,6 +129,11 @@ contract("GSVE Core Test", async accounts => {
       const gsveReward = web3.utils.toWei('0.1');
       const gsveBalance = await token.balanceOf(accounts[3]);
       assert.equal(gsveReward.toString(), gsveBalance.toString());
+    });
+
+    it('should be able to claim tokens after x time', async () => {
+      await timeMachine.advanceTimeAndBlock(60 * 60 * 13);
+      
     });
 
     /*
