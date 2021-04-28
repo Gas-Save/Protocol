@@ -135,13 +135,4 @@ contract("GSVE Core Test", async accounts => {
       await timeMachine.advanceTimeAndBlock(60 * 60 * 13);
       
     });
-
-    /*
-    web3.currentProvider.send({
-     jsonrpc: "2.0",
-     method: "evm_increaseTime",
-     params: [600],
-     id: 123
-     })
-     */
 });
