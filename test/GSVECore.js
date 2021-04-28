@@ -3,6 +3,7 @@ const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 const GSVEToken  = artifacts.require ("./GSVEToken.sol");
 const GSVEProtocol = artifacts.require ("./GSVECore.sol");
 const GasToken  = artifacts.require ("./JetFuel.sol");
+const GS_Deployer  = artifacts.require ("./GSVEContractDeployer.sol");
 const GS_Wrapper  = artifacts.require ("./GasSwapWrapper.sol");
 const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 const timeMachine = require('ganache-time-traveler');
@@ -22,6 +23,16 @@ contract("GSVE Core Test", async accounts => {
 
       protocol = await GSVEProtocol.new(token.address);
       console.log("Core Address " + protocol.address);
+
+      deployer = await GS_Deployer.new();
+      console.log("deployer Address " + deployer.address);
+    });
+
+    it('should be able to add a token to the list of supported tokens', async () => {
+      await deployer.addGasToken(gasToken.address);
+
+      var compatible = await deployer.compatibleGasToken(gasToken.address);
+      assert.equal(compatible.toNumber(), 1);
     });
 
     it("should be able to update the fee address of the gas token to the protocol", async () => {

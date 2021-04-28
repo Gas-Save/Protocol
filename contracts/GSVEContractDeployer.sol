@@ -37,7 +37,7 @@ contract GSVEContractDeployer is Ownable{
         }
     }
 
-    function GsveDeploy2(bytes memory data, uint256 salt, address gasToken) public discountGas(gasToken) returns(address contractAddress) {
+    function GsveDeploy2(uint256 salt, bytes memory data, address gasToken) public discountGas(gasToken) returns(address contractAddress) {
         assembly {
             contractAddress := create2(0, add(data, 32), mload(data), salt)
         }
