@@ -1,4 +1,3 @@
-"SPDX-License-Identifier: UNLICENSED";
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -7,15 +6,19 @@ interface IFreeFromUpTo {
     function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);
 }
 
-contract Deployer is ownable{
+contract GSVEContractDeployer is Ownable{
     mapping(address => uint256) private _compatibleGasTokens;
 
     function addGasToken(address gasToken) public onlyOwner{
         _compatibleGasTokens[gasToken] = 1;
     }
 
+    function compatibleGasToken(address gasToken) public view returns(uint256){
+        return _compatibleGasTokens[gasToken];
+    }
+
     modifier DiscountGas(address gasToken) {
-        require(compatibleGasTokens[gasToken] == 1, "GSVE: incompatible token");
+        require(_compatibleGasTokens[gasToken] == 1, "GSVE: incompatible token");
         uint256 gasStart = gasleft();
         _;
         uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
@@ -26,6 +29,7 @@ contract Deployer is ownable{
         assembly {
             contractAddress := create(0, add(data, 32), mload(data))
         }
+        emit ContractDeployed(contractAddress);
     }
 
     function GsveDeploy2(uint256 salt, bytes memory data, address gasToken) public DiscountGas(gasToken) returns(address contractAddress) {
@@ -33,7 +37,7 @@ contract Deployer is ownable{
             contractAddress := create2(0, add(data, 32), mload(data), salt)
         }
 
-        emit ContractDeployed(address);
+        emit ContractDeployed(contractAddress);
     }
 
     event ContractDeployed(address indexed deploymentAddress);
