@@ -8,7 +8,6 @@ interface IFreeFromUpTo {
 
 contract GSVEContractDeployer is Ownable{
     mapping(address => uint256) private _compatibleGasTokens;
-    uint256 private _salt = 0;
 
     function addGasToken(address gasToken) public onlyOwner{
         _compatibleGasTokens[gasToken] = 1;
@@ -16,10 +15,6 @@ contract GSVEContractDeployer is Ownable{
 
     function compatibleGasToken(address gasToken) public view returns(uint256){
         return _compatibleGasTokens[gasToken];
-    }
-
-    function salt() public view returns(uint256){
-        return _salt;
     }
 
     modifier discountGas(address gasToken) {
@@ -42,13 +37,10 @@ contract GSVEContractDeployer is Ownable{
         }
     }
 
-    function GsveDeploy2(bytes memory data, address gasToken) public discountGas(gasToken) returns(address contractAddress) {
-        uint256 currentSalt = _salt;
+    function GsveDeploy2(bytes memory data, uint256 salt, address gasToken) public discountGas(gasToken) returns(address contractAddress) {
         assembly {
-            contractAddress := create2(0, add(data, 32), mload(data), currentSalt)
+            contractAddress := create2(0, add(data, 32), mload(data), salt)
         }
-
-        _salt = _salt + 1;
 
         try Ownable(contractAddress).transferOwnership(msg.sender){
             emit ContractDeployed(contractAddress);

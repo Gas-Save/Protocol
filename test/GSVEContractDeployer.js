@@ -52,21 +52,24 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
     it('should be able to deploy2 a contract even when no gas tokens on hand', async () => {
       var byteCode = byteCodeJson["bytecode"];
-      var receipt = await deployer.GsveDeploy2(byteCode, gasToken.address, {from: accounts[1]});
+      var receipt = await deployer.GsveDeploy2(31337, byteCode, gasToken.address, {from: accounts[1]});
       console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
 
     it('should be able to deploy2 a contract that is not ownable', async () => {
       var byteCode = byteCodeNonOwnedJson["bytecode"];
-      var receipt = await deployer.GsveDeploy2(byteCode, gasToken.address, {from: accounts[1]});
+      var receipt = await deployer.GsveDeploy2(31337, byteCode, gasToken.address, {from: accounts[1]});
       console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
+
+    
+
 
     it('should be able to deploy2 a contract that is not ownable and save gas', async () => {
       await gasToken.mint(100, {from: accounts[1]});
       await gasToken.approve(deployer.address, 98, {from: accounts[1]});
       var byteCode = byteCodeNonOwnedJson["bytecode"]
-      var receipt = await deployer.GsveDeploy2(byteCode, gasToken.address, {from: accounts[1]});
+      var receipt = await deployer.GsveDeploy2(313373, byteCode, gasToken.address, {from: accounts[1]});
       console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
 });
