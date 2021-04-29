@@ -112,8 +112,8 @@ contract("Wrapper Test", async accounts => {
         await wrapper.withdrawTokenBalance(gasToken.address);
         wrapper_balance = await gasToken.balanceOf.call(wrapper.address)
         account_balance = await gasToken.balanceOf.call(accounts[0])
-        assert.equal(0, wrapper_balance)
-        assert.equal(100,  account_balance)
+        assert.equal(0, wrapper_balance.toNumber())
+        assert.equal(100,  account_balance.toNumber())
     });
 
     it('should allow the withdrawal of balance', async () => {
