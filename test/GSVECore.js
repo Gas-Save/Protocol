@@ -4,14 +4,14 @@ const GSVEToken  = artifacts.require ("./GSVEToken.sol");
 const GSVEProtocol = artifacts.require ("./GSVECore.sol");
 const GasToken  = artifacts.require ("./JetFuel.sol");
 const GS_Deployer  = artifacts.require ("./GSVEContractDeployer.sol");
-const GS_Wrapper  = artifacts.require ("./GasSwapWrapper.sol");
-const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
+const GS_Wrapper  = artifacts.require ("./GSVETransactionWrapper.sol");
 const timeMachine = require('ganache-time-traveler');
 
 contract("GSVE Core Test", async accounts => {
     var token;
     var gasToken;
     var protocol;
+    var wrapper;
     const TOTAL_SUPPLY = web3.utils.toWei('100000000');
 
     it('should be able to deploy protocol contracts', async () => {
@@ -26,12 +26,22 @@ contract("GSVE Core Test", async accounts => {
 
       deployer = await GS_Deployer.new();
       console.log("deployer Address " + deployer.address);
+
+      wrapper = await GS_Wrapper.new();
+      console.log("wrapper Address " + wrapper.address);
+
     });
 
-    it('should be able to add a token to the list of supported tokens', async () => {
+    it('should be able to add a token to the list of deployer supported tokens', async () => {
       await deployer.addGasToken(gasToken.address);
 
       var compatible = await deployer.compatibleGasToken(gasToken.address);
+      assert.equal(compatible.toNumber(), 1);
+    });
+
+    it('should be able to add a token to the list of wrapper supported tokens', async () => {
+      await wrapper.addGasToken(gasToken.address);
+      var compatible = await wrapper.compatibleGasToken(gasToken.address);
       assert.equal(compatible.toNumber(), 1);
     });
 
