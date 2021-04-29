@@ -1,16 +1,23 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-
-interface IFreeFromUpTo {
-    function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);
-}
+import "./GSVETransactionWrapper.sol";
 
 contract GSVEContractDeployer is Ownable{
     mapping(address => uint256) private _compatibleGasTokens;
+    mapping(uint256 => address) private _reverseTokenMap;
+    mapping(address => address) private _deployedWalletAddressLocation;
+    uint256 private _totalSupportedTokens = 0;
+
 
     function addGasToken(address gasToken) public onlyOwner{
         _compatibleGasTokens[gasToken] = 1;
+        _reverseTokenMap[_totalSupportedTokens] = gasToken;
+        _totalSupportedTokens = _totalSupportedTokens + 1;
+    }
+
+    function deployedWalletAddressLocation(address creator) public view returns(address){
+        return _deployedWalletAddressLocation[creator];
     }
 
     function compatibleGasToken(address gasToken) public view returns(uint256){
@@ -30,10 +37,10 @@ contract GSVEContractDeployer is Ownable{
             contractAddress := create(0, add(data, 32), mload(data))
         }
         try Ownable(contractAddress).transferOwnership(msg.sender){
-            emit ContractDeployed(contractAddress);
+            emit ContractDeployed(msg.sender, contractAddress);
         }
         catch{
-            emit ContractDeployed(contractAddress);
+            emit ContractDeployed(msg.sender, contractAddress);
         }
     }
 
@@ -43,12 +50,29 @@ contract GSVEContractDeployer is Ownable{
         }
 
         try Ownable(contractAddress).transferOwnership(msg.sender){
-            emit ContractDeployed(contractAddress);
+            emit ContractDeployed(msg.sender, contractAddress);
         }
         catch{
-            emit ContractDeployed(contractAddress);
+            emit ContractDeployed(msg.sender, contractAddress);
         }
     }
+    
+    function GsveWrapperDeploy() public returns(address contractAddress) {
 
-    event ContractDeployed(address indexed deploymentAddress);
+        bytes memory bytecode = type(GSVETransactionWrapper).creationCode;
+        bytes32 salt = keccak256(abi.encodePacked(msg.sender));
+
+        assembly {
+            contractAddress := create2(0, add(bytecode, 32), mload(bytecode), salt)
+        }
+
+        for(uint256 i = 0; i<_totalSupportedTokens; i++){
+            GSVETransactionWrapper(contractAddress).addGasToken(_reverseTokenMap[i]);
+        }
+        
+        _deployedWalletAddressLocation[msg.sender] = contractAddress;
+        emit ContractDeployed(msg.sender, contractAddress);
+    }
+
+    event ContractDeployed(address indexed creator, address deploymentAddress);
 }

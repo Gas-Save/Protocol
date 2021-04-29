@@ -69,4 +69,16 @@ contract("GSVE Contract Deployer Test", async accounts => {
       var receipt = await deployer.GsveDeploy2(313373, byteCode, gasToken.address, {from: accounts[1]});
       console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
+
+    it('should be able to deploy a wrapper contract', async () => {
+      var receipt = await deployer.GsveWrapperDeploy({from: accounts[0]});
+      var address = await deployer.deployedWalletAddressLocation.call(accounts[0])
+      var deployed = false;
+      if(address != "0x0000000000000000000000000000000000000000"){
+        deployed= true;
+      }
+
+      assert.equal(deployed, true)
+      console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    });
 });
