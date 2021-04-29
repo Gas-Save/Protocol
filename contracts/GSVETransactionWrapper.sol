@@ -1,8 +1,6 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/Address.sol";
-import "@openzeppelin/contracts/utils/math/Math.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IGSVEToken.sol";
@@ -42,5 +40,15 @@ contract GSVETransactionWrapper is Ownable {
         else{
             contractAddress.functionCall(data, "GS: Error forwarding transaction");
         }
+    }
+
+    function withdrawBalance() public onlyOwner{
+        owner().call{value: address(this).balance, gas:gasleft()}("");
+    }
+
+    function withdrawTokenBalance(address token) public onlyOwner{
+        IERC20 tokenContract = IERC20(token);
+        uint256 balance = tokenContract.balanceOf(address(this));
+        tokenContract.transfer(owner(), balance);
     }
 }
