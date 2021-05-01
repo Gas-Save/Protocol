@@ -115,6 +115,11 @@ contract("Wrapper Test", async accounts => {
         assert.equal(0, wrapper_balance.toNumber())
     });
 
+    it('should be able to send the contract some coins', async () => {
+        await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+        wrapper_balance = await web3.eth.getBalance(wrapper.address);
+        assert.equal(wrapper_balance, ether("0.15"));
+    });
     it('should allow the withdrawal of balance', async () => {
         await wrapper.withdrawBalance();
         wrapper_balance = await web3.eth.getBalance(wrapper.address);
