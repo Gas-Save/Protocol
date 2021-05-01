@@ -4,6 +4,10 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./GSVETransactionWrapper.sol";
 
+interface IFreeFromUpTo {
+    function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);
+}
+
 contract GSVEContractDeployer is Ownable{
     mapping(address => uint256) private _compatibleGasTokens;
     mapping(uint256 => address) private _reverseTokenMap;

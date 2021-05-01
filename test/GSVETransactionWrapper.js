@@ -93,7 +93,7 @@ contract("Wrapper Test", async accounts => {
         var burner_callData = helper_w3.methods.burnGas(147000).encodeABI();
 
         await gasToken.mint(100);
-        await gasToken.approve(wrapper.address, 100, {from: accounts[0]})
+        await gasToken.transfer(wrapper.address, 98, {from: accounts[0]})
         
         var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, 0, gasToken.address);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
@@ -107,7 +107,7 @@ contract("Wrapper Test", async accounts => {
         var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
 
         await gasToken.mint(100);
-        await gasToken.approve(wrapper.address, 100, {from: accounts[0]})
+        await gasToken.transfer(wrapper.address, 98, {from: accounts[0]})
         await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
         var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);

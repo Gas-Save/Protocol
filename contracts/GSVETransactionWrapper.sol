@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IGSVEToken.sol";
 
-interface IFreeFromUpTo {
-    function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);
+interface IFreeUpTo {
+    function freeUpTo(uint256 value) external returns (uint256 freed);
 }
 
 contract GSVETransactionWrapper is Ownable {
@@ -29,7 +29,7 @@ contract GSVETransactionWrapper is Ownable {
         uint256 gasStart = gasleft();
         _;
         uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
-        IFreeFromUpTo(gasToken).freeFromUpTo(msg.sender,  (gasSpent + 14154) / 24000);
+        IFreeUpTo(gasToken).freeUpTo((gasSpent + 14154) / 24000);
     }
     
     function wrapTransaction(bytes calldata data, address contractAddress, uint256 value, address gasToken) public discountGas(gasToken) payable onlyOwner{
