@@ -24,7 +24,7 @@ contract("Wrapper Test", async accounts => {
     it('should revert when trying to use a non-supported gas token address', async () => {
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGas(147000).encodeABI();
-        expectRevert(wrapper.wrapTransaction(burner_callData, helper.address, gasToken.address), "GSVE: incompatible token");
+        expectRevert(wrapper.wrapTransaction(burner_callData, helper.address, 0, gasToken.address), "GSVE: incompatible token");
       });
 
     
@@ -50,7 +50,7 @@ contract("Wrapper Test", async accounts => {
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGas(147000).encodeABI();
         
-        var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, gasToken.address);
+        var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, 0, gasToken.address);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
 
         assert.equal(true, true);
@@ -64,14 +64,27 @@ contract("Wrapper Test", async accounts => {
 
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
-        var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, gasToken.address, {value: ether("0.01")});
-        console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
 
+        await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+        var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
+        console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
 
         helper_balance = await web3.eth.getBalance(helper.address);
         wrapper_balance = await web3.eth.getBalance(wrapper.address);
 
-        assert.equal(helper_balance, ether("0.01"));
+        assert.equal(helper_balance, ether("0.15"));
+        assert.equal(wrapper_balance, ether("0"));
+    });
+
+    it('should be able to send the contract some coins', async () => {
+        await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+        wrapper_balance = await web3.eth.getBalance(wrapper.address);
+        assert.equal(wrapper_balance, ether("0.15"));
+    });
+    
+    it('should allow the withdrawal of balance', async () => {
+        await wrapper.withdrawBalance();
+        wrapper_balance = await web3.eth.getBalance(wrapper.address);
         assert.equal(wrapper_balance, ether("0"));
     });
 
@@ -82,7 +95,7 @@ contract("Wrapper Test", async accounts => {
         await gasToken.mint(100);
         await gasToken.approve(wrapper.address, 100, {from: accounts[0]})
         
-        var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, gasToken.address);
+        var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, 0, gasToken.address);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
 
         assert.equal(true, true);
@@ -95,14 +108,15 @@ contract("Wrapper Test", async accounts => {
 
         await gasToken.mint(100);
         await gasToken.approve(wrapper.address, 100, {from: accounts[0]})
-        var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, gasToken.address, {value: ether("0.01")});
+        await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+        var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
 
 
         helper_balance = await web3.eth.getBalance(helper.address);
         wrapper_balance = await web3.eth.getBalance(wrapper.address);
 
-        assert.equal(helper_balance, ether("0.02"));
+        assert.equal(helper_balance, ether("0.3"));
         assert.equal(wrapper_balance, ether("0"));
     });
 
@@ -113,16 +127,5 @@ contract("Wrapper Test", async accounts => {
         wrapper_balance = await gasToken.balanceOf.call(wrapper.address)
         account_balance = await gasToken.balanceOf.call(accounts[0])
         assert.equal(0, wrapper_balance.toNumber())
-    });
-
-    it('should be able to send the contract some coins', async () => {
-        await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
-        wrapper_balance = await web3.eth.getBalance(wrapper.address);
-        assert.equal(wrapper_balance, ether("0.15"));
-    });
-    it('should allow the withdrawal of balance', async () => {
-        await wrapper.withdrawBalance();
-        wrapper_balance = await web3.eth.getBalance(wrapper.address);
-        assert.equal(wrapper_balance, ether("0"));
     });
 });

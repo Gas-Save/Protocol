@@ -32,13 +32,13 @@ contract GSVETransactionWrapper is Ownable {
         IFreeFromUpTo(gasToken).freeFromUpTo(msg.sender,  (gasSpent + 14154) / 24000);
     }
     
-    function wrapTransaction(bytes calldata data, address contractAddress, address gasToken) public discountGas(gasToken) payable onlyOwner{
+    function wrapTransaction(bytes calldata data, address contractAddress, uint256 value, address gasToken) public discountGas(gasToken) payable onlyOwner{
         if(!contractAddress.isContract()){
             return;
         }
 
-        if(msg.value > 0){
-            contractAddress.functionCallWithValue(data, msg.value, "GS: Error forwarding transaction");
+        if(value > 0){
+            contractAddress.functionCallWithValue(data, value, "GS: Error forwarding transaction");
         }
         else{
             contractAddress.functionCall(data, "GS: Error forwarding transaction");
