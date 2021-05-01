@@ -58,7 +58,7 @@ contract GSVEContractDeployer is Ownable{
         }
     }
     
-    function GsveWrapperDeploy() public returns(address contractAddress) {
+    function GsveWrapperDeploy() public returns(address payable contractAddress) {
 
         bytes memory bytecode = type(GSVETransactionWrapper).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(msg.sender));
@@ -71,6 +71,7 @@ contract GSVEContractDeployer is Ownable{
             GSVETransactionWrapper(contractAddress).addGasToken(_reverseTokenMap[i]);
         }
         
+        Ownable(contractAddress).transferOwnership(msg.sender);
         _deployedWalletAddressLocation[msg.sender] = contractAddress;
         emit ContractDeployed(msg.sender, contractAddress);
     }
