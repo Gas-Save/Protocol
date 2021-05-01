@@ -14,6 +14,8 @@ contract GSVETransactionWrapper is Ownable {
     using Address for address;
     mapping(address => uint256) private _compatibleGasTokens;
 
+    receive() external payable{}
+
     function addGasToken(address gasToken) public onlyOwner{
         _compatibleGasTokens[gasToken] = 1;
     }
