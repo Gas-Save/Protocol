@@ -19,7 +19,7 @@ contract GSVECore is Ownable {
     //supported gas tokens
     uint256 private totalSupportedGasTokens = 0;
 
-    //mapping(uint256 => address) private supportedGasTokens;
+    //system is in place to prevent reentrancy from untrusted tokens
     mapping(address => uint256) private _mintingType;
     mapping(address => uint256) private _claimable;
 
@@ -99,13 +99,15 @@ contract GSVECore is Ownable {
     }
 
     function collectReward() public {
-        require(totalRewards() > 0, "GSVE: contract has ran out of rewards to give");
+        uint256 remainingRewards = totalRewards();
+        require(remainingRewards > 0, "GSVE: contract has ran out of rewards to give");
 
         uint256 reward = calculateStakeReward(msg.sender);
         if(reward == 0){
             return;
         }
-        
+
+        reward = Math.min(remainingRewards, reward);
         userStakeTimes[msg.sender] = block.timestamp;
         userTotalRewards[msg.sender] = userTotalRewards[msg.sender] + reward;
         require(IERC20(GSVEToken).transfer(msg.sender, reward), "GSVE: token transfer failed");

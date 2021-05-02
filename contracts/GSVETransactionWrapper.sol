@@ -12,6 +12,8 @@ interface IFreeUpTo {
 
 contract GSVETransactionWrapper is Ownable {
     using Address for address;
+
+    //compatibility system is in place to prevent reentrancy/other attacks from untrusted tokens
     mapping(address => uint256) private _compatibleGasTokens;
 
     receive() external payable{}
