@@ -2,7 +2,7 @@ const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 const GasToken  = artifacts.require ("./JetFuel.sol");
 const GS_Deployer  = artifacts.require ("./GSVEContractDeployer.sol");
-const byteCodeJson = require("./../build/contracts/GasSwapWrapper.json")
+const byteCodeJson = require("./../build/contracts/GSVETransactionWrapper.json")
 const byteCodeNonOwnedJson = require("./../build/contracts/GasToken1.json")
 
 contract("GSVE Contract Deployer Test", async accounts => {
