@@ -19,7 +19,7 @@ contract("GSVE Vault Test", async accounts => {
     });
 
     it('should be able to transfer tokens from vault as owner', async () => {
-      await vault.transferToken(token.address, accounts[1], web3.utils.toWei("2"))
+      await vault.transferToken(token.address, accounts[1], web3.utils.toWei("6"))
       var vaultTokenBalance = await token.balanceOf.call(vault.address);
       var addressTokenBalance = await token.balanceOf.call(accounts[1]);
       assert.equal(vaultTokenBalance.toString(), web3.utils.toWei("4"));
