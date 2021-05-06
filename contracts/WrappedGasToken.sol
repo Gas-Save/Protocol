@@ -104,8 +104,8 @@ contract WrappedGasToken is IERC20, ERC20WithoutTotalSupply, Ownable{
     */
     function unwrap(uint256 value) public {
         if(value > 0){
-            _burnFrom(msg.sender, value);
-            IERC20(wrappedTokenAddress).transferFrom(address(this), msg.sender, value);
+            _burn(msg.sender, value);
+            IERC20(wrappedTokenAddress).transfer(msg.sender, value);
             totalMinted = totalMinted + value;
         }
     }

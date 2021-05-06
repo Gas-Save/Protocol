@@ -88,35 +88,56 @@ contract("Wrapped ChiToken Token Test", async accounts => {
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
 
-/*
+
     it('Should burn Gas And Free', async function () {
-        var instance = await GasToken.new();
-        var helper = await GSVE_helper.new();
 
-        await instance.mint(100);
-        await instance.transfer(helper.address, 75, {from: accounts[0]});
-        var receipt = await helper.burnGasAndFree(instance.address, 5000000, 75, {from: accounts[0]});
-
+        await instance.transfer(helper.address, 47, {from: accounts[1]});
+        var receipt = await helper.burnGasAndFree(instance.address, 1000000, 47, {from: accounts[1]});
+        
         var total_supply =  await instance.totalSupply.call()
-        total_supply = total_supply.toNumber()
-        assert.equal(total_supply, 25);        
+        assert.equal(total_supply.toNumber(), 50);
+
+        var balance = await instance.balanceOf.call(accounts[1]);
+        assert.equal(balance.toNumber(), 50);
+
+        balance = await baseGasToken.balanceOf.call(instance.address);
+        assert.equal(balance.toNumber(), 50);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
 
     it('Should burn Gas And Free Up To', async function () {
-        var instance = await GasToken.new();
-        var helper = await GSVE_helper.new();
-
-        await instance.mint(100);
-        await instance.transfer(helper.address, 75, {from: accounts[0]});
-        var receipt = await helper.burnGasAndFreeUpTo(instance.address, 5000000, 75, {from: accounts[0]});
-
-        var total_supply =  await instance.totalSupply.call()
-        total_supply = total_supply.toNumber()
-        assert.equal(total_supply, 25);   
+        await instance.transfer(helper.address, 50, {from: accounts[1]});
+        var receipt = await helper.burnGasAndFreeUpTo(instance.address, 1000000, 50, {from: accounts[1]});
         
+        var total_supply =  await instance.totalSupply.call()
+        assert.equal(total_supply.toNumber(), 0);
+
+        var balance = await instance.balanceOf.call(accounts[1]);
+        assert.equal(balance.toNumber(), 0);
+
+        balance = await baseGasToken.balanceOf.call(instance.address);
+        assert.equal(balance.toNumber(), 0);
+
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
-*/
+
+    it("should be able to mint & wrap and then unwrap", async () => {
+        await baseGasToken.mint(100, {from: accounts[1]});
+        await baseGasToken.approve(instance.address, 100, {from: accounts[1]});
+        await instance.mint(100, {from: accounts[1]})
+        var receipt = await instance.unwrap(97, {from: accounts[1]})
+        
+        balance = await instance.balanceOf.call(accounts[1]);
+        assert.equal(balance.toNumber(), 0);
+
+        balance = await baseGasToken.balanceOf.call(instance.address);
+        assert.equal(balance.toNumber(), 3);
+
+        balance = await baseGasToken.balanceOf.call(accounts[1]);
+        assert.equal(balance.toNumber(), 97);
+
+        console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    });
+
 });
