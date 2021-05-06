@@ -3,18 +3,44 @@ pragma solidity ^0.8.0;
 
 interface IGasToken {
 
-    function totalSupply() external view  returns(uint256);
+    /**
+    * @dev calculate token total supply
+    */
+    function totalSupply() external view returns(uint256);
 
-    function mint(uint256 value) external;
+    /**
+     * @dev mints new tokens.
+     */
+    function mint(uint256 value) external; 
 
-    function computeAddress2(uint256 salt) external pure returns (address child); 
+    /**
+    * @dev mints new tokens at a fee discount.
+    */
+    function discountedMint(uint256 value, uint256 discountedFee, address recipient) external; 
 
-    function free(uint256 value) external returns (uint256);  
+    /**
+    * @dev unwraps gas tokens.
+    */
+    function unwrap(uint256 value) external;
 
-    function freeUpTo(uint256 value) external returns (uint256); 
+    /**
+     * @dev return number of tokens freed up.
+     */
+    function free(uint256 value) external returns (uint256);
 
+    /**
+     * @dev return number of tokens freed up.
+     */
+    function freeUpTo(uint256 value) external returns (uint256);
+
+    /**
+     * @dev return number of tokens freed up.
+     */
     function freeFrom(address from, uint256 value) external returns (uint256); 
 
+    /**
+     * @dev return number of tokens freed up.
+     */
     function freeFromUpTo(address from, uint256 value) external returns (uint256); 
-
+    
 }
