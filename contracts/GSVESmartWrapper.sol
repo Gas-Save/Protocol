@@ -69,7 +69,7 @@ contract GSVESmartWrapper is Ownable {
     * as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper
     * if the function requires a payment, this is handled too and sent from the wrapper balance.
     */
-    function wrapTransaction(bytes calldata data, address contractAddress, uint256 value, address gasToken) public discountGas(gasToken) payable onlyOwner{
+    function wrapTransaction(bytes calldata data, address contractAddress, uint256 value, address gasToken) external discountGas(gasToken) payable onlyOwner{
         if(!contractAddress.isContract()){
             return;
         }

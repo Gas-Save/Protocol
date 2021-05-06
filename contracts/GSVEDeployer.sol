@@ -57,7 +57,7 @@ contract GSVEDeployer is Ownable{
             uint256 gasStart = gasleft();
             _;
             uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
-            IFreeFromUpTo(gasToken).freeFromUpTo(msg.sender,  (gasSpent + 20000) / _freeUpValue[gasToken]);
+            IFreeFromUpTo(gasToken).freeFromUpTo(msg.sender,  (gasSpent + 16000) / _freeUpValue[gasToken]);
         }
         else{
             _;
