@@ -65,7 +65,7 @@ contract WrappedGasToken is IERC20, ERC20WithoutTotalSupply, Ownable{
     * issuing wrapped gas tokens equal to the fee, to the fee address.
     */
     function mint(uint256 value) public {
-        IERC20(wrappedTokenAddress).transferFrom(msg.sender, address(this), value);
+        require(IERC20(wrappedTokenAddress).transferFrom(msg.sender, address(this), value) == true, "GSVE: Gas Token Wrap Transfer Failed");
         uint256 fee = calculateFee(value, protocolFee);
         uint256 valueAfterFee =  value.sub(fee, "GSVE: Minted Value must be larger than fee");
         _mint(msg.sender, valueAfterFee);
@@ -82,7 +82,7 @@ contract WrappedGasToken is IERC20, ERC20WithoutTotalSupply, Ownable{
     * issuing wrapped gas tokens equal to the fee, to the fee address, if there is a fee to be paid.
     */
     function discountedMint(uint256 value, uint256 discountedFee, address recipient) public onlyOwner {
-        IERC20(wrappedTokenAddress).transferFrom(msg.sender, address(this), value);
+        require(IERC20(wrappedTokenAddress).transferFrom(msg.sender, address(this), value) == true, "GSVE: Gas Token Wrap Transfer Failed");
         uint256 fee = 0;
         if(discountedFee>0){
             fee = calculateFee(value, discountedFee);

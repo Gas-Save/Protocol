@@ -25,6 +25,7 @@ contract GSVESmartWrapper is Ownable {
 
    
     mapping(address => uint256) private _compatibleGasTokens;
+    mapping(address => uint256) private _freeUpValue;
 
     /**
     * @dev allow the contract to recieve funds. 
@@ -35,10 +36,12 @@ contract GSVESmartWrapper is Ownable {
     /**
     * @dev function to enable gas tokens.
     * by default the wrapped tokens are added when the wrapper is deployed
+    * using efficiency values based on a known token gas rebate that we store on contract.
     * DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!
     */
-    function addGasToken(address gasToken) public onlyOwner{
+    function addGasToken(address gasToken, uint256 freeUpValue) public onlyOwner{
         _compatibleGasTokens[gasToken] = 1;
+        _freeUpValue[gasToken] = freeUpValue;
     }
 
     /**
@@ -57,7 +60,7 @@ contract GSVESmartWrapper is Ownable {
         uint256 gasStart = gasleft();
         _;
         uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
-        IFreeUpTo(gasToken).freeUpTo((gasSpent + 14154) / 24000);
+        IFreeUpTo(gasToken).freeUpTo((gasSpent + 20000) / _freeUpValue[gasToken]);
     }
     
     /**

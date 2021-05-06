@@ -20,15 +20,17 @@ contract GSVEDeployer is Ownable{
     mapping(address => uint256) private _compatibleGasTokens;
     mapping(uint256 => address) private _reverseTokenMap;
     mapping(address => address) private _deployedWalletAddressLocation;
+    mapping(address => uint256) private _freeUpValue;
     uint256 private _totalSupportedTokens = 0;
 
     /**
     * @dev add support for trusted gas tokens - those we wrapped
     */
-    function addGasToken(address gasToken) public onlyOwner{
+    function addGasToken(address gasToken, uint256 freeUpValue) public onlyOwner{
         _compatibleGasTokens[gasToken] = 1;
         _reverseTokenMap[_totalSupportedTokens] = gasToken;
         _totalSupportedTokens = _totalSupportedTokens + 1;
+        _freeUpValue[gasToken] = freeUpValue;
     }
 
     /**
@@ -55,7 +57,7 @@ contract GSVEDeployer is Ownable{
             uint256 gasStart = gasleft();
             _;
             uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
-            IFreeFromUpTo(gasToken).freeFromUpTo(msg.sender,  (gasSpent + 14154) / 41130);
+            IFreeFromUpTo(gasToken).freeFromUpTo(msg.sender,  (gasSpent + 20000) / _freeUpValue[gasToken]);
         }
         else{
             _;
@@ -115,7 +117,8 @@ contract GSVEDeployer is Ownable{
         }
 
         for(uint256 i = 0; i<_totalSupportedTokens; i++){
-            GSVESmartWrapper(contractAddress).addGasToken(_reverseTokenMap[i]);
+            address tokenAddress = _reverseTokenMap[i];
+            GSVESmartWrapper(contractAddress).addGasToken(tokenAddress, _freeUpValue[tokenAddress]);
         }
         
         Ownable(contractAddress).transferOwnership(msg.sender);

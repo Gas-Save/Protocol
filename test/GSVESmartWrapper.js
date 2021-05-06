@@ -1,8 +1,9 @@
 const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
-const GasToken  = artifacts.require ("./JetFuel.sol");
-const GS_Wrapper  = artifacts.require ("./GSVETransactionWrapper.sol");
+const GS_Wrapper  = artifacts.require ("./GSVESmartWrapper.sol");
 const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
+const GST1GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken1.sol");
+const wrappedToken = artifacts.require("./WrappedGasToken.sol");
 
 contract("Wrapper Test", async accounts => {
 
@@ -11,9 +12,12 @@ contract("Wrapper Test", async accounts => {
     var helper;
 
     it('should be able to deploy contracts', async () => {
-        gasToken = await GasToken.new();
-        console.log("JetFuel Address " + gasToken.address);
-  
+
+        baseGasToken = await GST1GasToken.new();
+        gasToken = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
+        console.log("wGST Address " + gasToken.address);
+
+        
         wrapper = await GS_Wrapper.new();
         console.log("wrapper Address " + wrapper.address);
 
@@ -29,7 +33,10 @@ contract("Wrapper Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-        await wrapper.addGasToken(gasToken.address);
+        await wrapper.addGasToken(gasToken.address, 15000);
+        var compatible = await wrapper.compatibleGasToken(gasToken.address);
+        assert.equal(compatible.toNumber(), 1);
+
         var compatible = await wrapper.compatibleGasToken(gasToken.address);
         assert.equal(compatible.toNumber(), 1);
       });
@@ -88,12 +95,13 @@ contract("Wrapper Test", async accounts => {
         assert.equal(wrapper_balance, ether("0"));
     });
 
-    it('Should be able to call function by proxy and burn SG1', async function () {
+    it('Should be able to call function by proxy and burn ', async function () {
+        await baseGasToken.mint(100);
+        await baseGasToken.approve(gasToken.address, 97);
+        await gasToken.mint(97);
+        await gasToken.transfer(wrapper.address, 97)
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGas(147000).encodeABI();
-
-        await gasToken.mint(100);
-        await gasToken.transfer(wrapper.address, 98, {from: accounts[0]})
         
         var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, 0, gasToken.address);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
@@ -106,8 +114,11 @@ contract("Wrapper Test", async accounts => {
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
 
-        await gasToken.mint(100);
-        await gasToken.transfer(wrapper.address, 98, {from: accounts[0]})
+        await baseGasToken.mint(100);
+        await baseGasToken.approve(gasToken.address, 97);
+        await gasToken.mint(97);
+        await gasToken.transfer(wrapper.address, 97)
+        
         await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
         var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
@@ -121,7 +132,9 @@ contract("Wrapper Test", async accounts => {
     });
 
     it('should allow the withdrawal token balance', async () => {
-        await gasToken.mint(100);
+        await baseGasToken.mint(10);
+        await baseGasToken.approve(gasToken.address, 10);
+        await gasToken.mint(10);
         await gasToken.transfer(wrapper.address, 10)
         await wrapper.withdrawTokenBalance(gasToken.address);
         wrapper_balance = await gasToken.balanceOf.call(wrapper.address)

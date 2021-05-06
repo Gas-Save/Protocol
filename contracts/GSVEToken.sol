@@ -14,7 +14,7 @@ contract GSVEToken is ERC20{
     * @dev mint 1 billion GSVE tokens
     */
     constructor() public ERC20("Gas Save Protocol Token", "GSVE") {
-        _mint(msg.sender, 1000000000*(10**18));
+        _mint(msg.sender, 100000000*(10**18));
     }
 
     /**
