@@ -10,11 +10,17 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "./IGasToken.sol";
 import "./IWrappedGasToken.sol";
 
+/**
+* @dev Interface for interacting with protocol token
+*/
 interface IGSVEProtocolToken {
     function burn(uint256 amount) external ;
     function burnFrom(address account, uint256 amount) external;
 }
 
+/**
+* @dev Interface for interacting with the gas vault
+*/
 interface IGSVEVault {
     function transferToken(address token, address recipient, uint256 amount) external;
 }
