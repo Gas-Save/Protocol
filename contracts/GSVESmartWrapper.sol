@@ -5,26 +5,53 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+/**
+* @dev interface to allow gas tokens to be burned from the wrapper
+*/
 interface IFreeUpTo {
     function freeUpTo(uint256 value) external returns (uint256 freed);
 }
 
+/**
+* @dev The v1 smart wrapper is the core gas saving feature
+* it can interact with other smart contracts
+* it burns gas to save on the transaction fee
+* only the owner/deployer of the smart contract can interact with it
+* only the owner can send tokens from the address (smart contract)
+* only the owner can withdraw tokens of any type, and this goes directly to the owner.
+*/
 contract GSVESmartWrapper is Ownable {
     using Address for address;
 
-    //compatibility system is in place to prevent reentrancy/other attacks from untrusted tokens
+   
     mapping(address => uint256) private _compatibleGasTokens;
 
+    /**
+    * @dev allow the contract to recieve funds. 
+    * This will be needed for dApps that check balances before enabling transaction creation.
+    */
     receive() external payable{}
 
+    /**
+    * @dev function to enable gas tokens.
+    * by default the wrapped tokens are added when the wrapper is deployed
+    * DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!
+    */
     function addGasToken(address gasToken) public onlyOwner{
         _compatibleGasTokens[gasToken] = 1;
     }
 
+    /**
+    * @dev checks if the gas token is supported
+    */
     function compatibleGasToken(address gasToken) public view returns(uint256){
         return _compatibleGasTokens[gasToken];
     }
 
+    /**
+    * @dev GSVE moddifier that burns supported gas tokens around a function that uses gas
+    * the function calculates the optimal number of tokens to burn, based on the token specified
+    */
     modifier discountGas(address gasToken) {
         require(_compatibleGasTokens[gasToken] == 1, "GSVE: incompatible token");
         uint256 gasStart = gasleft();
@@ -33,6 +60,12 @@ contract GSVESmartWrapper is Ownable {
         IFreeUpTo(gasToken).freeUpTo((gasSpent + 14154) / 24000);
     }
     
+    /**
+    * @dev the wrapTransaction function interacts with other smart contracts on the users behalf
+    * this wrapper works for any smart contract
+    * as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper
+    * if the function requires a payment, this is handled too and sent from the wrapper balance.
+    */
     function wrapTransaction(bytes calldata data, address contractAddress, uint256 value, address gasToken) public discountGas(gasToken) payable onlyOwner{
         if(!contractAddress.isContract()){
             return;
@@ -46,10 +79,16 @@ contract GSVESmartWrapper is Ownable {
         }
     }
 
+    /**
+    * @dev function that the user can trigger to withdraw the entire balance of their wrapper back to themselves.
+    */
     function withdrawBalance() public onlyOwner{
         owner().call{value: address(this).balance, gas:gasleft()}("");
     }
 
+    /**
+    * @dev function that the user can trigger to withdraw an entire token balance from the wrapper to themselves
+    */
     function withdrawTokenBalance(address token) public onlyOwner{
         IERC20 tokenContract = IERC20(token);
         uint256 balance = tokenContract.balanceOf(address(this));
