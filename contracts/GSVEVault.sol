@@ -10,7 +10,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 * and any GSVE that is to be rewarded from protocol iteraction
 */
 contract GSVEVault is Ownable{
-
     function transferToken(address token, address recipient, uint256 amount) public onlyOwner{
         IERC20(token).transfer(recipient, amount);
     }
