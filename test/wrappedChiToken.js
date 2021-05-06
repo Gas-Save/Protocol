@@ -122,6 +122,7 @@ contract("Wrapped ChiToken Token Test", async accounts => {
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
 
+
     it("should be able to mint & wrap and then unwrap", async () => {
         await baseGasToken.mint(100, {from: accounts[1]});
         await baseGasToken.approve(instance.address, 100, {from: accounts[1]});
@@ -138,6 +139,31 @@ contract("Wrapped ChiToken Token Test", async accounts => {
         assert.equal(balance.toNumber(), 97);
 
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    });
+
+    it('should fail to un wrap when ', async () => {
+        expectRevert(instance.unwrap(10), "ERC20: burn amount exceeds balance")
+    });
+
+    it('should fail to update fee address if not owner', async () => {
+        expectRevert(instance.updateFeeAddress(accounts[1], {from:accounts[1]}), "Ownable: caller is not the owner.")
+    });
+
+    it("should be able to transfer ownership of the token", async () => {
+        await instance.transferOwnership(accounts[2]);
+        var owner = await instance.owner()
+        assert.equal(owner, accounts[2]);
+    });
+
+    it('should fail to transfer ownership if not owner', async () => {
+        expectRevert(instance.transferOwnership(accounts[1], {from:accounts[1]}), "Ownable: caller is not the owner.")
+    });
+
+
+    it("should be able to update transfer fee address", async () => {
+        await instance.transferOwnership(accounts[2]);
+        var owner = await instance.owner()
+        assert.equal(owner, accounts[2]);
     });
 
 });
