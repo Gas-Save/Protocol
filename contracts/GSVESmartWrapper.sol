@@ -4,13 +4,12 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./IGSVEToken.sol";
 
 interface IFreeUpTo {
     function freeUpTo(uint256 value) external returns (uint256 freed);
 }
 
-contract GSVETransactionWrapper is Ownable {
+contract GSVESmartWrapper is Ownable {
     using Address for address;
 
     //compatibility system is in place to prevent reentrancy/other attacks from untrusted tokens

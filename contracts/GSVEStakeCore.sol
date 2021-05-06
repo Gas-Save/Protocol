@@ -5,12 +5,14 @@ import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./IWrappedGasToken.sol";
 
-import "./IGSVEProtocolToken.sol";
-import "./IGSVEToken.sol";
+interface IGSVEProtocolToken {
+    function burn(uint256 amount) external ;
+    function burnFrom(address account, uint256 amount) external;
+}
 
-
-contract GSVECore is Ownable {
+contract GSVEStakeCore is Ownable {
     using SafeMath for uint256;
     
     //address of our protocol utility token
@@ -114,12 +116,12 @@ contract GSVECore is Ownable {
         emit Reward(msg.sender, reward);
     }
 
-    //remove fees when the user burns 0.25 GSVE
+    //remove fees when the user burns 1 GSVE
     function burnDiscountedMinting(address mintTokenAddress, uint256 tokensToMint) public {
         uint256 mintType = _mintingType[mintTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
-        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, 25 * 10**16);
-        IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 0, msg.sender);
+        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, 1 * 10**18);
+        IWrappedGasToken(mintTokenAddress).discountedMint(tokensToMint, 0, msg.sender);
     }
 
     //discounted minting for tier one stakers
@@ -129,10 +131,10 @@ contract GSVECore is Ownable {
         require(userStakes[msg.sender] >= tierOneThreshold , "GSVE: User has not staked enough to discount");
 
         if(mintType == 1){
-            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 1, msg.sender);
+            IWrappedGasToken(mintTokenAddress).discountedMint(tokensToMint, 0, msg.sender);
         }
         else if (mintType == 2){
-            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 2, msg.sender);
+            IWrappedGasToken(mintTokenAddress).discountedMint(tokensToMint, 1, msg.sender);
         }
         else{
             return;
@@ -145,10 +147,10 @@ contract GSVECore is Ownable {
         require(mintType != 0, "GSVE: Unsupported Token");
         require(totalRewards() > 0, "GSVE: contract has ran out of rewards to give");
         if(mintType == 1){
-            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 2, msg.sender);
+            IWrappedGasToken(mintTokenAddress).discountedMint(tokensToMint, 1, msg.sender);
         }
         else if (mintType == 2){
-            IGSVEToken(mintTokenAddress).discountedMint(tokensToMint, 3, msg.sender);
+            IWrappedGasToken(mintTokenAddress).discountedMint(tokensToMint, 2, msg.sender);
         }
         else{
             return;

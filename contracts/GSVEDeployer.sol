@@ -2,13 +2,13 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./GSVETransactionWrapper.sol";
+import "./GSVESmartWrapper.sol";
 
 interface IFreeFromUpTo {
     function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);
 }
 
-contract GSVEContractDeployer is Ownable{
+contract GSVEDeployer is Ownable{
     mapping(address => uint256) private _compatibleGasTokens;
     mapping(uint256 => address) private _reverseTokenMap;
     mapping(address => address) private _deployedWalletAddressLocation;
@@ -64,7 +64,7 @@ contract GSVEContractDeployer is Ownable{
     
     function GsveWrapperDeploy() public returns(address payable contractAddress) {
 
-        bytes memory bytecode = type(GSVETransactionWrapper).creationCode;
+        bytes memory bytecode = type(GSVESmartWrapper).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(msg.sender));
 
         assembly {
@@ -72,7 +72,7 @@ contract GSVEContractDeployer is Ownable{
         }
 
         for(uint256 i = 0; i<_totalSupportedTokens; i++){
-            GSVETransactionWrapper(contractAddress).addGasToken(_reverseTokenMap[i]);
+            GSVESmartWrapper(contractAddress).addGasToken(_reverseTokenMap[i]);
         }
         
         Ownable(contractAddress).transferOwnership(msg.sender);

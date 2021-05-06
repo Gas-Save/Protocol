@@ -7,8 +7,8 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 contract GSVEToken is ERC20{    
     using SafeMath for uint256;
 
-    constructor() public ERC20("Gas Save Utility Token by Gas Save", "GSVE") {
-        _mint(msg.sender, 100000000*(10**18));
+    constructor() public ERC20("Gas Save Protocol Token", "GSVE") {
+        _mint(msg.sender, 1000000000*(10**18));
     }
 
     function burn(uint256 amount) external {
