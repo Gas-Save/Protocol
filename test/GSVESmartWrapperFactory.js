@@ -5,25 +5,29 @@ const GS_Wrapper  = artifacts.require ("./GSVESmartWrapper.sol");
 const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 const GST1GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken1.sol");
 const wrappedToken = artifacts.require("./WrappedGasToken.sol");
-
+const GSVEToken  = artifacts.require ("./GSVEToken.sol");
 
 contract("GSVE Contract Deployer Test", async accounts => {
+
     var gasToken;
     var wrapperMain;
     var factory;
     var helper;
     var wrapper;
+    var token;
 
     it('should be able to deploy contracts', async () => {
+
+      token = await GSVEToken.new();
 
       baseGasToken = await GST1GasToken.new();
       gasToken = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
       console.log("wGST Address " + gasToken.address);
 
-      wrapperMain = await GS_Wrapper.new();
+      wrapperMain = await GS_Wrapper.new(token.address);
       console.log("wrapper Address " + wrapperMain.address);
 
-      factory = await GS_WrapperFactory.new(wrapperMain.address);
+      factory = await GS_WrapperFactory.new(wrapperMain.address, token.address);
       console.log("factory Address " + factory.address);
 
       helper = await GSVE_helper.new();
@@ -31,7 +35,7 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-      await factory.addGasToken(gasToken.address, 25130);
+      await factory.addGasToken(gasToken.address, 15000);
 
       var compatible = await factory.compatibleGasToken(gasToken.address);
       assert.equal(compatible.toNumber(), 1);
@@ -63,7 +67,7 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-        await wrapper.addGasToken(gasToken.address, 25130);
+        await wrapper.addGasToken(gasToken.address, 15000);
         var compatible = await wrapper.compatibleGasToken(gasToken.address);
         assert.equal(compatible.toNumber(), 1);
 

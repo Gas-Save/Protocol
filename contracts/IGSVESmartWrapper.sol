@@ -42,7 +42,7 @@ interface  IGSVESmartWrapper{
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
-    function init (address initialOwner) external;
+    function init (address initialOwner, address _GSVEToken) external;
 
     /**
      * @dev Returns the address of the current owner.

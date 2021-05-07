@@ -11,10 +11,12 @@ contract GSVESmartWrapperFactory is Ownable{
     mapping(uint256 => address) private _reverseTokenMap;
     mapping(address => address) private _deployedWalletAddressLocation;
     mapping(address => uint256) private _freeUpValue;
+    address private GSVEToken;
     uint256 private _totalSupportedTokens = 0;
 
-  constructor (address payable _smartWrapperLocation) public {
+  constructor (address payable _smartWrapperLocation, address _GSVEToken) public {
     smartWrapperLocation = _smartWrapperLocation;
+    GSVEToken = _GSVEToken;
   }
 
     /**
@@ -50,7 +52,7 @@ contract GSVESmartWrapperFactory is Ownable{
     */
   function deployGSVESmartWrapper() public {
         address contractAddress = Clones.clone(smartWrapperLocation);
-        IGSVESmartWrapper(payable(contractAddress)).init(address(this));
+        IGSVESmartWrapper(payable(contractAddress)).init(address(this), GSVEToken);
 
         for(uint256 i = 0; i<_totalSupportedTokens; i++){
             address tokenAddress = _reverseTokenMap[i];

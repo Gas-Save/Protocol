@@ -4,6 +4,7 @@ const GS_Wrapper  = artifacts.require ("./GSVESmartWrapper.sol");
 const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 const GST1GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken1.sol");
 const wrappedToken = artifacts.require("./WrappedGasToken.sol");
+const GSVEToken  = artifacts.require ("./GSVEToken.sol");
 
 contract("Wrapper Test", async accounts => {
 
@@ -14,12 +15,13 @@ contract("Wrapper Test", async accounts => {
 
     it('should be able to deploy contracts', async () => {
 
+        token = await GSVEToken.new();
+
         baseGasToken = await GST1GasToken.new();
         gasToken = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
         console.log("wGST Address " + gasToken.address);
-
         
-        wrapper = await GS_Wrapper.new();
+        wrapper = await GS_Wrapper.new(token.address);
         console.log("wrapper Address " + wrapper.address);
 
         helper = await GSVE_helper.new();
@@ -34,7 +36,7 @@ contract("Wrapper Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-        await wrapper.addGasToken(gasToken.address, 25130);
+        await wrapper.addGasToken(gasToken.address, 15000);
         var compatible = await wrapper.compatibleGasToken(gasToken.address);
         assert.equal(compatible.toNumber(), 1);
 
