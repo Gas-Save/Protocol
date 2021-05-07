@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
 * @dev interface to allow gas tokens to be burned from the wrapper
@@ -20,12 +19,15 @@ interface IFreeUpTo {
 * only the owner can send tokens from the address (smart contract)
 * only the owner can withdraw tokens of any type, and this goes directly to the owner.
 */
-contract GSVESmartWrapper is Ownable {
+contract GSVESmartWrapper {
     using Address for address;
-
-   
     mapping(address => uint256) private _compatibleGasTokens;
     mapping(address => uint256) private _freeUpValue;
+    address private _owner;
+
+    constructor () public {
+        init(msg.sender);
+    }
 
     /**
     * @dev allow the contract to recieve funds. 
@@ -97,4 +99,61 @@ contract GSVESmartWrapper is Ownable {
         uint256 balance = tokenContract.balanceOf(address(this));
         tokenContract.transfer(owner(), balance);
     }
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    function init (address initialOwner) public {
+        require(_owner == address(0), "This contract is already owned");
+        _owner = initialOwner;
+        emit OwnershipTransferred(address(0), initialOwner);
+    }
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    /**
+     * @dev Leaves the contract without owner. It will not be possible to call
+     * `onlyOwner` functions anymore. Can only be called by the current owner.
+     *
+     * NOTE: Renouncing ownership will leave the contract without an owner,
+     * thereby removing any functionality that is only available to the owner.
+     */
+    function renounceOwnership() public virtual onlyOwner {
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Can only be called by the current owner.
+     */
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+
+    function _msgData() internal view virtual returns (bytes calldata) {
+        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
+        return msg.data;
+    }
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 }
