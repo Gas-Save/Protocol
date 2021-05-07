@@ -192,17 +192,6 @@ contract("GSVE Contract Deployer Test", async accounts => {
       assert.equal(wrapper_balance, ether("0"));
   });
 
-  it('should allow the withdrawal token balance', async () => {
-      await baseGasToken.mint(10);
-      await baseGasToken.approve(gasToken.address, 10);
-      await gasToken.mint(10);
-      await gasToken.transfer(wrapper.address, 10)
-      await wrapper.withdrawTokenBalance(gasToken.address);
-      wrapper_balance = await gasToken.balanceOf.call(wrapper.address)
-      account_balance = await gasToken.balanceOf.call(accounts[0])
-      assert.equal(0, wrapper_balance.toNumber())
-  });
-  
   it('should fail to upgrade if no gsve tokens approved for burning', async () => {
     expectRevert(wrapper.upgradeProxy(), "ERC20: burn amount exceeds allowance.");
 });
@@ -221,4 +210,16 @@ it('should fail to upgrade if already upgraded', async () => {
     token.approve(wrapper.address, web3.utils.toWei("100"));
     expectRevert(wrapper.upgradeProxy(), "GSVE: Wrapper Already Upgraded.");
 }); 
+  it('should allow the withdrawal token balance', async () => {
+      await baseGasToken.mint(10);
+      await baseGasToken.approve(gasToken.address, 10);
+      await gasToken.mint(10);
+      await gasToken.transfer(wrapper.address, 10)
+      await wrapper.withdrawTokenBalance(gasToken.address);
+      wrapper_balance = await gasToken.balanceOf.call(wrapper.address)
+      account_balance = await gasToken.balanceOf.call(accounts[0])
+      assert.equal(0, wrapper_balance.toNumber())
+  });
+
+
 });
