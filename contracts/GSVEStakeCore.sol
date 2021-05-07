@@ -139,7 +139,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
     function burnDiscountedMinting(address gasTokenAddress, uint256 value) public nonReentrant() {
         uint256 mintType = _mintingType[gasTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
-        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, 1*10**18);
+        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, 2*10**18);
         IWrappedGasToken(gasTokenAddress).discountedMint(value, 0, msg.sender);
         if(mintType == 1){
             convenientMinting(gasTokenAddress, value, 0);
@@ -188,7 +188,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
             return;
         }
 
-        IGSVEVault(GSVEVault).transferToken(GSVEToken, msg.sender, 1*10**18);
+        IGSVEVault(GSVEVault).transferToken(GSVEToken, msg.sender, 5*10**17);
     }
 
     /**
@@ -232,7 +232,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
             return;
         }
 
-        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, tokensGiven * 1 * 10 ** 18);
+        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, tokensGiven*1*10**18);
         IGSVEVault(GSVEVault).transferToken(gasTokenAddress, msg.sender, tokensGiven);
         userClaimTimes[msg.sender] = block.timestamp;
         emit Claimed(msg.sender, gasTokenAddress, tokensGiven);
