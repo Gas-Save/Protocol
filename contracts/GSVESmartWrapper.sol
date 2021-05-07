@@ -103,11 +103,16 @@ contract GSVESmartWrapper {
     * the function calculates the optimal number of tokens to burn, based on the token specified
     */
     modifier discountGas(address gasToken) {
-        require(_compatibleGasTokens[gasToken] == 1, "GSVE: incompatible token");
-        uint256 gasStart = gasleft();
-        _;
-        uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
-        IFreeUpTo(gasToken).freeUpTo((gasSpent + 16000) / _freeUpValue[gasToken]);
+        if(gasToken != address(0)){
+            require(_compatibleGasTokens[gasToken] == 1, "GSVE: incompatible token");
+            uint256 gasStart = gasleft();
+            _;
+            uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
+            IFreeUpTo(gasToken).freeUpTo((gasSpent + 14000) / _freeUpValue[gasToken]);
+        }
+        else {
+            _;
+        }
     }
     
     /**
