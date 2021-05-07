@@ -12,6 +12,14 @@ interface IFreeUpTo {
 }
 
 /**
+* @dev interface to allow gsve to be burned for upgrades
+*/
+interface IGSVEToken {
+    function burnFrom(address account, uint256 amount) external;
+}
+
+
+/**
 * @dev The v1 smart wrapper is the core gas saving feature
 * it can interact with other smart contracts
 * it burns gas to save on the transaction fee
@@ -23,10 +31,23 @@ contract GSVESmartWrapper {
     using Address for address;
     mapping(address => uint256) private _compatibleGasTokens;
     mapping(address => uint256) private _freeUpValue;
+    address private GSVEToken;
+    bool private _upgraded;
     address private _owner;
 
-    constructor () public {
-        init(msg.sender);
+    constructor (address _GSVEToken) public {
+        init(msg.sender, _GSVEToken);
+    }
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     * also sets the GSVE token reference
+     */
+    function init (address initialOwner, address _GSVEToken) public {
+        require(_owner == address(0), "This contract is already owned");
+        _owner = initialOwner;
+        emit OwnershipTransferred(address(0), initialOwner);
+        GSVEToken = _GSVEToken;
     }
 
     /**
@@ -47,6 +68,30 @@ contract GSVESmartWrapper {
     }
 
     /**
+    * @dev function to 'upgrade the proxy' by enabling unwrapped gas token support
+    * the user must burn 100 GSVE to upgrade the proxy.
+    */
+    function upgradeProxy() public onlyOwner{
+        require(_upgraded == false, "GSVE: Wrapper Already Upgraded.");
+        require(GSVEToken != address(0), "GSVE: gsve token not referenced");
+        IGSVEToken(GSVEToken).burnFrom(msg.sender, 100*10**18);
+
+        // add CHI gas token
+        _compatibleGasTokens[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 1;
+        _freeUpValue[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 41947;
+
+        // add GST2 gas token
+        _compatibleGasTokens[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 1;
+        _freeUpValue[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 41130;
+
+        // add GST1 gas token
+        _compatibleGasTokens[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 1;
+        _freeUpValue[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 15000;
+
+        _upgraded = true;
+    }
+
+    /**
     * @dev checks if the gas token is supported
     */
     function compatibleGasToken(address gasToken) public view returns(uint256){
@@ -62,7 +107,7 @@ contract GSVESmartWrapper {
         uint256 gasStart = gasleft();
         _;
         uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
-        IFreeUpTo(gasToken).freeUpTo((gasSpent + 20000) / _freeUpValue[gasToken]);
+        IFreeUpTo(gasToken).freeUpTo((gasSpent + 16000) / _freeUpValue[gasToken]);
     }
     
     /**
@@ -98,15 +143,6 @@ contract GSVESmartWrapper {
         IERC20 tokenContract = IERC20(token);
         uint256 balance = tokenContract.balanceOf(address(this));
         tokenContract.transfer(owner(), balance);
-    }
-
-    /**
-     * @dev Initializes the contract setting the deployer as the initial owner.
-     */
-    function init (address initialOwner) public {
-        require(_owner == address(0), "This contract is already owned");
-        _owner = initialOwner;
-        emit OwnershipTransferred(address(0), initialOwner);
     }
 
     /**
