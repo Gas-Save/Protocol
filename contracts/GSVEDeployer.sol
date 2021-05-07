@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./GSVESmartWrapper.sol";
 
 /**
 * @dev interface to allow the burning of gas tokens from an address
@@ -28,8 +27,6 @@ contract GSVEDeployer is Ownable{
     */
     function addGasToken(address gasToken, uint256 freeUpValue) public onlyOwner{
         _compatibleGasTokens[gasToken] = 1;
-        _reverseTokenMap[_totalSupportedTokens] = gasToken;
-        _totalSupportedTokens = _totalSupportedTokens + 1;
         _freeUpValue[gasToken] = freeUpValue;
     }
 
@@ -99,32 +96,5 @@ contract GSVEDeployer is Ownable{
         }
     }
     
-    
-    /**
-    * @dev deploys a gsve smart wrapper for the caller
-    * the ownership of the wrapper is transfered to the caller
-    * a note is made of where the users wrapper is deployed
-    * gas tokens can be burned to save on this deployment operation
-    * the gas tokens that the deployer supports are enabled in the wrapper before transfering ownership.
-    */
-    function GsveWrapperDeploy(address gasToken)  public discountGas(gasToken) returns(address payable contractAddress) {
-
-        bytes memory bytecode = type(GSVESmartWrapper).creationCode;
-        bytes32 salt = keccak256(abi.encodePacked(msg.sender));
-
-        assembly {
-            contractAddress := create2(0, add(bytecode, 32), mload(bytecode), salt)
-        }
-
-        for(uint256 i = 0; i<_totalSupportedTokens; i++){
-            address tokenAddress = _reverseTokenMap[i];
-            GSVESmartWrapper(contractAddress).addGasToken(tokenAddress, _freeUpValue[tokenAddress]);
-        }
-        
-        Ownable(contractAddress).transferOwnership(msg.sender);
-        _deployedWalletAddressLocation[msg.sender] = contractAddress;
-        emit ContractDeployed(msg.sender, contractAddress);
-    }
-
     event ContractDeployed(address indexed creator, address deploymentAddress);
 }
