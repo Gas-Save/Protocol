@@ -8,6 +8,7 @@ const wrappedToken = artifacts.require("./WrappedGasToken.sol");
 contract("Wrapper Test", async accounts => {
 
     var gasToken;
+    var token;
     var wrapper;
     var helper;
 
@@ -33,7 +34,7 @@ contract("Wrapper Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-        await wrapper.addGasToken(gasToken.address, 15000);
+        await wrapper.addGasToken(gasToken.address, 25130);
         var compatible = await wrapper.compatibleGasToken(gasToken.address);
         assert.equal(compatible.toNumber(), 1);
 

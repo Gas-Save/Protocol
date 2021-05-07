@@ -31,7 +31,7 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-      await factory.addGasToken(gasToken.address, 15000);
+      await factory.addGasToken(gasToken.address, 25130);
 
       var compatible = await factory.compatibleGasToken(gasToken.address);
       assert.equal(compatible.toNumber(), 1);
@@ -63,7 +63,7 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-        await wrapper.addGasToken(gasToken.address, 15000);
+        await wrapper.addGasToken(gasToken.address, 25130);
         var compatible = await wrapper.compatibleGasToken(gasToken.address);
         assert.equal(compatible.toNumber(), 1);
 
