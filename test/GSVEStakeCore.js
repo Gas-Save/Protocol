@@ -74,12 +74,12 @@ contract("GSVE Core Test", async accounts => {
 
     it('should be able to add a token to the list of supported tokens', async () => {
 
-      await protocol.addGasToken(gasToken.address, 1, 1);
+      await protocol.addGasToken(gasToken.address, 2, 1);
 
       var claimable = await protocol.claimable(gasToken.address);
       var mintType = await protocol.mintingType(gasToken.address);
       assert.equal(claimable.toNumber(), 1);
-      assert.equal(mintType.toNumber(), 1);
+      assert.equal(mintType.toNumber(), 2);
     });
   
     it('should be able to burn gsve to save on protocol minting fee', async () => {
@@ -102,10 +102,14 @@ contract("GSVE Core Test", async accounts => {
     });
 
     it('should fail to discount minting as no tokens to burn', async () => {
+      await baseGasToken.mint(100);
+      await baseGasToken.approve(gasToken.address, 100)
       expectRevert(protocol.burnDiscountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
     });
 
     it('should fail to discount minting as no tokens to burn but approval given', async () => {
+      await baseGasToken.mint(100);
+      await baseGasToken.approve(gasToken.address, 100)
       await token.approve(protocol.address, web3.utils.toWei("2"), {from: accounts[1]});
       expectRevert(protocol.burnDiscountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
     });
@@ -125,7 +129,6 @@ contract("GSVE Core Test", async accounts => {
     });
 
     it('should be able to mint at a reduced fee due to already having a tier 1 stake', async () => {
-
       await baseGasToken.mint(100);
       await baseGasToken.approve(gasToken.address, 100)
       var receipt = await protocol.discountedMinting(gasToken.address, 100);
@@ -133,11 +136,13 @@ contract("GSVE Core Test", async accounts => {
       const gasTokenBalance = await gasToken.balanceOf.call(accounts[0]);
       assert.equal(gasTokenBalance.toNumber(), 198);
 
-      const feeHolderGasTokenBalance = await gasToken.balanceOf.call(protocol.address);
+      const feeHolderGasTokenBalance = await gasToken.balanceOf.call(vault.address);
       assert.equal(feeHolderGasTokenBalance.toNumber(), 2);
     });
 
     it('should fail to be rewarded if the contract has no rewards to give.', async () => {
+      await baseGasToken.mint(100, {from: accounts[3]});
+      await baseGasToken.approve(gasToken.address, 100, {from: accounts[3]})
       expectRevert(protocol.rewardedMinting(gasToken.address, 100, {from: accounts[3]}), "GSVE: contract has ran out of rewards to give.");
     });
 
@@ -148,23 +153,27 @@ contract("GSVE Core Test", async accounts => {
     });
 
     it('should fail to mint at discount rate as not a tier 1 stake', async () => {
+      await baseGasToken.mint(100, {from: accounts[1]});
+      await baseGasToken.approve(gasToken.address, 100, {from: accounts[1]})
       expectRevert(protocol.discountedMinting(gasToken.address, 100, {from: accounts[1]}), 'GSVE: User has not staked enough to discount.');
     });
 
     it('should fail to be rewarded for attempting to mint a non-accepted address', async () => {
+      await baseGasToken.mint(100, {from: accounts[3]});
+      await baseGasToken.approve(gasToken.address, 100, {from: accounts[3]})
       expectRevert(protocol.rewardedMinting(token.address, 100, {from: accounts[3]}), "GSVE: Unsupported Token");
     });
 
-
-
     it('should be able to mint tokens and be rewarded with gsve tokens', async () => {
+      await baseGasToken.mint(100);
+      await baseGasToken.approve(gasToken.address, 100, {from: accounts[3]})
       var receipt = await protocol.rewardedMinting(gasToken.address, 100, {from: accounts[3]});
 
       const gasTokenBalance = await gasToken.balanceOf(accounts[3]);
-      assert.equal(gasTokenBalance.toNumber(), 98);
+      assert.equal(gasTokenBalance.toNumber(), 97);
 
-      const gasTokenProtocolBalance = await gasToken.balanceOf(protocol.address);
-      assert.equal(gasTokenProtocolBalance.toNumber(), 3);
+      const gasTokenProtocolBalance = await gasToken.balanceOf(vault.address);
+      assert.equal(gasTokenProtocolBalance.toNumber(), 5);
 
       const gsveReward = web3.utils.toWei('0.5');
       const gsveBalance = await token.balanceOf(accounts[3]);

@@ -140,7 +140,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
         uint256 mintType = _mintingType[gasTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
         IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, 2*10**18);
-        IWrappedGasToken(gasTokenAddress).discountedMint(value, 0, msg.sender);
+
         if(mintType == 1){
             convenientMinting(gasTokenAddress, value, 0);
         }
@@ -164,12 +164,13 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 1);
         }
         else if (mintType == 2){
-            IWrappedGasToken(gasTokenAddress).discountedMint(value, 2, msg.sender);
+            IWrappedGasToken(gasTokenAddress).discountedMint(value, 1, msg.sender);
         }
         else{
             return;
         }
     }
+    
     /**
      * @dev A function that allows a user to be rewarded tokens by minting or wrapping
      * they pay full fees for this operation.
