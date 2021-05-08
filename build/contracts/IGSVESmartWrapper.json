@@ -142,7 +142,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"freeUpValue\",\"type\":\"uint256\"}],\"name\":\"addGasToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"}],\"name\":\"compatibleGasToken\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_GSVEToken\",\"type\":\"address\"}],\"name\":\"init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"withdrawTokenBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"}],\"name\":\"wrapTransaction\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"details\":\"interface for v1 gsve smart wrapper\",\"kind\":\"dev\",\"methods\":{\"addGasToken(address,uint256)\":{\"details\":\"function to enable gas tokens. by default the wrapped tokens are added when the wrapper is deployed using efficiency values based on a known token gas rebate that we store on contract. DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!\"},\"compatibleGasToken(address)\":{\"details\":\"checks if the gas token is supported\"},\"init(address,address)\":{\"details\":\"Initializes the contract setting the deployer as the initial owner.\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"withdrawBalance()\":{\"details\":\"function that the user can trigger to withdraw the entire balance of their wrapper back to themselves.\"},\"withdrawTokenBalance(address)\":{\"details\":\"function that the user can trigger to withdraw an entire token balance from the wrapper to themselves\"},\"wrapTransaction(bytes,address,uint256,address)\":{\"details\":\"the wrapTransaction function interacts with other smart contracts on the users behalf this wrapper works for any smart contract as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper if the function requires a payment, this is handled too and sent from the wrapper balance.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVESmartWrapper.sol\":\"IGSVESmartWrapper\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVESmartWrapper.sol\":{\"keccak256\":\"0xf8b6dff9205179992333937460f5cba74d8114f049e4389e337fd81f1739edc9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5834acd8937a8c0a05a14b30f7581f13748fb3f8f8292ce408839a1ec134af6c\",\"dweb:/ipfs/QmezzUYo8HhZwKD5t1wmFNUzGZyd5iondBXew25w895QgD\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"freeUpValue\",\"type\":\"uint256\"}],\"name\":\"addGasToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"}],\"name\":\"compatibleGasToken\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_GSVEToken\",\"type\":\"address\"}],\"name\":\"init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"withdrawTokenBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"}],\"name\":\"wrapTransaction\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"details\":\"interface for v1 gsve smart wrapper\",\"kind\":\"dev\",\"methods\":{\"addGasToken(address,uint256)\":{\"details\":\"function to enable gas tokens. by default the wrapped tokens are added when the wrapper is deployed using efficiency values based on a known token gas rebate that we store on contract. DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!\"},\"compatibleGasToken(address)\":{\"details\":\"checks if the gas token is supported\"},\"init(address,address)\":{\"details\":\"Initializes the contract setting the deployer as the initial owner.\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"withdrawBalance()\":{\"details\":\"function that the user can trigger to withdraw the entire balance of their wrapper back to themselves.\"},\"withdrawTokenBalance(address)\":{\"details\":\"function that the user can trigger to withdraw an entire token balance from the wrapper to themselves\"},\"wrapTransaction(bytes,address,uint256,address)\":{\"details\":\"the wrapTransaction function interacts with other smart contracts on the users behalf this wrapper works for any smart contract as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper if the function requires a payment, this is handled too and sent from the wrapper balance.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVESmartWrapper.sol\":\"IGSVESmartWrapper\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVESmartWrapper.sol\":{\"keccak256\":\"0xf8b6dff9205179992333937460f5cba74d8114f049e4389e337fd81f1739edc9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5834acd8937a8c0a05a14b30f7581f13748fb3f8f8292ce408839a1ec134af6c\",\"dweb:/ipfs/QmezzUYo8HhZwKD5t1wmFNUzGZyd5iondBXew25w895QgD\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -151,20 +151,20 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\n/**\r\n* @dev interface for v1 gsve smart wrapper\r\n*/\r\ninterface  IGSVESmartWrapper{\r\n\r\n    receive() external payable;\r\n\r\n    /**\r\n    * @dev function to enable gas tokens.\r\n    * by default the wrapped tokens are added when the wrapper is deployed\r\n    * using efficiency values based on a known token gas rebate that we store on contract.\r\n    * DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!\r\n    */\r\n    function addGasToken(address gasToken, uint256 freeUpValue) external;\r\n\r\n    /**\r\n    * @dev checks if the gas token is supported\r\n    */\r\n    function compatibleGasToken(address gasToken) external view returns(uint256);\r\n\r\n    /**\r\n    * @dev the wrapTransaction function interacts with other smart contracts on the users behalf\r\n    * this wrapper works for any smart contract\r\n    * as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper\r\n    * if the function requires a payment, this is handled too and sent from the wrapper balance.\r\n    */\r\n    function wrapTransaction(bytes calldata data, address contractAddress, uint256 value, address gasToken) external;\r\n\r\n    /**\r\n    * @dev function that the user can trigger to withdraw the entire balance of their wrapper back to themselves.\r\n    */\r\n    function withdrawBalance() external;\r\n\r\n    /**\r\n    * @dev function that the user can trigger to withdraw an entire token balance from the wrapper to themselves\r\n    */\r\n    function withdrawTokenBalance(address token) external;\r\n\r\n    /**\r\n     * @dev Initializes the contract setting the deployer as the initial owner.\r\n     */\r\n    function init (address initialOwner, address _GSVEToken) external;\r\n\r\n    /**\r\n     * @dev Returns the address of the current owner.\r\n     */\r\n\r\n    function owner() external view returns (address);\r\n    /**\r\n     * @dev Leaves the contract without owner. It will not be possible to call\r\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\r\n     *\r\n     * NOTE: Renouncing ownership will leave the contract without an owner,\r\n     * thereby removing any functionality that is only available to the owner.\r\n     */\r\n    function renounceOwnership() external;\r\n\r\n    /**\r\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\r\n     * Can only be called by the current owner.\r\n     */\r\n    function transferOwnership(address newOwner) external;\r\n\r\n}\r\n",
-  "sourcePath": "C:\\Users\\khera\\Documents\\GitHub\\GasSwapTokens\\contracts\\IGSVESmartWrapper.sol",
+  "sourcePath": "C:/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVESmartWrapper.sol",
   "ast": {
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVESmartWrapper.sol",
     "exportedSymbols": {
       "IGSVESmartWrapper": [
-        2286
+        1005
       ]
     },
-    "id": 2287,
+    "id": 1006,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2219,
+        "id": 938,
         "literals": [
           "solidity",
           "^",
@@ -172,7 +172,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:7"
+        "src": "33:23:3"
       },
       {
         "abstract": false,
@@ -180,22 +180,22 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2220,
+          "id": 939,
           "nodeType": "StructuredDocumentation",
-          "src": "60:51:7",
+          "src": "60:51:3",
           "text": " @dev interface for v1 gsve smart wrapper"
         },
         "fullyImplemented": false,
-        "id": 2286,
+        "id": 1005,
         "linearizedBaseContracts": [
-          2286
+          1005
         ],
         "name": "IGSVESmartWrapper",
-        "nameLocation": "124:17:7",
+        "nameLocation": "124:17:3",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 2223,
+            "id": 942,
             "implemented": false,
             "kind": "receive",
             "modifiers": [],
@@ -203,51 +203,51 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2221,
+              "id": 940,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "157:2:7"
+              "src": "157:2:3"
             },
             "returnParameters": {
-              "id": 2222,
+              "id": 941,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "176:0:7"
+              "src": "176:0:3"
             },
-            "scope": 2286,
-            "src": "150:27:7",
+            "scope": 1005,
+            "src": "150:27:3",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2224,
+              "id": 943,
               "nodeType": "StructuredDocumentation",
-              "src": "185:316:7",
+              "src": "185:316:3",
               "text": " @dev function to enable gas tokens.\n by default the wrapped tokens are added when the wrapper is deployed\n using efficiency values based on a known token gas rebate that we store on contract.\n DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!"
             },
             "functionSelector": "00e35602",
-            "id": 2231,
+            "id": 950,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "addGasToken",
-            "nameLocation": "516:11:7",
+            "nameLocation": "516:11:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2229,
+              "id": 948,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2226,
+                  "id": 945,
                   "mutability": "mutable",
                   "name": "gasToken",
-                  "nameLocation": "536:8:7",
+                  "nameLocation": "536:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2231,
-                  "src": "528:16:7",
+                  "scope": 950,
+                  "src": "528:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -255,10 +255,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2225,
+                    "id": 944,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "528:7:7",
+                    "src": "528:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -269,13 +269,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2228,
+                  "id": 947,
                   "mutability": "mutable",
                   "name": "freeUpValue",
-                  "nameLocation": "554:11:7",
+                  "nameLocation": "554:11:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2231,
-                  "src": "546:19:7",
+                  "scope": 950,
+                  "src": "546:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -283,10 +283,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2227,
+                    "id": 946,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "546:7:7",
+                    "src": "546:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -295,48 +295,48 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "527:39:7"
+              "src": "527:39:3"
             },
             "returnParameters": {
-              "id": 2230,
+              "id": 949,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "575:0:7"
+              "src": "575:0:3"
             },
-            "scope": 2286,
-            "src": "507:69:7",
+            "scope": 1005,
+            "src": "507:69:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2232,
+              "id": 951,
               "nodeType": "StructuredDocumentation",
-              "src": "584:60:7",
+              "src": "584:60:3",
               "text": " @dev checks if the gas token is supported"
             },
             "functionSelector": "8e13fd78",
-            "id": 2239,
+            "id": 958,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "compatibleGasToken",
-            "nameLocation": "659:18:7",
+            "nameLocation": "659:18:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2235,
+              "id": 954,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2234,
+                  "id": 953,
                   "mutability": "mutable",
                   "name": "gasToken",
-                  "nameLocation": "686:8:7",
+                  "nameLocation": "686:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2239,
-                  "src": "678:16:7",
+                  "scope": 958,
+                  "src": "678:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -344,10 +344,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2233,
+                    "id": 952,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "678:7:7",
+                    "src": "678:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -357,21 +357,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "677:18:7"
+              "src": "677:18:3"
             },
             "returnParameters": {
-              "id": 2238,
+              "id": 957,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2237,
+                  "id": 956,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2239,
-                  "src": "718:7:7",
+                  "scope": 958,
+                  "src": "718:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -379,10 +379,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2236,
+                    "id": 955,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "718:7:7",
+                    "src": "718:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -391,42 +391,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "717:9:7"
+              "src": "717:9:3"
             },
-            "scope": 2286,
-            "src": "650:77:7",
+            "scope": 1005,
+            "src": "650:77:3",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2240,
+              "id": 959,
               "nodeType": "StructuredDocumentation",
-              "src": "735:389:7",
+              "src": "735:389:3",
               "text": " @dev the wrapTransaction function interacts with other smart contracts on the users behalf\n this wrapper works for any smart contract\n as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper\n if the function requires a payment, this is handled too and sent from the wrapper balance."
             },
             "functionSelector": "8da02632",
-            "id": 2251,
+            "id": 970,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "wrapTransaction",
-            "nameLocation": "1139:15:7",
+            "nameLocation": "1139:15:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2249,
+              "id": 968,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2242,
+                  "id": 961,
                   "mutability": "mutable",
                   "name": "data",
-                  "nameLocation": "1170:4:7",
+                  "nameLocation": "1170:4:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2251,
-                  "src": "1155:19:7",
+                  "scope": 970,
+                  "src": "1155:19:3",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -434,10 +434,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 2241,
+                    "id": 960,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1155:5:7",
+                    "src": "1155:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -447,13 +447,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2244,
+                  "id": 963,
                   "mutability": "mutable",
                   "name": "contractAddress",
-                  "nameLocation": "1184:15:7",
+                  "nameLocation": "1184:15:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2251,
-                  "src": "1176:23:7",
+                  "scope": 970,
+                  "src": "1176:23:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -461,10 +461,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2243,
+                    "id": 962,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1176:7:7",
+                    "src": "1176:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -475,13 +475,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2246,
+                  "id": 965,
                   "mutability": "mutable",
                   "name": "value",
-                  "nameLocation": "1209:5:7",
+                  "nameLocation": "1209:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2251,
-                  "src": "1201:13:7",
+                  "scope": 970,
+                  "src": "1201:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -489,10 +489,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2245,
+                    "id": 964,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1201:7:7",
+                    "src": "1201:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -502,13 +502,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2248,
+                  "id": 967,
                   "mutability": "mutable",
                   "name": "gasToken",
-                  "nameLocation": "1224:8:7",
+                  "nameLocation": "1224:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2251,
-                  "src": "1216:16:7",
+                  "scope": 970,
+                  "src": "1216:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -516,10 +516,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2247,
+                    "id": 966,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1216:7:7",
+                    "src": "1216:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -529,81 +529,81 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1154:79:7"
+              "src": "1154:79:3"
             },
             "returnParameters": {
-              "id": 2250,
+              "id": 969,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1242:0:7"
+              "src": "1242:0:3"
             },
-            "scope": 2286,
-            "src": "1130:113:7",
+            "scope": 1005,
+            "src": "1130:113:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2252,
+              "id": 971,
               "nodeType": "StructuredDocumentation",
-              "src": "1251:126:7",
+              "src": "1251:126:3",
               "text": " @dev function that the user can trigger to withdraw the entire balance of their wrapper back to themselves."
             },
             "functionSelector": "5fd8c710",
-            "id": 2255,
+            "id": 974,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "withdrawBalance",
-            "nameLocation": "1392:15:7",
+            "nameLocation": "1392:15:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2253,
+              "id": 972,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1407:2:7"
+              "src": "1407:2:3"
             },
             "returnParameters": {
-              "id": 2254,
+              "id": 973,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1418:0:7"
+              "src": "1418:0:3"
             },
-            "scope": 2286,
-            "src": "1383:36:7",
+            "scope": 1005,
+            "src": "1383:36:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2256,
+              "id": 975,
               "nodeType": "StructuredDocumentation",
-              "src": "1427:125:7",
+              "src": "1427:125:3",
               "text": " @dev function that the user can trigger to withdraw an entire token balance from the wrapper to themselves"
             },
             "functionSelector": "90bb6153",
-            "id": 2261,
+            "id": 980,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "withdrawTokenBalance",
-            "nameLocation": "1567:20:7",
+            "nameLocation": "1567:20:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2259,
+              "id": 978,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2258,
+                  "id": 977,
                   "mutability": "mutable",
                   "name": "token",
-                  "nameLocation": "1596:5:7",
+                  "nameLocation": "1596:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2261,
-                  "src": "1588:13:7",
+                  "scope": 980,
+                  "src": "1588:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -611,10 +611,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2257,
+                    "id": 976,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1588:7:7",
+                    "src": "1588:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -624,48 +624,48 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1587:15:7"
+              "src": "1587:15:3"
             },
             "returnParameters": {
-              "id": 2260,
+              "id": 979,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1611:0:7"
+              "src": "1611:0:3"
             },
-            "scope": 2286,
-            "src": "1558:54:7",
+            "scope": 1005,
+            "src": "1558:54:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2262,
+              "id": 981,
               "nodeType": "StructuredDocumentation",
-              "src": "1620:93:7",
+              "src": "1620:93:3",
               "text": " @dev Initializes the contract setting the deployer as the initial owner."
             },
             "functionSelector": "f09a4016",
-            "id": 2269,
+            "id": 988,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "init",
-            "nameLocation": "1728:4:7",
+            "nameLocation": "1728:4:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2267,
+              "id": 986,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2264,
+                  "id": 983,
                   "mutability": "mutable",
                   "name": "initialOwner",
-                  "nameLocation": "1742:12:7",
+                  "nameLocation": "1742:12:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2269,
-                  "src": "1734:20:7",
+                  "scope": 988,
+                  "src": "1734:20:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -673,10 +673,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2263,
+                    "id": 982,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1734:7:7",
+                    "src": "1734:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -687,13 +687,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2266,
+                  "id": 985,
                   "mutability": "mutable",
                   "name": "_GSVEToken",
-                  "nameLocation": "1764:10:7",
+                  "nameLocation": "1764:10:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2269,
-                  "src": "1756:18:7",
+                  "scope": 988,
+                  "src": "1756:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -701,10 +701,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2265,
+                    "id": 984,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1756:7:7",
+                    "src": "1756:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -714,54 +714,54 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1733:42:7"
+              "src": "1733:42:3"
             },
             "returnParameters": {
-              "id": 2268,
+              "id": 987,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1784:0:7"
+              "src": "1784:0:3"
             },
-            "scope": 2286,
-            "src": "1719:66:7",
+            "scope": 1005,
+            "src": "1719:66:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2270,
+              "id": 989,
               "nodeType": "StructuredDocumentation",
-              "src": "1793:67:7",
+              "src": "1793:67:3",
               "text": " @dev Returns the address of the current owner."
             },
             "functionSelector": "8da5cb5b",
-            "id": 2275,
+            "id": 994,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "owner",
-            "nameLocation": "1877:5:7",
+            "nameLocation": "1877:5:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2271,
+              "id": 990,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1882:2:7"
+              "src": "1882:2:3"
             },
             "returnParameters": {
-              "id": 2274,
+              "id": 993,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2273,
+                  "id": 992,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2275,
-                  "src": "1908:7:7",
+                  "scope": 994,
+                  "src": "1908:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -769,10 +769,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2272,
+                    "id": 991,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1908:7:7",
+                    "src": "1908:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -782,75 +782,75 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1907:9:7"
+              "src": "1907:9:3"
             },
-            "scope": 2286,
-            "src": "1868:49:7",
+            "scope": 1005,
+            "src": "1868:49:3",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2276,
+              "id": 995,
               "nodeType": "StructuredDocumentation",
-              "src": "1923:337:7",
+              "src": "1923:337:3",
               "text": " @dev Leaves the contract without owner. It will not be possible to call\n `onlyOwner` functions anymore. Can only be called by the current owner.\n NOTE: Renouncing ownership will leave the contract without an owner,\n thereby removing any functionality that is only available to the owner."
             },
             "functionSelector": "715018a6",
-            "id": 2279,
+            "id": 998,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "renounceOwnership",
-            "nameLocation": "2275:17:7",
+            "nameLocation": "2275:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2277,
+              "id": 996,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2292:2:7"
+              "src": "2292:2:3"
             },
             "returnParameters": {
-              "id": 2278,
+              "id": 997,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2303:0:7"
+              "src": "2303:0:3"
             },
-            "scope": 2286,
-            "src": "2266:38:7",
+            "scope": 1005,
+            "src": "2266:38:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2280,
+              "id": 999,
               "nodeType": "StructuredDocumentation",
-              "src": "2312:141:7",
+              "src": "2312:141:3",
               "text": " @dev Transfers ownership of the contract to a new account (`newOwner`).\n Can only be called by the current owner."
             },
             "functionSelector": "f2fde38b",
-            "id": 2285,
+            "id": 1004,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "transferOwnership",
-            "nameLocation": "2468:17:7",
+            "nameLocation": "2468:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2283,
+              "id": 1002,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2282,
+                  "id": 1001,
                   "mutability": "mutable",
                   "name": "newOwner",
-                  "nameLocation": "2494:8:7",
+                  "nameLocation": "2494:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2285,
-                  "src": "2486:16:7",
+                  "scope": 1004,
+                  "src": "2486:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -858,10 +858,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2281,
+                    "id": 1000,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2486:7:7",
+                    "src": "2486:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -871,41 +871,41 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2485:18:7"
+              "src": "2485:18:3"
             },
             "returnParameters": {
-              "id": 2284,
+              "id": 1003,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2512:0:7"
+              "src": "2512:0:3"
             },
-            "scope": 2286,
-            "src": "2459:54:7",
+            "scope": 1005,
+            "src": "2459:54:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2287,
-        "src": "113:2405:7",
+        "scope": 1006,
+        "src": "113:2405:3",
         "usedErrors": []
       }
     ],
-    "src": "33:2487:7"
+    "src": "33:2487:3"
   },
   "legacyAST": {
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IGSVESmartWrapper.sol",
     "exportedSymbols": {
       "IGSVESmartWrapper": [
-        2286
+        1005
       ]
     },
-    "id": 2287,
+    "id": 1006,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2219,
+        "id": 938,
         "literals": [
           "solidity",
           "^",
@@ -913,7 +913,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:7"
+        "src": "33:23:3"
       },
       {
         "abstract": false,
@@ -921,22 +921,22 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2220,
+          "id": 939,
           "nodeType": "StructuredDocumentation",
-          "src": "60:51:7",
+          "src": "60:51:3",
           "text": " @dev interface for v1 gsve smart wrapper"
         },
         "fullyImplemented": false,
-        "id": 2286,
+        "id": 1005,
         "linearizedBaseContracts": [
-          2286
+          1005
         ],
         "name": "IGSVESmartWrapper",
-        "nameLocation": "124:17:7",
+        "nameLocation": "124:17:3",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 2223,
+            "id": 942,
             "implemented": false,
             "kind": "receive",
             "modifiers": [],
@@ -944,51 +944,51 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2221,
+              "id": 940,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "157:2:7"
+              "src": "157:2:3"
             },
             "returnParameters": {
-              "id": 2222,
+              "id": 941,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "176:0:7"
+              "src": "176:0:3"
             },
-            "scope": 2286,
-            "src": "150:27:7",
+            "scope": 1005,
+            "src": "150:27:3",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2224,
+              "id": 943,
               "nodeType": "StructuredDocumentation",
-              "src": "185:316:7",
+              "src": "185:316:3",
               "text": " @dev function to enable gas tokens.\n by default the wrapped tokens are added when the wrapper is deployed\n using efficiency values based on a known token gas rebate that we store on contract.\n DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!"
             },
             "functionSelector": "00e35602",
-            "id": 2231,
+            "id": 950,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "addGasToken",
-            "nameLocation": "516:11:7",
+            "nameLocation": "516:11:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2229,
+              "id": 948,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2226,
+                  "id": 945,
                   "mutability": "mutable",
                   "name": "gasToken",
-                  "nameLocation": "536:8:7",
+                  "nameLocation": "536:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2231,
-                  "src": "528:16:7",
+                  "scope": 950,
+                  "src": "528:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -996,10 +996,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2225,
+                    "id": 944,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "528:7:7",
+                    "src": "528:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1010,13 +1010,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2228,
+                  "id": 947,
                   "mutability": "mutable",
                   "name": "freeUpValue",
-                  "nameLocation": "554:11:7",
+                  "nameLocation": "554:11:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2231,
-                  "src": "546:19:7",
+                  "scope": 950,
+                  "src": "546:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1024,10 +1024,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2227,
+                    "id": 946,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "546:7:7",
+                    "src": "546:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1036,48 +1036,48 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "527:39:7"
+              "src": "527:39:3"
             },
             "returnParameters": {
-              "id": 2230,
+              "id": 949,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "575:0:7"
+              "src": "575:0:3"
             },
-            "scope": 2286,
-            "src": "507:69:7",
+            "scope": 1005,
+            "src": "507:69:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2232,
+              "id": 951,
               "nodeType": "StructuredDocumentation",
-              "src": "584:60:7",
+              "src": "584:60:3",
               "text": " @dev checks if the gas token is supported"
             },
             "functionSelector": "8e13fd78",
-            "id": 2239,
+            "id": 958,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "compatibleGasToken",
-            "nameLocation": "659:18:7",
+            "nameLocation": "659:18:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2235,
+              "id": 954,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2234,
+                  "id": 953,
                   "mutability": "mutable",
                   "name": "gasToken",
-                  "nameLocation": "686:8:7",
+                  "nameLocation": "686:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2239,
-                  "src": "678:16:7",
+                  "scope": 958,
+                  "src": "678:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1085,10 +1085,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2233,
+                    "id": 952,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "678:7:7",
+                    "src": "678:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1098,21 +1098,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "677:18:7"
+              "src": "677:18:3"
             },
             "returnParameters": {
-              "id": 2238,
+              "id": 957,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2237,
+                  "id": 956,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2239,
-                  "src": "718:7:7",
+                  "scope": 958,
+                  "src": "718:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1120,10 +1120,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2236,
+                    "id": 955,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "718:7:7",
+                    "src": "718:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1132,42 +1132,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "717:9:7"
+              "src": "717:9:3"
             },
-            "scope": 2286,
-            "src": "650:77:7",
+            "scope": 1005,
+            "src": "650:77:3",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2240,
+              "id": 959,
               "nodeType": "StructuredDocumentation",
-              "src": "735:389:7",
+              "src": "735:389:3",
               "text": " @dev the wrapTransaction function interacts with other smart contracts on the users behalf\n this wrapper works for any smart contract\n as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper\n if the function requires a payment, this is handled too and sent from the wrapper balance."
             },
             "functionSelector": "8da02632",
-            "id": 2251,
+            "id": 970,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "wrapTransaction",
-            "nameLocation": "1139:15:7",
+            "nameLocation": "1139:15:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2249,
+              "id": 968,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2242,
+                  "id": 961,
                   "mutability": "mutable",
                   "name": "data",
-                  "nameLocation": "1170:4:7",
+                  "nameLocation": "1170:4:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2251,
-                  "src": "1155:19:7",
+                  "scope": 970,
+                  "src": "1155:19:3",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -1175,10 +1175,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 2241,
+                    "id": 960,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1155:5:7",
+                    "src": "1155:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -1188,13 +1188,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2244,
+                  "id": 963,
                   "mutability": "mutable",
                   "name": "contractAddress",
-                  "nameLocation": "1184:15:7",
+                  "nameLocation": "1184:15:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2251,
-                  "src": "1176:23:7",
+                  "scope": 970,
+                  "src": "1176:23:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1202,10 +1202,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2243,
+                    "id": 962,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1176:7:7",
+                    "src": "1176:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1216,13 +1216,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2246,
+                  "id": 965,
                   "mutability": "mutable",
                   "name": "value",
-                  "nameLocation": "1209:5:7",
+                  "nameLocation": "1209:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2251,
-                  "src": "1201:13:7",
+                  "scope": 970,
+                  "src": "1201:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1230,10 +1230,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2245,
+                    "id": 964,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1201:7:7",
+                    "src": "1201:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1243,13 +1243,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2248,
+                  "id": 967,
                   "mutability": "mutable",
                   "name": "gasToken",
-                  "nameLocation": "1224:8:7",
+                  "nameLocation": "1224:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2251,
-                  "src": "1216:16:7",
+                  "scope": 970,
+                  "src": "1216:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1257,10 +1257,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2247,
+                    "id": 966,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1216:7:7",
+                    "src": "1216:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1270,81 +1270,81 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1154:79:7"
+              "src": "1154:79:3"
             },
             "returnParameters": {
-              "id": 2250,
+              "id": 969,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1242:0:7"
+              "src": "1242:0:3"
             },
-            "scope": 2286,
-            "src": "1130:113:7",
+            "scope": 1005,
+            "src": "1130:113:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2252,
+              "id": 971,
               "nodeType": "StructuredDocumentation",
-              "src": "1251:126:7",
+              "src": "1251:126:3",
               "text": " @dev function that the user can trigger to withdraw the entire balance of their wrapper back to themselves."
             },
             "functionSelector": "5fd8c710",
-            "id": 2255,
+            "id": 974,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "withdrawBalance",
-            "nameLocation": "1392:15:7",
+            "nameLocation": "1392:15:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2253,
+              "id": 972,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1407:2:7"
+              "src": "1407:2:3"
             },
             "returnParameters": {
-              "id": 2254,
+              "id": 973,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1418:0:7"
+              "src": "1418:0:3"
             },
-            "scope": 2286,
-            "src": "1383:36:7",
+            "scope": 1005,
+            "src": "1383:36:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2256,
+              "id": 975,
               "nodeType": "StructuredDocumentation",
-              "src": "1427:125:7",
+              "src": "1427:125:3",
               "text": " @dev function that the user can trigger to withdraw an entire token balance from the wrapper to themselves"
             },
             "functionSelector": "90bb6153",
-            "id": 2261,
+            "id": 980,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "withdrawTokenBalance",
-            "nameLocation": "1567:20:7",
+            "nameLocation": "1567:20:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2259,
+              "id": 978,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2258,
+                  "id": 977,
                   "mutability": "mutable",
                   "name": "token",
-                  "nameLocation": "1596:5:7",
+                  "nameLocation": "1596:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2261,
-                  "src": "1588:13:7",
+                  "scope": 980,
+                  "src": "1588:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1352,10 +1352,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2257,
+                    "id": 976,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1588:7:7",
+                    "src": "1588:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1365,48 +1365,48 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1587:15:7"
+              "src": "1587:15:3"
             },
             "returnParameters": {
-              "id": 2260,
+              "id": 979,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1611:0:7"
+              "src": "1611:0:3"
             },
-            "scope": 2286,
-            "src": "1558:54:7",
+            "scope": 1005,
+            "src": "1558:54:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2262,
+              "id": 981,
               "nodeType": "StructuredDocumentation",
-              "src": "1620:93:7",
+              "src": "1620:93:3",
               "text": " @dev Initializes the contract setting the deployer as the initial owner."
             },
             "functionSelector": "f09a4016",
-            "id": 2269,
+            "id": 988,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "init",
-            "nameLocation": "1728:4:7",
+            "nameLocation": "1728:4:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2267,
+              "id": 986,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2264,
+                  "id": 983,
                   "mutability": "mutable",
                   "name": "initialOwner",
-                  "nameLocation": "1742:12:7",
+                  "nameLocation": "1742:12:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2269,
-                  "src": "1734:20:7",
+                  "scope": 988,
+                  "src": "1734:20:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1414,10 +1414,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2263,
+                    "id": 982,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1734:7:7",
+                    "src": "1734:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1428,13 +1428,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2266,
+                  "id": 985,
                   "mutability": "mutable",
                   "name": "_GSVEToken",
-                  "nameLocation": "1764:10:7",
+                  "nameLocation": "1764:10:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2269,
-                  "src": "1756:18:7",
+                  "scope": 988,
+                  "src": "1756:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1442,10 +1442,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2265,
+                    "id": 984,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1756:7:7",
+                    "src": "1756:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1455,54 +1455,54 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1733:42:7"
+              "src": "1733:42:3"
             },
             "returnParameters": {
-              "id": 2268,
+              "id": 987,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1784:0:7"
+              "src": "1784:0:3"
             },
-            "scope": 2286,
-            "src": "1719:66:7",
+            "scope": 1005,
+            "src": "1719:66:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2270,
+              "id": 989,
               "nodeType": "StructuredDocumentation",
-              "src": "1793:67:7",
+              "src": "1793:67:3",
               "text": " @dev Returns the address of the current owner."
             },
             "functionSelector": "8da5cb5b",
-            "id": 2275,
+            "id": 994,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "owner",
-            "nameLocation": "1877:5:7",
+            "nameLocation": "1877:5:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2271,
+              "id": 990,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1882:2:7"
+              "src": "1882:2:3"
             },
             "returnParameters": {
-              "id": 2274,
+              "id": 993,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2273,
+                  "id": 992,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2275,
-                  "src": "1908:7:7",
+                  "scope": 994,
+                  "src": "1908:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1510,10 +1510,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2272,
+                    "id": 991,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1908:7:7",
+                    "src": "1908:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1523,75 +1523,75 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1907:9:7"
+              "src": "1907:9:3"
             },
-            "scope": 2286,
-            "src": "1868:49:7",
+            "scope": 1005,
+            "src": "1868:49:3",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2276,
+              "id": 995,
               "nodeType": "StructuredDocumentation",
-              "src": "1923:337:7",
+              "src": "1923:337:3",
               "text": " @dev Leaves the contract without owner. It will not be possible to call\n `onlyOwner` functions anymore. Can only be called by the current owner.\n NOTE: Renouncing ownership will leave the contract without an owner,\n thereby removing any functionality that is only available to the owner."
             },
             "functionSelector": "715018a6",
-            "id": 2279,
+            "id": 998,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "renounceOwnership",
-            "nameLocation": "2275:17:7",
+            "nameLocation": "2275:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2277,
+              "id": 996,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2292:2:7"
+              "src": "2292:2:3"
             },
             "returnParameters": {
-              "id": 2278,
+              "id": 997,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2303:0:7"
+              "src": "2303:0:3"
             },
-            "scope": 2286,
-            "src": "2266:38:7",
+            "scope": 1005,
+            "src": "2266:38:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2280,
+              "id": 999,
               "nodeType": "StructuredDocumentation",
-              "src": "2312:141:7",
+              "src": "2312:141:3",
               "text": " @dev Transfers ownership of the contract to a new account (`newOwner`).\n Can only be called by the current owner."
             },
             "functionSelector": "f2fde38b",
-            "id": 2285,
+            "id": 1004,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "transferOwnership",
-            "nameLocation": "2468:17:7",
+            "nameLocation": "2468:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2283,
+              "id": 1002,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2282,
+                  "id": 1001,
                   "mutability": "mutable",
                   "name": "newOwner",
-                  "nameLocation": "2494:8:7",
+                  "nameLocation": "2494:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2285,
-                  "src": "2486:16:7",
+                  "scope": 1004,
+                  "src": "2486:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1599,10 +1599,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2281,
+                    "id": 1000,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2486:7:7",
+                    "src": "2486:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1612,27 +1612,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2485:18:7"
+              "src": "2485:18:3"
             },
             "returnParameters": {
-              "id": 2284,
+              "id": 1003,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2512:0:7"
+              "src": "2512:0:3"
             },
-            "scope": 2286,
-            "src": "2459:54:7",
+            "scope": 1005,
+            "src": "2459:54:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2287,
-        "src": "113:2405:7",
+        "scope": 1006,
+        "src": "113:2405:3",
         "usedErrors": []
       }
     ],
-    "src": "33:2487:7"
+    "src": "33:2487:3"
   },
   "compiler": {
     "name": "solc",
@@ -1640,7 +1640,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-08T09:50:55.628Z",
+  "updatedAt": "2021-05-08T12:06:49.341Z",
   "devdoc": {
     "details": "interface for v1 gsve smart wrapper",
     "kind": "dev",

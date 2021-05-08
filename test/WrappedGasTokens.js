@@ -50,7 +50,7 @@ contract("Wrapped ChiToken Token Test", async accounts => {
     });
 
     it('Should fail to free up', async function () {
-        expectRevert(instance.free(amountMint, { from: accounts[3] }), 'ERC20: burn amount exceeds balance');
+        expectRevert(instance.free(amountMint, { from: accounts[2] }), 'ERC20: burn amount exceeds balance');
     });
 
     it('burn gas to find baseline cost', async function () {
@@ -216,7 +216,7 @@ contract("Wrapped GST2 Token Test", async accounts => {
     });
 
     it('Should fail to free up', async function () {
-        expectRevert(instance.free(amountMint, { from: accounts[3] }), 'ERC20: burn amount exceeds balance');
+        expectRevert(instance.free(amountMint, { from: accounts[2] }), 'ERC20: burn amount exceeds balance');
     });
 
     it('burn gas to find baseline cost', async function () {
@@ -376,7 +376,7 @@ contract("Wrapped GST1 Token Test", async accounts => {
     });
 
     it('Should fail to free up', async function () {
-        expectRevert(instance.free(amountMint, { from: accounts[3] }), 'ERC20: burn amount exceeds balance');
+        expectRevert(instance.free(amountMint, { from: accounts[2] }), 'ERC20: burn amount exceeds balance');
     });
 
     it('burn gas to find baseline cost', async function () {

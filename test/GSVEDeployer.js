@@ -62,7 +62,7 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
     it('should be able to deploy2 a contract even when no gas tokens on hand', async () => {
       var byteCode = byteCodeJson["bytecode"];
-      var receipt = await deployer.GsveDeploy2(31337, byteCode, gasToken.address, {from: accounts[3]});
+      var receipt = await deployer.GsveDeploy2(31337, byteCode, gasToken.address, {from: accounts[2]});
       console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
 
