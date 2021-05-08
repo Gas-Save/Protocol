@@ -289,7 +289,7 @@ contract("GSVE Core Test", async accounts => {
       var receipt = await protocol.rewardedMinting(baseGasToken.address, 100, {from: accounts[2]});
 
       const gasTokenBalance = await baseGasToken.balanceOf.call(accounts[2]);
-      assert.equal(gasTokenBalance.toNumber(), 198);
+      assert.equal(gasTokenBalance.toNumber(), 298);
 
       const gasTokenProtocolBalance = await baseGasToken.balanceOf.call(vault.address);
       assert.equal(gasTokenProtocolBalance.toNumber(), 3);
@@ -311,10 +311,10 @@ contract("GSVE Core Test", async accounts => {
 
 
     it('staking and forwarding time by 24 hours', async () => {
-      await token.approve(protocol.address, web3.utils.toWei("100000"));
-      var receipt = await protocol.stake(web3.utils.toWei('100000'));
+      await token.approve(protocol.address, web3.utils.toWei("100001"));
+      var receipt = await protocol.stake(web3.utils.toWei('100001'));
 
-      const balanceSent = web3.utils.toWei('100000');
+      const balanceSent = web3.utils.toWei('100001');
       const balanceAddress = await token.balanceOf(protocol.address);
       const totalStaked = await protocol.totalStaked();
       const userStakeSize = await protocol.userStakeSize(accounts[0]);
@@ -377,11 +377,11 @@ contract("GSVE Core Test", async accounts => {
 
   it('forwarding time by 6 hours and then try to claim more than the vaults balance of a token', async () => {
 
-    await token.transfer(accounts[1], web3.utils.toWei("100000"))
+    await token.transfer(accounts[1], web3.utils.toWei("100001"))
     await timeMachine.advanceTimeAndBlock(60 * 60 * 6);
 
-    await token.approve(protocol.address, web3.utils.toWei("100000"), {from:accounts[1]})
-    await protocol.stake(web3.utils.toWei("100000"), {from:accounts[1]})
+    await token.approve(protocol.address, web3.utils.toWei("100001"), {from:accounts[1]})
+    await protocol.stake(web3.utils.toWei("100001"), {from:accounts[1]})
 
     await token.approve(protocol.address, web3.utils.toWei("0.5"), {from:accounts[1]})
     await protocol.claimToken(baseGasToken.address, 5)
