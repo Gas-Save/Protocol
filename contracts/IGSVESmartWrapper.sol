@@ -7,6 +7,11 @@ pragma solidity ^0.8.0;
 interface  IGSVESmartWrapper{
 
     receive() external payable;
+    
+     /**
+    * @dev sets the contract as inited
+    */
+    function setInited() external;
 
     /**
     * @dev function to enable gas tokens.

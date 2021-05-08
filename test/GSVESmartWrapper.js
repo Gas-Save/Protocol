@@ -46,6 +46,25 @@ contract("Wrapper Test", async accounts => {
       });
     
 
+    it('should be able to set inited', async () => {
+        await wrapper.setInited()
+        var inited = await wrapper._inited.call();
+        assert.equal(inited, true);
+    });
+
+    it('should cost gsve to add gas token after initing', async () => {
+        await token.approve(wrapper.address, web3.utils.toWei("5"))
+        await wrapper.addGasToken(baseGasToken.address, 15000);
+        var compatible = await wrapper.compatibleGasToken(gasToken.address);
+        assert.equal(compatible.toNumber(), 1);
+
+        var compatible = await wrapper.compatibleGasToken(gasToken.address);
+        assert.equal(compatible.toNumber(), 1);
+
+        account_balance = await token.balanceOf.call(accounts[0])
+        assert.equal(web3.utils.toWei("99999995"), account_balance.toString());
+      });
+
     it('burn gas to find baseline cost', async function () {
         var receipt = await helper.burnGas(147000, {from: accounts[0]});
         assert.equal(true, true);
@@ -150,11 +169,11 @@ contract("Wrapper Test", async accounts => {
         assert.equal(true, true);
     });
 
-    it('Should be able to call function by proxy, and this should successfully forward a payment, and then burn SG1', async function () {
+    it('Should be able to call function by proxy, and this should successfully forward a payment, and then burn', async function () {
 
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
-
+    
         await baseGasToken.mint(100);
         await baseGasToken.approve(gasToken.address, 97);
         await gasToken.mint(97);
@@ -163,31 +182,51 @@ contract("Wrapper Test", async accounts => {
         await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
         var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
         console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
-
-
+    
+    
         helper_balance = await web3.eth.getBalance(helper.address);
         wrapper_balance = await web3.eth.getBalance(wrapper.address);
-
+    
         assert.equal(helper_balance, ether("0.45"));
         assert.equal(wrapper_balance, ether("0"));
     });
-
+    
+    it('Should be able to call function by proxy, and this should successfully forward a payment, and then burn', async function () {
+    
+      helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
+      var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
+    
+      await baseGasToken.mint(100);
+      await baseGasToken.transfer(wrapper.address, 100);
+      
+      await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+      var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), baseGasToken.address);
+      console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    
+    
+      helper_balance = await web3.eth.getBalance(helper.address);
+      wrapper_balance = await web3.eth.getBalance(wrapper.address);
+    
+      assert.equal(helper_balance, ether("0.6"));
+      assert.equal(wrapper_balance, ether("0"));
+    });
+    
     it('should fail to upgrade if no gsve tokens approved for burning', async () => {
         expectRevert(wrapper.upgradeProxy(), "ERC20: burn amount exceeds allowance");
     });
     
     it('should be able to upgrade smart wrapper', async () => {
-        token.approve(wrapper.address, web3.utils.toWei("100"));
+        token.approve(wrapper.address, web3.utils.toWei("10"));
         await wrapper.upgradeProxy();
         account_balance = await token.balanceOf.call(accounts[0])
-        assert.equal(web3.utils.toWei("99999900"), account_balance.toString());
+        assert.equal(web3.utils.toWei("99999985"), account_balance.toString());
     
         var compatible = await wrapper.compatibleGasToken("0x0000000000004946c0e9F43F4Dee607b0eF1fA1c");
         assert.equal(compatible.toNumber(), 1);
     });
     
     it('should fail to upgrade if already upgraded', async () => {
-        token.approve(wrapper.address, web3.utils.toWei("100"));
+        token.approve(wrapper.address, web3.utils.toWei("10"));
         expectRevert(wrapper.upgradeProxy(), "GSVE: Wrapper Already Upgraded.");
     }); 
       it('should allow the withdrawal token balance', async () => {
@@ -202,4 +241,4 @@ contract("Wrapper Test", async accounts => {
       });
     
     
-});
+    });

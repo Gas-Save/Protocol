@@ -29,15 +29,18 @@ interface IGSVEToken {
 */
 contract GSVESmartWrapper {
     using Address for address;
-    mapping(address => uint256) private _compatibleGasTokens;
-    mapping(address => uint256) private _freeUpValue;
-    address private GSVEToken;
-    bool private _upgraded;
+    mapping(address => uint256) public _compatibleGasTokens;
+    mapping(address => uint256) public _freeUpValue;
+    address public GSVEToken;
+    bool public _upgraded;
+    bool public _inited;
     address private _owner;
 
     constructor (address _GSVEToken) public {
         init(msg.sender, _GSVEToken);
     }
+
+
 
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
@@ -46,8 +49,8 @@ contract GSVESmartWrapper {
     function init (address initialOwner, address _GSVEToken) public {
         require(_owner == address(0), "This contract is already owned");
         _owner = initialOwner;
-        emit OwnershipTransferred(address(0), initialOwner);
         GSVEToken = _GSVEToken;
+        emit OwnershipTransferred(address(0), initialOwner);
     }
 
     /**
@@ -57,31 +60,42 @@ contract GSVESmartWrapper {
     receive() external payable{}
 
     /**
+    * @dev sets the contract as inited
+    */
+    function setInited() public {
+        _inited = true;
+    }
+
+    /**
     * @dev function to enable gas tokens.
     * by default the wrapped tokens are added when the wrapper is deployed
     * using efficiency values based on a known token gas rebate that we store on contract.
     * DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!
+    * costs 5 gsve to add custom gas tokens if done after the wallet is inited
     */
     function addGasToken(address gasToken, uint256 freeUpValue) public onlyOwner{
+        if(_inited){
+            IGSVEToken(GSVEToken).burnFrom(msg.sender, 5*10**18);
+        }
         _compatibleGasTokens[gasToken] = 1;
         _freeUpValue[gasToken] = freeUpValue;
     }
 
     /**
     * @dev function to 'upgrade the proxy' by enabling unwrapped gas token support
-    * the user must burn 100 GSVE to upgrade the proxy.
+    * the user must burn 10 GSVE to upgrade the proxy.
     */
     function upgradeProxy() public onlyOwner{
         require(_upgraded == false, "GSVE: Wrapper Already Upgraded.");
-        IGSVEToken(GSVEToken).burnFrom(msg.sender, 100*10**18);
+        IGSVEToken(GSVEToken).burnFrom(msg.sender, 10*10**18);
 
         // add CHI gas token
         _compatibleGasTokens[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 1;
-        _freeUpValue[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 41947;
+        _freeUpValue[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 24000;
 
         // add GST2 gas token
         _compatibleGasTokens[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 1;
-        _freeUpValue[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 41130;
+        _freeUpValue[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 24000;
 
         // add GST1 gas token
         _compatibleGasTokens[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 1;
