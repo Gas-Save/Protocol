@@ -20,7 +20,6 @@
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 var json = require('./keys.json'); 
-var mnemonic = json['mnemonic'];
 
 module.exports = {
   networks: {
@@ -31,13 +30,13 @@ module.exports = {
     },  
 	ropsten: {
 		provider: function() {
-		  return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5");
+		  return new HDWalletProvider([json['mnemonic1'], json['mnemonic2'], json['mnemonic3']], "https://ropsten.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5");
 		},
     network_id: '3',
   },
     mainnet: {
       provider: function() {
-        return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5")
+        return new HDWalletProvider(json['mnemonic1'], "https://mainnet.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5")
       },
       network_id: 1
     },
