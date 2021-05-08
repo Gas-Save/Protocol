@@ -73,22 +73,22 @@ contract("GSVE Core Test", async accounts => {
 
     it('should be able to add a wrapped token to the list of supported tokens', async () => {
 
-      await protocol.addGasToken(gasToken.address, 2, 1);
+      await protocol.addGasToken(gasToken.address, 2, true);
 
       var claimable = await protocol.claimable(gasToken.address);
       var mintType = await protocol.mintingType(gasToken.address);
-      assert.equal(claimable.toNumber(), 1);
+      assert.equal(claimable, true);
       assert.equal(mintType.toNumber(), 2);
     });
 
     
     it('should be able to add a minted token to the list of supported tokens', async () => {
 
-      await protocol.addGasToken(baseGasToken.address, 1, 1);
+      await protocol.addGasToken(baseGasToken.address, 1, true);
 
       var claimable = await protocol.claimable(baseGasToken.address);
       var mintType = await protocol.mintingType(baseGasToken.address);
-      assert.equal(claimable.toNumber(), 1);
+      assert.equal(claimable, true);
       assert.equal(mintType.toNumber(), 1);
     });
   
@@ -299,22 +299,11 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(gsveReward.toString(), gsveBalance.toString());
     });
 
-    it("should fail to transfer ownership if not owner", async () => {
-      expectRevert(protocol.transferOwnershipOfSubcontract(gasToken.address, accounts[0], {from: accounts[1]}), "Ownable: caller is not the owner");
-    });
-
-    it("should be able to transfer ownership of an owned contract away from the protocol", async () => {
-      await protocol.transferOwnershipOfSubcontract(gasToken.address, accounts[0]);
-      var owner = await gasToken.owner()
-      assert.equal(owner, accounts[0]);
-    });
-
-
     it('staking and forwarding time by 24 hours', async () => {
-      await token.approve(protocol.address, web3.utils.toWei("100001"));
-      var receipt = await protocol.stake(web3.utils.toWei('100001'));
+      await token.approve(protocol.address, web3.utils.toWei("100000"));
+      var receipt = await protocol.stake(web3.utils.toWei('100000'));
 
-      const balanceSent = web3.utils.toWei('100001');
+      const balanceSent = web3.utils.toWei('100000');
       const balanceAddress = await token.balanceOf(protocol.address);
       const totalStaked = await protocol.totalStaked();
       const userStakeSize = await protocol.userStakeSize(accounts[0]);
@@ -358,7 +347,7 @@ contract("GSVE Core Test", async accounts => {
 
   it("should revert if not the right tier", async () => {
     await token.approve(protocol.address, web3.utils.toWei("0.3"), {from: accounts[1]})
-    expectRevert(protocol.claimToken(token.address, 3, {from: accounts[1]}) , "GSVE: User has not staked enough to claim from the pool");
+    expectRevert(protocol.claimToken(gasToken.address, 3, {from: accounts[1]}) , "GSVE: User has not staked enough to claim from the pool");
   });
 
 
@@ -377,11 +366,11 @@ contract("GSVE Core Test", async accounts => {
 
   it('forwarding time by 6 hours and then try to claim more than the vaults balance of a token', async () => {
 
-    await token.transfer(accounts[1], web3.utils.toWei("100001"))
-    await timeMachine.advanceTimeAndBlock(60 * 60 * 6);
+    await token.transfer(accounts[1], web3.utils.toWei("100000"))
+    await timeMachine.advanceTimeAndBlock(60 * 60 * 7);
 
-    await token.approve(protocol.address, web3.utils.toWei("100001"), {from:accounts[1]})
-    await protocol.stake(web3.utils.toWei("100001"), {from:accounts[1]})
+    await token.approve(protocol.address, web3.utils.toWei("100000"), {from:accounts[1]})
+    await protocol.stake(web3.utils.toWei("100000"), {from:accounts[1]})
 
     await token.approve(protocol.address, web3.utils.toWei("0.5"), {from:accounts[1]})
     await protocol.claimToken(baseGasToken.address, 5)
@@ -390,7 +379,7 @@ contract("GSVE Core Test", async accounts => {
     assert.equal(gasTokenProtocolBalance.toNumber(), 0);
     
     const tokenbalance = await baseGasToken.balanceOf.call(accounts[1]);
-    assert.equal(tokenbalance.toNumber(), 103);
+    assert.equal(tokenbalance.toNumber(), 100);
   });
 
   it('user should be able to change minting rewards', async () => {
@@ -439,6 +428,16 @@ contract("GSVE Core Test", async accounts => {
 
     threshold = await protocol.getTierThreshold.call(2)
     assert.equal(web3.utils.toWei("20000"), threshold);
+  });
+
+  it("should fail to transfer ownership if not owner", async () => {
+    expectRevert(protocol.transferOwnershipOfSubcontract(gasToken.address, accounts[0], {from: accounts[1]}), "Ownable: caller is not the owner");
+  });
+
+  it("should be able to transfer ownership of an owned contract away from the protocol", async () => {
+    await protocol.transferOwnershipOfSubcontract(gasToken.address, accounts[0]);
+    var owner = await gasToken.owner()
+    assert.equal(owner, accounts[0]);
   });
 
 });
