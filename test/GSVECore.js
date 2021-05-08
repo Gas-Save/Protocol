@@ -182,7 +182,7 @@ contract("GSVE Core Test", async accounts => {
     it('user should be able to enable rewards', async () => {
       await protocol.enableRewards()
       var enabled = await protocol.getRewardEnabled()
-      assert.equal(true, enabled.toBool());
+      assert.equal(true, enabled);
     });
 
     it('should be able to mint tokens and be rewarded with gsve tokens', async () => {
