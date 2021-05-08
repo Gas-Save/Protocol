@@ -8,7 +8,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "./IGasToken.sol";
-import "./IWrappedGasToken.sol";
 
 /**
 * @dev Interface for interacting with protocol token
@@ -142,6 +141,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
         require(IERC20(GSVEToken).transferFrom(msg.sender, address(this), value));
         userStakes[msg.sender] = userStakes[msg.sender].add(value);
         userStakeTimes[msg.sender] = block.timestamp;
+        userClaimTimes[msg.sender] = block.timestamp;
         _totalStaked = _totalStaked.add(value);
         emit Staked(msg.sender, value);
     }
@@ -156,6 +156,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
         }
         userStakes[msg.sender] = 0;
         userStakeTimes[msg.sender] = 0;
+        userClaimTimes[msg.sender] = 0;
         _totalStaked = _totalStaked.sub(stakeSize);
         require(IERC20(GSVEToken).transfer(msg.sender, stakeSize));
         emit Unstaked(msg.sender, stakeSize);
@@ -175,8 +176,8 @@ contract GSVECore is Ownable, ReentrancyGuard{
 
         uint256 initialTime = Math.max(userStakeTimes[rewardedAddress], rewardEnableTime);
         uint256 timeDifference = block.timestamp.sub(initialTime);
-        uint256 rewardPeriod = timeDifference.div((60*60*1));
-        uint256 rewardPerPeriod = userStakes[rewardedAddress].div(24000);
+        uint256 rewardPeriod = timeDifference.div((60*60*6));
+        uint256 rewardPerPeriod = userStakes[rewardedAddress].div(4000);
         uint256 reward = rewardPeriod.mul(rewardPerPeriod);
 
         return reward;
@@ -216,7 +217,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 0);
         }
         else if (mintType == 2){
-            IWrappedGasToken(gasTokenAddress).discountedMint(value, 0, msg.sender);
+            IGasToken(gasTokenAddress).discountedMint(value, 0, msg.sender);
         }
         else{
             return;
@@ -235,7 +236,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 1);
         }
         else if (mintType == 2){
-            IWrappedGasToken(gasTokenAddress).discountedMint(value, 1, msg.sender);
+            IGasToken(gasTokenAddress).discountedMint(value, 1, msg.sender);
         }
         else{
             return;
@@ -255,7 +256,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 2);
         }
         else if (mintType == 2){
-            IWrappedGasToken(gasTokenAddress).discountedMint(value, 2, msg.sender);
+            IGasToken(gasTokenAddress).discountedMint(value, 2, msg.sender);
         }
         else{
             return;
@@ -276,6 +277,9 @@ contract GSVECore is Ownable, ReentrancyGuard{
         require(userTokens > 0, "GSVE: User attempted to mint too little");
         IGasToken(gasTokenAddress).mint(value);
         IERC20(gasTokenAddress).transfer(msg.sender, userTokens);
+        if(fee > 0){
+            IERC20(gasTokenAddress).transfer(GSVEVault, fee);
+        }
     }
 
     /**
@@ -288,13 +292,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
         uint256 isClaimable = _claimable[gasTokenAddress];
         require(isClaimable == 1, "GSVE: Token not claimable");
         require(userStakes[msg.sender] >= tierThreshholds[2] , "GSVE: User has not staked enough to claim from the pool");
-        
-        if(userClaimTimes[msg.sender] != 0){
-            require(block.timestamp.sub(userClaimTimes[msg.sender]) > 60 * 60 * 6, "GSVE: User cannot claim the gas tokens twice in 6 hours");
-        }
-        else{
-            require(block.timestamp.sub(userStakeTimes[msg.sender]) > 60 * 60 * 6, "GSVE: User cannot claim within 6 hours of staking");
-        }
+        require(block.timestamp.sub(userClaimTimes[msg.sender]) > 60 * 60 * 6, "GSVE: User cannot claim the gas tokens twice in 6 hours");
 
         uint256 tokensGiven = value;
 

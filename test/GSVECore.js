@@ -135,8 +135,6 @@ contract("GSVE Core Test", async accounts => {
     });
 
     it('should fail to discount minting as no tokens to burn but approval given', async () => {
-      await baseGasToken.mint(100, {from: accounts[1]});
-      await baseGasToken.approve(gasToken.address, 100, {from: accounts[1]})
       await token.approve(protocol.address, web3.utils.toWei("2"), {from: accounts[1]});
       expectRevert(protocol.burnDiscountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
     });
@@ -170,7 +168,7 @@ contract("GSVE Core Test", async accounts => {
     });
 
 
-    it('should be able to mint at a reduced fee due to already having a tier 1 stake', async () => {
+    it('should be able to wrap at a reduced fee due to already having a tier 1 stake', async () => {
       await baseGasToken.mint(100);
       await baseGasToken.approve(gasToken.address, 100)
       var receipt = await protocol.discountedMinting(gasToken.address, 100);
@@ -180,6 +178,17 @@ contract("GSVE Core Test", async accounts => {
 
       const feeHolderGasTokenBalance = await gasToken.balanceOf.call(vault.address);
       assert.equal(feeHolderGasTokenBalance.toNumber(), 2);
+    });
+
+    
+    it('should be able to mint at a reduced fee due to already having a tier 1 stake', async () => {
+      var receipt = await protocol.discountedMinting(baseGasToken.address, 100);
+
+      const gasTokenBalance = await baseGasToken.balanceOf.call(accounts[0]);
+      assert.equal(gasTokenBalance.toNumber(), 299);
+
+      const feeHolderGasTokenBalance = await baseGasToken.balanceOf.call(vault.address);
+      assert.equal(feeHolderGasTokenBalance.toNumber(), 1);
     });
 
     it('should fail to be rewarded if the contract has no rewards to give.', async () => {
@@ -279,11 +288,11 @@ contract("GSVE Core Test", async accounts => {
     it('should be able to mint tokens and be rewarded with gsve tokens', async () => {
       var receipt = await protocol.rewardedMinting(baseGasToken.address, 100, {from: accounts[2]});
 
-      const gasTokenBalance = await baseGasToken.balanceOf(accounts[2]);
-      assert.equal(gasTokenBalance.toNumber(), 98);
+      const gasTokenBalance = await baseGasToken.balanceOf.call(accounts[2]);
+      assert.equal(gasTokenBalance.toNumber(), 198);
 
-      const gasTokenProtocolBalance = await baseGasToken.balanceOf(vault.address);
-      assert.equal(gasTokenProtocolBalance.toNumber(), 2);
+      const gasTokenProtocolBalance = await baseGasToken.balanceOf.call(vault.address);
+      assert.equal(gasTokenProtocolBalance.toNumber(), 3);
 
       const gsveReward = web3.utils.toWei('1');
       const gsveBalance = await token.balanceOf(accounts[2]);
@@ -299,5 +308,131 @@ contract("GSVE Core Test", async accounts => {
       var owner = await gasToken.owner()
       assert.equal(owner, accounts[0]);
     });
+
+
+    it('staking and forwarding time by 24 hours', async () => {
+      await token.approve(protocol.address, web3.utils.toWei("100000"));
+      var receipt = await protocol.stake(web3.utils.toWei('100000'));
+
+      const balanceSent = web3.utils.toWei('100000');
+      const balanceAddress = await token.balanceOf(protocol.address);
+      const totalStaked = await protocol.totalStaked();
+      const userStakeSize = await protocol.userStakeSize(accounts[0]);
+
+      assert.equal(balanceAddress, balanceSent);
+      assert.equal(totalStaked, balanceSent);
+      assert.equal(userStakeSize, balanceSent);
+      await timeMachine.advanceTimeAndBlock(60 * 60 * 24);
+    });
+
+    it('user should have rewards', async () => {
+      var rewards = await protocol.calculateStakeReward.call(accounts[0])
+      assert.equal(web3.utils.toWei("100"), rewards.toString());
+    });
+
+    it('user should be able to claim rewards', async () => {
+        await protocol.collectReward()
+
+        var rewards = await protocol.calculateStakeReward.call(accounts[0])
+        assert.equal("0", rewards.toString());
+
+        var rewards = await protocol.totalRewardUser.call(accounts[0])
+        assert.equal(web3.utils.toWei("100"), rewards.toString());
+    });
+
+    it('user should be able to try to claim rewards but get nothing', async () => {
+      await protocol.collectReward()
+
+      var rewards = await protocol.calculateStakeReward.call(accounts[0])
+      assert.equal("0", rewards.toString());
+
+      var rewards = await protocol.totalRewardUser.call(accounts[0])
+      assert.equal(web3.utils.toWei("100"), rewards.toString());
+  });
+
+  it("should revert if trying to claim GSVE tokens", async () => {
+    await token.approve(protocol.address, web3.toWei(0.3))
+    expectRevert(protocol.claimToken(token.address, 3) , "GSVE: Token not claimable");
+  });
+
+  it("should revert if not the right tier", async () => {
+    await token.approve(protocol.address, web3.toWei(0.3))
+    expectRevert(protocol.claimToken(token.address, 3, {from: accounts[1]}) , "GSVE: User has not staked enough to claim from the pool");
+  });
+
+
+  it('user should be able to claim gas tokens', async () => {
+    await token.approve(protocol.address, web3.toWei(0.3))
+    await protocol.claimToken(gasToken.address, 3)
+
+    const gasTokenProtocolBalance = await gasToken.balanceOf(vault.address);
+    assert.equal(gasTokenProtocolBalance.toNumber(), 2);
+  }); 
+
+  it("should fail to claim tokens if already claimed in last 6 hours", async () => {
+    await token.approve(protocol.address, web3.toWei(0.3))
+    expectRevert(protocol.claimToken(gasToken.address, 3) , "GSVE: User cannot claim the gas tokens twice in 6 hours");
+  });
+
+  it('forwarding time by 6 hours and then try to claim more than the vaults balance of a token', async () => {
+    await timeMachine.advanceTimeAndBlock(60 * 60 * 6);
+
+    await token.approve(protocol.address, web3.toWei(0.5))
+    await protocol.claimToken(baseGasToken.address, 5)
+
+    var gasTokenProtocolBalance = await baseGasToken.balanceOf.call(vault.address);
+    assert.equal(gasTokenProtocolBalance.toNumber(), 0);
+    
+    const tokenbalance = await baseGasToken.balanceOf.call(accounts[0]);
+    assert.equal(tokenbalance.toNumber(), 3);
+  });
+
+  it('user should be able to change minting rewards', async () => {
+    var reward = await protocol.getMintingReward()
+    assert.equal(web3.utils.toWei(0.5), reward);
+
+    await protocol.updateMintingReward(web3.utils.toWei(0.6))
+
+    reward = await protocol.getMintingReward()
+    assert.equal(web3.utils.toWei(0.6), reward);
+  });
+
+  it('user should be able to change updateBurnClaimFee rewards', async () => {
+    var reward = await protocol.getBurnToClaimGasTokens()
+    assert.equal(web3.utils.toWei(0.1), reward);
+
+    await protocol.updateBurnClaimFee(web3.utils.toWei(1))
+
+    reward = await protocol.getBurnToClaimGasTokens()
+    assert.equal(web3.utils.toWei(1), reward);
+  });
+
+  
+  it('user should be able to updateBurnSaveFee', async () => {
+    var reward = await protocol.getBurnToSaveFee()
+    assert.equal(web3.utils.toWei(0.25), reward);
+
+    await protocol.updateBurnSaveFee(web3.utils.toWei(1))
+
+    reward = await protocol.getBurnToSaveFee()
+    assert.equal(web3.utils.toWei(1), reward);
+  });
+
+  it('user should be able to update tiers', async () => {
+    var threshold = await protocol.getTierThreshold.call(1)
+    assert.equal(web3.utils.toWei(25000), threshold);
+
+    threshold = await protocol.getTierThreshold.call(2)
+    assert.equal(web3.utils.toWei(100000), threshold);
+
+    await protocol.updateTier(1, web3.utils.toWei(10000))
+    await protocol.updateTier(2, web3.utils.toWei(20000))
+
+    threshold = await protocol.getTierThreshold.call(1)
+    assert.equal(web3.utils.toWei(10000), threshold);
+
+    threshold = await protocol.getTierThreshold.call(2)
+    assert.equal(web3.utils.toWei(20000), threshold);
+  });
 
 });
