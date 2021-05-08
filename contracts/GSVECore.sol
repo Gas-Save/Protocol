@@ -33,7 +33,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
 
     //system is in place to prevent reentrancy from untrusted tokens
     mapping(address => uint256) private _mintingType;
-    mapping(address => uint256) private _claimable;
+    mapping(address => bool) private _claimable;
 
     uint256 private _totalStaked;
 
@@ -127,6 +127,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
         GSVEVault = _vaultAddress;
         tierThreshholds[1] = 25000*(10**18);
         tierThreshholds[2] = 100000*(10**18);
+        _claimable[_tokenAddress] = false;
     }
 
     /**
@@ -280,8 +281,8 @@ contract GSVECore is Ownable, ReentrancyGuard{
      */
     function claimToken(address gasTokenAddress, uint256 value) public nonReentrant() {
 
-        uint256 isClaimable = _claimable[gasTokenAddress];
-        require(isClaimable == 1, "GSVE: Token not claimable");
+        bool isClaimable = _claimable[gasTokenAddress];
+        require(isClaimable, "GSVE: Token not claimable");
         require(userStakes[msg.sender] >= tierThreshholds[2] , "GSVE: User has not staked enough to claim from the pool");
         require(block.timestamp.sub(userClaimTimes[msg.sender]) > 60 * 60 * 6, "GSVE: User cannot claim the gas tokens twice in 6 hours");
 
@@ -303,7 +304,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
     /**
      * @dev A function that allows us to enable gas tokens for use with this contract.
      */
-    function addGasToken(address gasToken, uint256 mintType, uint256 isClaimable) public onlyOwner{
+    function addGasToken(address gasToken, uint256 mintType, bool isClaimable) public onlyOwner{
         _mintingType[gasToken] = mintType;
         _claimable[gasToken] = isClaimable;
     }
@@ -311,7 +312,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
     /**
      * @dev A function that allows us to easily check claim type of the token.
      */
-    function claimable(address gasToken) public view returns (uint256){
+    function claimable(address gasToken) public view returns (bool){
         return _claimable[gasToken];
     }
 
