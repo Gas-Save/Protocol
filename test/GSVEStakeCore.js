@@ -4,8 +4,8 @@ const GSVEToken  = artifacts.require ("./GSVEToken.sol");
 const GSVEProtocol = artifacts.require ("./GSVEStakeCore.sol");
 const GST1GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken1.sol");
 const wrappedToken = artifacts.require("./WrappedGasToken.sol");
-const GS_Deployer  = artifacts.require ("./GSVEContractDeployer.sol");
-const GS_Wrapper  = artifacts.require ("./GSVETransactionWrapper.sol");
+const GS_Deployer  = artifacts.require ("./GSVEDeployer.sol");
+const GS_Wrapper  = artifacts.require ("./GSVESmartWrapper.sol");
 const GSVEVault = artifacts.require ("./GSVEVault.sol");
 const timeMachine = require('ganache-time-traveler');
 

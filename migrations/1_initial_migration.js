@@ -1,5 +1,5 @@
-var rFuel  = artifacts.require ("./RocketFuel.sol");
+var token  = artifacts.require ("./GSVEToken.sol");
 
 module.exports = function (deployer) {
-  deployer.deploy(rFuel);
+  deployer.deploy(token);
 };

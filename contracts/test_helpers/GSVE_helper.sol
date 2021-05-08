@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../IGSVEToken.sol";
+import "../IGasToken.sol";
 
 contract GSVE_helper {
 
@@ -30,21 +30,21 @@ contract GSVE_helper {
 
     function burnGasAndFree(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
-        require(IGSVEToken(gas_token).free(free) > 0, "burnGasAndFree");
+        require(IGasToken(gas_token).free(free) > 0, "burnGasAndFree");
     }
 
     function burnGasAndFreeUpTo(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
-        require(free == IGSVEToken(gas_token).freeUpTo(free), "burnGasAndFreeUpTo");
+        require(free == IGasToken(gas_token).freeUpTo(free), "burnGasAndFreeUpTo");
     }
 
     function burnGasAndFreeFrom(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
-        require(IGSVEToken(gas_token).freeFrom(tx.origin, free) > 0, "burnGasAndFreeFrom");
+        require(IGasToken(gas_token).freeFrom(tx.origin, free) > 0, "burnGasAndFreeFrom");
     }
 
     function burnGasAndFreeFromUpTo(address gas_token, uint256 burn, uint256 free) public {
         burnGas(burn);
-        require(free == IGSVEToken(gas_token).freeFromUpTo(tx.origin, free), "burnGasAndFreeFromUpTo");
+        require(free == IGasToken(gas_token).freeFromUpTo(tx.origin, free), "burnGasAndFreeFromUpTo");
     }
 }
