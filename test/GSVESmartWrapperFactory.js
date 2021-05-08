@@ -169,31 +169,30 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
       assert.equal(true, true);
   });
-
   it('Should be able to call function by proxy, and this should successfully forward a payment, and then burn SG1', async function () {
 
-      helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
-      var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
+    helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
+    var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
 
-      await baseGasToken.mint(100);
-      await baseGasToken.approve(gasToken.address, 97);
-      await gasToken.mint(97);
-      await gasToken.transfer(wrapper.address, 97)
-      
-      await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
-      var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
-      console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    await baseGasToken.mint(100);
+    await baseGasToken.approve(gasToken.address, 97);
+    await gasToken.mint(97);
+    await gasToken.transfer(wrapper.address, 97)
+    
+    await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+    var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
+    console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
 
 
-      helper_balance = await web3.eth.getBalance(helper.address);
-      wrapper_balance = await web3.eth.getBalance(wrapper.address);
+    helper_balance = await web3.eth.getBalance(helper.address);
+    wrapper_balance = await web3.eth.getBalance(wrapper.address);
 
-      assert.equal(helper_balance, ether("0.45"));
-      assert.equal(wrapper_balance, ether("0"));
-  });
+    assert.equal(helper_balance, ether("0.45"));
+    assert.equal(wrapper_balance, ether("0"));
+});
 
-  it('should fail to upgrade if no gsve tokens approved for burning', async () => {
-    expectRevert(wrapper.upgradeProxy(), "ERC20: burn amount exceeds allowance.");
+it('should fail to upgrade if no gsve tokens approved for burning', async () => {
+    expectRevert(wrapper.upgradeProxy(), "ERC20: burn amount exceeds allowance");
 });
 
 it('should be able to upgrade smart wrapper', async () => {

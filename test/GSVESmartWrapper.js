@@ -162,7 +162,7 @@ contract("Wrapper Test", async accounts => {
     });
 
     it('should fail to upgrade if no gsve tokens approved for burning', async () => {
-        expectRevert(wrapper.upgradeProxy(), "ERC20: burn amount exceeds allowance.");
+        expectRevert(wrapper.upgradeProxy(), "ERC20: burn amount exceeds allowance");
     });
     
     it('should be able to upgrade smart wrapper', async () => {
@@ -191,4 +191,4 @@ contract("Wrapper Test", async accounts => {
       });
     
     
-    });
+});

@@ -35,20 +35,20 @@ contract("GSVE Core Test", async accounts => {
       deployer = await GS_Deployer.new();
       console.log("deployer Address " + deployer.address);
 
-      wrapper = await GS_Wrapper.new();
+      wrapper = await GS_Wrapper.new(token.address);
       console.log("wrapper Address " + wrapper.address);
 
     });
 
     it('should be able to add a token to the list of deployer supported tokens', async () => {
-      await deployer.addGasToken(gasToken.address);
+      await deployer.addGasToken(gasToken.address, 25130);
 
       var compatible = await deployer.compatibleGasToken(gasToken.address);
       assert.equal(compatible.toNumber(), 1);
     });
 
     it('should be able to add a token to the list of wrapper supported tokens', async () => {
-      await wrapper.addGasToken(gasToken.address);
+      await wrapper.addGasToken(gasToken.address, 15000);
       var compatible = await wrapper.compatibleGasToken(gasToken.address);
       assert.equal(compatible.toNumber(), 1);
     });
@@ -143,7 +143,7 @@ contract("GSVE Core Test", async accounts => {
     it('should fail to be rewarded if the contract has no rewards to give.', async () => {
       await baseGasToken.mint(100, {from: accounts[3]});
       await baseGasToken.approve(gasToken.address, 100, {from: accounts[3]})
-      expectRevert(protocol.rewardedMinting(gasToken.address, 100, {from: accounts[3]}), "GSVE: contract has ran out of rewards to give.");
+      expectRevert(protocol.rewardedMinting(gasToken.address, 100, {from: accounts[3]}), "GSVE: contract has ran out of rewards to give");
     });
 
     it('contract should be given some tokens to distribute', async () => {
