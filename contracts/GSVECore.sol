@@ -219,9 +219,6 @@ contract GSVECore is Ownable, ReentrancyGuard{
         else if (mintType == 2){
             IGasToken(gasTokenAddress).discountedMint(value, 0, msg.sender);
         }
-        else{
-            return;
-        }
     }
 
     /**
@@ -237,9 +234,6 @@ contract GSVECore is Ownable, ReentrancyGuard{
         }
         else if (mintType == 2){
             IGasToken(gasTokenAddress).discountedMint(value, 1, msg.sender);
-        }
-        else{
-            return;
         }
     }
     
@@ -257,9 +251,6 @@ contract GSVECore is Ownable, ReentrancyGuard{
         }
         else if (mintType == 2){
             IGasToken(gasTokenAddress).discountedMint(value, 2, msg.sender);
-        }
-        else{
-            return;
         }
 
         IGSVEVault(GSVEVault).transferToken(GSVEToken, msg.sender, mintingReward);
