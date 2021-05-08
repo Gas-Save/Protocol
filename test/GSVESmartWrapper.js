@@ -67,6 +67,17 @@ contract("Wrapper Test", async accounts => {
         assert.equal(true, true);
     });
 
+    it('Should return when called address is not a contract', async function () {
+        helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
+        var burner_callData = helper_w3.methods.burnGas(147000).encodeABI();
+        
+        var receipt = await wrapper.wrapTransaction(burner_callData, accounts[0], 0, gasToken.address);
+        console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+
+        assert.equal(true, true);
+    });
+
+
     it('Should be able to call function by proxy and not try to burn gas', async function () {
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
         var burner_callData = helper_w3.methods.burnGas(147000).encodeABI();

@@ -107,69 +107,69 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
       assert.equal(true, true);
   });
-
   it('should revert when trying to withdraw gastoken balance', async () => {
-      expectRevert(wrapper.withdrawTokenBalance(gasToken.address, {from: accounts[1]}), "Ownable: caller is not the owner");
-  });
+    expectRevert(wrapper.withdrawTokenBalance(gasToken.address, {from: accounts[1]}), "Ownable: caller is not the owner");
+});
 
-  it('Should be able to call function by proxy, and this should successfully forward a payment, when no gas tokens', async function () {
+it('Should be able to call function by proxy, and this should successfully forward a payment, when no gas tokens', async function () {
 
-      helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
-      var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
+    helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
+    var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
 
-      await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
-      var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
-      console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+    var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), gasToken.address);
+    console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
 
-      helper_balance = await web3.eth.getBalance(helper.address);
-      wrapper_balance = await web3.eth.getBalance(wrapper.address);
+    helper_balance = await web3.eth.getBalance(helper.address);
+    wrapper_balance = await web3.eth.getBalance(wrapper.address);
 
-      assert.equal(helper_balance, ether("0.15"));
-      assert.equal(wrapper_balance, ether("0"));
-  });
+    assert.equal(helper_balance, ether("0.15"));
+    assert.equal(wrapper_balance, ether("0"));
+});
 
-  it('Should be able to call function by proxy, and this should successfully forward a payment, without trying to save gas', async function () {
+it('Should be able to call function by proxy, and this should successfully forward a payment, without trying to save gas', async function () {
 
-      helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
-      var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
+    helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
+    var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();
 
-      await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
-      var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), zerox);
-      console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+    var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, ether("0.15"), zerox);
+    console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
 
-      helper_balance = await web3.eth.getBalance(helper.address);
-      wrapper_balance = await web3.eth.getBalance(wrapper.address);
+    helper_balance = await web3.eth.getBalance(helper.address);
+    wrapper_balance = await web3.eth.getBalance(wrapper.address);
 
-      assert.equal(helper_balance, ether("0.3"));
-      assert.equal(wrapper_balance, ether("0"));
-  });
+    assert.equal(helper_balance, ether("0.3"));
+    assert.equal(wrapper_balance, ether("0"));
+});
 
-  it('should be able to send the contract some coins', async () => {
-      await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
-      wrapper_balance = await web3.eth.getBalance(wrapper.address);
-      assert.equal(wrapper_balance, ether("0.15"));
-  });
-  
-  it('should allow the withdrawal of balance', async () => {
-      await wrapper.withdrawBalance();
-      wrapper_balance = await web3.eth.getBalance(wrapper.address);
-      assert.equal(wrapper_balance, ether("0"));
-  });
+it('should be able to send the contract some coins', async () => {
+    await web3.eth.sendTransaction({from:accounts[0], to:wrapper.address, value: web3.utils.toWei("0.15")})
+    wrapper_balance = await web3.eth.getBalance(wrapper.address);
+    assert.equal(wrapper_balance, ether("0.15"));
+});
 
-  it('Should be able to call function by proxy and burn ', async function () {
-      await baseGasToken.mint(100);
-      await baseGasToken.approve(gasToken.address, 97);
-      await gasToken.mint(97);
-      await gasToken.transfer(wrapper.address, 97)
-      helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
-      var burner_callData = helper_w3.methods.burnGas(147000).encodeABI();
-      
-      var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, 0, gasToken.address);
-      console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+it('should allow the withdrawal of balance', async () => {
+    await wrapper.withdrawBalance();
+    wrapper_balance = await web3.eth.getBalance(wrapper.address);
+    assert.equal(wrapper_balance, ether("0"));
+});
 
-      assert.equal(true, true);
-  });
-  it('Should be able to call function by proxy, and this should successfully forward a payment, and then burn SG1', async function () {
+it('Should be able to call function by proxy and burn ', async function () {
+    await baseGasToken.mint(100);
+    await baseGasToken.approve(gasToken.address, 97);
+    await gasToken.mint(97);
+    await gasToken.transfer(wrapper.address, 97)
+    helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
+    var burner_callData = helper_w3.methods.burnGas(147000).encodeABI();
+    
+    var receipt = await wrapper.wrapTransaction(burner_callData, helper.address, 0, gasToken.address);
+    console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+
+    assert.equal(true, true);
+});
+
+it('Should be able to call function by proxy, and this should successfully forward a payment, and then burn SG1', async function () {
 
     helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
     var burner_callData = helper_w3.methods.burnGasAndAcceptPayment(147000).encodeABI();

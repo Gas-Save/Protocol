@@ -73,7 +73,6 @@ contract GSVESmartWrapper {
     */
     function upgradeProxy() public onlyOwner{
         require(_upgraded == false, "GSVE: Wrapper Already Upgraded.");
-        require(GSVEToken != address(0), "GSVE: gsve token not referenced");
         IGSVEToken(GSVEToken).burnFrom(msg.sender, 100*10**18);
 
         // add CHI gas token
@@ -166,18 +165,6 @@ contract GSVESmartWrapper {
     }
 
     /**
-     * @dev Leaves the contract without owner. It will not be possible to call
-     * `onlyOwner` functions anymore. Can only be called by the current owner.
-     *
-     * NOTE: Renouncing ownership will leave the contract without an owner,
-     * thereby removing any functionality that is only available to the owner.
-     */
-    function renounceOwnership() public virtual onlyOwner {
-        emit OwnershipTransferred(_owner, address(0));
-        _owner = address(0);
-    }
-
-    /**
      * @dev Transfers ownership of the contract to a new account (`newOwner`).
      * Can only be called by the current owner.
      */
@@ -189,11 +176,6 @@ contract GSVESmartWrapper {
 
     function _msgSender() internal view virtual returns (address) {
         return msg.sender;
-    }
-
-    function _msgData() internal view virtual returns (bytes calldata) {
-        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
-        return msg.data;
     }
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
