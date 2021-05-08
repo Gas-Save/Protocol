@@ -14,8 +14,7 @@ contract("Wrapped ChiToken Token Test", async accounts => {
 
     it("should be able deploy contracts", async () => {
 
-
-        baseGasToken = await ChiGasToken.new();
+        baseGasToken = await ChiGasToken.at("0x0000000000004946c0e9F43F4Dee607b0eF1fA1c");
         instance = await wrappedToken.new(baseGasToken.address, "Wrapped Chi by Gas Save", "wChi");
 
         helper = await GSVE_helper.new();
@@ -180,7 +179,7 @@ contract("Wrapped GST2 Token Test", async accounts => {
 
     it("should be able deploy contracts", async () => {
 
-        baseGasToken = await GST2GasToken.new();
+        baseGasToken = await GST2GasToken.at("0x0000000000b3F879cb30FE243b4Dfee438691c04");
         instance = await wrappedToken.new(baseGasToken.address, "Wrapped GST2 by Gas Save", "wGST2");
 
 
@@ -344,7 +343,7 @@ contract("Wrapped GST1 Token Test", async accounts => {
 
     it("should be able deploy contracts", async () => {
 
-        baseGasToken = await GST1GasToken.new();
+        baseGasToken = await GST1GasToken.at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");
         instance = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
         helper = await GSVE_helper.new();
     });

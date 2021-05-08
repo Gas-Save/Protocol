@@ -11,7 +11,7 @@ contract("GSVE Contract Deployer Test", async accounts => {
     var deployer;
 
     it('should be able to deploy contracts', async () => {
-      baseGasToken = await GST1GasToken.new();
+      baseGasToken = await GST1GasToken.at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");;
       gasToken = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
       console.log("wGST Address " + gasToken.address);
 

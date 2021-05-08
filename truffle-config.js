@@ -27,10 +27,15 @@ module.exports = {
       host: "localhost",
       port: 7545,
       network_id: "5777"
+    },
+	developmentcli: {
+      host: "localhost",
+      port: 8545,
+      network_id: "5777"
     },  
 	ropsten: {
 		provider: function() {
-		  return new HDWalletProvider([json['mnemonic1'], json['mnemonic2'], json['mnemonic3']], "https://ropsten.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5");
+		  return new HDWalletProvider([json['mnemonic1'], json['mnemonic2'], json['mnemonic3']], "wss://eth-ropsten.ws.alchemyapi.io/v2/U95uLFWWqSikszXr0UBfQJSL6qkStVGJ");
 		},
     network_id: '3',
   },
