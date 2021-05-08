@@ -113,6 +113,20 @@ contract("GSVE Core Test", async accounts => {
       expectRevert(protocol.burnDiscountedMinting(gasToken.address, 100, {from: accounts[1]}), 'ERC20: burn amount exceeds balance.');
     });
 
+    it('should be able to try to stake 0 gsve without error', async () => {
+      await token.approve(protocol.address, web3.utils.toWei("0"));
+      var receipt = await protocol.stake(web3.utils.toWei('0'));
+
+      const balanceSent = web3.utils.toWei('0');
+      const balanceAddress = await token.balanceOf(protocol.address);
+      const totalStaked = await protocol.totalStaked();
+      const userStakeSize = await protocol.userStakeSize(accounts[0]);
+
+      assert.equal(balanceAddress, balanceSent);
+      assert.equal(totalStaked, balanceSent);
+      assert.equal(userStakeSize, balanceSent);
+    });
+
     it('should be able to stake gsve', async () => {
       await token.approve(protocol.address, web3.utils.toWei("25000"));
       var receipt = await protocol.stake(web3.utils.toWei('25000'));
@@ -126,6 +140,7 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(totalStaked, balanceSent);
       assert.equal(userStakeSize, balanceSent);
     });
+
 
     it('should be able to mint at a reduced fee due to already having a tier 1 stake', async () => {
       await baseGasToken.mint(100);
