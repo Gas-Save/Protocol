@@ -38,6 +38,12 @@ contract("GSVE Contract Deployer Test", async accounts => {
       console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
     });
 
+    it('should be able to deploy a contract that is not a ownable and use no gas tokens', async () => {
+      var byteCode = byteCodeNonOwnedJson["bytecode"];
+      var receipt = await deployer.GsveDeploy(byteCode, "0x0000000000000000000000000000000000000000", {from: accounts[0]});
+      console.log(`GasUsed: ${receipt.receipt.gasUsed}`);
+    });
+
     it('should be able to deploy a contract that is not a ownable', async () => {
       var byteCode = byteCodeNonOwnedJson["bytecode"];
       var receipt = await deployer.GsveDeploy(byteCode, gasToken.address, {from: accounts[0]});

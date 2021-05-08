@@ -17,8 +17,6 @@ interface IFreeFromUpTo {
 */
 contract GSVEDeployer is Ownable{
     mapping(address => uint256) private _compatibleGasTokens;
-    mapping(uint256 => address) private _reverseTokenMap;
-    mapping(address => address) private _deployedWalletAddressLocation;
     mapping(address => uint256) private _freeUpValue;
     uint256 private _totalSupportedTokens = 0;
 
@@ -29,14 +27,7 @@ contract GSVEDeployer is Ownable{
         _compatibleGasTokens[gasToken] = 1;
         _freeUpValue[gasToken] = freeUpValue;
     }
-
-    /**
-    * @dev return the location of a users deployed wrapper
-    */
-    function deployedWalletAddressLocation(address creator) public view returns(address){
-        return _deployedWalletAddressLocation[creator];
-    }
-
+    
     /**
     * @dev function to check if a gas token is supported by the deployer
     */
