@@ -40,8 +40,8 @@ module.exports = {
         return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5")
       },
       network_id: 1
-    }
-  }
+    },
+  },
   plugins: ["solidity-coverage"],
   // Set default mocha options here, use special reporters etc.
   mocha: { /* https://github.com/cgewecke/eth-gas-reporter
@@ -67,3 +67,4 @@ module.exports = {
 	},
   },
 }
+
