@@ -28,22 +28,20 @@ module.exports = {
       host: "localhost",
       port: 7545,
       network_id: "5777"
-    },
-    testnet: {
-      provider: () => new HDWalletProvider(mnemonic, `https://data-seed-prebsc-2-s3.binance.org:8545/`),
-      network_id: 97,
-      confirmations: 10,
-      timeoutBlocks: 200,
-      skipDryRun: true,
-    },
-    bsc: {
-      provider: () => new HDWalletProvider(mnemonic, `https://bsc-dataseed1.binance.org`),
-      network_id: 56,
-      confirmations: 10,
-      timeoutBlocks: 200,
-      skipDryRun: true
-    },
+    },  
+	ropsten: {
+		provider: function() {
+		  return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5");
+		},
+    network_id: '3',
   },
+    mainnet: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5")
+      },
+      network_id: 1
+    }
+  }
   plugins: ["solidity-coverage"],
   // Set default mocha options here, use special reporters etc.
   mocha: { /* https://github.com/cgewecke/eth-gas-reporter
@@ -60,6 +58,12 @@ module.exports = {
  compilers: {
     solc:{
 		version: "^0.8.0",
+		settings: {
+		optimizer: {
+			  enabled: true,
+			  runs: 200   // Optimize for how many times you intend to run the code
+			},
+      },
 	},
   },
 }
