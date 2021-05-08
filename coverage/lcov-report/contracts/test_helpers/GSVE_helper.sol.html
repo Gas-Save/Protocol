@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>8/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>4/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">42.86% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/7</span>
+        <span class='fraction'>7/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">27.27% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/11</span>
+        <span class='fraction'>11/11</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -101,6 +101,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -116,31 +124,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
@@ -173,24 +173,24 @@ contract GSVE_helper {
         }
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    function burnGasAndFree(address gas_token, uint256 burn, uint256 free) public {</span>
-<span class="cstat-no" title="statement not covered" >        burnGas(burn)</span>;
-<span class="cstat-no" title="statement not covered" >        require(IGasToken(gas_token).free(free) &gt; 0, "burnGasAndFree")</span>;
+    function burnGasAndFree(address gas_token, uint256 burn, uint256 free) public {
+        burnGas(burn);
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(IGasToken(gas_token).free(free) &gt; 0, "burnGasAndFree");
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    function burnGasAndFreeUpTo(address gas_token, uint256 burn, uint256 free) public {</span>
-<span class="cstat-no" title="statement not covered" >        burnGas(burn)</span>;
-<span class="cstat-no" title="statement not covered" >        require(free == IGasToken(gas_token).freeUpTo(free), "burnGasAndFreeUpTo")</span>;
+    function burnGasAndFreeUpTo(address gas_token, uint256 burn, uint256 free) public {
+        burnGas(burn);
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(free == IGasToken(gas_token).freeUpTo(free), "burnGasAndFreeUpTo");
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    function burnGasAndFreeFrom(address gas_token, uint256 burn, uint256 free) public {</span>
-<span class="cstat-no" title="statement not covered" >        burnGas(burn)</span>;
-<span class="cstat-no" title="statement not covered" >        require(IGasToken(gas_token).freeFrom(tx.origin, free) &gt; 0, "burnGasAndFreeFrom")</span>;
+    function burnGasAndFreeFrom(address gas_token, uint256 burn, uint256 free) public {
+        burnGas(burn);
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(IGasToken(gas_token).freeFrom(tx.origin, free) &gt; 0, "burnGasAndFreeFrom");
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    function burnGasAndFreeFromUpTo(address gas_token, uint256 burn, uint256 free) public {</span>
-<span class="cstat-no" title="statement not covered" >        burnGas(burn)</span>;
-<span class="cstat-no" title="statement not covered" >        require(free == IGasToken(gas_token).freeFromUpTo(tx.origin, free), "burnGasAndFreeFromUpTo")</span>;
+    function burnGasAndFreeFromUpTo(address gas_token, uint256 burn, uint256 free) public {
+        burnGas(burn);
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(free == IGasToken(gas_token).freeFromUpTo(tx.origin, free), "burnGasAndFreeFromUpTo");
     }
 }
 &nbsp;</pre></td></tr>
@@ -199,7 +199,7 @@ contract GSVE_helper {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 08 2021 18:29:38 GMT+0100 (British Summer Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 08 2021 19:56:38 GMT+0100 (British Summer Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
