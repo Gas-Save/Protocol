@@ -4,6 +4,7 @@
     "@openzeppelin/test-helpers": "^0.5.10",
     "@truffle/hdwallet-provider": "^1.2.6",
     "ganache-time-traveler": "^1.0.15",
-    "rlp": "^2.2.6"
+    "rlp": "^2.2.6",
+    "solidity-coverage": "^0.7.16"
   }
 }

@@ -44,6 +44,7 @@ module.exports = {
       skipDryRun: true
     },
   },
+  plugins: ["solidity-coverage"],
   // Set default mocha options here, use special reporters etc.
   mocha: { /* https://github.com/cgewecke/eth-gas-reporter
     reporter: 'eth-gas-reporter',
