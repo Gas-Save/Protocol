@@ -1,7 +1,7 @@
 const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 const GSVEToken  = artifacts.require ("./GSVEToken.sol");
-const GSVEProtocol = artifacts.require ("./GSVEStakeCore.sol");
+const GSVEProtocolCore = artifacts.require ("./GSVECore.sol");
 const GST1GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken1.sol");
 const wrappedToken = artifacts.require("./WrappedGasToken.sol");
 const GS_Deployer  = artifacts.require ("./GSVEDeployer.sol");
@@ -29,7 +29,7 @@ contract("GSVE Core Test", async accounts => {
       vault = await GSVEVault.new();
       console.log("Vault Address " + vault.address);
 
-      protocol = await GSVEProtocol.new(token.address, vault.address);
+      protocol = await GSVEProtocolCore.new(token.address, vault.address);
       console.log("Core Address " + protocol.address);
 
       deployer = await GS_Deployer.new();
@@ -83,7 +83,7 @@ contract("GSVE Core Test", async accounts => {
     });
   
     it('should be able to burn gsve to save on protocol minting fee', async () => {
-      await token.approve(protocol.address, web3.utils.toWei("2"));
+      await token.approve(protocol.address, web3.utils.toWei("0.25"));
       await baseGasToken.mint(100);
       await baseGasToken.approve(gasToken.address, 100)
       var receipt = await protocol.burnDiscountedMinting(gasToken.address, 100);
@@ -94,7 +94,7 @@ contract("GSVE Core Test", async accounts => {
       const feeHolderGasTokenBalance = await gasToken.balanceOf.call(protocol.address);
       assert.equal(feeHolderGasTokenBalance, 0);
 
-      const New_SUPPLY = web3.utils.toWei('99999998');
+      const New_SUPPLY = web3.utils.toWei('99999999.75');
       const totalSupplyGSVE = await token.totalSupply();
       const balanceAdmin = await token.balanceOf(accounts[0]);
       assert.equal(totalSupplyGSVE.toString(), New_SUPPLY);
@@ -164,6 +164,27 @@ contract("GSVE Core Test", async accounts => {
       expectRevert(protocol.rewardedMinting(token.address, 100, {from: accounts[2]}), "GSVE: Unsupported Token");
     });
 
+    it('should fail to claim reward if rewards are not enabled', async () => {
+      await baseGasToken.mint(100);
+      await baseGasToken.approve(gasToken.address, 100)
+      expectRevert(protocol.rewardedMinting(gasToken.address, 100), 'GSVE: Rewards are not enabled');
+    });
+
+    it('forwarding time by 6 hours', async () => {
+      await timeMachine.advanceTimeAndBlock(60 * 60 * 6);
+    });
+
+    it('user should have no rewards', async () => {
+      var rewards = await protocol.calculateStakeReward.call(accounts[0])
+      assert.equal("0", rewards.toString());
+    });
+
+    it('user should be able to enable rewards', async () => {
+      await protocol.enableRewards()
+      var enabled = await protocol.getRewardEnabled()
+      assert.equal(true, enabled.toBool());
+    });
+
     it('should be able to mint tokens and be rewarded with gsve tokens', async () => {
       await baseGasToken.mint(100);
       await baseGasToken.approve(gasToken.address, 100, {from: accounts[2]})
@@ -180,7 +201,5 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(gsveReward.toString(), gsveBalance.toString());
     });
 
-    it('should be able to claim tokens after x time', async () => {
-      await timeMachine.advanceTimeAndBlock(60 * 60 * 13);
-    });
+
 });

@@ -25,33 +25,125 @@ interface IGSVEVault {
     function transferToken(address token, address recipient, uint256 amount) external;
 }
 
-contract GSVEStakeCore is Ownable, ReentrancyGuard{
+contract GSVECore is Ownable, ReentrancyGuard{
     using SafeMath for uint256;
     
     //address of our protocol utility token
     address private GSVEToken;
-
     address private GSVEVault;
-
-    //supported gas tokens
-    uint256 private totalSupportedGasTokens = 0;
 
     //system is in place to prevent reentrancy from untrusted tokens
     mapping(address => uint256) private _mintingType;
     mapping(address => uint256) private _claimable;
 
-    //fee stake threshholds;
-    uint256 private tierOneThreshold = 25000 * (10**18);
-    uint256 private tierTwoThreshold = 100000 * (10**18);
-
-    uint256 private _totalStaked = 0;
+    uint256 private _totalStaked;
 
     //staking  
     mapping(address => uint256) private userStakes;
     mapping(address => uint256) private userStakeTimes;
     mapping(address => uint256) private userTotalRewards;
-
     mapping(address => uint256) private userClaimTimes;
+
+    //protocol values
+    mapping(uint256=>uint256) private tierThreshholds;
+    uint256 rewardEnableTime;
+
+    bool rewardsEnabled = false;
+    uint256 burnToSaveFee = 25*10**16;
+    uint256 burnToClaimGasTokens = 1*10**17;
+
+    //cost to "upgrade" wrapper
+    uint256 wrapperUpgradeCost = 100*10**18; 
+
+    //cost to deploy the gsve-adapted gnosis wallet
+    uint256 gnosisWalletDeployCost = 100*10**18; 
+
+    //cost to use unwrapped tokens in a deployer transaction
+    uint256 unwrappedDeployerCost = 1*10**18; 
+
+
+    /**
+     * @dev A function that enables protocol rewards
+     */
+    function enableRewards() public onlyOwner {
+        require(rewardsEnabled == false, "GSVE: Rewards already enabled");
+        rewardsEnabled = true;
+        rewardEnableTime = block.timestamp;
+        emit rewardsToggled(true);
+    }
+
+    /**
+    * @dev A function that disables rewards
+    */
+    function disableRewards() public onlyOwner {
+        require(rewardsEnabled, "GSVE: Rewards not already enabled");
+        rewardsEnabled = false;
+        rewardEnableTime = 0;
+        emit rewardsToggled(false);
+    }
+
+    /**
+     * @dev A function that allows us to update the tier threshold
+     */
+    function updateTier(uint256 tier, uint256 value) public onlyOwner {
+        require(value > 10**18, "GSVE: Tier value seems to be low.");
+        tierThreshholds[tier] = value;
+        emit TierUpdate(tier, value);
+    }
+
+    /**
+     * @dev A function that allows us to update the burn gsve:save fee ratio
+     */
+    function updateBurnSaveFee(uint256 value) public onlyOwner{
+        require(value > 10**17, "GSVE: Fee Value seems to be low.");
+        burnToSaveFee = value;
+        emit feeUpdated(0x6275726e00000000000000000000000000000000000000000000000000000000, value);
+    }
+
+    /**
+     * @dev A function that allows us to update the burn gsve:claim gastoken ratio
+     */
+    function updateBurnClaimFee(uint256 value) public onlyOwner{
+        require(value > 10**17, "GSVE: Fee Value seems to be low.");
+        burnToClaimGasTokens= value;
+        emit feeUpdated(0x636c61696d000000000000000000000000000000000000000000000000000000, value);
+    }
+
+    /**
+     * @dev A function that allows us to update the burn gsve:claim gastoken ratio
+     */
+    function updateUpgradeFee(uint256 value) public onlyOwner{
+        require(value > 10**18, "GSVE: Fee Value seems to be low.");
+        wrapperUpgradeCost = value;
+        emit feeUpdated(0x7570677261646500000000000000000000000000000000000000000000000000, value);
+    }
+
+    /**
+     * @dev A function that allows us to update the burn gsve:claim gastoken ratio
+     */
+    function updateGnosisFee(uint256 value) public onlyOwner{
+        require(value > 10**18, "GSVE: Fee Value seems to be low.");
+        wrapperUpgradeCost = value;
+        emit feeUpdated(0x7361666500000000000000000000000000000000000000000000000000000000, value);
+    }
+
+    
+    /**
+     * @dev A function that allows us to update the burn gsve:claim gastoken ratio
+     */
+    function updateUnwrappedDeployerCost(uint256 value) public onlyOwner{
+        require(value > 10**18, "GSVE: Fee Value seems to be low.");
+        unwrappedDeployerCost = value;
+        emit feeUpdated(0x6465706c6f796572000000000000000000000000000000000000000000000000, value);
+    }
+
+    /**
+     * @dev A function that allows us to reassign ownership of the contracts that this contract owns. 
+     /* Enabling future smartcontract upgrades without the complexity of proxy/proxy upgrades.
+     */
+    function transferOwnershipOfSubcontract(address ownedContract, address newOwner) public onlyOwner{
+        Ownable(ownedContract).transferOwnership(newOwner);
+    }
 
     /**
      * @dev the constructor allows us to set the gsve token
@@ -61,15 +153,15 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
     constructor(address _tokenAddress, address _vaultAddress) {
         GSVEToken = _tokenAddress;
         GSVEVault = _vaultAddress;
+        tierThreshholds[1] = 25000*(10**18);
+        tierThreshholds[2] = 100000*(10**18);
     }
-
 
     /**
      * @dev A function that allows a user to stake tokens. 
      * If they have a rewards from a stake already, they must claim this first.
      */
     function stake(uint256 value) public nonReentrant() {
-        require(calculateStakeReward(msg.sender) == 0, "GSVE: User has stake rewards they must claim before updating stake.");
 
         if (value == 0){
             return;
@@ -104,7 +196,12 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
             return 0;
         }
 
-        uint256 timeDifference = block.timestamp.sub(userStakeTimes[rewardedAddress]);
+        if(rewardsEnabled == false){
+            return 0;
+        }
+
+        uint256 initialTime = Math.max(userStakeTimes[rewardedAddress], rewardEnableTime);
+        uint256 timeDifference = block.timestamp.sub(initialTime);
         uint256 rewardPeriod = timeDifference.div((60*60*1));
         uint256 rewardPerPeriod = userStakes[rewardedAddress].div(24000);
         uint256 reward = rewardPeriod.mul(rewardPerPeriod);
@@ -120,6 +217,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
     function collectReward() public nonReentrant() {
         uint256 remainingRewards = totalRewards();
         require(remainingRewards > 0, "GSVE: contract has ran out of rewards to give");
+        require(rewardsEnabled, "GSVE: Rewards are not enabled");
 
         uint256 reward = calculateStakeReward(msg.sender);
         if(reward == 0){
@@ -139,7 +237,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
     function burnDiscountedMinting(address gasTokenAddress, uint256 value) public nonReentrant() {
         uint256 mintType = _mintingType[gasTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
-        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, 2*10**18);
+        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, burnToSaveFee);
 
         if(mintType == 1){
             convenientMinting(gasTokenAddress, value, 0);
@@ -158,7 +256,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
     function discountedMinting(address gasTokenAddress, uint256 value) public nonReentrant(){
         uint256 mintType = _mintingType[gasTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
-        require(userStakes[msg.sender] >= tierOneThreshold , "GSVE: User has not staked enough to discount");
+        require(userStakes[msg.sender] >= tierThreshholds[1] , "GSVE: User has not staked enough to discount");
 
         if(mintType == 1){
             convenientMinting(gasTokenAddress, value, 1);
@@ -179,6 +277,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
         uint256 mintType = _mintingType[gasTokenAddress];
         require(mintType != 0, "GSVE: Unsupported Token");
         require(totalRewards() > 0, "GSVE: contract has ran out of rewards to give");
+        require(rewardsEnabled, "GSVE: Rewards are not enabled");
         if(mintType == 1){
             convenientMinting(gasTokenAddress, value, 2);
         }
@@ -215,7 +314,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
 
         uint256 isClaimable = _claimable[gasTokenAddress];
         require(isClaimable == 1, "GSVE: Token not claimable");
-        require(userStakes[msg.sender] >= tierTwoThreshold , "GSVE: User has not staked enough to claim from the pool");
+        require(userStakes[msg.sender] >= tierThreshholds[2] , "GSVE: User has not staked enough to claim from the pool");
         
         if(userClaimTimes[msg.sender] != 0){
             require(block.timestamp.sub(userClaimTimes[msg.sender]) > 60 * 60 * 6, "GSVE: User cannot claim the gas tokens twice in 6 hours");
@@ -233,7 +332,7 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
             return;
         }
 
-        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, tokensGiven*1*10**18);
+        IGSVEProtocolToken(GSVEToken).burnFrom(msg.sender, tokensGiven * burnToClaimGasTokens);
         IGSVEVault(GSVEVault).transferToken(gasTokenAddress, msg.sender, tokensGiven);
         userClaimTimes[msg.sender] = block.timestamp;
         emit Claimed(msg.sender, gasTokenAddress, tokensGiven);
@@ -290,11 +389,59 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
     }
 
     /**
-     * @dev A function that allows us to reassign ownership of the contracts that this contract owns. 
-     /* Enabling future smartcontract upgrades without the complexity of proxy/proxy upgrades.
-     */
-    function transferOwnershipOfSubcontract(address ownedContract, address newOwner) public onlyOwner{
-        Ownable(ownedContract).transferOwnership(newOwner);
+    * @dev A function that allows us to get a tier threshold
+    */
+    function getTierThreshold(uint256 tier)  public view returns (uint256){
+        return tierThreshholds[tier];
+    }
+
+    /**
+    * @dev A function that allows us to get the time rewards where enabled
+    */
+    function getRewardEnableTime()  public view returns (uint256){
+        return rewardEnableTime;
+    }
+
+    /**
+    * @dev A function that allows us to get the time rewards where enabled
+    */
+    function getRewardEnabled()  public view returns (bool){
+        return rewardsEnabled;
+    }
+
+    /**
+    * @dev A function that allows us to get the burnToSaveFee 
+    */
+    function getBurnToSaveFee()  public view returns (uint){
+        return burnToSaveFee;
+    }
+
+    /**
+    * @dev A function that allows us to get the burnToClaimGasTokens 
+    */
+    function getBurnToClaimGasTokens()  public view returns (uint){
+        return burnToClaimGasTokens;
+    }
+
+    /**
+    * @dev A function that allows us to get the wrapperUpgradeCost 
+    */
+    function getWrapperUpgradeCost()  public view returns (uint){
+        return wrapperUpgradeCost;
+    }
+
+    /**
+    * @dev A function that allows us to get the gnosisWalletDeployCost 
+    */
+    function getGnosisWalletDeployCost()  public view returns (uint){
+        return gnosisWalletDeployCost;
+    }
+
+    /**
+    * @dev A function that allows us to get the unwrappedDeployerCost 
+    */
+    function getUnwrappedDeployerCost()  public view returns (uint){
+        return unwrappedDeployerCost;
     }
 
     event Claimed(address indexed _from, address indexed _token, uint _value);
@@ -304,4 +451,10 @@ contract GSVEStakeCore is Ownable, ReentrancyGuard{
     event Staked(address indexed _from, uint _value);
 
     event Unstaked(address indexed _from, uint _value);
+
+    event TierUpdate(uint256 _tier, uint256 _value);
+
+    event feeUpdated(bytes32 _type, uint256 _value);
+
+    event rewardsToggled(bool _value);
 }
