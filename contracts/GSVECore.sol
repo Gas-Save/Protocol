@@ -51,15 +51,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
     bool rewardsEnabled = false;
     uint256 burnToSaveFee = 25*10**16;
     uint256 burnToClaimGasTokens = 1*10**17;
-
-    //cost to "upgrade" wrapper
-    uint256 wrapperUpgradeCost = 100*10**18; 
-
-    //cost to deploy the gsve-adapted gnosis wallet
-    uint256 gnosisWalletDeployCost = 100*10**18; 
-
-    //cost to use unwrapped tokens in a deployer transaction
-    uint256 unwrappedDeployerCost = 1*10**18; 
+    uint256 mintingReward = 5*10**17;
 
 
     /**
@@ -69,7 +61,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
         require(rewardsEnabled == false, "GSVE: Rewards already enabled");
         rewardsEnabled = true;
         rewardEnableTime = block.timestamp;
-        emit rewardsToggled(true);
+        emit protocolUpdated(0x656e61626c655570646174650000000000000000000000000000000000000000, 1);
     }
 
     /**
@@ -79,7 +71,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
         require(rewardsEnabled, "GSVE: Rewards not already enabled");
         rewardsEnabled = false;
         rewardEnableTime = 0;
-        emit rewardsToggled(false);
+        emit protocolUpdated(0x656e61626c655570646174650000000000000000000000000000000000000000, 0);
     }
 
     /**
@@ -95,46 +87,27 @@ contract GSVECore is Ownable, ReentrancyGuard{
      * @dev A function that allows us to update the burn gsve:save fee ratio
      */
     function updateBurnSaveFee(uint256 value) public onlyOwner{
-        require(value > 10**17, "GSVE: Fee Value seems to be low.");
+        require(value > 10**17, "GSVE: Value seems to be low.");
         burnToSaveFee = value;
-        emit feeUpdated(0x6275726e00000000000000000000000000000000000000000000000000000000, value);
+        emit protocolUpdated(0x6275726e00000000000000000000000000000000000000000000000000000000, value);
     }
 
     /**
      * @dev A function that allows us to update the burn gsve:claim gastoken ratio
      */
     function updateBurnClaimFee(uint256 value) public onlyOwner{
-        require(value > 10**17, "GSVE: Fee Value seems to be low.");
+        require(value > 10**17, "GSVE: Value seems to be low.");
         burnToClaimGasTokens= value;
-        emit feeUpdated(0x636c61696d000000000000000000000000000000000000000000000000000000, value);
+        emit protocolUpdated(0x636c61696d000000000000000000000000000000000000000000000000000000, value);
     }
 
     /**
      * @dev A function that allows us to update the burn gsve:claim gastoken ratio
      */
-    function updateUpgradeFee(uint256 value) public onlyOwner{
-        require(value > 10**18, "GSVE: Fee Value seems to be low.");
-        wrapperUpgradeCost = value;
-        emit feeUpdated(0x7570677261646500000000000000000000000000000000000000000000000000, value);
-    }
-
-    /**
-     * @dev A function that allows us to update the burn gsve:claim gastoken ratio
-     */
-    function updateGnosisFee(uint256 value) public onlyOwner{
-        require(value > 10**18, "GSVE: Fee Value seems to be low.");
-        wrapperUpgradeCost = value;
-        emit feeUpdated(0x7361666500000000000000000000000000000000000000000000000000000000, value);
-    }
-
-    
-    /**
-     * @dev A function that allows us to update the burn gsve:claim gastoken ratio
-     */
-    function updateUnwrappedDeployerCost(uint256 value) public onlyOwner{
-        require(value > 10**18, "GSVE: Fee Value seems to be low.");
-        unwrappedDeployerCost = value;
-        emit feeUpdated(0x6465706c6f796572000000000000000000000000000000000000000000000000, value);
+    function updateMintingReward(uint256 value) public onlyOwner{
+        require(value > 10**17, "GSVE: Value seems to be low.");
+        mintingReward = value;
+        emit protocolUpdated(0x6d696e74696e6700000000000000000000000000000000000000000000000000, value);
     }
 
     /**
@@ -288,7 +261,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             return;
         }
 
-        IGSVEVault(GSVEVault).transferToken(GSVEToken, msg.sender, 5*10**17);
+        IGSVEVault(GSVEVault).transferToken(GSVEToken, msg.sender, mintingReward);
     }
 
     /**
@@ -412,49 +385,33 @@ contract GSVECore is Ownable, ReentrancyGuard{
     /**
     * @dev A function that allows us to get the burnToSaveFee 
     */
-    function getBurnToSaveFee()  public view returns (uint){
+    function getBurnToSaveFee()  public view returns (uint256){
         return burnToSaveFee;
     }
 
     /**
     * @dev A function that allows us to get the burnToClaimGasTokens 
     */
-    function getBurnToClaimGasTokens()  public view returns (uint){
+    function getBurnToClaimGasTokens()  public view returns (uint256){
         return burnToClaimGasTokens;
     }
 
-    /**
-    * @dev A function that allows us to get the wrapperUpgradeCost 
+        /**
+    * @dev A function that allows us to get the burnToClaimGasTokens 
     */
-    function getWrapperUpgradeCost()  public view returns (uint){
-        return wrapperUpgradeCost;
+    function getMintingReward()  public view returns (uint256){
+        return mintingReward;
     }
 
-    /**
-    * @dev A function that allows us to get the gnosisWalletDeployCost 
-    */
-    function getGnosisWalletDeployCost()  public view returns (uint){
-        return gnosisWalletDeployCost;
-    }
+    event Claimed(address indexed _from, address indexed _token, uint256 _value);
 
-    /**
-    * @dev A function that allows us to get the unwrappedDeployerCost 
-    */
-    function getUnwrappedDeployerCost()  public view returns (uint){
-        return unwrappedDeployerCost;
-    }
+    event Reward(address indexed _from, uint256 _value);
 
-    event Claimed(address indexed _from, address indexed _token, uint _value);
+    event Staked(address indexed _from, uint256 _value);
 
-    event Reward(address indexed _from, uint _value);
-
-    event Staked(address indexed _from, uint _value);
-
-    event Unstaked(address indexed _from, uint _value);
+    event Unstaked(address indexed _from, uint256 _value);
 
     event TierUpdate(uint256 _tier, uint256 _value);
 
-    event feeUpdated(bytes32 _type, uint256 _value);
-
-    event rewardsToggled(bool _value);
+    event protocolUpdated(bytes32 _type, uint256 _value);
 }

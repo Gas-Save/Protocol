@@ -71,7 +71,6 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(owner, protocol.address);
     });
 
-
     it('should be able to add a token to the list of supported tokens', async () => {
 
       await protocol.addGasToken(gasToken.address, 2, 1);
@@ -185,6 +184,26 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(true, enabled);
     });
 
+    it('user should be able to disable rewards', async () => {
+      await protocol.disableRewards()
+      var enabled = await protocol.getRewardEnabled()
+      assert.equal(false, enabled);
+    });
+
+    it('should fail to update reward enable if already enabled', async () => {
+      expectRevert(protocol.disableRewards(), "GSVE: Rewards not already enabled");
+    });
+
+    it('user should be able to enable rewards', async () => {
+      await protocol.enableRewards()
+      var enabled = await protocol.getRewardEnabled()
+      assert.equal(true, enabled);
+    });
+
+    it('should fail to update reward enable if already enabled', async () => {
+      expectRevert(protocol.enableRewards(), "GSVE: Rewards already enabled");
+    });
+
     it('should be able to mint tokens and be rewarded with gsve tokens', async () => {
       await baseGasToken.mint(100);
       await baseGasToken.approve(gasToken.address, 100, {from: accounts[2]})
@@ -200,6 +219,5 @@ contract("GSVE Core Test", async accounts => {
       const gsveBalance = await token.balanceOf(accounts[2]);
       assert.equal(gsveReward.toString(), gsveBalance.toString());
     });
-
 
 });
