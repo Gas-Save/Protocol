@@ -31,7 +31,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -2340,9 +2341,37 @@
     "name": "solc",
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8E16Bf3D17eE22F0C1486c4fCaA77AC9702a2f16",
+      "transactionHash": "0xee2d4ae9632a7c34026e2830d6772efd498dda202a2f5e05445140b4e9871914"
+    }
+  },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-08T14:10:58.099Z",
+  "updatedAt": "2021-05-09T07:00:03.328Z",
+  "networkType": "ethereum",
   "devdoc": {
     "details": "This smart contract is a \"vault\" it holds onto the fees that the protocol has gathered and any GSVE that is to be rewarded from protocol iteraction",
     "kind": "dev",
