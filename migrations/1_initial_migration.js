@@ -19,6 +19,8 @@ module.exports = async(deployer) => {
   var core = await deployer.deploy(GSVEProtocolCore, gsvetoken.address, GSVEVault.address)
 
   console.log("Setting up contracts")
+  console.log("GSVE Token: " + gsvetoken.address)
+  
   var vaultInstance = await GSVEVault.at(GSVEVault.address);
   console.log("vault: " + GSVEVault.address)
   await vaultInstance.transferOwnership(GSVEProtocolCore.address)
