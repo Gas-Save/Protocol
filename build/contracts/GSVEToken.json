@@ -7894,6 +7894,12 @@
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x52658344b4877f3a45949C3b05d9Fef188Aed46e",
+      "transactionHash": "0x3bf51d9b572459dc8560da6b24d32d48ee91d4c6cc8941a2e9c66e8a4b0dfa06"
+    },
     "5777": {
       "events": {
         "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
@@ -7953,7 +7959,7 @@
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-09T07:00:03.301Z",
+  "updatedAt": "2021-05-09T07:37:28.746Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "the GSVE token is a ERC20 token with burning capabilities",

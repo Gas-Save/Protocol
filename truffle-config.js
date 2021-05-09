@@ -46,7 +46,10 @@ module.exports = {
       network_id: 1
     },
   },
-  plugins: ["solidity-coverage"],
+  plugins: ["solidity-coverage", 'truffle-plugin-verify'],
+  api_keys: {
+    etherscan: json['etherscan']
+  },
   // Set default mocha options here, use special reporters etc.
   mocha: { /* https://github.com/cgewecke/eth-gas-reporter
     reporter: 'eth-gas-reporter',

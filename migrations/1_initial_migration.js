@@ -53,5 +53,8 @@ module.exports = async(deployer) => {
   await deployercontractInstance.addGasToken(wgst2.address, 41130); //wgst2
   await deployercontractInstance.addGasToken(wgst1.address, 25130); //wgst1
   await deployercontractInstance.transferOwnership(GSVEProtocolCore.address)
+
+  var wrapperMainInstance = await GS_WrapperFactory.at(GS_Wrapper.address)
+  await wrapperMainInstance.transferOwnership(GSVEProtocolCore.address)
   
 };

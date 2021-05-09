@@ -9710,6 +9710,51 @@
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {
+        "0x33c981baba081f8fd2c52ac6ad1ea95b6814b4376640f55689051f6584729688": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "creator",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "deploymentAddress",
+              "type": "address"
+            }
+          ],
+          "name": "ContractDeployed",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x03C608596f374df489884760e88B4016e6F72A73",
+      "transactionHash": "0x88c40192897c21a9a48776ec1092fcaaf37c9f30113d08382f342b97d0627ffc"
+    },
     "5777": {
       "events": {
         "0x33c981baba081f8fd2c52ac6ad1ea95b6814b4376640f55689051f6584729688": {
@@ -9757,7 +9802,7 @@
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-09T07:00:03.336Z",
+  "updatedAt": "2021-05-09T07:37:28.777Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "the gsve deployer has two purposes it deploys gsve smart wrappers, keeping track of the owners it allows users to deploy smart contracts using create and create2",
