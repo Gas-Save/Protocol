@@ -2391,12 +2391,12 @@
         }
       },
       "links": {},
-      "address": "0x1D4b2af1F4e2c4F366A4C17bd15358648F39D20d",
-      "transactionHash": "0x4d35a038bc40393864dacc11999b1193b3349653ee5f5e0e6132f46f21bf9b67"
+      "address": "0xB63cE76f06f07135449f661eB8aB71c97d0f7195",
+      "transactionHash": "0xd62fa3f9d4d7eab63c6ef57c29fdc68b7ffe08389db93a3ed305622d132075b3"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-10T07:33:24.397Z",
+  "updatedAt": "2021-05-10T12:05:00.382Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "This smart contract is a \"vault\" it holds onto the fees that the protocol has gathered and any GSVE that is to be rewarded from protocol iteraction",

@@ -76,7 +76,7 @@ contract("GSVE Contract Deployer Test", async accounts => {
     });
 
     it('should revert when trying change owner using init', async () => {
-        expectRevert(wrapper.wrapTransaction(accounts[2], token.address), "This contract is already owned");
+        expectRevert(wrapper.init(accounts[2], token.address), "This contract is already owned");
       });
 
       

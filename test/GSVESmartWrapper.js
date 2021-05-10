@@ -29,7 +29,7 @@ contract("Wrapper Test", async accounts => {
       });
 
       it('should revert when trying change owner using init', async () => {
-        expectRevert(wrapper.wrapTransaction(accounts[2], token.address), "This contract is already owned");
+        expectRevert(wrapper.init(accounts[2], token.address), "This contract is already owned");
       });
       
     it('should revert when trying to use a non-supported gas token address', async () => {

@@ -6,26 +6,43 @@ pragma solidity ^0.8.0;
 */
 interface  IGSVESmartWrapper{
 
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     * also sets the GSVE token reference
+     */
+    function init (address initialOwner, address _GSVEToken) external;
+
+    /**
+    * @dev allow the contract to recieve funds. 
+    * This will be needed for dApps that check balances before enabling transaction creation.
+    */
     receive() external payable;
-    
-     /**
+
+    /**
     * @dev sets the contract as inited
     */
     function setInited() external;
-
     /**
     * @dev function to enable gas tokens.
     * by default the wrapped tokens are added when the wrapper is deployed
     * using efficiency values based on a known token gas rebate that we store on contract.
     * DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!
+    * costs 5 gsve to add custom gas tokens if done after the wallet is inited
     */
     function addGasToken(address gasToken, uint256 freeUpValue) external;
 
+    /**
+    * @dev function to 'upgrade the proxy' by enabling unwrapped gas token support
+    * the user must burn 10 GSVE to upgrade the proxy.
+    */
+    function upgradeProxy() external;
     /**
     * @dev checks if the gas token is supported
     */
     function compatibleGasToken(address gasToken) external view returns(uint256);
 
+    
     /**
     * @dev the wrapTransaction function interacts with other smart contracts on the users behalf
     * this wrapper works for any smart contract
@@ -45,30 +62,16 @@ interface  IGSVESmartWrapper{
     function withdrawTokenBalance(address token) external;
 
     /**
-     * @dev Initializes the contract setting the deployer as the initial owner.
-     */
-    function init (address initialOwner, address _GSVEToken) external;
-
-    /**
      * @dev Returns the address of the current owner.
      */
-
     function owner() external view returns (address);
-    /**
-     * @dev Leaves the contract without owner. It will not be possible to call
-     * `onlyOwner` functions anymore. Can only be called by the current owner.
-     *
-     * NOTE: Renouncing ownership will leave the contract without an owner,
-     * thereby removing any functionality that is only available to the owner.
-     */
-    function renounceOwnership() external;
 
     /**
      * @dev Transfers ownership of the contract to a new account (`newOwner`).
      * Can only be called by the current owner.
      */
     function transferOwnership(address newOwner) external;
-
+    
     /**
      * @dev Returns the upgrade status of the wrapper
      */
