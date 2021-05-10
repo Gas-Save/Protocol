@@ -35,7 +35,7 @@ module.exports = {
     },  
 	ropsten: {
 		provider: function() {
-		  return new HDWalletProvider([json['mnemonic1'], json['mnemonic2'], json['mnemonic3']], "wss://eth-ropsten.ws.alchemyapi.io/v2/U95uLFWWqSikszXr0UBfQJSL6qkStVGJ");
+		  return new HDWalletProvider([json['mnemonic1'], json['mnemonic2'], json['mnemonic3']], "wss://ropsten.infura.io/ws/v3/9af22c382b3142389625451f5193fc76");
 		},
     network_id: '3',
   },
