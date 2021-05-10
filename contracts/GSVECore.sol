@@ -395,13 +395,27 @@ contract GSVECore is Ownable, ReentrancyGuard{
         return burnToClaimGasTokens;
     }
 
-        /**
+    /**
     * @dev A function that allows us to get the burnToClaimGasTokens 
     */
     function getMintingReward()  public view returns (uint256){
         return mintingReward;
     }
 
+    /**
+    * @dev A function that allows us to get the stake times
+    */
+    function getStakeTimes(address staker)  public view returns (uint256){
+        return userStakeTimes[staker];
+    }
+
+    /**
+    * @dev A function that allows us to get the claim times
+    */
+    function getClaimTimes(address staker)  public view returns (uint256){
+        return userClaimTimes[staker];
+    }
+    
     event Claimed(address indexed _from, address indexed _token, uint256 _value);
 
     event Reward(address indexed _from, uint256 _value);

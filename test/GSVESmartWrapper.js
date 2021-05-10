@@ -28,6 +28,9 @@ contract("Wrapper Test", async accounts => {
         helper = await GSVE_helper.new();
       });
 
+      it('should revert when trying change owner using init', async () => {
+        expectRevert(wrapper.wrapTransaction(accounts[2], token.address), "This contract is already owned");
+      });
       
     it('should revert when trying to use a non-supported gas token address', async () => {
         helper_w3 = new web3.eth.Contract(helper.abi, helper.address);
@@ -223,6 +226,9 @@ contract("Wrapper Test", async accounts => {
     
         var compatible = await wrapper.compatibleGasToken("0x0000000000004946c0e9F43F4Dee607b0eF1fA1c");
         assert.equal(compatible.toNumber(), 1);
+
+        var upgraded = await wrapper.getUpgraded.call();
+        assert.equal(true, upgraded)
     });
     
     it('should fail to upgrade if already upgraded', async () => {
@@ -239,6 +245,6 @@ contract("Wrapper Test", async accounts => {
           account_balance = await gasToken.balanceOf.call(accounts[0])
           assert.equal(0, wrapper_balance.toNumber())
       });
-    
+
     
     });

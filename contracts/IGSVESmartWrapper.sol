@@ -69,4 +69,9 @@ interface  IGSVESmartWrapper{
      */
     function transferOwnership(address newOwner) external;
 
+    /**
+     * @dev Returns the upgrade status of the wrapper
+     */
+    function getUpgraded() external view returns (bool);
+    
 }

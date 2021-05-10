@@ -7954,12 +7954,12 @@
         }
       },
       "links": {},
-      "address": "0xD0985dC4168150fF00F9b99cd46DaFF6ED7dBa9b",
-      "transactionHash": "0x20a730aab03f305f042725ceb29021797d540fc5461dfb111302480e1089f1d9"
+      "address": "0x58CF4F767D10B4c35Ee7eD536DB0229c3BF6c02A",
+      "transactionHash": "0xefc366e7c5a5196d0c91660a3a0f6837e4ccf1e847c40feb127b81ece34e6160"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-10T07:26:00.761Z",
+  "updatedAt": "2021-05-10T07:33:24.375Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "the GSVE token is a ERC20 token with burning capabilities",

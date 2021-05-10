@@ -446,4 +446,23 @@ contract("GSVE Core Test", async accounts => {
     const gasTokenBalance = await baseGasToken.balanceOf.call(accounts[3]);
     assert.equal(gasTokenBalance, 48);
   });
+
+    it('should be able to get the user stake time', async () => {
+    var times = await protocol.getStakeTimes.call(accounts[0]);
+    var t = false
+    if(times.toString() !== "0"){
+      t = true
+    }
+    assert.equal(true, t);
+  });
+
+    it('should be able to get the user claim time', async () => {
+    var times = await protocol.getClaimTimes.call(accounts[0]);
+    var t = false
+    if(times.toString() !== "0"){
+      t = true
+    }
+    assert.equal(true, t);
+    });
+
 });

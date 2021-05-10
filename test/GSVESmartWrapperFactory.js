@@ -75,6 +75,9 @@ contract("GSVE Contract Deployer Test", async accounts => {
       
     });
 
+    it('should revert when trying change owner using init', async () => {
+        expectRevert(wrapper.wrapTransaction(accounts[2], token.address), "This contract is already owned");
+      });
 
       
     it('should revert when trying to use a non-supported gas token address', async () => {
@@ -236,15 +239,18 @@ it('should fail to upgrade if no gsve tokens approved for burning', async () => 
     expectRevert(wrapper.upgradeProxy(), "ERC20: burn amount exceeds allowance");
 });
 
-it('should be able to upgrade smart wrapper', async () => {
-    token.approve(wrapper.address, web3.utils.toWei("10"));
-    await wrapper.upgradeProxy();
-    account_balance = await token.balanceOf.call(accounts[0])
-    assert.equal(web3.utils.toWei("99999985"), account_balance.toString());
+    it('should be able to upgrade smart wrapper', async () => {
+        token.approve(wrapper.address, web3.utils.toWei("10"));
+        await wrapper.upgradeProxy();
+        account_balance = await token.balanceOf.call(accounts[0])
+        assert.equal(web3.utils.toWei("99999985"), account_balance.toString());
+    
+        var compatible = await wrapper.compatibleGasToken("0x0000000000004946c0e9F43F4Dee607b0eF1fA1c");
+        assert.equal(compatible.toNumber(), 1);
 
-    var compatible = await wrapper.compatibleGasToken("0x0000000000004946c0e9F43F4Dee607b0eF1fA1c");
-    assert.equal(compatible.toNumber(), 1);
-});
+        var upgraded = await wrapper.getUpgraded.call();
+        assert.equal(true, upgraded)
+    });
 
 it('should fail to upgrade if already upgraded', async () => {
     token.approve(wrapper.address, web3.utils.toWei("10"));

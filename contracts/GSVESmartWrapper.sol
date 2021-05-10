@@ -192,5 +192,13 @@ contract GSVESmartWrapper {
         return msg.sender;
     }
 
+    
+    /**
+     * @dev Returns the upgrade status of the wrapper
+     */
+    function getUpgraded() public view virtual returns (bool) {
+        return _upgraded;
+    }
+
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 }
