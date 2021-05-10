@@ -154,10 +154,10 @@ contract("GSVE Core Test", async accounts => {
     });
 
     it('should be able to stake gsve', async () => {
-      await token.approve(protocol.address, web3.utils.toWei("25000"));
-      var receipt = await protocol.stake(web3.utils.toWei('25000'));
+      await token.approve(protocol.address, web3.utils.toWei("250"));
+      var receipt = await protocol.stake(web3.utils.toWei('250'));
 
-      const balanceSent = web3.utils.toWei('25000');
+      const balanceSent = web3.utils.toWei('250');
       const balanceAddress = await token.balanceOf(protocol.address);
       const totalStaked = await protocol.totalStaked();
       const userStakeSize = await protocol.userStakeSize(accounts[0]);
@@ -366,11 +366,11 @@ contract("GSVE Core Test", async accounts => {
 
   it('forwarding time by 6 hours and then try to claim more than the vaults balance of a token', async () => {
 
-    await token.transfer(accounts[1], web3.utils.toWei("100000"))
+    await token.transfer(accounts[1], web3.utils.toWei("1000"))
     await timeMachine.advanceTimeAndBlock(60 * 60 * 7);
 
-    await token.approve(protocol.address, web3.utils.toWei("100000"), {from:accounts[1]})
-    await protocol.stake(web3.utils.toWei("100000"), {from:accounts[1]})
+    await token.approve(protocol.address, web3.utils.toWei("1000"), {from:accounts[1]})
+    await protocol.stake(web3.utils.toWei("1000"), {from:accounts[1]})
 
     await token.approve(protocol.address, web3.utils.toWei("0.5"), {from:accounts[1]})
     await protocol.claimToken(baseGasToken.address, 5)
@@ -415,19 +415,19 @@ contract("GSVE Core Test", async accounts => {
 
   it('user should be able to update tiers', async () => {
     var threshold = await protocol.getTierThreshold.call(1)
-    assert.equal(web3.utils.toWei("25000"), threshold);
+    assert.equal(web3.utils.toWei("250"), threshold);
 
     threshold = await protocol.getTierThreshold.call(2)
-    assert.equal(web3.utils.toWei("100000"), threshold);
+    assert.equal(web3.utils.toWei("1000"), threshold);
 
-    await protocol.updateTier(1, web3.utils.toWei("10000"))
-    await protocol.updateTier(2, web3.utils.toWei("20000"))
+    await protocol.updateTier(1, web3.utils.toWei("10"))
+    await protocol.updateTier(2, web3.utils.toWei("200"))
 
     threshold = await protocol.getTierThreshold.call(1)
-    assert.equal(web3.utils.toWei("10000"), threshold);
+    assert.equal(web3.utils.toWei("10"), threshold);
 
     threshold = await protocol.getTierThreshold.call(2)
-    assert.equal(web3.utils.toWei("20000"), threshold);
+    assert.equal(web3.utils.toWei("200"), threshold);
   });
 
   it("should fail to transfer ownership if not owner", async () => {
@@ -440,4 +440,10 @@ contract("GSVE Core Test", async accounts => {
     assert.equal(owner, accounts[0]);
   });
 
+  it('should be able to mint using the convenience function', async () => {
+    var receipt = await protocol.mintGasToken(baseGasToken.address, 50, {from:accounts[3]});
+
+    const gasTokenBalance = await baseGasToken.balanceOf.call(accounts[3]);
+    assert.equal(gasTokenBalance, 48);
+  });
 });

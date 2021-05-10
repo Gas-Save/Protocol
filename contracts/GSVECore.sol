@@ -125,8 +125,8 @@ contract GSVECore is Ownable, ReentrancyGuard{
     constructor(address _tokenAddress, address _vaultAddress) {
         GSVEToken = _tokenAddress;
         GSVEVault = _vaultAddress;
-        tierThreshholds[1] = 25000*(10**18);
-        tierThreshholds[2] = 100000*(10**18);
+        tierThreshholds[1] = 250*(10**18);
+        tierThreshholds[2] = 1000*(10**18);
         _claimable[_tokenAddress] = false;
     }
 
@@ -273,6 +273,15 @@ contract GSVECore is Ownable, ReentrancyGuard{
             IERC20(gasTokenAddress).transfer(GSVEVault, fee);
         }
     }
+
+    
+    /**
+     * @dev public entry to the convenient minting function
+     */
+    function mintGasToken(address gasTokenAddress, uint256 value) public {
+        convenientMinting(gasTokenAddress, value, 2);
+    }
+
 
     /**
      * @dev A function that allows a user to claim tokens from the pool
