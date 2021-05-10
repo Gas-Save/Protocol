@@ -9752,8 +9752,8 @@
         }
       },
       "links": {},
-      "address": "0x03C608596f374df489884760e88B4016e6F72A73",
-      "transactionHash": "0x88c40192897c21a9a48776ec1092fcaaf37c9f30113d08382f342b97d0627ffc"
+      "address": "0x6BD5aD6d3a46177A3302776EA192C8b7160327C0",
+      "transactionHash": "0x26ede67b75ad2ea9d294457451c0890aeeb27bd1cfccfc2bbd11eb39d59fc1d6"
     },
     "5777": {
       "events": {
@@ -9802,7 +9802,7 @@
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-10T12:05:00.389Z",
+  "updatedAt": "2021-05-10T13:36:57.158Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "the gsve deployer has two purposes it deploys gsve smart wrappers, keeping track of the owners it allows users to deploy smart contracts using create and create2",
