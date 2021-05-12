@@ -21254,12 +21254,12 @@
         }
       },
       "links": {},
-      "address": "0x4f8513833EAF182811A07B73B8234EDAfD094063",
-      "transactionHash": "0x0de9000ff51bc8e1fbc43555f1cb2a18f51a1ab0d36111c970275509b80b0562"
+      "address": "0x013280eE09b067B438e1c2be5d0366584F1e1b85",
+      "transactionHash": "0x046ad8c8ae9c6fe7673fbdc7acf6fc9a4f4b1e8acb0b117e80925b5bd242cc5d"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-10T13:36:57.184Z",
+  "updatedAt": "2021-05-12T21:03:21.723Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "The v1 smart wrapper is the core gas saving feature it can interact with other smart contracts it burns gas to save on the transaction fee only the owner/deployer of the smart contract can interact with it only the owner can send tokens from the address (smart contract) only the owner can withdraw tokens of any type, and this goes directly to the owner.",

@@ -5,9 +5,11 @@ var GS_Deployer  = artifacts.require ("./GSVEDeployer.sol");
 var GS_WrapperFactory  = artifacts.require ("./GSVESmartWrapperFactory.sol");
 var GS_Wrapper  = artifacts.require ("./GSVESmartWrapper.sol");
 var GSVEProtocolCore = artifacts.require ("./GSVECore.sol");
+var GSVEBeacon  = artifacts.require ("./GSVEBeacon.sol");
 
 
 module.exports = async(deployer) => {
+
   var vault = await deployer.deploy(GSVEVault)
   var token = await deployer.deploy(gsvetoken)
   var wchi = await deployer.deploy(wrappedToken,"0x0000000000004946c0e9F43F4Dee607b0eF1fA1c", "Wrapped Chi by Gas Save", "wChi")
@@ -66,5 +68,7 @@ module.exports = async(deployer) => {
   var wrapperMainInstance = await GS_WrapperFactory.at(GS_Wrapper.address)
   console.log("wrapper: " + GS_Wrapper.address)
   await wrapperMainInstance.transferOwnership(GSVEProtocolCore.address)
-  
+
+  var beacon = await deployer.deploy(GSVEBeacon,wchi.address, wgst2.address, wgst1.address)
+  console.log("beacon: " + GSVEBeacon.address)
 };
