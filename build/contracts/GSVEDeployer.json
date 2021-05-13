@@ -9797,8 +9797,8 @@
         }
       },
       "links": {},
-      "address": "0xDe5D5fa976Cb22dF09024Fa30EEA9b0eA610e5D0",
-      "transactionHash": "0x7c9b64ba24f2de49ba44a5d8607cebdc5b820b2cf7da881dcb898286c86c9a87"
+      "address": "0x6597E58124066B3c18566D4C4542353d145C222f",
+      "transactionHash": "0x543f8fe44cebee9c3d29a5039d8777174653cc49588a634ad90f93f4eca517f3"
     },
     "5777": {
       "events": {
@@ -9842,12 +9842,12 @@
         }
       },
       "links": {},
-      "address": "0x5D0C61D5686363b9942d45d79909574484533Cc8",
-      "transactionHash": "0xb42573f14b5abc4bcf4835c7d54a358528c81e8d8589520fbd9176aebf3995a7"
+      "address": "0x0e02d1456b5b617e6D9F7D80157d8dCff3E54F58",
+      "transactionHash": "0xb696f76c32918e9fb07d3fa9560e9419d0d181cbc425e0d3028ed2d474bed16a"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-13T09:10:51.354Z",
+  "updatedAt": "2021-05-13T16:07:52.513Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "the gsve deployer has two purposes it deploys gsve smart wrappers, keeping track of the owners it allows users to deploy smart contracts using create and create2",

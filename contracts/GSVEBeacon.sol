@@ -67,8 +67,8 @@ contract GSVEBeacon is Ownable{
     function initSafe(address owner, address safe) public onlyOwner{
         require(_deployedAddress[owner] == address(0), "GSVE: address already init'd");
         _deployedAddress[owner] = safe;
-        _addressGasToken[safe] = 0x0000000000004946c0e9F43F4Dee607b0eF1fA1c;
-        emit UpdatedGasToken(safe, 0x0000000000004946c0e9F43F4Dee607b0eF1fA1c);
+        _addressGasToken[safe] = address(0);
+        emit UpdatedGasToken(safe, address(0));
     }
 
     event UpdatedGasToken(address safe, address gasToken);

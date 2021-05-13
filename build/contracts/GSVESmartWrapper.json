@@ -21254,8 +21254,8 @@
         }
       },
       "links": {},
-      "address": "0x4ac6574B4aBCcd5610B139EE98b99705443ddFA2",
-      "transactionHash": "0x6be49200eb42e27b722a87bf70816769bfcf5bb8cc1e490116f0324cf6775b7b"
+      "address": "0xB833A7518878E13611aCF8229e5e91eDE3A87576",
+      "transactionHash": "0x4b2de461b1b3a43b33ddacd4f1732426f377344fa79e9245c5d44628fbe9c558"
     },
     "5777": {
       "events": {
@@ -21280,12 +21280,12 @@
         }
       },
       "links": {},
-      "address": "0x2dC2F97216Ae6aaFCc17d1078CD27F0BEe7eeDFa",
-      "transactionHash": "0xc95b05413fd6529cfa7d806a164fd2e2fac94bb90be89e731174a67a16988c08"
+      "address": "0xe4bBE29cBD7Ee1B9426c21321c44Ae18046Bd0cC",
+      "transactionHash": "0x79bf6584fecdbb68bdc933f6a071dc706c873700c7e5a936c1b5ae1a787127db"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-13T09:10:51.381Z",
+  "updatedAt": "2021-05-13T16:07:52.535Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "The v1 smart wrapper is the core gas saving feature it can interact with other smart contracts it burns gas to save on the transaction fee only the owner/deployer of the smart contract can interact with it only the owner can send tokens from the address (smart contract) only the owner can withdraw tokens of any type, and this goes directly to the owner.",
