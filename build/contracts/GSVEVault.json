@@ -2368,6 +2368,32 @@
       "address": "0x8b4F569b4155812721fD1bECE6BeD50495954D78",
       "transactionHash": "0xe5e4f09590fa7c4ddf7d999e6d28c9c9bcf2ded9e7ba5dc467b992a415961fbc"
     },
+    "4": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x918bBB637E4F456397301a1Dd2a4C7af9D34fbab",
+      "transactionHash": "0x40e34cc7ce110c4a7a14d3e7db5454c88310c1373a42df7fb752f38ac7128cc5"
+    },
     "5777": {
       "events": {
         "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
@@ -2391,12 +2417,12 @@
         }
       },
       "links": {},
-      "address": "0x75960BbEba320b7eb4c8d0240Cc8e093536CE2e9",
-      "transactionHash": "0xe2e192082fa08b7d7efbeaa4f626de08030dbec5b57571a988c704c29c02c46c"
+      "address": "0x85a283ba3f71BFfE4fd8bc5a2D3bc1c3786340ca",
+      "transactionHash": "0xa0400e2336019da9bbd5fb57fbf99b56f37888f289bfbe26447811d19f011b59"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-12T21:10:52.787Z",
+  "updatedAt": "2021-05-13T09:10:51.345Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "This smart contract is a \"vault\" it holds onto the fees that the protocol has gathered and any GSVE that is to be rewarded from protocol iteraction",

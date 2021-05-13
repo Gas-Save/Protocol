@@ -7951,6 +7951,63 @@
       "address": "0xdF4e3C59D70F17603644250FF4014E8918431d3E",
       "transactionHash": "0x4c94a837742252f62ff29a5851bae2e990936cbbcde110baba19e66226b9c5bc"
     },
+    "4": {
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x13B4ecB7aF446b006b78A900f2D75A4FB2dc639a",
+      "transactionHash": "0x61ec0280ad6c18b2524a61d6a0644239eaf24fb572ac57a1542c3cebdd87d4c0"
+    },
     "5777": {
       "events": {
         "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
@@ -8005,12 +8062,12 @@
         }
       },
       "links": {},
-      "address": "0x5850A39A206338ad387D338347DA93F72DF27E62",
-      "transactionHash": "0x201997011fa8f2d41f67e224e935ac92761a54ca57b21b9ef22b05ff3e720766"
+      "address": "0x056568Ce02cC1776Ab0Ca7a255F91fDB44F552dd",
+      "transactionHash": "0xc8d02a571d4d5e751b0db85ad3746b976d1c2063653237caa36843b6984c49e3"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-12T21:10:52.763Z",
+  "updatedAt": "2021-05-13T09:10:51.297Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "the GSVE token is a ERC20 token with burning capabilities",

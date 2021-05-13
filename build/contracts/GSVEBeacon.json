@@ -9497,6 +9497,51 @@
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
   "networks": {
+    "4": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xf457100720fb97ccb67a26d8f3ce110d2c414903bb49b87f5c8bbb6f0649ac69": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "safe",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "gasToken",
+              "type": "address"
+            }
+          ],
+          "name": "UpdatedGasToken",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8EBBB79228A5b5C2E6EC718201405825b4D48454",
+      "transactionHash": "0xe7ebcbf5270d81f425929d8afdad2245837f379024249dba835b55a920066aa1"
+    },
     "5777": {
       "events": {
         "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
@@ -9539,12 +9584,12 @@
         }
       },
       "links": {},
-      "address": "0x98DEA83628a522AF9F70c5201DdD60Df78B2fD93",
-      "transactionHash": "0xdb8ff6bb76906687509c9ecee0428ceedafd06adc405b71142d495083f02edef"
+      "address": "0x732a77c64e0CDE1C204b248006467CB4e1Df5472",
+      "transactionHash": "0xce338447358098efc5196b0049307e783db6736038405dcb8c2e49216c6e285c"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-12T21:10:52.878Z",
+  "updatedAt": "2021-05-13T09:10:51.440Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
