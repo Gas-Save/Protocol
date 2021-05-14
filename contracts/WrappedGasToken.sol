@@ -31,8 +31,8 @@ contract WrappedGasToken is IERC20, ERC20WithoutTotalSupply, Ownable{
     * @dev We set the main elements of our wrapped token here.
     * the name, symbol and fee address and address of the underlying gas token
     */
-    constructor(address _tokenAddress, string memory _name, string memory _symbol) {
-        feeAddress = msg.sender;
+    constructor(address _tokenAddress, address _feeAddress, string memory _name, string memory _symbol) {
+        feeAddress = _feeAddress;
         wrappedTokenAddress = _tokenAddress;
         name = _name;
         symbol = _symbol;

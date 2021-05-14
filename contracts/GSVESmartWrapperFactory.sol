@@ -21,9 +21,22 @@ contract GSVESmartWrapperFactory is Ownable{
     address private GSVEToken;
     uint256 private _totalSupportedTokens = 0;
 
-  constructor (address payable _smartWrapperLocation, address _GSVEToken) public {
+  constructor (address payable _smartWrapperLocation, address _GSVEToken, address wchi, address wgst2, address wgst1) public {
     smartWrapperLocation = _smartWrapperLocation;
     GSVEToken = _GSVEToken;
+    _compatibleGasTokens[wchi] = 1;
+    _reverseTokenMap[0] = wchi;
+    _freeUpValue[wchi] = 41130;
+
+    _compatibleGasTokens[wgst2] = 1;
+    _reverseTokenMap[1] = wgst2;
+    _freeUpValue[wgst2] = 41130;
+
+    _compatibleGasTokens[wgst1] = 1;
+    _reverseTokenMap[2] = wgst1;
+    _freeUpValue[wgst1] = 20130;
+
+    _totalSupportedTokens = 3;
   }
 
     /**

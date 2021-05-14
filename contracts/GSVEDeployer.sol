@@ -18,7 +18,17 @@ interface IFreeFromUpTo {
 contract GSVEDeployer is Ownable{
     mapping(address => uint256) private _compatibleGasTokens;
     mapping(address => uint256) private _freeUpValue;
-    uint256 private _totalSupportedTokens = 0;
+
+  constructor (address wchi, address wgst2, address wgst1) public {
+    _compatibleGasTokens[wchi] = 1;
+    _freeUpValue[wchi] = 41130;
+
+    _compatibleGasTokens[wgst2] = 1;
+    _freeUpValue[wgst2] = 41130;
+
+    _compatibleGasTokens[wgst1] = 1;
+    _freeUpValue[wgst1] = 20130;
+  }
 
     /**
     * @dev add support for trusted gas tokens - those we wrapped

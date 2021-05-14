@@ -122,12 +122,31 @@ contract GSVECore is Ownable, ReentrancyGuard{
      * as the token we are using for staking and other protocol features
      * also lets us set the vault address.
      */
-    constructor(address _tokenAddress, address _vaultAddress) {
+    constructor(address _tokenAddress, address _vaultAddress, address wchi, address wgst2, address wgst1) {
         GSVEToken = _tokenAddress;
         GSVEVault = _vaultAddress;
         tierThreshholds[1] = 250*(10**18);
         tierThreshholds[2] = 1000*(10**18);
         _claimable[_tokenAddress] = false;
+
+        _claimable[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = true;
+        _mintingType[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 1;
+
+        _claimable[0x0000000000b3F879cb30FE243b4Dfee438691c04] = true;
+        _mintingType[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 1;
+
+        _claimable[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = true;
+        _mintingType[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 1;
+        
+
+        _claimable[wchi] = true;
+        _mintingType[wchi] = 1;
+
+        _claimable[wgst2] = true;
+        _mintingType[wgst2] = 1;
+
+        _claimable[wgst1] = true;
+        _mintingType[wgst1] = 1;
     }
 
     /**
