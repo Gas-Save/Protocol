@@ -91,15 +91,15 @@ contract GSVESmartWrapper {
 
         // add CHI gas token
         _compatibleGasTokens[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 1;
-        _freeUpValue[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 41130;
+        _freeUpValue[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 24000;
 
         // add GST2 gas token
         _compatibleGasTokens[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 1;
-        _freeUpValue[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 41130;
+        _freeUpValue[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 24000;
 
         // add GST1 gas token
         _compatibleGasTokens[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 1;
-        _freeUpValue[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 20130;
+        _freeUpValue[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 15000;
 
         _upgraded = true;
     }

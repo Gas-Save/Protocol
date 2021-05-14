@@ -11,14 +11,14 @@ contract GSVEBeacon is Ownable{
     
     constructor (address _wchi, address _wgst2, address _wgst1) public {
         //chi, gst2 and gst1
-        _supportedGasTokens[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 41130;
-        _supportedGasTokens[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 41130;
-        _supportedGasTokens[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 20130;
+        _supportedGasTokens[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 24000;
+        _supportedGasTokens[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 24000;
+        _supportedGasTokens[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 15000;
 
         //wchi, wgst2 and wgst1
-        _supportedGasTokens[_wchi] = 41130;
-        _supportedGasTokens[_wgst2] = 41130;
-        _supportedGasTokens[_wgst1] = 20130;
+        _supportedGasTokens[_wchi] = 24000;
+        _supportedGasTokens[_wgst2] = 24000;
+        _supportedGasTokens[_wgst1] = 15000;
     }
     
     /**

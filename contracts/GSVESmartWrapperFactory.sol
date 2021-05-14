@@ -26,15 +26,15 @@ contract GSVESmartWrapperFactory is Ownable{
     GSVEToken = _GSVEToken;
     _compatibleGasTokens[wchi] = 1;
     _reverseTokenMap[0] = wchi;
-    _freeUpValue[wchi] = 41130;
+    _freeUpValue[wchi] = 24000;
 
     _compatibleGasTokens[wgst2] = 1;
     _reverseTokenMap[1] = wgst2;
-    _freeUpValue[wgst2] = 41130;
+    _freeUpValue[wgst2] = 24000;
 
     _compatibleGasTokens[wgst1] = 1;
     _reverseTokenMap[2] = wgst1;
-    _freeUpValue[wgst1] = 20130;
+    _freeUpValue[wgst1] = 15000;
 
     _totalSupportedTokens = 3;
   }
