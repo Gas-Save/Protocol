@@ -3,6 +3,7 @@ const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 const GSVEToken  = artifacts.require ("./GSVEToken.sol");
 const GSVEProtocolCore = artifacts.require ("./GSVECore.sol");
 const GST1GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken1.sol");
+const GST2GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken2.sol");
 const wrappedToken = artifacts.require("./WrappedGasToken.sol");
 const GS_Deployer  = artifacts.require ("./GSVEDeployer.sol");
 const GS_Wrapper  = artifacts.require ("./GSVESmartWrapper.sol");
@@ -21,18 +22,22 @@ contract("GSVE Core Test", async accounts => {
     it('should be able to deploy protocol contracts', async () => {
       token = await GSVEToken.new();
       console.log("GSVE Address " + token.address);
-      
-      baseGasToken = await GST1GasToken.at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");
-      gasToken = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
+
+      baseGasToken = await GST1GasToken.new() // at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");;
+      baseGasToken2 = await GST2GasToken.new() //at("0x0000000000b3F879cb30FE243b4Dfee438691c04")
+      gasToken = await wrappedToken.new(baseGasToken.address, accounts[0], "Wrapped GST1 by Gas Save", "wGST1");
       console.log("wGST Address " + gasToken.address);
 
       vault = await GSVEVault.new();
       console.log("Vault Address " + vault.address);
 
-      protocol = await GSVEProtocolCore.new(token.address, vault.address);
+      protocol = await GSVEProtocolCore.new(token.address, vault.address, baseGasToken.address, gasToken.address, baseGasToken2.address);
       console.log("Core Address " + protocol.address);
 
-      deployer = await GS_Deployer.new();
+
+      console.log("wGST Address " + gasToken.address);
+
+      deployer = await GS_Deployer.new(baseGasToken.address, gasToken.address, baseGasToken2.address);
       console.log("deployer Address " + deployer.address);
 
       wrapper = await GS_Wrapper.new(token.address);

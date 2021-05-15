@@ -7,7 +7,14 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-import "./IGasToken.sol";
+/**
+ * @dev Interface of the wrapped Gas Token Type
+ */
+interface IGasTokenMint {
+    function mint(uint256 value) external; 
+    function discountedMint(uint256 value, uint256 discountedFee, address recipient) external; 
+}
+
 
 /**
 * @dev Interface for interacting with protocol token
@@ -237,7 +244,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 0);
         }
         else if (mintType == 2){
-            IGasToken(gasTokenAddress).discountedMint(value, 0, msg.sender);
+            IGasTokenMint(gasTokenAddress).discountedMint(value, 0, msg.sender);
         }
     }
 
@@ -253,7 +260,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 1);
         }
         else if (mintType == 2){
-            IGasToken(gasTokenAddress).discountedMint(value, 1, msg.sender);
+            IGasTokenMint(gasTokenAddress).discountedMint(value, 1, msg.sender);
         }
     }
     
@@ -270,7 +277,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 2);
         }
         else if (mintType == 2){
-            IGasToken(gasTokenAddress).discountedMint(value, 2, msg.sender);
+            IGasTokenMint(gasTokenAddress).discountedMint(value, 2, msg.sender);
         }
 
         IGSVEVault(GSVEVault).transferToken(GSVEToken, msg.sender, mintingReward);
@@ -286,7 +293,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
 
         uint256 userTokens = value.sub(fee);
         require(userTokens > 0, "GSVE: User attempted to mint too little");
-        IGasToken(gasTokenAddress).mint(value);
+        IGasTokenMint(gasTokenAddress).mint(value);
         IERC20(gasTokenAddress).transfer(msg.sender, userTokens);
         if(fee > 0){
             IERC20(gasTokenAddress).transfer(GSVEVault, fee);

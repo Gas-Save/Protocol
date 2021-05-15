@@ -1,9 +1,10 @@
 const { BN, expectRevert, send, ether } = require('@openzeppelin/test-helpers');
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 const GST1GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken1.sol");
+const GST2GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken2.sol");
 const wrappedToken = artifacts.require("./WrappedGasToken.sol");
 const GS_Deployer  = artifacts.require ("./GSVEDeployer.sol");
-const byteCodeJson = require("./../build/contracts/GSVEDeployer.json")
+const byteCodeJson = require("./../build/contracts/GSVEVault.json")
 const byteCodeNonOwnedJson = require("./../build/contracts/GasToken1.json")
 
 contract("GSVE Contract Deployer Test", async accounts => {
@@ -11,16 +12,17 @@ contract("GSVE Contract Deployer Test", async accounts => {
     var deployer;
 
     it('should be able to deploy contracts', async () => {
-      baseGasToken = await GST1GasToken.at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");;
-      gasToken = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
+      baseGasToken = await GST1GasToken.new() // at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");;
+      baseGasToken2 = await GST2GasToken.new() //at("0x0000000000b3F879cb30FE243b4Dfee438691c04")
+      gasToken = await wrappedToken.new(baseGasToken.address, accounts[0], "Wrapped GST1 by Gas Save", "wGST1");
       console.log("wGST Address " + gasToken.address);
 
-      deployer = await GS_Deployer.new();
+      deployer = await GS_Deployer.new(baseGasToken.address, gasToken.address, baseGasToken2.address);
       console.log("deployer Address " + deployer.address);
     });
 
     it('should be able to add a token to the list of supported tokens', async () => {
-      await deployer.addGasToken(gasToken.address, 25130);
+      await deployer.addGasToken(gasToken.address, 20046);
 
       var compatible = await deployer.compatibleGasToken(gasToken.address);
       assert.equal(compatible.toNumber(), 1);

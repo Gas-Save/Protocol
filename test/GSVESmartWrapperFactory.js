@@ -4,6 +4,7 @@ const GS_WrapperFactory  = artifacts.require ("./GSVESmartWrapperFactory.sol");
 const GS_Wrapper  = artifacts.require ("./GSVESmartWrapper.sol");
 const GSVE_helper  = artifacts.require ("./test_helpers/GSVE_helper.sol");
 const GST1GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken1.sol");
+const GST2GasToken = artifacts.require("./existing_gas_tokens/GST/GasToken2.sol");
 const wrappedToken = artifacts.require("./WrappedGasToken.sol");
 const GSVEToken  = artifacts.require ("./GSVEToken.sol");
 
@@ -21,14 +22,15 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
       token = await GSVEToken.new();
 
-      baseGasToken = await GST1GasToken.at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");
-      gasToken = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
+      baseGasToken = await GST1GasToken.new() // at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");
+      baseGasToken2 = await GST1GasToken.new() 
+      gasToken = await wrappedToken.new(baseGasToken.address, accounts[0], "Wrapped GST1 by Gas Save", "wGST1");
       console.log("wGST Address " + gasToken.address);
 
       wrapperMain = await GS_Wrapper.new(token.address);
       console.log("wrapper Address " + wrapperMain.address);
 
-      factory = await GS_WrapperFactory.new(wrapperMain.address, token.address);
+      factory = await GS_WrapperFactory.new(wrapperMain.address, token.address, baseGasToken.address, baseGasToken2.address, gasToken.address);
       console.log("factory Address " + factory.address);
 
       helper = await GSVE_helper.new();
@@ -36,7 +38,7 @@ contract("GSVE Contract Deployer Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-      await factory.addGasToken(gasToken.address, 15000);
+      await factory.addGasToken(gasToken.address, 20046);
 
       var compatible = await factory.compatibleGasToken(gasToken.address);
       assert.equal(compatible.toNumber(), 1);
@@ -240,7 +242,7 @@ it('should fail to upgrade if no gsve tokens approved for burning', async () => 
 });
 
     it('should be able to upgrade smart wrapper', async () => {
-        token.approve(wrapper.address, web3.utils.toWei("10"));
+        await token.approve(wrapper.address, web3.utils.toWei("10"));
         await wrapper.upgradeProxy();
         account_balance = await token.balanceOf.call(accounts[0])
         assert.equal(web3.utils.toWei("99999985"), account_balance.toString());
@@ -253,7 +255,7 @@ it('should fail to upgrade if no gsve tokens approved for burning', async () => 
     });
 
 it('should fail to upgrade if already upgraded', async () => {
-    token.approve(wrapper.address, web3.utils.toWei("10"));
+    await token.approve(wrapper.address, web3.utils.toWei("10"));
     expectRevert(wrapper.upgradeProxy(), "GSVE: Wrapper Already Upgraded.");
 }); 
   it('should allow the withdrawal token balance', async () => {

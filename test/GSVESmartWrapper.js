@@ -18,8 +18,8 @@ contract("Wrapper Test", async accounts => {
 
         token = await GSVEToken.new();
 
-        baseGasToken = await GST1GasToken.at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");
-        gasToken = await wrappedToken.new(baseGasToken.address, "Wrapped GST1 by Gas Save", "wGST1");
+        baseGasToken = await GST1GasToken.new() //at("0x88d60255F917e3eb94eaE199d827DAd837fac4cB");
+        gasToken = await wrappedToken.new(baseGasToken.address, accounts[0],  "Wrapped GST1 by Gas Save", "wGST1");
         console.log("wGST Address " + gasToken.address);
         
         wrapper = await GS_Wrapper.new(token.address);
@@ -40,7 +40,7 @@ contract("Wrapper Test", async accounts => {
 
     
     it('should be able to add a token to the list of supported tokens', async () => {
-        await wrapper.addGasToken(gasToken.address, 15000);
+        await wrapper.addGasToken(gasToken.address, 20046);
         var compatible = await wrapper.compatibleGasToken(gasToken.address);
         assert.equal(compatible.toNumber(), 1);
 
@@ -219,7 +219,7 @@ contract("Wrapper Test", async accounts => {
     });
     
     it('should be able to upgrade smart wrapper', async () => {
-        token.approve(wrapper.address, web3.utils.toWei("10"));
+        await token.approve(wrapper.address, web3.utils.toWei("10"));
         await wrapper.upgradeProxy();
         account_balance = await token.balanceOf.call(accounts[0])
         assert.equal(web3.utils.toWei("99999985"), account_balance.toString());
@@ -232,7 +232,7 @@ contract("Wrapper Test", async accounts => {
     });
     
     it('should fail to upgrade if already upgraded', async () => {
-        token.approve(wrapper.address, web3.utils.toWei("10"));
+        await token.approve(wrapper.address, web3.utils.toWei("10"));
         expectRevert(wrapper.upgradeProxy(), "GSVE: Wrapper Already Upgraded.");
     }); 
       it('should allow the withdrawal token balance', async () => {

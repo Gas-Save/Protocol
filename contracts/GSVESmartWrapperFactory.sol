@@ -4,13 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IGSVESmartWrapper.sol";
-
-/**
-* @dev interface to allow the burning of gas tokens from an address to save on deployment cost
-*/
-interface IFreeFromUpTo {
-    function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);
-}
+import "./IFreeFromUpTo.sol";
 
 contract GSVESmartWrapperFactory is Ownable{
     address payable public smartWrapperLocation;
@@ -26,15 +20,15 @@ contract GSVESmartWrapperFactory is Ownable{
     GSVEToken = _GSVEToken;
     _compatibleGasTokens[wchi] = 1;
     _reverseTokenMap[0] = wchi;
-    _freeUpValue[wchi] = 24000;
+    _freeUpValue[wchi] = 30053;
 
     _compatibleGasTokens[wgst2] = 1;
     _reverseTokenMap[1] = wgst2;
-    _freeUpValue[wgst2] = 24000;
+    _freeUpValue[wgst2] = 30870;
 
     _compatibleGasTokens[wgst1] = 1;
     _reverseTokenMap[2] = wgst1;
-    _freeUpValue[wgst1] = 15000;
+    _freeUpValue[wgst1] = 20046;
 
     _totalSupportedTokens = 3;
   }

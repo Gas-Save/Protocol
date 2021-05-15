@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">97.6% </span>
+        <span class="strong">97.81% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>122/125</span>
+        <span class='fraction'>134/137</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">73.53% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>33/33</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">97.54% </span>
+        <span class="strong">97.76% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>119/122</span>
+        <span class='fraction'>131/134</span>
       </div>
     </div>
   </div>
@@ -473,7 +473,40 @@
 428
 429
 430
-431</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -598,11 +631,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4×</span>
-<span class="cline-any cline-yes">4×</span>
-<span class="cline-any cline-yes">4×</span>
-<span class="cline-any cline-yes">4×</span>
-<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -789,8 +841,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8×</span>
-<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -912,7 +964,14 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 &nbsp;
-import "./IGasToken.sol";
+/**
+ * @dev Interface of the wrapped Gas Token Type
+ */
+interface IGasTokenMint {
+    function mint(uint256 value) external; 
+    function discountedMint(uint256 value, uint256 discountedFee, address recipient) external; 
+}
+&nbsp;
 &nbsp;
 /**
 * @dev Interface for interacting with protocol token
@@ -1027,12 +1086,31 @@ contract GSVECore is Ownable, ReentrancyGuard{
      * as the token we are using for staking and other protocol features
      * also lets us set the vault address.
      */
-    constructor(address _tokenAddress, address _vaultAddress) {
+    constructor(address _tokenAddress, address _vaultAddress, address wchi, address wgst2, address wgst1) {
         GSVEToken = _tokenAddress;
         GSVEVault = _vaultAddress;
         tierThreshholds[1] = 250*(10**18);
         tierThreshholds[2] = 1000*(10**18);
         _claimable[_tokenAddress] = false;
+&nbsp;
+        _claimable[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = true;
+        _mintingType[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 1;
+&nbsp;
+        _claimable[0x0000000000b3F879cb30FE243b4Dfee438691c04] = true;
+        _mintingType[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 1;
+&nbsp;
+        _claimable[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = true;
+        _mintingType[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 1;
+        
+&nbsp;
+        _claimable[wchi] = true;
+        _mintingType[wchi] = 1;
+&nbsp;
+        _claimable[wgst2] = true;
+        _mintingType[wgst2] = 1;
+&nbsp;
+        _claimable[wgst1] = true;
+        _mintingType[wgst1] = 1;
     }
 &nbsp;
     /**
@@ -1123,7 +1201,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 0);
         }
         else <span class="missing-if-branch" title="else path not taken" >E</span>if (mintType == 2){
-            IGasToken(gasTokenAddress).discountedMint(value, 0, msg.sender);
+            IGasTokenMint(gasTokenAddress).discountedMint(value, 0, msg.sender);
         }
     }
 &nbsp;
@@ -1139,7 +1217,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 1);
         }
         else <span class="missing-if-branch" title="else path not taken" >E</span>if (mintType == 2){
-            IGasToken(gasTokenAddress).discountedMint(value, 1, msg.sender);
+            IGasTokenMint(gasTokenAddress).discountedMint(value, 1, msg.sender);
         }
     }
     
@@ -1156,7 +1234,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
             convenientMinting(gasTokenAddress, value, 2);
         }
         else <span class="missing-if-branch" title="else path not taken" >E</span>if (mintType == 2){
-            IGasToken(gasTokenAddress).discountedMint(value, 2, msg.sender);
+            IGasTokenMint(gasTokenAddress).discountedMint(value, 2, msg.sender);
         }
 &nbsp;
         IGSVEVault(GSVEVault).transferToken(GSVEToken, msg.sender, mintingReward);
@@ -1172,7 +1250,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
 &nbsp;
         uint256 userTokens = value.sub(fee);
         <span class="missing-if-branch" title="else path not taken" >E</span>require(userTokens &gt; 0, "GSVE: User attempted to mint too little");
-        IGasToken(gasTokenAddress).mint(value);
+        IGasTokenMint(gasTokenAddress).mint(value);
         IERC20(gasTokenAddress).transfer(msg.sender, userTokens);
         if(fee &gt; 0){
             IERC20(gasTokenAddress).transfer(GSVEVault, fee);
@@ -1339,7 +1417,7 @@ contract GSVECore is Ownable, ReentrancyGuard{
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon May 10 2021 13:55:48 GMT+0100 (British Summer Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 15 2021 17:44:21 GMT+0100 (British Summer Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

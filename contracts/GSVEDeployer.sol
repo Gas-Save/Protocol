@@ -2,13 +2,8 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./IFreeFromUpTo.sol";
 
-/**
-* @dev interface to allow the burning of gas tokens from an address
-*/
-interface IFreeFromUpTo {
-    function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);
-}
 
 /**
 * @dev the gsve deployer has two purposes
@@ -21,13 +16,13 @@ contract GSVEDeployer is Ownable{
 
   constructor (address wchi, address wgst2, address wgst1) public {
     _compatibleGasTokens[wchi] = 1;
-    _freeUpValue[wchi] = 41130;
+    _freeUpValue[wchi] = 30053;
 
     _compatibleGasTokens[wgst2] = 1;
-    _freeUpValue[wgst2] = 41130;
+    _freeUpValue[wgst2] = 30870;
 
     _compatibleGasTokens[wgst1] = 1;
-    _freeUpValue[wgst1] = 20130;
+    _freeUpValue[wgst1] = 20046;
   }
 
     /**
