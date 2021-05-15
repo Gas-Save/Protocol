@@ -9,7 +9,7 @@ var GSVEBeacon  = artifacts.require ("./GSVEBeacon.sol");
 
 
 module.exports = async(deployer) => {
-  /*
+  
   var vault = await deployer.deploy(GSVEVault)
   var token = await deployer.deploy(gsvetoken)
   var wchi =  await deployer.deploy(wrappedToken, "0x0000000000004946c0e9F43F4Dee607b0eF1fA1c", GSVEVault.address, "Wrapped Chi by Gas Save", "wChi")
@@ -57,5 +57,4 @@ module.exports = async(deployer) => {
   var beacon = await deployer.deploy(GSVEBeacon,wchi.address, wgst2.address, wgst1.address)
   console.log("beacon: " + GSVEBeacon.address)
 
-  */
 };
