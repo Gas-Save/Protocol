@@ -71,7 +71,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -128,7 +129,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -10927,9 +10929,56 @@
     "name": "solc",
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {
+        "0x33c981baba081f8fd2c52ac6ad1ea95b6814b4376640f55689051f6584729688": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "creator",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "deploymentAddress",
+              "type": "address"
+            }
+          ],
+          "name": "ContractDeployed",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x69d918D604bC07512ACeA3daB8Ea3ba50Fda49A6",
+      "transactionHash": "0xed0a2e3f868282d4c30abfa83bd88c221bd7ace35bd7de2245e86c5235f4d406"
+    }
+  },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-15T16:37:09.175Z",
+  "updatedAt": "2021-05-15T16:48:45.785Z",
+  "networkType": "ethereum",
   "devdoc": {
     "details": "the gsve deployer has two purposes it deploys gsve smart wrappers, keeping track of the owners it allows users to deploy smart contracts using create and create2",
     "kind": "dev",
