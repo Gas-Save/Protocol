@@ -147,13 +147,13 @@ contract GSVECore is Ownable, ReentrancyGuard{
         
 
         _claimable[wchi] = true;
-        _mintingType[wchi] = 1;
+        _mintingType[wchi] = 2;
 
         _claimable[wgst2] = true;
-        _mintingType[wgst2] = 1;
+        _mintingType[wgst2] = 2;
 
         _claimable[wgst1] = true;
-        _mintingType[wgst1] = 1;
+        _mintingType[wgst1] = 2;
     }
 
     /**
