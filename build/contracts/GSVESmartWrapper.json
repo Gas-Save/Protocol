@@ -42,8 +42,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -62,8 +61,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -82,8 +80,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -96,8 +93,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -110,13 +106,11 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "stateMutability": "payable",
-      "type": "receive",
-      "payable": true
+      "type": "receive"
     },
     {
       "inputs": [
@@ -185,8 +179,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -214,8 +207,7 @@
       "name": "wrapTransaction",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function",
-      "payable": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -248,8 +240,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -275,8 +266,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_GSVEToken\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"GSVEToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_compatibleGasTokens\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_freeUpValue\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_inited\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_upgraded\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"freeUpValue\",\"type\":\"uint256\"}],\"name\":\"addGasToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"}],\"name\":\"compatibleGasToken\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getUpgraded\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_GSVEToken\",\"type\":\"address\"}],\"name\":\"init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"setInited\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeProxy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"withdrawTokenBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"gasToken\",\"type\":\"address\"}],\"name\":\"wrapTransaction\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"details\":\"The v1 smart wrapper is the core gas saving feature it can interact with other smart contracts it burns gas to save on the transaction fee only the owner/deployer of the smart contract can interact with it only the owner can send tokens from the address (smart contract) only the owner can withdraw tokens of any type, and this goes directly to the owner.\",\"kind\":\"dev\",\"methods\":{\"addGasToken(address,uint256)\":{\"details\":\"function to enable gas tokens. by default the wrapped tokens are added when the wrapper is deployed using efficiency values based on a known token gas rebate that we store on contract. DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad! costs 5 gsve to add custom gas tokens if done after the wallet is inited\"},\"compatibleGasToken(address)\":{\"details\":\"checks if the gas token is supported\"},\"getUpgraded()\":{\"details\":\"Returns the upgrade status of the wrapper\"},\"init(address,address)\":{\"details\":\"Initializes the contract setting the deployer as the initial owner. also sets the GSVE token reference\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"setInited()\":{\"details\":\"sets the contract as inited\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"upgradeProxy()\":{\"details\":\"function to 'upgrade the proxy' by enabling unwrapped gas token support the user must burn 10 GSVE to upgrade the proxy.\"},\"withdrawBalance()\":{\"details\":\"function that the user can trigger to withdraw the entire balance of their wrapper back to themselves.\"},\"withdrawTokenBalance(address)\":{\"details\":\"function that the user can trigger to withdraw an entire token balance from the wrapper to themselves\"},\"wrapTransaction(bytes,address,uint256,address)\":{\"details\":\"the wrapTransaction function interacts with other smart contracts on the users behalf this wrapper works for any smart contract as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper if the function requires a payment, this is handled too and sent from the wrapper balance.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/GSVESmartWrapper.sol\":\"GSVESmartWrapper\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/GSVESmartWrapper.sol\":{\"keccak256\":\"0x81b8fa30690af9105d08054a0c47fd76acb13e94ce2f558863b04ae175eb28e1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8044c2aafa2f66c10b486e58886b9c21b4e8c866318f02d44a8af287a940da24\",\"dweb:/ipfs/QmagFc3JZuLEVycayprnhCUJTANFZvPxof7yk1MDwEN7ey\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xf8e8d118a7a8b2e134181f7da655f6266aa3a0f9134b2605747139fcb0c5d835\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9ec48567e7ad06acb670980d5cdf3fd7f3949bf12894f02d68c3bb43e75aa84f\",\"dweb:/ipfs/QmaG3R2J9cz92YT77vFjYrjMNU2wHp4ypwYD62HqDUqS5U\"]},\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x069b2631bb5b5193a58ccf7a06266c7361bd2c20095667af4402817605627f45\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6a4c96fafff76deda5697c3c5c98cade6e6e1b178254544c106bf360c079ce4e\",\"dweb:/ipfs/QmXmxubE3jnatFgZuN8ay1VV6hZ8WRmhvUjNpeVjki15HX\"]}},\"version\":1}",
@@ -17560,17 +17550,9 @@
     "name": "solc",
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
-  "networks": {
-    "5777": {
-      "events": {},
-      "links": {},
-      "address": "0x36ed2162d7e8354a299F904E3E18B02809858269",
-      "transactionHash": "0x2338a17e4dec5f018a01393c3bc9cef9dab4c7d2fa15c71a1d655f740c3c3609"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-15T16:48:45.806Z",
-  "networkType": "ethereum",
+  "updatedAt": "2021-05-16T15:33:51.559Z",
   "devdoc": {
     "details": "The v1 smart wrapper is the core gas saving feature it can interact with other smart contracts it burns gas to save on the transaction fee only the owner/deployer of the smart contract can interact with it only the owner can send tokens from the address (smart contract) only the owner can withdraw tokens of any type, and this goes directly to the owner.",
     "kind": "dev",

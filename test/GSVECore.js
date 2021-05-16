@@ -58,6 +58,18 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(compatible.toNumber(), 1);
     });
 
+      
+    it('should be able to add a minted token to the list of supported tokens', async () => {
+
+      await protocol.addGasToken(baseGasToken.address, 1, true);
+
+      var claimable = await protocol.claimable(baseGasToken.address);
+      var mintType = await protocol.mintingType(baseGasToken.address);
+      assert.equal(claimable, true);
+      assert.equal(mintType.toNumber(), 1);
+    });
+
+
     it("should be able to update the fee address of the gas token to the vault", async () => {
       await gasToken.updateFeeAddress(vault.address);
       var owner = await gasToken.feeAddress()
@@ -74,27 +86,6 @@ contract("GSVE Core Test", async accounts => {
       await vault.transferOwnership(protocol.address);
       var owner = await vault.owner()
       assert.equal(owner, protocol.address);
-    });
-
-    it('should be able to add a wrapped token to the list of supported tokens', async () => {
-
-      await protocol.addGasToken(gasToken.address, 2, true);
-
-      var claimable = await protocol.claimable(gasToken.address);
-      var mintType = await protocol.mintingType(gasToken.address);
-      assert.equal(claimable, true);
-      assert.equal(mintType.toNumber(), 2);
-    });
-
-    
-    it('should be able to add a minted token to the list of supported tokens', async () => {
-
-      await protocol.addGasToken(baseGasToken.address, 1, true);
-
-      var claimable = await protocol.claimable(baseGasToken.address);
-      var mintType = await protocol.mintingType(baseGasToken.address);
-      assert.equal(claimable, true);
-      assert.equal(mintType.toNumber(), 1);
     });
   
     it('should be able to burn gsve to save on protocol wrapping fee', async () => {
@@ -416,6 +407,16 @@ contract("GSVE Core Test", async accounts => {
 
     reward = await protocol.getBurnToSaveFee()
     assert.equal(web3.utils.toWei("1"), reward);
+  });
+
+  it('should be able to add a wrapped token to the list of supported tokens', async () => {
+
+    await protocol.addGasToken(gasToken.address, 2, true);
+
+    var claimable = await protocol.claimable(gasToken.address);
+    var mintType = await protocol.mintingType(gasToken.address);
+    assert.equal(claimable, true);
+    assert.equal(mintType.toNumber(), 2);
   });
 
   it('user should be able to update tiers', async () => {

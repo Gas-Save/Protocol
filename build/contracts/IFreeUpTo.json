@@ -11315,7 +11315,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-15T16:37:09.201Z",
+  "updatedAt": "2021-05-16T15:33:51.570Z",
   "devdoc": {
     "details": "interface to allow gas tokens to be burned from the wrapper",
     "kind": "dev",

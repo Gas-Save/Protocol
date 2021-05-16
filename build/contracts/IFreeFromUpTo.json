@@ -35,20 +35,20 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\n/**\r\n* @dev interface to allow the burning of gas tokens from an address\r\n*/\r\ninterface IFreeFromUpTo {\r\n    function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);\r\n}",
-  "sourcePath": "C:/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IFreeFromUpTo.sol",
+  "sourcePath": "C:\\Users\\khera\\Documents\\GitHub\\GasSwapTokens\\contracts\\IFreeFromUpTo.sol",
   "ast": {
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IFreeFromUpTo.sol",
     "exportedSymbols": {
       "IFreeFromUpTo": [
-        313
+        3003
       ]
     },
-    "id": 314,
+    "id": 3004,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 302,
+        "id": 2992,
         "literals": [
           "solidity",
           "^",
@@ -56,7 +56,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:1"
+        "src": "33:23:8"
       },
       {
         "abstract": false,
@@ -64,42 +64,42 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 303,
+          "id": 2993,
           "nodeType": "StructuredDocumentation",
-          "src": "60:76:1",
+          "src": "60:76:8",
           "text": " @dev interface to allow the burning of gas tokens from an address"
         },
         "fullyImplemented": false,
-        "id": 313,
+        "id": 3003,
         "linearizedBaseContracts": [
-          313
+          3003
         ],
         "name": "IFreeFromUpTo",
-        "nameLocation": "148:13:1",
+        "nameLocation": "148:13:8",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "079d229f",
-            "id": 312,
+            "id": 3002,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "freeFromUpTo",
-            "nameLocation": "178:12:1",
+            "nameLocation": "178:12:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 308,
+              "id": 2998,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 305,
+                  "id": 2995,
                   "mutability": "mutable",
                   "name": "from",
-                  "nameLocation": "199:4:1",
+                  "nameLocation": "199:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 312,
-                  "src": "191:12:1",
+                  "scope": 3002,
+                  "src": "191:12:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -107,10 +107,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 304,
+                    "id": 2994,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "191:7:1",
+                    "src": "191:7:8",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -121,13 +121,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 307,
+                  "id": 2997,
                   "mutability": "mutable",
                   "name": "value",
-                  "nameLocation": "213:5:1",
+                  "nameLocation": "213:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 312,
-                  "src": "205:13:1",
+                  "scope": 3002,
+                  "src": "205:13:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -135,10 +135,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 306,
+                    "id": 2996,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "205:7:1",
+                    "src": "205:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -147,21 +147,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "190:29:1"
+              "src": "190:29:8"
             },
             "returnParameters": {
-              "id": 311,
+              "id": 3001,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 310,
+                  "id": 3000,
                   "mutability": "mutable",
                   "name": "freed",
-                  "nameLocation": "246:5:1",
+                  "nameLocation": "246:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 312,
-                  "src": "238:13:1",
+                  "scope": 3002,
+                  "src": "238:13:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -169,10 +169,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 309,
+                    "id": 2999,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:7:1",
+                    "src": "238:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -181,35 +181,35 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "237:15:1"
+              "src": "237:15:8"
             },
-            "scope": 313,
-            "src": "169:84:1",
+            "scope": 3003,
+            "src": "169:84:8",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 314,
-        "src": "138:118:1",
+        "scope": 3004,
+        "src": "138:118:8",
         "usedErrors": []
       }
     ],
-    "src": "33:223:1"
+    "src": "33:223:8"
   },
   "legacyAST": {
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IFreeFromUpTo.sol",
     "exportedSymbols": {
       "IFreeFromUpTo": [
-        313
+        3003
       ]
     },
-    "id": 314,
+    "id": 3004,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 302,
+        "id": 2992,
         "literals": [
           "solidity",
           "^",
@@ -217,7 +217,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:1"
+        "src": "33:23:8"
       },
       {
         "abstract": false,
@@ -225,42 +225,42 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 303,
+          "id": 2993,
           "nodeType": "StructuredDocumentation",
-          "src": "60:76:1",
+          "src": "60:76:8",
           "text": " @dev interface to allow the burning of gas tokens from an address"
         },
         "fullyImplemented": false,
-        "id": 313,
+        "id": 3003,
         "linearizedBaseContracts": [
-          313
+          3003
         ],
         "name": "IFreeFromUpTo",
-        "nameLocation": "148:13:1",
+        "nameLocation": "148:13:8",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "079d229f",
-            "id": 312,
+            "id": 3002,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "freeFromUpTo",
-            "nameLocation": "178:12:1",
+            "nameLocation": "178:12:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 308,
+              "id": 2998,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 305,
+                  "id": 2995,
                   "mutability": "mutable",
                   "name": "from",
-                  "nameLocation": "199:4:1",
+                  "nameLocation": "199:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 312,
-                  "src": "191:12:1",
+                  "scope": 3002,
+                  "src": "191:12:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -268,10 +268,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 304,
+                    "id": 2994,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "191:7:1",
+                    "src": "191:7:8",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -282,13 +282,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 307,
+                  "id": 2997,
                   "mutability": "mutable",
                   "name": "value",
-                  "nameLocation": "213:5:1",
+                  "nameLocation": "213:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 312,
-                  "src": "205:13:1",
+                  "scope": 3002,
+                  "src": "205:13:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -296,10 +296,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 306,
+                    "id": 2996,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "205:7:1",
+                    "src": "205:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -308,21 +308,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "190:29:1"
+              "src": "190:29:8"
             },
             "returnParameters": {
-              "id": 311,
+              "id": 3001,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 310,
+                  "id": 3000,
                   "mutability": "mutable",
                   "name": "freed",
-                  "nameLocation": "246:5:1",
+                  "nameLocation": "246:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 312,
-                  "src": "238:13:1",
+                  "scope": 3002,
+                  "src": "238:13:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -330,10 +330,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 309,
+                    "id": 2999,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:7:1",
+                    "src": "238:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -342,21 +342,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "237:15:1"
+              "src": "237:15:8"
             },
-            "scope": 313,
-            "src": "169:84:1",
+            "scope": 3003,
+            "src": "169:84:8",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 314,
-        "src": "138:118:1",
+        "scope": 3004,
+        "src": "138:118:8",
         "usedErrors": []
       }
     ],
-    "src": "33:223:1"
+    "src": "33:223:8"
   },
   "compiler": {
     "name": "solc",
@@ -364,7 +364,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-15T16:46:19.425Z",
+  "updatedAt": "2021-05-16T15:33:51.599Z",
   "devdoc": {
     "details": "interface to allow the burning of gas tokens from an address",
     "kind": "dev",
