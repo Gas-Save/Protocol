@@ -20,7 +20,6 @@
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 var json = require('./keys.json'); 
-var mnemonic = json['mnemonic'];
 
 module.exports = {
   networks: {
@@ -29,20 +28,33 @@ module.exports = {
       port: 7545,
       network_id: "5777"
     },
-    testnet: {
-      provider: () => new HDWalletProvider(mnemonic, `https://data-seed-prebsc-2-s3.binance.org:8545/`),
-      network_id: 97,
-      confirmations: 10,
-      timeoutBlocks: 200,
-      skipDryRun: true,
+	developmentcli: {
+      host: "localhost",
+      port: 8545,
+      network_id: "5777"
+    },  
+	ropsten: {
+		provider: function() {
+		  return new HDWalletProvider([json['mnemonic1'], json['mnemonic2'], json['mnemonic3']], "wss://ropsten.infura.io/ws/v3/9af22c382b3142389625451f5193fc76");
+		},
+    network_id: '3',
+  },
+  	rinkeby: {
+		provider: function() {
+		  return new HDWalletProvider([json['mnemonic1'], json['mnemonic2'], json['mnemonic3']], "wss://eth-rinkeby.ws.alchemyapi.io/v2/dkUwNqnpIVoIl-gVvAx9ICAa3yANIZKm");
+		},
+    network_id: '4',
+  },
+    mainnet: {
+      provider: function() {
+        return new HDWalletProvider(json['mnemonic1'], "https://mainnet.infura.io/v3/df6f0e663e6d433397f2b2c3308ab5f5")
+      },
+      network_id: 1
     },
-    bsc: {
-      provider: () => new HDWalletProvider(mnemonic, `https://bsc-dataseed1.binance.org`),
-      network_id: 56,
-      confirmations: 10,
-      timeoutBlocks: 200,
-      skipDryRun: true
-    },
+  },
+  plugins: ["solidity-coverage", 'truffle-plugin-verify'],
+  api_keys: {
+    etherscan: json['etherscan']
   },
   // Set default mocha options here, use special reporters etc.
   mocha: { /* https://github.com/cgewecke/eth-gas-reporter
@@ -59,6 +71,13 @@ module.exports = {
  compilers: {
     solc:{
 		version: "^0.8.0",
+		settings: {
+		optimizer: {
+			  enabled: true,
+			  runs: 200   // Optimize for how many times you intend to run the code
+			},
+      },
 	},
   },
 }
+

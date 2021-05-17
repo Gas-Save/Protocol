@@ -20,7 +20,7 @@ contract("GSVE Token Test", async accounts => {
 
       const name = await token.name.call();
       const symbol = await token.symbol.call();
-      assert.equal(name.toString(), "Gas Save Utility Token by Gas Save");
+      assert.equal(name.toString(), "Gas Save Protocol Token");
       assert.equal(symbol.toString(), "GSVE");
   });
 
@@ -35,11 +35,11 @@ contract("GSVE Token Test", async accounts => {
   });
 
   it("should not be able to burn tokens if has no tokens", async () => {
-    expectRevert(token.burn(web3.utils.toWei("1"), {from:accounts[1]}), 'ERC20: burn amount exceeds balance.');
+    expectRevert(token.burn(web3.utils.toWei("1"), {from:accounts[1]}), 'ERC20: burn amount exceeds balance');
   });
 
   it("should not be able to burn tokens when not approved", async () => {
-    expectRevert(token.burnFrom(accounts[0], web3.utils.toWei("1"), {from: accounts[1]}), 'ERC20: burn amount exceeds allowance.');
+    expectRevert(token.burnFrom(accounts[0], web3.utils.toWei("1"), {from: accounts[1]}), 'ERC20: burn amount exceeds allowance');
   });
 
   it("should be able to burn tokens for another account if approved", async () => {
@@ -51,6 +51,4 @@ contract("GSVE Token Test", async accounts => {
     assert.equal(totalSupply.toString(), New_SUPPLY);
     assert.equal(balanceAdmin.toString(), New_SUPPLY);
   });
-
-
 });
