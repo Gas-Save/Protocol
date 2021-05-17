@@ -2,3 +2,4 @@
 keys.json
 .secret
 node_modules/*
+keys.json
