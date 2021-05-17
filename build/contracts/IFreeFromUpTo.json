@@ -40,15 +40,15 @@
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IFreeFromUpTo.sol",
     "exportedSymbols": {
       "IFreeFromUpTo": [
-        3003
+        2684
       ]
     },
-    "id": 3004,
+    "id": 2685,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2992,
+        "id": 2673,
         "literals": [
           "solidity",
           "^",
@@ -64,15 +64,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2993,
+          "id": 2674,
           "nodeType": "StructuredDocumentation",
           "src": "60:76:8",
           "text": " @dev interface to allow the burning of gas tokens from an address"
         },
         "fullyImplemented": false,
-        "id": 3003,
+        "id": 2684,
         "linearizedBaseContracts": [
-          3003
+          2684
         ],
         "name": "IFreeFromUpTo",
         "nameLocation": "148:13:8",
@@ -80,7 +80,7 @@
         "nodes": [
           {
             "functionSelector": "079d229f",
-            "id": 3002,
+            "id": 2683,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -88,17 +88,17 @@
             "nameLocation": "178:12:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2998,
+              "id": 2679,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2995,
+                  "id": 2676,
                   "mutability": "mutable",
                   "name": "from",
                   "nameLocation": "199:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3002,
+                  "scope": 2683,
                   "src": "191:12:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -107,7 +107,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2994,
+                    "id": 2675,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "191:7:8",
@@ -121,12 +121,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 2997,
+                  "id": 2678,
                   "mutability": "mutable",
                   "name": "value",
                   "nameLocation": "213:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3002,
+                  "scope": 2683,
                   "src": "205:13:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -135,7 +135,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2996,
+                    "id": 2677,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "205:7:8",
@@ -150,17 +150,17 @@
               "src": "190:29:8"
             },
             "returnParameters": {
-              "id": 3001,
+              "id": 2682,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3000,
+                  "id": 2681,
                   "mutability": "mutable",
                   "name": "freed",
                   "nameLocation": "246:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3002,
+                  "scope": 2683,
                   "src": "238:13:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -169,7 +169,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2999,
+                    "id": 2680,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "238:7:8",
@@ -183,14 +183,14 @@
               ],
               "src": "237:15:8"
             },
-            "scope": 3003,
+            "scope": 2684,
             "src": "169:84:8",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 3004,
+        "scope": 2685,
         "src": "138:118:8",
         "usedErrors": []
       }
@@ -201,15 +201,15 @@
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/IFreeFromUpTo.sol",
     "exportedSymbols": {
       "IFreeFromUpTo": [
-        3003
+        2684
       ]
     },
-    "id": 3004,
+    "id": 2685,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2992,
+        "id": 2673,
         "literals": [
           "solidity",
           "^",
@@ -225,15 +225,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2993,
+          "id": 2674,
           "nodeType": "StructuredDocumentation",
           "src": "60:76:8",
           "text": " @dev interface to allow the burning of gas tokens from an address"
         },
         "fullyImplemented": false,
-        "id": 3003,
+        "id": 2684,
         "linearizedBaseContracts": [
-          3003
+          2684
         ],
         "name": "IFreeFromUpTo",
         "nameLocation": "148:13:8",
@@ -241,7 +241,7 @@
         "nodes": [
           {
             "functionSelector": "079d229f",
-            "id": 3002,
+            "id": 2683,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -249,17 +249,17 @@
             "nameLocation": "178:12:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2998,
+              "id": 2679,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2995,
+                  "id": 2676,
                   "mutability": "mutable",
                   "name": "from",
                   "nameLocation": "199:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3002,
+                  "scope": 2683,
                   "src": "191:12:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -268,7 +268,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2994,
+                    "id": 2675,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "191:7:8",
@@ -282,12 +282,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 2997,
+                  "id": 2678,
                   "mutability": "mutable",
                   "name": "value",
                   "nameLocation": "213:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3002,
+                  "scope": 2683,
                   "src": "205:13:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -296,7 +296,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2996,
+                    "id": 2677,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "205:7:8",
@@ -311,17 +311,17 @@
               "src": "190:29:8"
             },
             "returnParameters": {
-              "id": 3001,
+              "id": 2682,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3000,
+                  "id": 2681,
                   "mutability": "mutable",
                   "name": "freed",
                   "nameLocation": "246:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3002,
+                  "scope": 2683,
                   "src": "238:13:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -330,7 +330,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2999,
+                    "id": 2680,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "238:7:8",
@@ -344,14 +344,14 @@
               ],
               "src": "237:15:8"
             },
-            "scope": 3003,
+            "scope": 2684,
             "src": "169:84:8",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 3004,
+        "scope": 2685,
         "src": "138:118:8",
         "usedErrors": []
       }
@@ -364,7 +364,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-16T15:33:51.599Z",
+  "updatedAt": "2021-05-17T19:37:44.104Z",
   "devdoc": {
     "details": "interface to allow the burning of gas tokens from an address",
     "kind": "dev",

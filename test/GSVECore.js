@@ -40,7 +40,7 @@ contract("GSVE Core Test", async accounts => {
       deployer = await GS_Deployer.new(baseGasToken.address, gasToken.address, baseGasToken2.address);
       console.log("deployer Address " + deployer.address);
 
-      wrapper = await GS_Wrapper.new(token.address);
+      wrapper = await GS_Wrapper.new();
       console.log("wrapper Address " + wrapper.address);
 
     });
@@ -52,13 +52,7 @@ contract("GSVE Core Test", async accounts => {
       assert.equal(compatible.toNumber(), 1);
     });
 
-    it('should be able to add a token to the list of wrapper supported tokens', async () => {
-      await wrapper.addGasToken(gasToken.address, 15000);
-      var compatible = await wrapper.compatibleGasToken(gasToken.address);
-      assert.equal(compatible.toNumber(), 1);
-    });
 
-      
     it('should be able to add a minted token to the list of supported tokens', async () => {
 
       await protocol.addGasToken(baseGasToken.address, 1, true);

@@ -2,20 +2,22 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/Address.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
 * @dev interface to allow gas tokens to be burned from the wrapper
 */
-interface IFreeUpTo {
+interface IFreeUp {
     function freeUpTo(uint256 value) external returns (uint256 freed);
+    function freeFromUpTo(address from, uint256 value) external returns (uint256 freed);
 }
 
 /**
 * @dev interface to allow gsve to be burned for upgrades
 */
-interface IGSVEToken {
+interface IToken {
     function burnFrom(address account, uint256 amount) external;
+    function balanceOf(address account) external view returns (uint256);
+    function transfer(address recipient, uint256 amount) external returns (bool);
 }
 
 
@@ -29,27 +31,19 @@ interface IGSVEToken {
 */
 contract GSVESmartWrapper {
     using Address for address;
-    mapping(address => uint256) public _compatibleGasTokens;
-    mapping(address => uint256) public _freeUpValue;
-    address public GSVEToken;
-    bool public _upgraded;
-    bool public _inited;
     address private _owner;
 
-    constructor (address _GSVEToken) public {
-        init(msg.sender, _GSVEToken);
+    constructor () public {
+        init(msg.sender);
     }
-
-
 
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
      * also sets the GSVE token reference
      */
-    function init (address initialOwner, address _GSVEToken) public {
+    function init (address initialOwner) public {
         require(_owner == address(0), "This contract is already owned");
         _owner = initialOwner;
-        GSVEToken = _GSVEToken;
         emit OwnershipTransferred(address(0), initialOwner);
     }
 
@@ -60,68 +54,25 @@ contract GSVESmartWrapper {
     receive() external payable{}
 
     /**
-    * @dev sets the contract as inited
+    * @dev GSVE moddifier that burns gas tokens if the sender wants to burn them
+    * burning them if the sender wants to burn them
     */
-    function setInited() public {
-        _inited = true;
-    }
-
-    /**
-    * @dev function to enable gas tokens.
-    * by default the wrapped tokens are added when the wrapper is deployed
-    * using efficiency values based on a known token gas rebate that we store on contract.
-    * DANGER: adding unvetted gas tokens that aren't supported by the protocol could be bad!
-    * costs 5 gsve to add custom gas tokens if done after the wallet is inited
-    */
-    function addGasToken(address gasToken, uint256 freeUpValue) public onlyOwner{
-        if(_inited){
-            IGSVEToken(GSVEToken).burnFrom(msg.sender, 5*10**18);
-        }
-        _compatibleGasTokens[gasToken] = 1;
-        _freeUpValue[gasToken] = freeUpValue;
-    }
-
-    /**
-    * @dev function to 'upgrade the proxy' by enabling unwrapped gas token support
-    * the user must burn 10 GSVE to upgrade the proxy.
-    */
-    function upgradeProxy() public onlyOwner{
-        require(_upgraded == false, "GSVE: Wrapper Already Upgraded.");
-        IGSVEToken(GSVEToken).burnFrom(msg.sender, 10*10**18);
-
-        // add CHI gas token
-        _compatibleGasTokens[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 1;
-        _freeUpValue[0x0000000000004946c0e9F43F4Dee607b0eF1fA1c] = 30053;
-
-        // add GST2 gas token
-        _compatibleGasTokens[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 1;
-        _freeUpValue[0x0000000000b3F879cb30FE243b4Dfee438691c04] = 30870;
-
-        // add GST1 gas token
-        _compatibleGasTokens[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 1;
-        _freeUpValue[0x88d60255F917e3eb94eaE199d827DAd837fac4cB] = 20046;
-
-        _upgraded = true;
-    }
-
-    /**
-    * @dev checks if the gas token is supported
-    */
-    function compatibleGasToken(address gasToken) public view returns(uint256){
-        return _compatibleGasTokens[gasToken];
-    }
-
-    /**
-    * @dev GSVE moddifier that burns supported gas tokens around a function that uses gas
-    * the function calculates the optimal number of tokens to burn, based on the token specified
-    */
-    modifier discountGas(address gasToken) {
+    modifier discountGas(address gasToken, uint256 tokenFreeValue, bool sender) {
         if(gasToken != address(0)){
-            require(_compatibleGasTokens[gasToken] == 1, "GSVE: incompatible token");
             uint256 gasStart = gasleft();
             _;
             uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
-            IFreeUpTo(gasToken).freeUpTo((gasSpent + 16000) / _freeUpValue[gasToken]);
+
+            if(tokenFreeValue == 0 || gasSpent < 48000){
+                return;
+            }
+
+            if(sender){
+                IFreeUp(gasToken).freeFromUpTo(msg.sender, (gasSpent + 16000) / tokenFreeValue);
+            }
+            else{
+                IFreeUp(gasToken).freeUpTo((gasSpent + 16000) / tokenFreeValue);
+            }
         }
         else {
             _;
@@ -134,7 +85,7 @@ contract GSVESmartWrapper {
     * as long as the dApp/smart contract the wrapper is interacting with has the correct approvals for balances within this wrapper
     * if the function requires a payment, this is handled too and sent from the wrapper balance.
     */
-    function wrapTransaction(bytes calldata data, address contractAddress, uint256 value, address gasToken) external discountGas(gasToken) payable onlyOwner{
+    function wrapTransaction(bytes calldata data, address contractAddress, uint256 value, address gasToken, uint256 tokenFreeValue, bool sender) external discountGas(gasToken, tokenFreeValue, sender) payable onlyOwner{
         if(!contractAddress.isContract()){
             return;
         }
@@ -157,8 +108,8 @@ contract GSVESmartWrapper {
     /**
     * @dev function that the user can trigger to withdraw an entire token balance from the wrapper to themselves
     */
-    function withdrawTokenBalance(address token) public onlyOwner{
-        IERC20 tokenContract = IERC20(token);
+    function withdrawTokenBalance(address token) external onlyOwner{
+        IToken tokenContract = IToken(token);
         uint256 balance = tokenContract.balanceOf(address(this));
         tokenContract.transfer(owner(), balance);
     }
@@ -190,14 +141,6 @@ contract GSVESmartWrapper {
 
     function _msgSender() internal view virtual returns (address) {
         return msg.sender;
-    }
-
-    
-    /**
-     * @dev Returns the upgrade status of the wrapper
-     */
-    function getUpgraded() public view virtual returns (bool) {
-        return _upgraded;
     }
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);

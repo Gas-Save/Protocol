@@ -71,7 +71,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -110,7 +111,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -129,7 +131,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -148,7 +151,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -172,7 +176,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -2815,13 +2820,13 @@
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/GSVEBeacon.sol",
     "exportedSymbols": {
       "Context": [
-        6138
+        5791
       ],
       "GSVEBeacon": [
         521
       ],
       "Ownable": [
-        5120
+        4773
       ]
     },
     "id": 522,
@@ -2846,7 +2851,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 522,
-        "sourceUnit": 5121,
+        "sourceUnit": 4774,
         "src": "60:52:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2859,7 +2864,7 @@
               "id": 304,
               "name": "Ownable",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 5120,
+              "referencedDeclaration": 4773,
               "src": "139:7:1"
             },
             "id": 305,
@@ -2873,8 +2878,8 @@
         "id": 521,
         "linearizedBaseContracts": [
           521,
-          5120,
-          6138
+          4773,
+          5791
         ],
         "name": "GSVEBeacon",
         "nameLocation": "125:10:1",
@@ -5369,7 +5374,7 @@
                   "id": 475,
                   "name": "onlyOwner",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 5069,
+                  "referencedDeclaration": 4722,
                   "src": "2382:9:1"
                 },
                 "nodeType": "ModifierInvocation",
@@ -5539,13 +5544,13 @@
     "absolutePath": "/C/Users/khera/Documents/GitHub/GasSwapTokens/contracts/GSVEBeacon.sol",
     "exportedSymbols": {
       "Context": [
-        6138
+        5791
       ],
       "GSVEBeacon": [
         521
       ],
       "Ownable": [
-        5120
+        4773
       ]
     },
     "id": 522,
@@ -5570,7 +5575,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 522,
-        "sourceUnit": 5121,
+        "sourceUnit": 4774,
         "src": "60:52:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -5583,7 +5588,7 @@
               "id": 304,
               "name": "Ownable",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 5120,
+              "referencedDeclaration": 4773,
               "src": "139:7:1"
             },
             "id": 305,
@@ -5597,8 +5602,8 @@
         "id": 521,
         "linearizedBaseContracts": [
           521,
-          5120,
-          6138
+          4773,
+          5791
         ],
         "name": "GSVEBeacon",
         "nameLocation": "125:10:1",
@@ -8093,7 +8098,7 @@
                   "id": 475,
                   "name": "onlyOwner",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 5069,
+                  "referencedDeclaration": 4722,
                   "src": "2382:9:1"
                 },
                 "nodeType": "ModifierInvocation",
@@ -8263,9 +8268,17 @@
     "name": "solc",
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x09b6D58FD340E3B3341b9DC3a26a84deb1D8D42d",
+      "transactionHash": "0x56ca302568fe42e600a7616eedcb81752e443cffb226233d20a82bdb2eb61a8c"
+    }
+  },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-16T15:33:51.459Z",
+  "updatedAt": "2021-05-17T19:37:58.317Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {

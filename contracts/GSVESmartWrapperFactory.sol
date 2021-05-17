@@ -4,61 +4,23 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IGSVESmartWrapper.sol";
-import "./IFreeFromUpTo.sol";
+
+/**
+* @dev interface to allow gsve to be burned for upgrades
+*/
+interface IGSVEToken {
+    function burnFrom(address account, uint256 amount) external;
+}
 
 contract GSVESmartWrapperFactory is Ownable{
     address payable public smartWrapperLocation;
-    mapping(address => uint256) private _compatibleGasTokens;
-    mapping(uint256 => address) private _reverseTokenMap;
     mapping(address => address) private _deployedWalletAddressLocation;
-    mapping(address => uint256) private _freeUpValue;
     address private GSVEToken;
-    uint256 private _totalSupportedTokens = 0;
 
-  constructor (address payable _smartWrapperLocation, address _GSVEToken, address wchi, address wgst2, address wgst1) public {
+  constructor (address payable _smartWrapperLocation, address _GSVEToken) public {
     smartWrapperLocation = _smartWrapperLocation;
     GSVEToken = _GSVEToken;
-    _compatibleGasTokens[wchi] = 1;
-    _reverseTokenMap[0] = wchi;
-    _freeUpValue[wchi] = 30053;
-
-    _compatibleGasTokens[wgst2] = 1;
-    _reverseTokenMap[1] = wgst2;
-    _freeUpValue[wgst2] = 30870;
-
-    _compatibleGasTokens[wgst1] = 1;
-    _reverseTokenMap[2] = wgst1;
-    _freeUpValue[wgst1] = 20046;
-
-    _totalSupportedTokens = 3;
   }
-
-    /**
-    * @dev add support for trusted gas tokens - those we wrapped
-    */
-    function addGasToken(address gasToken, uint256 freeUpValue) public onlyOwner{
-        _compatibleGasTokens[gasToken] = 1;
-        _reverseTokenMap[_totalSupportedTokens] = gasToken;
-        _totalSupportedTokens = _totalSupportedTokens + 1;
-        _freeUpValue[gasToken] = freeUpValue;
-    }
-
-        /**
-    * @dev GSVE moddifier that burns supported gas tokens around a function that uses gas
-    * the function calculates the optimal number of tokens to burn, based on the token specified
-    */
-    modifier discountGas(address gasToken) {
-        if(gasToken != address(0)){
-            require(_compatibleGasTokens[gasToken] == 1, "GSVE: incompatible token");
-            uint256 gasStart = gasleft();
-            _;
-            uint256 gasSpent = 21000 + gasStart - gasleft() + 16 * msg.data.length;
-            IFreeFromUpTo(gasToken).freeFromUpTo(msg.sender,  (gasSpent + 16000) / _freeUpValue[gasToken]);
-        }
-        else{
-            _;
-        }
-    }
 
     /**
     * @dev return the location of a users deployed wrapper
@@ -68,30 +30,16 @@ contract GSVESmartWrapperFactory is Ownable{
     }
 
     /**
-    * @dev function to check if a gas token is supported by the deployer
-    */
-    function compatibleGasToken(address gasToken) public view returns(uint256){
-        return _compatibleGasTokens[gasToken];
-    }
-
-    /**
     * @dev deploys a gsve smart wrapper for the caller
     * the ownership of the wrapper is transfered to the caller
     * a note is made of where the users wrapper is deployed
-    * gas tokens can be burned to save on this deployment operation
-    * the gas tokens that the deployer supports are enabled in the wrapper before transfering ownership.
+    * user pays gsve fee to invoke
     */
-  function deployGSVESmartWrapper(address gasToken)  public discountGas(gasToken){
+  function deployGSVESmartWrapper()  public {
+        IGSVEToken(GSVEToken).burnFrom(msg.sender, 10*(10**18));
         address contractAddress = Clones.clone(smartWrapperLocation);
-        IGSVESmartWrapper(payable(contractAddress)).init(address(this), GSVEToken);
-
-        for(uint256 i = 0; i<_totalSupportedTokens; i++){
-            address tokenAddress = _reverseTokenMap[i];
-            IGSVESmartWrapper(payable(contractAddress)).addGasToken(tokenAddress, _freeUpValue[tokenAddress]);
-        }
-        IGSVESmartWrapper(payable(contractAddress)).setInited();
+        IGSVESmartWrapper(payable(contractAddress)).init(address(this));
         Ownable(contractAddress).transferOwnership(msg.sender);
         _deployedWalletAddressLocation[msg.sender] = contractAddress;
     }
-
 }
