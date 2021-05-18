@@ -25,7 +25,9 @@ module.exports = async(deployer) => {
   //var wgst1 = await deployer.deploy(wrappedToken, "0x88d60255F917e3eb94eaE199d827DAd837fac4cB", vaultAddress, "Wrapped GST1 by Gas Save", "wGST1")
   var wgst1Address = "0xE39B8DC27FfdcA3f2591Eb801C7548fCe7d87D72"
   
-  var deployercontract = await deployer.deploy(GS_Deployer, wchiAddress, wgst2Address, wgst1Address)
+  //var deployercontract = await deployer.deploy(GS_Deployer, wchiAddress, wgst2Address, wgst1Address)
+  var deployerAddress = "0x96e656e6031184F5b72cE10cf63F9f929E69f00D"
+
   var wrapperMain = await deployer.deploy(GS_Wrapper)
   var wrapperFactory = await deployer.deploy(GS_WrapperFactory, GS_Wrapper.address, tokenAddress)
   var core = await deployer.deploy(GSVEProtocolCore, tokenAddress, vaultAddress, wchiAddress, wgst2Address, wgst1Address)
@@ -57,8 +59,8 @@ module.exports = async(deployer) => {
   console.log("factory: " + wrapperFactory.address)
   await wrapperFactoryInstance.transferOwnership(GSVEProtocolCore.address)
 
-  var deployercontractInstance = await GS_Deployer.at(deployercontract.address)
-  console.log("deployer: " + deployercontract.address)
+  var deployercontractInstance = await GS_Deployer.at(deployerAddress)
+  console.log("deployer: " + deployerAddress)
   await deployercontractInstance.transferOwnership(GSVEProtocolCore.address)
 
   var wrapperMainInstance = await GS_Wrapper.at(GS_Wrapper.address)
