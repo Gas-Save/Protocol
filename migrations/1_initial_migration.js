@@ -16,16 +16,21 @@ module.exports = async(deployer) => {
   //var vault = await deployer.deploy(GSVEVault)
   var vaultAddress = "0x9E4309be6aC12dE5A9a979047ff426F5Aa73D908"
   
-  var wchi =  await deployer.deploy(wrappedToken, "0x0000000000004946c0e9F43F4Dee607b0eF1fA1c", vaultAddress, "Wrapped Chi by Gas Save", "wChi")
-  var wgst2 = await deployer.deploy(wrappedToken, "0x0000000000b3F879cb30FE243b4Dfee438691c04", vaultAddress, "Wrapped GST2 by Gas Save", "wGST2")
-  var wgst1 = await deployer.deploy(wrappedToken, "0x88d60255F917e3eb94eaE199d827DAd837fac4cB", vaultAddress, "Wrapped GST1 by Gas Save", "wGST1")
+  //var wchi =  await deployer.deploy(wrappedToken, "0x0000000000004946c0e9F43F4Dee607b0eF1fA1c", vaultAddress, "Wrapped Chi by Gas Save", "wChi")
+  var wchiAddress = "0x47536fD7C0CDb9338Ce495694BE6463A30314582"
 
-  /*
-  var deployercontract = await deployer.deploy(GS_Deployer, wchi.address, wgst2.address, wgst1.address)
+  //var wgst2 = await deployer.deploy(wrappedToken, "0x0000000000b3F879cb30FE243b4Dfee438691c04", vaultAddress, "Wrapped GST2 by Gas Save", "wGST2")
+  var wgst2Address = "0x1f4DD5A297ca59Cc086F6F24c36A8A032C4ddbAD"
+  
+  //var wgst1 = await deployer.deploy(wrappedToken, "0x88d60255F917e3eb94eaE199d827DAd837fac4cB", vaultAddress, "Wrapped GST1 by Gas Save", "wGST1")
+  var wgst1Address = "0xE39B8DC27FfdcA3f2591Eb801C7548fCe7d87D72"
+  
+  var deployercontract = await deployer.deploy(GS_Deployer, wchiAddress, wgst2Address, wgst1Address)
   var wrapperMain = await deployer.deploy(GS_Wrapper)
   var wrapperFactory = await deployer.deploy(GS_WrapperFactory, GS_Wrapper.address, tokenAddress)
-  var core = await deployer.deploy(GSVEProtocolCore, tokenAddress, vaultAddress, wchi.address, wgst2.address, wgst1.address)
+  var core = await deployer.deploy(GSVEProtocolCore, tokenAddress, vaultAddress, wchiAddress, wgst2Address, wgst1Address)
 
+  /*
   console.log("Setting up contracts")
   console.log("GSVE Token: " + tokenAddress)
   
@@ -33,16 +38,16 @@ module.exports = async(deployer) => {
   console.log("vault: " + vaultAddress)
   await vaultInstance.transferOwnership(GSVEProtocolCore.address)
 
-  var wChiInstance = await wrappedToken.at(wchi.address)
-  console.log("wchi: " + wchi.address)
+  var wChiInstance = await wrappedToken.at(wchiAddress)
+  console.log("wchi: " + wchiAddress)
   await wChiInstance.transferOwnership(GSVEProtocolCore.address)
 
-  var wgst2Instance = await wrappedToken.at(wgst2.address)
-  console.log("wgst2: " + wgst2.address)
+  var wgst2Instance = await wrappedToken.at(wgst2Address)
+  console.log("wgst2: " + wgst2Address)
   await wgst2Instance.transferOwnership(GSVEProtocolCore.address)
 
-  var wgst1Instance = await wrappedToken.at(wgst1.address)
-  console.log("wgst1: " + wgst1.address)
+  var wgst1Instance = await wrappedToken.at(wgst1Address)
+  console.log("wgst1: " + wgst1Address)
   await wgst1Instance.transferOwnership(GSVEProtocolCore.address)
 
   var coreInstance = await GSVEProtocolCore.at(GSVEProtocolCore.address)
@@ -60,8 +65,7 @@ module.exports = async(deployer) => {
   console.log("wrapper: " + GS_Wrapper.address)
   await wrapperMainInstance.transferOwnership(GSVEProtocolCore.address)
 
-  var beacon = await deployer.deploy(GSVEBeacon,wchi.address, wgst2.address, wgst1.address)
+  var beacon = await deployer.deploy(GSVEBeacon,wchiAddress, wgst2Address, wgst1Address)
   console.log("beacon: " + GSVEBeacon.address)
   */
-
 };
