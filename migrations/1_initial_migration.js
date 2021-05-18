@@ -19,6 +19,8 @@ module.exports = async(deployer) => {
   var wchi =  await deployer.deploy(wrappedToken, "0x0000000000004946c0e9F43F4Dee607b0eF1fA1c", vaultAddress, "Wrapped Chi by Gas Save", "wChi")
   var wgst2 = await deployer.deploy(wrappedToken, "0x0000000000b3F879cb30FE243b4Dfee438691c04", vaultAddress, "Wrapped GST2 by Gas Save", "wGST2")
   var wgst1 = await deployer.deploy(wrappedToken, "0x88d60255F917e3eb94eaE199d827DAd837fac4cB", vaultAddress, "Wrapped GST1 by Gas Save", "wGST1")
+
+  /*
   var deployercontract = await deployer.deploy(GS_Deployer, wchi.address, wgst2.address, wgst1.address)
   var wrapperMain = await deployer.deploy(GS_Wrapper)
   var wrapperFactory = await deployer.deploy(GS_WrapperFactory, GS_Wrapper.address, tokenAddress)
@@ -60,5 +62,6 @@ module.exports = async(deployer) => {
 
   var beacon = await deployer.deploy(GSVEBeacon,wchi.address, wgst2.address, wgst1.address)
   console.log("beacon: " + GSVEBeacon.address)
+  */
 
 };
