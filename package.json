@@ -6,6 +6,7 @@
     "ganache-time-traveler": "^1.0.15",
     "rlp": "^2.2.6",
     "solidity-coverage": "^0.7.16",
+    "truffle-contract-size": "^2.0.1",
     "truffle-plugin-verify": "^0.5.8"
   }
 }
