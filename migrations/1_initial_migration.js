@@ -37,40 +37,41 @@ module.exports = async(deployer) => {
   //var core = await deployer.deploy(GSVEProtocolCore, tokenAddress, vaultAddress, wchiAddress, wgst2Address, wgst1Address)
   var coreAddress = "0x621C63FE085f99CC270BDB7d70F66b160E78F586"
 
-  
+  /*
   console.log("Setting up contracts")
   console.log("GSVE Token: " + tokenAddress)
   
-  var vaultInstance = await GSVEVault.at(vaultAddress);
+  var vaultInstance = await GSVEVault.at(vaultAddress);-
   console.log("vault: " + vaultAddress)
   await vaultInstance.transferOwnership(coreAddress)
 
-  var wChiInstance = await wrappedToken.at(wchiAddress)
+  var wChiInstance = await wrappedToken.at(wchiAddress)-
   console.log("wchi: " + wchiAddress)
   await wChiInstance.transferOwnership(coreAddress)
 
-  var wgst2Instance = await wrappedToken.at(wgst2Address)
+  var wgst2Instance = await wrappedToken.at(wgst2Address)-
   console.log("wgst2: " + wgst2Address)
   await wgst2Instance.transferOwnership(coreAddress)
 
-  var wgst1Instance = await wrappedToken.at(wgst1Address)
+  var wgst1Instance = await wrappedToken.at(wgst1Address)-
   console.log("wgst1: " + wgst1Address)
   await wgst1Instance.transferOwnership(coreAddress)
 
-  var coreInstance = await GSVEProtocolCore.at(coreAddress)
+  var coreInstance = await GSVEProtocolCore.at(coreAddress)-
   console.log("core: " + coreAddress)
 
-  var wrapperFactoryInstance = await GS_WrapperFactory.at(factoryAddress)
+  var wrapperFactoryInstance = await GS_WrapperFactory.at(factoryAddress)-
   console.log("factory: " + factoryAddress)
   await wrapperFactoryInstance.transferOwnership(coreAddress)
 
-  var deployercontractInstance = await GS_Deployer.at(deployerAddress)
+  var deployercontractInstance = await GS_Deployer.at(deployerAddress)-
   console.log("deployer: " + deployerAddress)
   await deployercontractInstance.transferOwnership(coreAddress)
 
   var wrapperMainInstance = await GS_Wrapper.at(WrapperMainAddress)
   console.log("wrapper: " + WrapperMainAddress)
   await wrapperMainInstance.transferOwnership(coreAddress)
+  */
 
   var beacon = await deployer.deploy(GSVEBeacon, wchiAddress, wgst2Address, wgst1Address)
   console.log("beacon: " + GSVEBeacon.address)
